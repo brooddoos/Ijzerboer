@@ -31,3 +31,10 @@ enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 [rendering]
 
 renderer/rendering_method="mobile"
+
+[shader_globals]
+
+precision_multiplier={
+"type": "float",
+"value": 0.5
+}

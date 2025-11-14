@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://duqanjqofiqy2"]
+[gd_scene load_steps=10 format=3 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/mainmenu.gd" id="1_5mbse"]
 [ext_resource type="PackedScene" uid="uid://c3r0gl516bt40" path="res://assets/3d/road_temp.glb" id="2_r3g3c"]
 [ext_resource type="PackedScene" uid="uid://cknkwf45wt35w" path="res://assets/3d/tree_temp.glb" id="3_3vvtq"]
+[ext_resource type="Texture2D" uid="uid://bwsftepgrv6oe" path="res://assets/images/logotemporary.png" id="4_3vvtq"]
+[ext_resource type="ArrayMesh" uid="uid://b0qwpbidalm4g" path="res://assets/3d/truck-flat.obj" id="5_s5g8n"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7q3kq"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -21,21 +23,6 @@ glow_enabled = true
 albedo_color = Color(0.59, 0.51919997, 0.354, 1)
 
 [node name="Node3D" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_natt5")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
-shadow_enabled = true
-
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(7.200467, 0, 0, 0, 1, 0, 0, 0, 1, -5.5348206, 0, -36.146393)
-size = Vector3(18.058167, 1, 116.671936)
-material = SubResource("StandardMaterial3D_s5g8n")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4336605, 4.6083984, 0.97271824)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -67,7 +54,7 @@ alignment = 1
 custom_minimum_size = Vector2(512, 0)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 80
-text = "Ijzerboer"
+text = " titletitle"
 fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -77,59 +64,117 @@ layout_mode = 2
 text = "im picking up metals wow"
 horizontal_alignment = 1
 
-[node name="play" type="Button" parent="CanvasLayer/Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="play" type="Button" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "Play"
 
-[node name="road-straight2" parent="." instance=ExtResource("2_r3g3c")]
+[node name="spacer" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="options" type="Button" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Options"
+
+[node name="spacer2" type="Control" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="exit" type="Button" parent="CanvasLayer/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Exit
+"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4336605, 4.6083984, 0.97271824)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_natt5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="vloer" type="CSGBox3D" parent="."]
+transform = Transform3D(7.200467, 0, 0, 0, 1, 0, 0, 0, 1, -5.5348206, 0, -36.146393)
+size = Vector3(18.058167, 1, 116.671936)
+material = SubResource("StandardMaterial3D_s5g8n")
+
+[node name="weg" parent="." instance=ExtResource("2_r3g3c")]
 transform = Transform3D(81.65783, 0, 0, 0, 10, 0, 0, 0, 10, -3.815592, 0.47070646, -10.915129)
 
-[node name="tree_temp" parent="." instance=ExtResource("3_3vvtq")]
+[node name="trees" type="Node" parent="."]
+
+[node name="tree_temp" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -35.749996, 0.35534048, -18.262314)
 
-[node name="tree_temp2" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp2" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -20.903841, -0.24103785, -18.262312)
 
-[node name="tree_temp3" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp3" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -29.586042, -0.7570014, -18.262308)
 
-[node name="tree_temp4" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp4" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -14.205837, -2.4506888, -18.262306)
 
-[node name="tree_temp5" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp5" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -25.272678, -5.768126, -18.262308)
 
-[node name="tree_temp6" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp6" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -18.106716, -3.772015, -18.262308)
 
-[node name="tree_temp7" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp7" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -32.724396, -1.9614549, -18.262308)
 
-[node name="tree_temp8" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp8" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -2.2271538, -1.1920857, -18.262308)
 
-[node name="tree_temp9" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp9" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -8.620092, -3.0125937, -18.262308)
 
-[node name="tree_temp10" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp10" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -5.5077667, -5.527017, -18.262308)
 
-[node name="tree_temp11" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp11" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 2.8522701, -1.1293855, -18.26231)
 
-[node name="tree_temp12" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp12" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 7.4074135, -4.371206, -18.26231)
 
-[node name="tree_temp13" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp13" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 14.357957, -3.7926745, -18.26231)
 
-[node name="tree_temp14" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp14" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -3.6111479, -4.1265683, -2.6423779)
 
-[node name="tree_temp15" parent="." instance=ExtResource("3_3vvtq")]
+[node name="tree_temp15" parent="trees" instance=ExtResource("3_3vvtq")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.163408, -3.8182168, -2.6423779)
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+[node name="muur" type="CSGBox3D" parent="."]
 transform = Transform3D(149.71939, 0, 0, 0, 1.7977414, 0, 0, 0, 1, 0, 6.955824, -41.283447)
 size = Vector3(1, 7.692993, 1)
+
+[node name="logo" type="Sprite3D" parent="."]
+transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -8.090498, 6.840866, -15.785511)
+texture = ExtResource("4_3vvtq")
+
+[node name="startpoint1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.305, 0.475, -8.994)
+
+[node name="endpoint1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.305, 0.475, -8.994)
+
+[node name="TruckFlat" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, 23.224514, 0.47539127, -8.99438)
+mesh = ExtResource("5_s5g8n")
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/play" to="CanvasLayer/Control" method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/options" to="CanvasLayer/Control" method="_on_options_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/HBoxContainer/exit" to="CanvasLayer/Control" method="_on_exit_pressed"]

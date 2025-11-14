@@ -1,5 +1,6 @@
 extends Control
 @onready var splashtext: Label = $VBoxContainer/splashtext
+@onready var title: RichTextLabel = $VBoxContainer/title
 
 const splashTexts = [ #voeg later mss meer toe, idk
 	"im uhhh the iron metal collector man",
@@ -12,6 +13,13 @@ const splashTexts = [ #voeg later mss meer toe, idk
 func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
 	splashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
+	title.text = " "
 
-func _process(delta: float) -> void:
-	pass
+func _on_play_pressed() -> void:
+	push_error("ijzer ijzer ijzer ijzer")
+
+func _on_options_pressed() -> void:
+	print("euhhh nrml gezien zijn er instelling mr kheb nog niets gedaan eig")
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

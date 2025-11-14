@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splashScreen.gd" id="1_kkrr7"]
 [ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/nobgbrooddoos.png" id="1_pspwt"]
 [ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/mainmenu.tscn" id="2_by7hm"]
-[ext_resource type="Texture2D" uid="uid://vsgc5wb2eovh" path="res://assets/images/kobe.png" id="3_1b3xc"]
+[ext_resource type="Texture2D" uid="uid://c3ntjr65ng2h7" path="res://assets/images/kobe.svg" id="4_by7hm"]
 [ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/pfp.png" id="5_f3wds"]
 
 [node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
@@ -57,7 +57,7 @@ vertical_alignment = 1
 [node name="kobe" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("3_1b3xc")
+texture = ExtResource("4_by7hm")
 expand_mode = 3
 stretch_mode = 5
 
