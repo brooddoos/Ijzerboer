@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=3 uid="uid://t1al5hykieb"]
+
+[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splashScreen.gd" id="1_kkrr7"]
+[ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/nobgbrooddoos.png" id="1_pspwt"]
+[ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/mainmenu.tscn" id="2_by7hm"]
+[ext_resource type="Texture2D" uid="uid://vsgc5wb2eovh" path="res://assets/images/kobe.png" id="3_1b3xc"]
+[ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/pfp.png" id="5_f3wds"]
+
+[node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kkrr7")
+load_scene = ExtResource("2_by7hm")
+splash_screen_container = NodePath("CenterContainer")
+fg = NodePath("fadeout")
+
+[node name="mainbg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.0862745, 0.109804, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="brooddoos" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("1_pspwt")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/brooddoos"]
+layout_mode = 0
+offset_left = -65.0
+offset_top = 170.0
+offset_right = 339.0
+offset_bottom = 284.0
+theme_override_font_sizes/normal_font_size = 50
+text = "Brooddoos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="kobe" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 2
+texture = ExtResource("3_1b3xc")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="j4y" type="TextureRect" parent="CenterContainer"]
+custom_minimum_size = Vector2(260, 260)
+layout_mode = 2
+texture = ExtResource("5_f3wds")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="fadeout" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9144961, 0.9149079, 0.9343023, 1)

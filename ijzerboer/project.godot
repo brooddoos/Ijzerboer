@@ -1,0 +1,29 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Ijzerboer"
+config/name_localized={
+"en": "Totter"
+}
+config/description="A game where you pick up scrap metal for a living."
+config/version="0.1.0"
+run/main_scene="uid://t1al5hykieb"
+config/features=PackedStringArray("4.5", "Mobile")
+boot_splash/bg_color=Color(0.08627451, 0.08627451, 0.10980392, 1)
+boot_splash/fullsize=false
+boot_splash/image="uid://b2l0lf7xmfe17"
+config/icon="res://icon.svg"
+boot_splash/minimum_display_time=1000
+
+[rendering]
+
+renderer/rendering_method="mobile"
