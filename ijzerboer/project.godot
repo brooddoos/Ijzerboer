@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Ijzerboer"
 config/name_localized={
-"en": "Totter"
+"en": "Junkman"
 }
 config/description="A game where you pick up scrap metal for a living."
 config/version="0.1.0"
