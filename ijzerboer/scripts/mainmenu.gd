@@ -1,6 +1,7 @@
 extends Control
 @onready var splashtext: Label = $VBoxContainer/splashtext
 @onready var title: RichTextLabel = $VBoxContainer/title
+@onready var _3_dsplashtext: Label3D = $"../../logo/3dsplashtext"
 
 const splashTexts = [ #voeg later mss meer toe, idk
 	"im uhhh the iron metal collector man",
@@ -12,11 +13,13 @@ const splashTexts = [ #voeg later mss meer toe, idk
 
 func _ready() -> void:
 	var rng = RandomNumberGenerator.new()
-	splashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
+	splashtext.text = " "
+	_3_dsplashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
 	title.text = " "
 
 func _on_play_pressed() -> void:
 	push_error("ijzer ijzer ijzer ijzer")
+	# voeg hier load code toe vr game start
 
 func _on_options_pressed() -> void:
 	print("euhhh nrml gezien zijn er instelling mr kheb nog niets gedaan eig")
