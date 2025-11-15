@@ -1,8 +1,10 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c5jnsmgq8ymji"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c5jnsmgq8ymji"]
 
 [ext_resource type="Shader" uid="uid://s60rywsqspcx" path="res://shaders/aesthetic.gdshader" id="1_dholc"]
+[ext_resource type="Texture2D" uid="uid://blby58j8ulwlk" path="res://assets/3d/camion_cami.png" id="2_cepuw"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_dholc")
 shader_parameter/scale = 0.1
+shader_parameter/albedo_texture = ExtResource("2_cepuw")

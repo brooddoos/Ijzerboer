@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://duqanjqofiqy2"]
+[gd_scene load_steps=19 format=4 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/mainmenu.gd" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://h2ubv3t7qsjy" path="res://scripts/mainMenuCam.gd" id="2_dfy5j"]
@@ -6,7 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cknkwf45wt35w" path="res://assets/3d/tree_temp.glb" id="3_3vvtq"]
 [ext_resource type="Texture2D" uid="uid://bwsftepgrv6oe" path="res://assets/images/logotemporary.png" id="4_3vvtq"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/car.gd" id="6_7yvfd"]
-[ext_resource type="PackedScene" uid="uid://bfpu8sgyjm01e" path="res://assets/3d/camion.glb" id="7_85riq"]
+[ext_resource type="Material" uid="uid://c5jnsmgq8ymji" path="res://shaders/aesthetic.tres" id="7_85riq"]
+[ext_resource type="Texture2D" uid="uid://blby58j8ulwlk" path="res://assets/3d/camion_cami.png" id="7_dfy5j"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfy5j"]
 bg_color = Color(0, 0, 0, 0.49803922)
@@ -44,6 +45,44 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5g8n"]
 albedo_color = Color(0.59, 0.51919997, 0.354, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q5jl"]
+resource_name = "Material"
+cull_mode = 2
+albedo_texture = ExtResource("7_dfy5j")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_r7nqf"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -8, 4, 4.441984, 10.3),
+"format": 34359742465,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQABQAEAAMAAQAFAAMABQAGAAQABgACAAQABwAGAAUAAQAHAAUACAACAAYABwAIAAYACQACAAgABwAKAAgACQAIAAoABwALAAoADAAHAAEADAALAAcAAgAJAA0ADQAAAAIAAAAOAAEADwAOAAAAEAABAA4AAQAQAAwADwARAA4AEAAOABEAAAASAA8AEgARAA8AEgAQABEAAAANABIADAAQABIADAASAA0ADAANABMADQAUABMADAATABUAFQATABQADQAWABQADQAJABYAFQAUABcAFwAMABUAFAAWABgAFwAUABgAGQAMABcAFwAYABkAGAAaABkAGgAMABkAGAAWABoAGwAMABoAGwAaABYAGwAWAAkADAAbAAsACQAcABsACwAbABwACQAdABwACwAcAB4ACQAfAB0AHAAdAB8AHAAfAB4AHwALAB4ACQAKAB8AHwAKAAsA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("zcwsQLwkjkAzM/PAAACAvwAAIEAAAADBAABAQAEAIEAAAADBAACAvwAAAAAAAADBAABAQAAAAAAAAADBAACAvwAAAABnZubAAABAQAAAAABnZubAAACAv2dmZj9nZtbAAABAQGdmZj9nZtbAAABAQBcBgD8AAACAAABAQGdmZj+ambnAAACAv2dmZj+ambnAAACAvzMzE0BnZmY/AABAQDMzE0BnZmY/NDMzv7wkjkAzM/PAzcwsQLwkjkAAAIDANDMzv7wkjkAAAACANDMzv7wkjkAAAIDAzcwsQLwkjkAAAACAAABAQCJs8z8zMxNAAABAQAAAAAAzMxNAAACAvyRs8z8zMxNAAABAQBcBgD8AAIA/AACAvwAAAAAzMxNAAABAQAAAAAAAAMA/AACAvwAAAAAAAMA/AACAvwAAgD8AAIA/AACAvwAAgD8AAACAAACAvwAAAAAAAAC/AABAQAAAAAAAAAC/AACAvwAAAACamanAAABAQAAAAACamanA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k51wj"]
+resource_name = "camion_Cube"
+_surfaces = [{
+"aabb": AABB(-1, 0, -8, 4, 4.441984, 10.3),
+"attribute_data": PackedByteArray("fgQQP+fAAD8vc3g/CA44P8+MBz8FDjg/hftvP+nAAD8p+Lk+6luSPm+zGj9+j70+Kfi5Pn6PvT5vsxo/6luSPgZi/DxjUUg/elvyPkEufj8GYvw8QS5+P3pb8j5jUUg/BmL8PLgJPT8TXeE+514AP3pb8j64CT0/HBKDPedeAD/ScQ0/WFTGPrmt1z4ohG4+0nENPyiEbj65rdc+WFTGPtJxDT8UQsc+uK3XPmiDdT7RcQ0/bIN1Prmt1z4UQsc+EFGAPzQp8D6ri14/jiiAPhBRgD9wjZM+kCdtPzQp8D77+mA/1na/PsqhSD/Wdr8+RKVtPnZVxD40dTw/NCnwPtIrjz40KfA+yP0VPnZVxD7gCbs8iNZsPtCWyj00KfA+4Am7PDQp8D6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPquLXj+OKIA+EFGAPzQp8D4QUYA/cI2TPvv6YD9sdr8+kCdtPzQp8D7KoUg/bHa/PuAJuzyI1mw+0JbKPTQp8D7gCbs8NCnwPsj9FT52VcQ+RKVtPnZVxD7SK48+NCnwPjR1PD80KfA+z4wHPwUOOD8wc3g/GD9/P86MBz8YP38/L3N4PwgOOD+erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPp6vGD4yqPM+YlBnPs5XzD6erxg+zlfMPmJQZz4yqPM+nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPquLXj+OKIA+WFl5PUDOPj3gCbs8iNZsPsqhSD9Azj49GnrOPkDOPj3gCbs8iNZsPsqhSD9Azj49q4teP44ogD5YWXk9QM4+PRp6zj5Azj49nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPp6vGD4yqPM+YlBnPs5XzD6erxg+zlfMPmJQZz4yqPM+nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z4="),
+"format": 34359742487,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGwAZABgAHAAZABsAHQAZABwAGQAdAB4AHgAdAB8AHgAfACAAGQAeACEAGQAhACIAIgAhACMAIgAjACQAJQAmACcAJQAoACYAKQAqACsAKQAsACoAKgAsAC0AKQAuACwALwAuACkAMAAvADEAMgAvADAALgAvADIALgAyADMALgAzADQALgA0ADUANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASwBKAE0ASwBNAE4ATwBQAFEAUABPAFIAUABSAFMAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEA"),
+"material": SubResource("StandardMaterial3D_8q5jl"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 100,
+"vertex_data": PackedByteArray("zcwsQLwkjkAzM/PAAACAvwAAIEAAAADBAABAQAEAIEAAAADBNDMzv7wkjkAzM/PAAACAvzMzE0BnZmY/AABAQCJs8z8zMxNAAACAvyRs8z8zMxNAAABAQDMzE0BnZmY/AACAvyRs8z8zMxNAAABAQAAAAAAzMxNAAACAvwAAAAAzMxNAAABAQCJs8z8zMxNAAACAvzMzE0BnZmY/zcwsQLwkjkAAAACAAABAQDMzE0BnZmY/NDMzv7wkjkAAAACAzcwsQLwkjkAAAACANDMzv7wkjkAAAIDAzcwsQLwkjkAAAIDANDMzv7wkjkAAAACAzcwsQLwkjkAAAIDANDMzv7wkjkAzM/PAzcwsQLwkjkAzM/PANDMzv7wkjkAAAIDAAACAvwAAAAAzMxNAAACAvzMzE0BnZmY/AACAvyRs8z8zMxNAAACAvwAAAAAAAMA/AACAvwAAgD8AAIA/AACAvwAAgD8AAACAAACAv2dmZj+ambnAAACAvwAAAAAAAAC/AACAvwAAAACamanAAACAv2dmZj9nZtbAAACAvwAAIEAAAADBAACAvwAAAABnZubAAACAvwAAAAAAAADBAACAvwAAAAAzMxNAAABAQAAAAAAAAMA/AACAvwAAAAAAAMA/AABAQAAAAAAzMxNAAABAQDMzE0BnZmY/AABAQAAAAAAzMxNAAABAQCJs8z8zMxNAAABAQBcBgD8AAIA/AABAQAAAAAAAAMA/AABAQBcBgD8AAACAAABAQAEAIEAAAADBAABAQAAAAABnZubAAABAQAAAAAAAAADBAABAQGdmZj9nZtbAAABAQGdmZj+ambnAAABAQAAAAACamanAAABAQAAAAAAAAAC/AABAQAEAIEAAAADBAACAvwAAAAAAAADBAABAQAAAAAAAAADBAACAvwAAIEAAAADBAABAQAAAAAAAAMA/AACAvwAAgD8AAIA/AACAvwAAAAAAAMA/AABAQBcBgD8AAIA/AABAQBcBgD8AAACAAACAvwAAAAAAAAC/AACAvwAAgD8AAACAAABAQAAAAAAAAAC/AACAv2dmZj9nZtbAAABAQAAAAABnZubAAACAvwAAAABnZubAAABAQGdmZj9nZtbAAACAvwAAgD8AAACAAABAQBcBgD8AAIA/AABAQBcBgD8AAACAAACAvwAAgD8AAIA/AABAQDMzE0BnZmY/zcwsQLwkjkAzM/PAAABAQAEAIEAAAADBzcwsQLwkjkAAAACAzcwsQLwkjkAAAIDAAACAvwAAIEAAAADBNDMzv7wkjkAAAACAAACAvzMzE0BnZmY/NDMzv7wkjkAzM/PANDMzv7wkjkAAAIDAAABAQAAAAACamanAAACAv2dmZj+ambnAAACAvwAAAACamanAAABAQGdmZj+ambnAAACAvwAAAABnZubAAABAQAAAAAAAAADBAACAvwAAAAAAAADBAABAQAAAAABnZubAAACAvwAAAAAAAAC/AABAQAAAAACamanAAACAvwAAAACamanAAABAQAAAAAAAAAC/AACAv2dmZj9nZtbAAABAQGdmZj+ambnAAABAQGdmZj9nZtbAAACAv2dmZj+ambnAI+r//wAA/78j6v//AAD/vyPq//8AAP+/I+r//wAA/7//f6bj////v/9/puP///+//3+m4////7//f6bj////v/9//3////+//3//f////7//f/9/////v/9//3////+//3/epf///7//f96l////v/9/3qX///+//3/epf///7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//fwAA////P/9/AAD///8//38AAP///z//fwAA////P////3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8//////wAA/7//////AAD/v/////8AAP+//////wAA/79U1QAAqaoAAFTVAACpqgAAVNUAAKmqAABU1QAAqaoAAP9/VFWpqv5//39UVamq/n//f1RVqar+f/9/VFWpqv5//39JUv///z//f0lS////P/9/SVL///8//39JUv///z//fwAA/3//P/9/AAD/f/8//38AAP9//z//fwAA/3//P2XvZJDEfwJAZe9kkMN//T9l72SQwn/7P2XvZJDFfwRAZe9kkP///z+ZEGSQOoD8v5kQZJA7gAHAmRBkkDuAAsCZEGSQOYD6v5kQZJD///8/SdIAALWtAABJ0gAAta0AAEnSAAC1rQAASdIAALWtAAD/fwAA////P/9/AAD///8//38AAP///z//fwAA////P/9/AAD///8//38AAP///z//fwAA////P/9/AAD///8//38AAP9//z//fwAA/3//P/9/AAD/f/8//38AAP9//z8=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_r7nqf")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf3n4"]
 albedo_color = Color(0.446777, 0.44677705, 0.44677693, 1)
@@ -260,9 +299,15 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -37.
 [node name="startpoint2" type="Node3D" parent="."]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24, 1.039, -13)
 
-[node name="camion" parent="." instance=ExtResource("7_85riq")]
+[node name="camion" type="Node3D" parent="."]
 transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, -25.743507, 1.0385226, -8.257942)
 script = ExtResource("6_7yvfd")
+
+[node name="Cube" type="MeshInstance3D" parent="camion"]
+transform = Transform3D(0.99999994, 0, -3.5527137e-15, 0, 0.99999994, 0, 3.5527137e-15, 0, 0.99999994, 9.6321106e-05, 0.000795722, -0.0008201599)
+material_override = ExtResource("7_85riq")
+mesh = SubResource("ArrayMesh_k51wj")
+skeleton = NodePath("")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="camion"]
 transform = Transform3D(-2.4835268e-08, -0.99999946, -4.371136e-08, 0.99999946, -2.4835263e-08, 4.3711363e-08, -4.371138e-08, -4.3711374e-08, 0.99999917, -0.6073513, 0.23889446, 0.53564453)
@@ -279,14 +324,14 @@ sides = 16
 material = SubResource("StandardMaterial3D_wf3n4")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="camion"]
-transform = Transform3D(-2.4835268e-08, -0.99999946, -4.371136e-08, 0.99999946, -2.4835263e-08, 4.3711363e-08, -4.371138e-08, -4.3711374e-08, 0.99999917, 2.7259817, 0.23889446, 0.53564453)
+transform = Transform3D(-2.4835268e-08, -0.99999946, -4.371136e-08, 0.99999946, -2.4835263e-08, 4.3711363e-08, -4.371138e-08, -4.3711374e-08, 0.99999917, 2.6033373, 0.23889434, 0.53564453)
 radius = 1.2
 height = 0.4
 sides = 16
 material = SubResource("StandardMaterial3D_wf3n4")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="camion"]
-transform = Transform3D(-2.4835268e-08, -0.99999946, -4.371136e-08, 0.99999946, -2.4835263e-08, 4.3711363e-08, -4.371138e-08, -4.3711374e-08, 0.99999917, 2.7259798, 0.23889446, -6.2295074)
+transform = Transform3D(-2.4835268e-08, -0.99999946, -4.371136e-08, 0.99999946, -2.4835263e-08, 4.3711363e-08, -4.371138e-08, -4.3711374e-08, 0.99999917, 2.6033335, 0.23889434, -6.2295074)
 radius = 1.2
 height = 0.4
 sides = 16
