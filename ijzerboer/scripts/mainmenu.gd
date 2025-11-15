@@ -2,6 +2,8 @@ extends Control
 @onready var splashtext: Label = $VBoxContainer/splashtext
 @onready var title: RichTextLabel = $VBoxContainer/title
 @onready var _3_dsplashtext: Label3D = $"../../logo/3dsplashtext"
+@onready var settings: PanelContainer = $VBoxContainer/settings
+@onready var buttons: PanelContainer = $VBoxContainer/buttons
 
 const splashTexts = [ #voeg later mss meer toe, idk
 	"im uhhh the iron metal collector man",
@@ -22,7 +24,9 @@ func _on_play_pressed() -> void:
 	# voeg hier load code toe vr game start
 
 func _on_options_pressed() -> void:
-	print("euhhh nrml gezien zijn er instelling mr kheb nog niets gedaan eig")
+	buttons.visible = !buttons.visible
+	settings.visible = !settings.visible
+	
 
 func _on_exit_pressed() -> void:
 	get_tree().quit()
