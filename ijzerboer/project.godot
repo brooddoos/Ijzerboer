@@ -33,6 +33,7 @@ Gamestate="*res://scripts/gamestate.gd"
 
 window/size/viewport_width=512
 window/size/viewport_height=448
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 

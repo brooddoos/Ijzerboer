@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://duqanjqofiqy2"]
+[gd_scene load_steps=21 format=4 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://h2ubv3t7qsjy" path="res://scripts/menucam.gd" id="2_dfy5j"]
@@ -9,6 +9,23 @@
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/car.gd" id="6_7yvfd"]
 [ext_resource type="Material" uid="uid://c5jnsmgq8ymji" path="res://shaders/aesthetic.tres" id="7_85riq"]
 [ext_resource type="Texture2D" uid="uid://blby58j8ulwlk" path="res://assets/3d/camion_cami.png" id="7_dfy5j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt8fu"]
+bg_color = Color(0, 0, 0, 0.4)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0, 0, 0, 0)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dfy5j"]
 bg_color = Color(0, 0, 0, 0.49803922)
@@ -91,90 +108,120 @@ albedo_color = Color(0.446777, 0.44677705, 0.44677693, 1)
 [node name="Node3D" type="Node3D"]
 
 [node name="ui" type="CanvasLayer" parent="."]
-script = ExtResource("1_5mbse")
 
-[node name="Settings" type="PanelContainer" parent="ui"]
-visible = false
-offset_left = 156.0
-offset_top = 105.5
-offset_right = 696.0
-offset_bottom = 559.5
-theme_override_styles/panel = SubResource("StyleBoxFlat_dfy5j")
-
-[node name="MarginContainer" type="MarginContainer" parent="ui/Settings"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ui/Settings/MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ui/Settings/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ui/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_font_sizes/normal_font_size = 80
-text = "Options"
-fit_content = true
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Control" type="Control" parent="ui/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(0, 200)
-layout_mode = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ui/Settings/MarginContainer/HBoxContainer/VBoxContainer/Control"]
-layout_mode = 0
-offset_left = 93.0
-offset_top = 75.5
-offset_right = 458.0
-offset_bottom = 115.5
-text = "actual settings coming when we make the game lmao"
-fit_content = true
-
-[node name="options" type="Button" parent="ui/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "Back"
-
-[node name="Buttons" type="Control" parent="ui"]
+[node name="Control" type="Control" parent="ui"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("2_yt8fu")
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_5mbse")
 
-[node name="Play" type="Button" parent="ui/Buttons"]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 320.0
-offset_right = 168.0
-offset_bottom = 384.0
+[node name="Buttons" type="PanelContainer" parent="ui/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -166.0
+offset_top = 6.0
+offset_right = 167.0
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_styles/panel = SubResource("StyleBoxFlat_yt8fu")
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/Buttons"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/Buttons/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="ui/Control/Buttons/MarginContainer/HBoxContainer"]
+layout_mode = 2
 theme = ExtResource("2_yt8fu")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 
-[node name="Options" type="Button" parent="ui/Buttons"]
-layout_mode = 0
-offset_left = 344.0
-offset_top = 320.0
-offset_right = 480.0
-offset_bottom = 384.0
+[node name="spacer" type="Control" parent="ui/Control/Buttons/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Options" type="Button" parent="ui/Control/Buttons/MarginContainer/HBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Options"
 
-[node name="Exit" type="Button" parent="ui/Buttons"]
-layout_mode = 0
-offset_left = 192.0
-offset_top = 320.0
-offset_right = 320.0
-offset_bottom = 384.0
+[node name="spacer2" type="Control" parent="ui/Control/Buttons/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="ui/Control/Buttons/MarginContainer/HBoxContainer"]
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Exit
 "
+
+[node name="Settings" type="PanelContainer" parent="ui/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -128.0
+offset_right = 120.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dfy5j")
+
+[node name="MarginContainer" type="MarginContainer" parent="ui/Control/Settings"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ui/Control/Settings/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/Control/Settings/MarginContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/Control/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 40
+text = "Options"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="ui/Control/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ui/Control/Settings/MarginContainer/HBoxContainer/VBoxContainer/Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 60.0
+offset_right = 302.0
+offset_bottom = 170.0
+text = "actual settings coming when we make the game lmao"
+fit_content = true
+
+[node name="options" type="Button" parent="ui/Control/Settings/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Back"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4336605, 4.6083984, 0.97271824)
@@ -308,7 +355,7 @@ height = 0.4
 sides = 16
 material = SubResource("StandardMaterial3D_wf3n4")
 
-[connection signal="pressed" from="ui/Settings/MarginContainer/HBoxContainer/VBoxContainer/options" to="ui/Buttons" method="_on_options_pressed"]
-[connection signal="pressed" from="ui/Buttons/Play" to="ui/Buttons" method="_on_play_pressed"]
-[connection signal="pressed" from="ui/Buttons/Options" to="ui/Buttons" method="_on_options_pressed"]
-[connection signal="pressed" from="ui/Buttons/Exit" to="ui/Buttons" method="_on_exit_pressed"]
+[connection signal="pressed" from="ui/Control/Buttons/MarginContainer/HBoxContainer/Play" to="ui/Control" method="_on_play_pressed"]
+[connection signal="pressed" from="ui/Control/Buttons/MarginContainer/HBoxContainer/Options" to="ui/Control" method="_on_options_pressed"]
+[connection signal="pressed" from="ui/Control/Buttons/MarginContainer/HBoxContainer/Exit" to="ui/Control" method="_on_exit_pressed"]
+[connection signal="pressed" from="ui/Control/Settings/MarginContainer/HBoxContainer/VBoxContainer/options" to="ui/Control" method="_on_options_pressed"]

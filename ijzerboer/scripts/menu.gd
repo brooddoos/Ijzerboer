@@ -1,6 +1,6 @@
-extends CanvasLayer
-@onready var _3_dsplashtext: Label3D = $"../../logo/3dsplashtext"
+extends Control
 @onready var settings: PanelContainer = $Settings
+@onready var _3_dsplashtext: Label3D = $"../../logo/3dsplashtext"
 @onready var buttons: PanelContainer = $Buttons
 
 const splashTexts = [ #voeg later mss meer toe, idk
@@ -22,6 +22,5 @@ func _on_options_pressed() -> void:
 	buttons.visible = !buttons.visible
 	settings.visible = !settings.visible
 	
-
 func _on_exit_pressed() -> void:
 	get_tree().quit()
