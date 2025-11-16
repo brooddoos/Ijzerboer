@@ -149,30 +149,30 @@ theme = ExtResource("2_yt8fu")
 
 [node name="Play" type="Button" parent="ui/Buttons"]
 layout_mode = 0
-offset_left = 176.0
-offset_top = 232.0
-offset_right = 313.0
-offset_bottom = 328.0
+offset_left = 40.0
+offset_top = 320.0
+offset_right = 168.0
+offset_bottom = 384.0
 theme = ExtResource("2_yt8fu")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "Play"
 
 [node name="Options" type="Button" parent="ui/Buttons"]
 layout_mode = 0
-offset_left = 248.0
-offset_top = 336.0
-offset_right = 500.0
-offset_bottom = 432.0
-theme_override_font_sizes/font_size = 64
+offset_left = 344.0
+offset_top = 320.0
+offset_right = 480.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 32
 text = "Options"
 
 [node name="Exit" type="Button" parent="ui/Buttons"]
 layout_mode = 0
-offset_left = 24.0
-offset_top = 336.0
-offset_right = 240.0
-offset_bottom = 432.0
-theme_override_font_sizes/font_size = 64
+offset_left = 192.0
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 384.0
+theme_override_font_sizes/font_size = 32
 text = "Exit
 "
 
@@ -185,7 +185,8 @@ script = ExtResource("2_dfy5j")
 environment = SubResource("Environment_natt5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 20, 0)
+light_energy = 0.1
 shadow_enabled = true
 
 [node name="vloer" type="CSGBox3D" parent="."]
