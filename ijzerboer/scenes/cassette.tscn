@@ -697,11 +697,17 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-layout_mode = 0
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -324.0
-offset_right = 324.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0805556
+anchor_right = 1.0
+anchor_bottom = 1.0805556
+offset_left = -317.0
+offset_top = -214.0
+offset_right = 7.0
+offset_bottom = 110.0
+grow_horizontal = 0
 grow_vertical = 0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
@@ -733,6 +739,7 @@ cassette_1 = NodePath("Cassette/Cassette_1/Cassette_1")
 cassette_2 = NodePath("Cassette/Cassette_2/Cassette_2")
 labelText = NodePath("label/text")
 rotateRight = true
+title = "music music"
 
 [node name="Cassette" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette"]
 transform = Transform3D(1.5168189, 0, 0, 0, -2.384186e-07, -1, 0, 1, -2.384186e-07, 0, 1.3059248, 0)
@@ -848,40 +855,33 @@ _________________________________________________
 _________________________________________________"
 
 [node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
 z_index = -1
 custom_minimum_size = Vector2(256, 128)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -489.0
-offset_top = -216.0
-offset_right = -178.0
-offset_bottom = -11.0
-grow_horizontal = 2
+offset_left = -304.0
+offset_top = -95.0
+offset_right = 119.0
+offset_bottom = 242.0
+grow_horizontal = 0
 grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 custom_minimum_size = Vector2(256, 128)
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -492.0
-offset_top = -219.0
-offset_right = -168.0
-offset_bottom = -7.0
-grow_horizontal = 2
+offset_left = -304.0
+offset_top = -96.0
+offset_right = 264.0
+offset_bottom = 258.0
+grow_horizontal = 0
 grow_vertical = 0
 color = Color(0.3366075, 0.33660766, 0.33660755, 0.6509804)
-
-[node name="Control" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0

@@ -357,15 +357,6 @@ sides = 16
 material = SubResource("StandardMaterial3D_wf3n4")
 
 [node name="Control" parent="." instance=ExtResource("10_4umqm")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_right = 0.0
-offset_left = 632.0
-offset_top = 56.0
-offset_right = 632.0
-offset_bottom = 56.0
-grow_horizontal = 1
-grow_vertical = 0
 
 [connection signal="pressed" from="ui/Control/Buttons/MarginContainer/HBoxContainer/Play" to="ui/Control" method="_on_play_pressed"]
 [connection signal="pressed" from="ui/Control/Buttons/MarginContainer/HBoxContainer/Options" to="ui/Control" method="_on_options_pressed"]

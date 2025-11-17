@@ -4,7 +4,7 @@ extends Node3D
 @export var labelText: Label3D
 @export var speed:int = 2
 @export var rotateRight:bool = false
-@export var title:String = "placeholder placeholder"
+@export_multiline var title:String = "placeholder placeholder"
 
 func _ready() -> void:
 	labelText.text = title
