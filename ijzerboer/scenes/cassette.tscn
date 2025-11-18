@@ -1,11 +1,12 @@
-[gd_scene load_steps=53 format=4 uid="uid://c7hkk4gbb50nh"]
+[gd_scene load_steps=55 format=4 uid="uid://c7hkk4gbb50nh"]
 
 [ext_resource type="Script" uid="uid://d5ity0o3r1ql" path="res://scripts/cassette.gd" id="1_dyp6u"]
+[ext_resource type="Script" uid="uid://cj2tmqcbv7qk2" path="res://scripts/cassettegenerator.gd" id="1_eoihv"]
 [ext_resource type="Texture2D" uid="uid://ban5ceklhj6d7" path="res://assets/3d/Cassette_Cassette_tex.png" id="2_i7tjp"]
 [ext_resource type="Texture2D" uid="uid://uxhtgiv5t1s6" path="res://assets/images/label.png" id="3_dgkdk"]
 [ext_resource type="Texture2D" uid="uid://ctav3jkfeasug" path="res://assets/3d/cassettelowpoly_Behuizing.png" id="4_0j804"]
 [ext_resource type="FontFile" uid="uid://bcjd10553qm61" path="res://assets/fonts/ErraticCursiveItalic-gwDjp.ttf" id="4_p5oea"]
-[ext_resource type="Texture2D" uid="uid://c3r54r0oogl0n" path="res://assets/images/label2.png" id="6_p5oea"]
+[ext_resource type="Texture2D" uid="uid://bw86sywt8ltb3" path="res://assets/images/label3.png" id="6_p5oea"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dyp6u"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,7 +16,7 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_dyp6u")
 
 [sub_resource type="Environment" id="Environment_dgkdk"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0, 0, 0, 0)
 sky = SubResource("Sky_i7tjp")
 tonemap_mode = 2
@@ -219,6 +220,8 @@ shadow_mesh = SubResource("ArrayMesh_5xpxe")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5oea"]
 albedo_color = Color(0.29954746, 0.29954746, 0.29954743, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mvr7s"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eoihv"]
 albedo_color = Color(0.29954746, 0.29954746, 0.29954743, 1)
@@ -695,6 +698,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_eoihv")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 layout_mode = 1
@@ -709,6 +713,7 @@ offset_right = 7.0
 offset_bottom = 110.0
 grow_horizontal = 0
 grow_vertical = 0
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 world_3d = SubResource("World3D_0j804")
@@ -734,18 +739,21 @@ shadow_enabled = true
 
 [node name="Cassette" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D" node_paths=PackedStringArray("cassette_1", "cassette_2", "labelText")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.575, 0.95, -3)
+visible = false
 script = ExtResource("1_dyp6u")
 cassette_1 = NodePath("Cassette/Cassette_1/Cassette_1")
 cassette_2 = NodePath("Cassette/Cassette_2/Cassette_2")
 labelText = NodePath("label/text")
 rotateRight = true
-title = "music music"
+title = "soundtrack
+line 2"
 
 [node name="Cassette" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette"]
 transform = Transform3D(1.5168189, 0, 0, 0, -2.384186e-07, -1, 0, 1, -2.384186e-07, 0, 1.3059248, 0)
 mesh = SubResource("ArrayMesh_p3vn5")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_p5oea")
+surface_material_override/2 = SubResource("StandardMaterial3D_mvr7s")
 surface_material_override/4 = SubResource("StandardMaterial3D_eoihv")
 
 [node name="Bottom_tape" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Cassette"]
@@ -785,16 +793,18 @@ transform = Transform3D(-0.26, 0, -3.9258907e-08, 0, 0.26, 0, 3.9258907e-08, 0, 
 texture = ExtResource("3_dgkdk")
 
 [node name="text" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/label"]
-transform = Transform3D(1, 0, 5.684342e-14, 0, 1, 0, -5.684342e-14, 0, 1, -1.8300703e-08, 1.6187334, 0.44120014)
+transform = Transform3D(1, 0, 5.684342e-14, 0, 1, 0, -5.684342e-14, 0, 1, 0, 1.619, 0)
+sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
-text = "music idfk"
+text = "this is the soundtrack of
+ijzerboer or whatever"
 font = ExtResource("4_p5oea")
-font_size = 200
+font_size = 190
 outline_size = 0
+line_spacing = -100.0
 
 [node name="cassettelowpoly" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D" node_paths=PackedStringArray("cassette_1", "cassette_2", "labelText")]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 3.5691445, 2.2336092, -1.5748211)
-visible = false
 script = ExtResource("1_dyp6u")
 cassette_1 = NodePath("Spoel")
 cassette_2 = NodePath("Spoel2")
@@ -805,7 +815,7 @@ mesh = SubResource("ArrayMesh_6jhwy")
 skeleton = NodePath("")
 
 [node name="Spoel" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly"]
-transform = Transform3D(1, 0, -4.371139e-08, -4.371139e-08, 1.9106855e-15, -1, 0, 1, 1.9106855e-15, 0.025, 0.005, 0)
+transform = Transform3D(0.22325005, 3.395282e-08, -0.9747612, -0.9747612, 4.2608164e-08, -0.22325005, 3.395282e-08, 1, 4.2608164e-08, 0.025, 0.005, 0)
 mesh = SubResource("ArrayMesh_t0i3l")
 skeleton = NodePath("")
 
@@ -820,7 +830,7 @@ mesh = SubResource("ArrayMesh_8ayim")
 skeleton = NodePath("")
 
 [node name="Spoel2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly"]
-transform = Transform3D(-0.9996101, 0, 0.027921537, 0.027921537, -4.371139e-08, 0.9996101, 1.2204892e-09, 1, 4.3694346e-08, -0.025, 0.005, 0)
+transform = Transform3D(1, 0, 1.7484555e-07, 1.7484555e-07, -4.371139e-08, -1, 7.642742e-15, 1, -4.371139e-08, -0.025, 0.005, 0)
 rotation_order = 0
 mesh = SubResource("ArrayMesh_32rxg")
 skeleton = NodePath("")
@@ -836,23 +846,45 @@ mesh = SubResource("ArrayMesh_6e8sh")
 skeleton = NodePath("")
 
 [node name="label" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly"]
-transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 3.434467, 1.1481329, -1.8637395)
+transform = Transform3D(0.85, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 3.5860994, 2.5, -1.749713)
 top_level = true
+pixel_size = 0.0026
 texture = ExtResource("6_p5oea")
 
 [node name="text" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly/label"]
-transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0.11615229, -0.1652391, -0.11541748)
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0, 0.84096575, -0.11541748)
+sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
-text = "wowoowow
-zo'n coole mixtape
-zeg zeg zeg"
+text = "zo'n coole mixtape
+ededdeeddeeded"
+font = ExtResource("4_p5oea")
+font_size = 60
+line_spacing = -25.0
 
 [node name="lines" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly/label"]
-transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0.11615229, -0.1652391, -0.11541748)
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0, 0.8116441, -0.11541748)
+sorting_offset = 1.0
 modulate = Color(0, 0, 0, 1)
 text = "_________________________________________________
-_________________________________________________
 _________________________________________________"
+
+[node name="copyright" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly/label"]
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 1.0999117, -1.0648462, -0.11541748)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+text = "brooddoos tapes ©2025"
+font_size = 50
+line_spacing = -25.0
+
+[node name="copyright2" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/cassettelowpoly/label/copyright"]
+transform = Transform3D(1, 0, 1.2079227e-13, 0, 1, 0, -1.2079227e-13, 0, 1, 2.9897013, -0.0040026903, -2.3841858e-07)
+sorting_offset = 1.0
+modulate = Color(0, 0, 0, 1)
+text = "one sided
+type MMXXV tape
+uhhhhh infoinfoinfo"
+font_size = 25
+line_spacing = -12.0
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 z_index = -1
@@ -863,14 +895,15 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -304.0
-offset_top = -95.0
-offset_right = 119.0
-offset_bottom = 242.0
+offset_left = -315.0
+offset_top = -102.0
+offset_right = 108.0
+offset_bottom = 235.0
 grow_horizontal = 0
 grow_vertical = 0
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 custom_minimum_size = Vector2(256, 128)
 layout_mode = 1
 anchors_preset = 3
@@ -885,3 +918,6 @@ offset_bottom = 258.0
 grow_horizontal = 0
 grow_vertical = 0
 color = Color(0.3366075, 0.33660766, 0.33660755, 0.6509804)
+
+[connection signal="newTape" from="." to="SubViewportContainer/SubViewport/Node3D/Cassette" method="_on_control_new_tape"]
+[connection signal="newTape" from="." to="SubViewportContainer/SubViewport/Node3D/cassettelowpoly" method="_on_control_new_tape"]
