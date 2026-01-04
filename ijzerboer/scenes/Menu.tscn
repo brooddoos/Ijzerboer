@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
 [ext_resource type="Script" uid="uid://h2ubv3t7qsjy" path="res://scripts/menucam.gd" id="2_dfy5j"]
 [ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/Game.tscn" id="2_el213"]
-[ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/Menu.tres" id="2_yt8fu"]
+[ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="2_yt8fu"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="6_7yvfd"]
 [ext_resource type="Texture2D" uid="uid://dcfej0covuq8y" path="res://assets/images/logo.png" id="6_thu7x"]
 [ext_resource type="PackedScene" uid="uid://e8f5a586tn0u" path="res://assets/3d/cami.glb" id="9_4umqm"]
 [ext_resource type="AudioStream" uid="uid://dum3r7il36506" path="res://assets/audio/oudijzer.ogg" id="10_pp5m5"]
-[ext_resource type="QuadMesh" uid="uid://d0a3wmmibg0ii" path="res://assets/SnowDrawPass.tres" id="13_thu7x"]
+[ext_resource type="QuadMesh" uid="uid://d0a3wmmibg0ii" path="res://assets/godot/SnowDrawPass.tres" id="13_thu7x"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yt8fu"]
 bg_color = Color(0, 0, 0, 0.4)

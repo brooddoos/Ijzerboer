@@ -39,6 +39,21 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[importer_defaults]
+
+cubemap_texture={
+"compress/channel_pack": 0,
+"compress/hdr_compression": 1,
+"compress/high_quality": false,
+"compress/lossy_quality": 0.7,
+"compress/mode": 0,
+"compress/rdo_quality_loss": 0.0,
+"compress/uastc_level": 0,
+"mipmaps/generate": false,
+"mipmaps/limit": -1,
+"slices/arrangement": 1
+}
+
 [input]
 
 accelerate={
