@@ -32,6 +32,8 @@ var steering:float # added so you only need to update one variable (see settings
 var acceleration:float # same here
 var smoothing:float = 1.0
 
+var is_drifting = false
+
 func _ready() -> void:
 	steering = default_steering
 	acceleration = default_acceleration
@@ -68,7 +70,7 @@ func _physics_process(delta):
 	
 	# Apply movement force
 	var forward = car.transform.basis.z
-	if turn_input != 0:
+	if turn_input != 0: #tilt effect for turning
 		mesh.rotation.z = clamp(
 			mesh.rotation.z + turn_input * -0.05,
 			deg_to_rad(-5),
@@ -76,9 +78,18 @@ func _physics_process(delta):
 		)
 	else:
 		mesh.rotation.z = lerp(mesh.rotation.z, 0.0, 0.1)
+		
 	if ball.linear_velocity.length() > turn_minimum:
 		var dir = sign(ball.linear_velocity.dot(car.global_transform.basis.z))
 		car.rotate_y(turn_input * dir * delta)
+		
+	if is_drifting and ball.linear_velocity.length() > turn_minimum and turn_input != 0:
+		$Car/Mesh/drift2.emitting = true
+		$Car/Mesh/drift.emitting = true
+	else:
+		$Car/Mesh/drift2.emitting = false
+		$Car/Mesh/drift.emitting = false
+		
 	if ground_ray.is_colliding():
 		ball.apply_central_force(forward * speed_input)
 		if steering == default_steering:
@@ -99,7 +110,7 @@ func _physics_process(delta):
 	front_right_wheel.rotation.y = turn_input
 	front_left_wheel.rotation.y = turn_input+deg_to_rad(180)
 	
-	var wheelRotation = -ball.linear_velocity.dot(forward) * delta
+	var wheelRotation = ball.linear_velocity.dot(forward) * delta
 	front_right_wheel.rotation.x += wheelRotation
 	front_left_wheel.rotation.x += wheelRotation
 	back_right_wheel.rotation.x += wheelRotation
@@ -118,11 +129,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("drift"):
 		steering = default_steering*steer_multiplier
 		acceleration = default_acceleration*accel_multiplier
-		$Car/Mesh/drift2.emitting = true
-		$Car/Mesh/drift.emitting = true
+		is_drifting = true
 	if Input.is_action_just_released("drift"):
 		steering = default_steering
 		acceleration = default_acceleration
 		acceleration = default_acceleration*accel_multiplier
-		drift_2.emitting = false
-		drift.emitting = false
+		is_drifting = false

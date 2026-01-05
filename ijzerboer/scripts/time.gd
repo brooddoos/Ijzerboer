@@ -6,7 +6,7 @@ func _physics_process(delta: float) -> void:
 	@warning_ignore("integer_division") var seconds = int(time) % 60 
 	@warning_ignore("integer_division") var minutes = (int(time) / 60) % 60
 	@warning_ignore("integer_division") var hour = (int(time) / 3600) % 24
-	$Time.text = str(hour) + ":" + str(minutes) + ":" + str(seconds)
+	$Time.text = "%02d" % hour + ":" + "%02d" % minutes + ":" + "%02d" % seconds
 	var rings = hour % 12
 		
 	if last_hour != hour:
