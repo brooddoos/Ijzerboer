@@ -11,18 +11,17 @@ extends Node3D
 @onready var speed_lines: ColorRect = $"../UI/LineLayer/SpeedLines"
 @onready var mesh: MeshInstance3D = $Car/Mesh/Van
 
-
 @onready var drift_2: CPUParticles3D = $Car/Mesh/drift2
 @onready var drift: CPUParticles3D = $Car/Mesh/drift
-
 
 # Movement settings
 var default_acceleration = Gamestate.car_stats["acceleration"]	
 var accel_multiplier = 0.75 	# for drifting
 var default_steering = 30.0 	# degrees
 var steer_multiplier = 2.0 		# for drifting
-var turn_minimum = 2.0 			# minimum speed to turn
 var grip = 10.0 				# amount of grip the tires have
+var brake_mult = 0.98			# lower = brakes faster, higher slower DONT make it more than one (itll accelerate instead of brake)
+var full_turn_speed = 20.0			# speed needed to gain full steering
 
 # Input
 var speed_input := 0.0
@@ -32,7 +31,7 @@ var steering:float # added so you only need to update one variable (see settings
 var acceleration:float # same here
 var smoothing:float = 1.0
 
-var is_drifting = false
+var is_drifting := false
 
 func _ready() -> void:
 	steering = default_steering
@@ -47,13 +46,20 @@ func anti_slip_function(gripf):
 	var sideways_velocity = velocity - forward_velocity #wat overblijft is zijwaarts (dit willen we dus nie)
 	
 	ball.apply_central_force(-sideways_velocity * gripf)
-	
+
+func get_sideways_speed() -> float: #nah cuz why i cant find a proper function for this
+	var velocity = ball.linear_velocity
+	var forward = car.global_transform.basis.z.normalized()
+	var forward_velocity = forward * velocity.dot(forward)
+	var sideways_velocity = velocity - forward_velocity
+	return sideways_velocity.length()
+
 func _physics_process(delta):
 	# Stick car mesh to the ball's position
 	car.global_position = ball.global_position
 	
 	# Spedometer
-	var speed = int(ball.linear_velocity.length() * 3.6 / 3.0)
+	var speed = int(ball.linear_velocity.length() * 1.3)
 	$"../UI/Spedometer/Spedometer".text = str(speed) + " KM/H"
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))
@@ -70,6 +76,7 @@ func _physics_process(delta):
 	
 	# Apply movement force
 	var forward = car.transform.basis.z
+	
 	if turn_input != 0: #tilt effect for turning
 		mesh.rotation.z = clamp(
 			mesh.rotation.z + turn_input * -0.05,
@@ -78,17 +85,28 @@ func _physics_process(delta):
 		)
 	else:
 		mesh.rotation.z = lerp(mesh.rotation.z, 0.0, 0.1)
-		
-	if ball.linear_velocity.length() > turn_minimum:
-		var dir = sign(ball.linear_velocity.dot(car.global_transform.basis.z))
-		car.rotate_y(turn_input * dir * delta)
-		
-	if is_drifting and ball.linear_velocity.length() > turn_minimum and turn_input != 0:
-		$Car/Mesh/drift2.emitting = true
-		$Car/Mesh/drift.emitting = true
+	
+	var dir = sign(ball.linear_velocity.dot(car.global_transform.basis.z))
+	
+	var turn_speed_temp = 0.0
+	if ball.linear_velocity.length() < full_turn_speed and dir > 0.0 :
+		turn_speed_temp = abs(ball.linear_velocity.length())/full_turn_speed
 	else:
-		$Car/Mesh/drift2.emitting = false
-		$Car/Mesh/drift.emitting = false
+		turn_speed_temp = 1
+		
+	car.rotate_y(turn_input * dir * delta * turn_speed_temp)
+		
+	var sideways_speed = get_sideways_speed()
+	var is_actually_drifting = (is_drifting and ground_ray.is_colliding() and ball.linear_velocity.length() > 5.0 and sideways_speed > 1.5)
+	if is_actually_drifting: #with speed accounted and shit
+		drift_2.emitting = true
+		drift.emitting = true
+		if not $Car/Skid.playing:
+			$Car/Skid.play()
+	else:
+		drift_2.emitting = false
+		drift.emitting = false
+		$Car/Skid.stop()
 		
 	if ground_ray.is_colliding():
 		ball.apply_central_force(forward * speed_input)
@@ -112,26 +130,31 @@ func _physics_process(delta):
 	
 	var wheelRotation = ball.linear_velocity.dot(forward) * delta
 	front_right_wheel.rotation.x += wheelRotation
-	front_left_wheel.rotation.x += wheelRotation
+	front_left_wheel.rotation.x -= wheelRotation
 	back_right_wheel.rotation.x += wheelRotation
-	back_left_wheel.rotation.x += wheelRotation
-	
-	#if OS.is_debug_build():
-		#print("Velocity: X: " + str(int(ball.linear_velocity.x)) + " | Y: " + str(int(ball.linear_velocity.y)) + " | Z: " + str(int(ball.linear_velocity.z)))
+	back_left_wheel.rotation.x -= wheelRotation
 
-func _process(_delta):
-	#honk
-	if Input.is_action_just_pressed("honk"):
-		$Car/AudioStreamPlayer3D.play()
-	if Input.is_action_just_pressed("lights"):
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("honk"):
+		$Car/Honk.play()
+	if event.is_action_released("honk"):
+		$Car/Honk.stop()
+	if event.is_action_pressed("lights"):
 		$Car/Mesh/FrontLeftLight.visible = not $Car/Mesh/FrontLeftLight.visible
 		$Car/Mesh/FrontRightLight.visible = not $Car/Mesh/FrontRightLight.visible
-	if Input.is_action_just_pressed("drift"):
+	if event.is_action_pressed("drift"):
 		steering = default_steering*steer_multiplier
 		acceleration = default_acceleration*accel_multiplier
 		is_drifting = true
-	if Input.is_action_just_released("drift"):
+	if event.is_action_released("drift"):
 		steering = default_steering
 		acceleration = default_acceleration
 		acceleration = default_acceleration*accel_multiplier
 		is_drifting = false
+		$Car/Skid.stop()
+
+func _process(_delta):
+	var forward_speed = ball.linear_velocity.dot(car.global_transform.basis.z)
+	if Input.is_action_pressed("brake") and forward_speed > 5.0:
+		ball.linear_velocity *= brake_mult

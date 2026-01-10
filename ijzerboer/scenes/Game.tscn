@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=42 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="1_kiw3p"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="1_sv1m6"]
@@ -19,9 +19,31 @@
 [ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="19_45i86"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="19_sv1m6"]
 [ext_resource type="PackedScene" uid="uid://bds8qpwvnn87w" path="res://assets/3d/distributiehuis.glb" id="22_bneo8"]
+[ext_resource type="AudioStream" uid="uid://uj4g8in8uv54" path="res://assets/audio/skid.wav" id="22_ocgqw"]
 [ext_resource type="PackedScene" uid="uid://bv57k2wldeeul" path="res://assets/3d/garage.glb" id="23_bneo8"]
 [ext_resource type="PackedScene" uid="uid://3c2nxibwpjol" path="res://assets/3d/hubo.glb" id="24_ocgqw"]
 [ext_resource type="PackedScene" uid="uid://dl8c0psnwq170" path="res://assets/3d/frietkot.glb" id="25_jbgew"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7sob"]
+bg_color = Color(0.66, 0.66, 0.66, 0.34117648)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ua8r"]
+frequency = 0.0815
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r7sob"]
+noise = SubResource("FastNoiseLite_7ua8r")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjgi4"]
+shader = ExtResource("13_7ua8r")
+shader_parameter/noise = SubResource("NoiseTexture2D_r7sob")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_count = 2.0
+shader_parameter/line_density = 0.0
+shader_parameter/line_faloff = 0.58000002755
+shader_parameter/mask_size = 0.3210000152475
+shader_parameter/mask_edge = 0.3600000171
+shader_parameter/animation_speed = 20.0
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_attvq"]
 panorama = ExtResource("2_attvq")
@@ -74,27 +96,6 @@ uv1_world_triplanar = true
 [sub_resource type="BoxShape3D" id="BoxShape3D_78awf"]
 size = Vector3(500, 5, 500)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7sob"]
-bg_color = Color(0.66, 0.66, 0.66, 0.34117648)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ua8r"]
-frequency = 0.0815
-metadata/_preview_in_3d_space_ = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r7sob"]
-noise = SubResource("FastNoiseLite_7ua8r")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjgi4"]
-shader = ExtResource("13_7ua8r")
-shader_parameter/noise = SubResource("NoiseTexture2D_r7sob")
-shader_parameter/line_color = Color(1, 1, 1, 1)
-shader_parameter/line_count = 2.0
-shader_parameter/line_density = 0.0
-shader_parameter/line_faloff = 0.58000002755
-shader_parameter/mask_size = 0.3210000152475
-shader_parameter/mask_edge = 0.3600000171
-shader_parameter/animation_speed = 20.0
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7ua8r"]
 radius = 0.3
 height = 1.85
@@ -104,46 +105,6 @@ height = 1.85
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a8wo8"]
 
 [node name="Game" type="Node3D"]
-
-[node name="SpawnLocations" type="Node3D" parent="."]
-script = ExtResource("18_kyk2p")
-
-[node name="SpawnLocation1" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -57.886, -0.889, 0)
-
-[node name="SpawnLocation2" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322296, -0.9900398, 0)
-
-[node name="SpawnLocation3" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0.3958664, -0.889, -104.43997)
-
-[node name="SpawnLocation4" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -157.33385, -0.889, 84.90105)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_aug50")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 18.369925, 0)
-
-[node name="Snow" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 0)
-amount = 500
-lifetime = 2.0
-visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
-process_material = SubResource("ParticleProcessMaterial_r7sob")
-draw_pass_1 = SubResource("QuadMesh_mcffj")
-
-[node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -8, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(500, 0, 0, 0, 5, 0, 0, 0, 500, 0, 0, 0)
-material_override = SubResource("StandardMaterial3D_kiw3p")
-mesh = SubResource("BoxMesh_cpr0p")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-shape = SubResource("BoxShape3D_78awf")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -193,10 +154,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -113.0
-offset_top = -91.5
-offset_right = 113.0
-offset_bottom = 91.5
+offset_left = -197.0
+offset_top = -162.0
+offset_right = 197.0
+offset_bottom = 162.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
@@ -212,7 +173,7 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
 text = "Resume
 "
@@ -221,7 +182,7 @@ text = "Resume
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
 text = " Upload Music "
 
@@ -229,7 +190,7 @@ text = " Upload Music "
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
 text = " Clear custom songs "
 
@@ -237,7 +198,7 @@ text = " Clear custom songs "
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
 text = "exit"
 
@@ -321,20 +282,14 @@ script = ExtResource("1_sv1m6")
 layout_mode = 0
 offset_right = 144.0
 offset_bottom = 48.0
+text = "99:99:99"
 
 [node name="Bell" type="AudioStreamPlayer" parent="UI/Clock"]
 stream = ExtResource("17_a8wo8")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="Garage" type="Control" parent="UI"]
-visible = false
-anchors_preset = 0
-offset_right = 960.0
-offset_bottom = 720.0
-script = ExtResource("18_45i86")
-
-[node name="ColorRect" type="ColorRect" parent="UI/Garage"]
-process_mode = 2
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -342,67 +297,120 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.62352943)
+script = ExtResource("18_45i86")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Garage"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/Garage"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -102.5
-offset_right = 128.0
-offset_bottom = 102.5
+offset_left = -250.0
+offset_top = -160.0
+offset_right = 250.0
+offset_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="UI/Garage/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Garage/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "garage"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/Garage/VBoxContainer2"]
+[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="UI/Garage/VBoxContainer2/CustomLicensePlate"]
+[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/CustomLicensePlate"]
 layout_mode = 2
 text = "Custom Licenseplate"
 
-[node name="LicensePlateButton" type="Button" parent="UI/Garage/VBoxContainer2/CustomLicensePlate"]
+[node name="LicensePlateButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/CustomLicensePlate"]
 layout_mode = 2
 text = "40 000 BEF"
 metadata/price = 20000
 
-[node name="UpgradeLoad" type="HBoxContainer" parent="UI/Garage/VBoxContainer2"]
+[node name="UpgradeLoad" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="UI/Garage/VBoxContainer2/UpgradeLoad"]
+[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeLoad"]
 layout_mode = 2
 text = "Upgrade Load Capacity"
 
-[node name="CargoButton" type="Button" parent="UI/Garage/VBoxContainer2/UpgradeLoad"]
+[node name="CargoButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeLoad"]
 layout_mode = 2
 text = "100 BEF"
 metadata/price = 500
 
-[node name="UpgradeEngine" type="HBoxContainer" parent="UI/Garage/VBoxContainer2"]
+[node name="UpgradeEngine" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
 
-[node name="Label" type="Label" parent="UI/Garage/VBoxContainer2/UpgradeEngine"]
+[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeEngine"]
 layout_mode = 2
 text = "Upgrade Engine"
 
-[node name="EngineButton" type="Button" parent="UI/Garage/VBoxContainer2/UpgradeEngine"]
+[node name="EngineButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeEngine"]
 layout_mode = 2
 text = "40 000 BEF"
 metadata/price = 500
 
 [node name="Cassette" parent="UI" instance=ExtResource("5_s0nni")]
 layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="SpawnLocations" type="Node3D" parent="."]
+script = ExtResource("18_kyk2p")
+
+[node name="SpawnLocation1" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -57.886, -0.889, 0)
+
+[node name="SpawnLocation2" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322296, -0.9900398, 0)
+
+[node name="SpawnLocation3" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0.3958664, -0.889, -104.43997)
+
+[node name="SpawnLocation4" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -157.33385, -0.889, 84.90105)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aug50")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 18.369925, 0)
+
+[node name="Snow" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 0)
+amount = 500
+lifetime = 2.0
+visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
+process_material = SubResource("ParticleProcessMaterial_r7sob")
+draw_pass_1 = SubResource("QuadMesh_mcffj")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -8, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(500, 0, 0, 0, 5, 0, 0, 0, 500, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_kiw3p")
+mesh = SubResource("BoxMesh_cpr0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_78awf")
 
 [node name="Assets" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056533813, 0)
@@ -455,6 +463,13 @@ car = NodePath("../Car/Car")
 campos = NodePath("../Car/Car/CameraPoint")
 
 [node name="Car" parent="." instance=ExtResource("19_45i86")]
+
+[node name="Skid" parent="Car/Car" index="1"]
+stream = ExtResource("22_ocgqw")
+volume_db = 3.0
+
+[node name="Honk" parent="Car/Car" index="3"]
+volume_db = 5.0
 
 [node name="distributiehuis" parent="." instance=ExtResource("22_bneo8")]
 transform = Transform3D(-0.8831442, 0, 0.46910167, 0, 1, 0, -0.46910167, 0, -0.8831442, 36.226757, -1, 3.2757282)

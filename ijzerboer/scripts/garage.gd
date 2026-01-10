@@ -1,16 +1,23 @@
 extends Control
-@onready var buttons = [$VBoxContainer2/CustomLicensePlate/LicensePlateButton, $VBoxContainer2/UpgradeLoad/CargoButton, $VBoxContainer2/UpgradeEngine/EngineButton]
+@onready var buttons = [
+	$PanelContainer/VBoxContainer2/CustomLicensePlate/LicensePlateButton, 
+	$PanelContainer/VBoxContainer2/UpgradeLoad/CargoButton, 
+	$PanelContainer/VBoxContainer2/UpgradeEngine/EngineButton]
+@onready var area_3d: Area3D = $"../../Garage/Area3D"
+
 func _ready() -> void:
-	var area_3d = $"/root/Game/Garage/Area3D"
 	area_3d.entered.connect(_on_body_entered)
 	area_3d.exited.connect(_on_body_exited)
 	for button in buttons:
 		button.pressed.connect(_on_button_pressed.bind(button))
 	update_buttons()
+
 func _on_body_entered():
 	self.show()
+
 func _on_body_exited():
 	self.hide()
+
 func _on_button_pressed(button):
 	match button.name:
 		"LicensePlateButton":
@@ -30,6 +37,7 @@ func _on_button_pressed(button):
 			Gamestate.car_stats["acceleration"] += 20
 			$"../Values".update_currency()
 			print("test3")
+
 func update_buttons():
 	for button in buttons:
 		var price = button.get_meta("price")
