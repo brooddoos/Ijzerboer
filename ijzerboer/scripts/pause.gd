@@ -12,6 +12,10 @@ func _ready() -> void:
 	$".".position.y = 730.0
 	ogLen = len(cassette.tapes)
 	hide()
+	
+	if OS.has_feature("web"): #eh wrm zoude we t op web late alst toch nie supported is
+		$ColorRect/VBoxContainer/music.hide()
+		$ColorRect/VBoxContainer/clear.hide()
 
 func show_info(msg: String, title: String = "Info"):
 	var dialog = AcceptDialog.new()
@@ -58,7 +62,7 @@ func _on_button_pressed() -> void:
 
 func _on_music_pressed() -> void:
 	if OS.has_feature("web"):
-		OS.alert("This feature is not and probably will never be supported on Web. Please download a Windows or Linux build to use this feature.", "Error")
+		OS.alert("This feature is not and probably will never be supported on Web. Please download a Windows or Linux build to use this feature. Also, you're not supposed to be here? How did you manage to get this message?", "Error")
 		return
 	$FileDialog.popup_centered()
 

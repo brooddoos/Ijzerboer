@@ -18,12 +18,30 @@ func _on_body_entered():
 func _on_body_exited():
 	self.hide()
 
+func text_input(prompt = ""):
+	var line = LineEdit.new()
+	line.placeholder_text = prompt
+	line.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	line.position = Vector2(20, 20)
+	line.custom_minimum_size = Vector2(400, 0)
+	line.max_length = 9
+	
+	get_tree().root.add_child(line)
+	line.grab_focus()
+	
+	var text = await line.text_submitted
+	line.queue_free()
+	return text
+
+
 func _on_button_pressed(button):
 	match button.name:
 		"LicensePlateButton":
 			Gamestate.BEF -= button.get_meta("price")
 			update_buttons()
 			$"../Values".update_currency()
+			var plaat = await text_input("Enter your new license plate. (Maximum of 9 characters)") #gui komt later, dit werkt voorlopig
+			Gamestate.car_stats["licenseplate"] = plaat
 			print("test1")
 		"CargoButton":
 			Gamestate.BEF -= button.get_meta("price")

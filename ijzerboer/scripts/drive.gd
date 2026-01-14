@@ -10,6 +10,7 @@ extends Node3D
 @onready var back_right_wheel: MeshInstance3D = $Car/Mesh/BackRightWheel
 @onready var speed_lines: ColorRect = $"../UI/LineLayer/SpeedLines"
 @onready var mesh: MeshInstance3D = $Car/Mesh/Van
+@onready var license_plate: Label3D = $Car/Mesh/LicensePlate
 
 @onready var drift_2: CPUParticles3D = $Car/Mesh/drift2
 @onready var drift: CPUParticles3D = $Car/Mesh/drift
@@ -19,9 +20,9 @@ var default_acceleration = Gamestate.car_stats["acceleration"]
 var accel_multiplier = 0.75 	# for drifting
 var default_steering = 30.0 	# degrees
 var steer_multiplier = 2.0 		# for drifting
-var grip = 10.0 				# amount of grip the tires have
+var grip = 20.0 				# amount of grip the tires have
 var brake_mult = 0.98			# lower = brakes faster, higher slower DONT make it more than one (itll accelerate instead of brake)
-var full_turn_speed = 20.0			# speed needed to gain full steering
+var full_turn_speed = 15.0			# speed needed to gain full steering
 
 # Input
 var speed_input := 0.0
@@ -36,7 +37,7 @@ var is_drifting := false
 func _ready() -> void:
 	steering = default_steering
 	acceleration = default_acceleration
-	$Car/Mesh/LicensePlate.text = Gamestate.car_stats["licenseplate"]
+	license_plate.text = Gamestate.car_stats["licenseplate"]
 
 func anti_slip_function(gripf):
 	var velocity = ball.linear_velocity
@@ -59,7 +60,7 @@ func _physics_process(delta):
 	car.global_position = ball.global_position
 	
 	# Spedometer
-	var speed = int(ball.linear_velocity.length() * 1.3)
+	var speed = int(ball.linear_velocity.length())
 	$"../UI/Spedometer/Spedometer".text = str(speed) + " KM/H"
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))
@@ -78,21 +79,22 @@ func _physics_process(delta):
 	var forward = car.transform.basis.z
 	
 	if turn_input != 0: #tilt effect for turning
-		mesh.rotation.z = clamp(
-			mesh.rotation.z + turn_input * -0.05,
-			deg_to_rad(-5),
-			deg_to_rad(5)
-		)
+		mesh.rotation.z = clamp(mesh.rotation.z + turn_input * -0.05,deg_to_rad(-5),deg_to_rad(5))
+		license_plate.rotation.z = clamp(license_plate.rotation.z + turn_input * 0.05,deg_to_rad(-5),deg_to_rad(5))
+		
 	else:
 		mesh.rotation.z = lerp(mesh.rotation.z, 0.0, 0.1)
+		license_plate.rotation.z = lerp(license_plate.rotation.z, 0.0, 0.1)
 	
 	var dir = sign(ball.linear_velocity.dot(car.global_transform.basis.z))
 	
 	var turn_speed_temp = 0.0
-	if ball.linear_velocity.length() < full_turn_speed and dir > 0.0 :
+	if ball.linear_velocity.length() <2.0:
+		turn_speed_temp = 0.0
+	elif ball.linear_velocity.length() < full_turn_speed and dir > 0.0:
 		turn_speed_temp = abs(ball.linear_velocity.length())/full_turn_speed
 	else:
-		turn_speed_temp = 1
+		turn_speed_temp = 1.0
 		
 	car.rotate_y(turn_input * dir * delta * turn_speed_temp)
 		
@@ -116,13 +118,9 @@ func _physics_process(delta):
 		else:
 			smoothing = 0.0
 			anti_slip_function(grip/20)
-			#var car_velocity = car.global_transform.basis.z.normalized()
-			#drift.look_at(global_transform.origin + car_velocity, Vector3.UP)
-			#drift_2.look_at(global_transform.origin + car_velocity, Vector3.UP)
-	if not ground_ray.is_colliding():
+	else:
 		drift_2.emitting = false
 		drift.emitting = false
-		return
 	
 	# wheels
 	front_right_wheel.rotation.y = turn_input
@@ -155,6 +153,7 @@ func _input(event: InputEvent) -> void:
 		$Car/Skid.stop()
 
 func _process(_delta):
+	license_plate.text = Gamestate.car_stats["licenseplate"]
 	var forward_speed = ball.linear_velocity.dot(car.global_transform.basis.z)
 	if Input.is_action_pressed("brake") and forward_speed > 5.0:
 		ball.linear_velocity *= brake_mult

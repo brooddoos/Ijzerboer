@@ -5,6 +5,12 @@ extends Node3D
 @onready var startpoint_2: Node3D = $"../StartPoint2"
 @onready var car: Node3D = $"."
 @export var speed = 10
+
+@export var front_right_wheel: MeshInstance3D
+@export var front_left_wheel: MeshInstance3D
+@export var back_left_wheel: MeshInstance3D
+@export var back_right_wheel: MeshInstance3D
+
 ## if you read this: please improve the spaghetti
 var destination:Vector3 = Vector3(0,0,0)
 #related to driving state
@@ -57,4 +63,9 @@ func _process(delta: float) -> void:
 	else:
 		drunk = randi_range(0,2) == 1
 		
+		
+	front_right_wheel.rotation.x += speed*delta
+	front_left_wheel.rotation.x -= speed*delta
+	back_right_wheel.rotation.x += speed*delta
+	back_left_wheel.rotation.x -= speed*delta
 	
