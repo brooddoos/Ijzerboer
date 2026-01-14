@@ -104,11 +104,11 @@ func _physics_process(delta):
 		drift_2.emitting = true
 		drift.emitting = true
 		if not $Car/Skid.playing:
-			$Car/Skid.play()
+			$Car/Skid.playing = true
 	else:
 		drift_2.emitting = false
 		drift.emitting = false
-		$Car/Skid.stop()
+		$Car/Skid.playing = false
 		
 	if ground_ray.is_colliding():
 		ball.apply_central_force(forward * speed_input)
@@ -135,9 +135,9 @@ func _physics_process(delta):
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("honk"):
-		$Car/Honk.play()
+		$Car/Honk.playing = true
 	if event.is_action_released("honk"):
-		$Car/Honk.stop()
+		$Car/Honk.playing = false
 	if event.is_action_pressed("lights"):
 		$Car/Mesh/FrontLeftLight.visible = not $Car/Mesh/FrontLeftLight.visible
 		$Car/Mesh/FrontRightLight.visible = not $Car/Mesh/FrontRightLight.visible
