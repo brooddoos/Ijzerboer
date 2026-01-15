@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw86sywt8ltb3"
-path.s3tc="res://.godot/imported/label3.png-386fd6d3a423182a9a0bf0a0cf592936.s3tc.ctex"
+uid="uid://be5kc485fxbrn"
+path.s3tc="res://.godot/imported/skybox3_lowquality.png-7c50a8a644e78cefdbec4bde20b5baca.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/images/label3.png"
-dest_files=["res://.godot/imported/label3.png-386fd6d3a423182a9a0bf0a0cf592936.s3tc.ctex"]
+source_file="res://assets/images/skyboxes/skybox3_lowquality.png"
+dest_files=["res://.godot/imported/skybox3_lowquality.png-7c50a8a644e78cefdbec4bde20b5baca.s3tc.ctex"]
 
 [params]
 

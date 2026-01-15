@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cj2tmqcbv7qk2" path="res://scripts/cassette.gd" id="1_68kt0"]
 [ext_resource type="Texture2D" uid="uid://ctav3jkfeasug" path="res://assets/3d/cassettelowpoly_Behuizing.png" id="2_68kt0"]
 [ext_resource type="FontFile" uid="uid://d0vhpjp132hd8" path="res://assets/fonts/TrashHand.TTF" id="4_0j804"]
-[ext_resource type="Texture2D" uid="uid://cj6usxakrsfli" path="res://assets/images/label4.png" id="4_oirex"]
+[ext_resource type="Texture2D" uid="uid://cj6usxakrsfli" path="res://assets/images/ui/label.png" id="4_oirex"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dyp6u"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

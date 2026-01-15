@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=47 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="1_kiw3p"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="1_sv1m6"]
@@ -8,14 +8,15 @@
 [ext_resource type="PackedScene" uid="uid://bq3i3dy8sx7qc" path="res://scenes/Cassette.tscn" id="5_s0nni"]
 [ext_resource type="FontFile" uid="uid://b4hlmaj4yd0i6" path="res://assets/fonts/ClockFont.ttf" id="8_jbgew"]
 [ext_resource type="Script" uid="uid://cful1dia0pxja" path="res://scripts/pause.gd" id="10_r7sob"]
-[ext_resource type="Texture2D" uid="uid://bvdtxoxhkl374" path="res://assets/images/spedometer_outline.png" id="11_2rd6h"]
-[ext_resource type="Texture2D" uid="uid://cukwu6sx7ul8w" path="res://assets/images/spedometer_needle.png" id="12_7ua8r"]
-[ext_resource type="Texture2D" uid="uid://be5kc485fxbrn" path="res://assets/images/skybox3_lowquality.png" id="12_bneo8"]
+[ext_resource type="Texture2D" uid="uid://bvdtxoxhkl374" path="res://assets/images/ui/spedometer_outline.png" id="11_2rd6h"]
+[ext_resource type="Texture2D" uid="uid://cukwu6sx7ul8w" path="res://assets/images/ui/spedometer_needle.png" id="12_7ua8r"]
+[ext_resource type="Texture2D" uid="uid://be5kc485fxbrn" path="res://assets/images/skyboxes/skybox3_lowquality.png" id="12_bneo8"]
 [ext_resource type="Shader" uid="uid://dw2x83lxhae1h" path="res://shaders/speed.gdshader" id="13_7ua8r"]
-[ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scenes/ui_values.gd" id="16_attvq"]
+[ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="16_attvq"]
 [ext_resource type="Script" uid="uid://s7q8cvdiv6w3" path="res://scripts/dirk.gd" id="16_vjgi4"]
 [ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="17_a8wo8"]
 [ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="18_45i86"]
+[ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/interactring.tres" id="18_a85ww"]
 [ext_resource type="Script" uid="uid://duye04gka0uvq" path="res://scripts/ironspawner.gd" id="18_kyk2p"]
 [ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="19_45i86"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="19_sv1m6"]
@@ -25,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://bv57k2wldeeul" path="res://assets/3d/garage.glb" id="23_bneo8"]
 [ext_resource type="PackedScene" uid="uid://3c2nxibwpjol" path="res://assets/3d/hubo.glb" id="24_ocgqw"]
 [ext_resource type="PackedScene" uid="uid://dl8c0psnwq170" path="res://assets/3d/frietkot.glb" id="25_jbgew"]
+[ext_resource type="AudioStream" uid="uid://4qt05n3dcopj" path="res://assets/audio/engine_1.wav" id="26_jhsr3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7sob"]
 bg_color = Color(0.66, 0.66, 0.66, 0.34117648)
@@ -108,8 +110,7 @@ height = 1.85
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r7sob"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_bneo8"]
-size = Vector3(0.20874023, 0.13598633, 0.35755157)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
 
 [node name="Game" type="Node3D"]
 
@@ -447,14 +448,18 @@ shape = SubResource("CapsuleShape3D_r7sob")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33)
 
 [node name="Area3D" type="Area3D" parent="Garage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
 collision_mask = 2
 script = ExtResource("19_sv1m6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Garage/Area3D"]
-transform = Transform3D(45, 0, 0, 0, 45, 0, 0, 0, 45, -3.9381146, -0.3275299, -14.6520195)
-shape = SubResource("BoxShape3D_bneo8")
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jbgew")
 debug_color = Color(1, 1, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="Garage/Area3D"]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2, 0)
+texture = ExtResource("18_a85ww")
 
 [node name="garage" parent="Garage" instance=ExtResource("23_bneo8")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.9556332, 0.020529628, 18.349487)
@@ -484,6 +489,10 @@ font = ExtResource("23_a85ww")
 stream = ExtResource("22_ocgqw")
 volume_db = 0.0
 max_db = 3.0
+
+[node name="Engine" parent="Car/Car" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.93183, 2.2251968, -26.151123)
+stream = ExtResource("26_jhsr3")
 
 [node name="Honk" parent="Car/Car" index="3"]
 volume_db = 5.0

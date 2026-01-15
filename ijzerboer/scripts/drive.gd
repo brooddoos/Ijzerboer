@@ -32,7 +32,7 @@ var steering:float # added so you only need to update one variable (see settings
 var acceleration:float # same here
 var smoothing:float = 1.0
 
-var is_drifting := false
+var drift_pressed := false
 
 func _ready() -> void:
 	steering = default_steering
@@ -77,8 +77,8 @@ func _physics_process(delta):
 	
 	# Apply movement force
 	var forward = car.transform.basis.z
-	
-	if turn_input != 0: #tilt effect for turning
+	# Tilt effect
+	if turn_input != 0:
 		mesh.rotation.z = clamp(mesh.rotation.z + turn_input * -0.05,deg_to_rad(-5),deg_to_rad(5))
 		license_plate.rotation.z = clamp(license_plate.rotation.z + turn_input * 0.05,deg_to_rad(-5),deg_to_rad(5))
 		
@@ -86,6 +86,7 @@ func _physics_process(delta):
 		mesh.rotation.z = lerp(mesh.rotation.z, 0.0, 0.1)
 		license_plate.rotation.z = lerp(license_plate.rotation.z, 0.0, 0.1)
 	
+	# Car mechanics
 	var dir = sign(ball.linear_velocity.dot(car.global_transform.basis.z))
 	
 	var turn_speed_temp = 0.0
@@ -99,8 +100,8 @@ func _physics_process(delta):
 	car.rotate_y(turn_input * dir * delta * turn_speed_temp)
 		
 	var sideways_speed = get_sideways_speed()
-	var is_actually_drifting = (is_drifting and ground_ray.is_colliding() and ball.linear_velocity.length() > 5.0 and sideways_speed > 1.5)
-	if is_actually_drifting: #with speed accounted and shit
+	var is_drifting = (drift_pressed and ground_ray.is_colliding() and ball.linear_velocity.length() > 5.0 and sideways_speed > 1.5)
+	if is_drifting: #with speed accounted and shit
 		drift_2.emitting = true
 		drift.emitting = true
 		if not $Car/Skid.playing:
@@ -132,7 +133,7 @@ func _physics_process(delta):
 	back_right_wheel.rotation.x += wheelRotation
 	back_left_wheel.rotation.x -= wheelRotation
 
-
+# Controls
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("honk"):
 		$Car/Honk.playing = true
@@ -144,12 +145,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("drift"):
 		steering = default_steering*steer_multiplier
 		acceleration = default_acceleration*accel_multiplier
-		is_drifting = true
+		drift_pressed = true
 	if event.is_action_released("drift"):
 		steering = default_steering
 		acceleration = default_acceleration
 		acceleration = default_acceleration*accel_multiplier
-		is_drifting = false
+		drift_pressed = false
 		$Car/Skid.stop()
 
 func _process(_delta):

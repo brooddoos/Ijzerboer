@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="2_yt8fu"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="6_7yvfd"]
-[ext_resource type="Texture2D" uid="uid://dcfej0covuq8y" path="res://assets/images/logo.png" id="6_thu7x"]
+[ext_resource type="Texture2D" uid="uid://dcfej0covuq8y" path="res://assets/images/ui/logo.png" id="6_thu7x"]
 [ext_resource type="Texture2D" uid="uid://dgandea2lyobj" path="res://assets/3d/cami_cami.png" id="9_el213"]
 [ext_resource type="AudioStream" uid="uid://dum3r7il36506" path="res://assets/audio/oudijzer.ogg" id="10_pp5m5"]
 [ext_resource type="Texture2D" uid="uid://bl3v4utw7o846" path="res://assets/3d/cami_wheel.png" id="10_thu7x"]
@@ -379,48 +379,63 @@ skeleton = NodePath("")
 
 [node name="tree_simple" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -36.421, -0.264709, -18.262314)
+surface_material_override/0 = null
 
 [node name="tree_simple2" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -28.659405, -0.894609, -18.262314)
+surface_material_override/0 = null
 
 [node name="tree_simple3" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -20.867926, -1.1303253, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple4" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.537062, -2.614531, -18.26231)
+surface_material_override/0 = null
 
 [node name="tree_simple5" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -32.32728, -5.240683, -18.26231)
+surface_material_override/0 = null
 
 [node name="tree_simple6" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -24.843372, -3.0345082, -18.26231)
+surface_material_override/0 = null
 
 [node name="tree_simple7" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -11.707582, -0.5160532, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple8" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -7.0056195, -3.918457, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple9" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -2.7770944, -1.7382708, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple10" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0.71539783, -2.678238, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple11" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.5909424, -3.990203, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple12" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 10.145622, -2.4092255, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple13" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 14.24937, 0.13743877, -18.262312)
+surface_material_override/0 = null
 
 [node name="tree_simple14" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -3.611, -4.6550827, -2.642)
+surface_material_override/0 = null
 
 [node name="tree_simple15" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.163, -4.3460827, -2.642)
+surface_material_override/0 = null
 
 [node name="Wall" type="CSGBox3D" parent="."]
 transform = Transform3D(149.71939, 0, 0, 0, 1.7977414, 0, 0, 0, 1, 0, 6.955824, -41.283447)

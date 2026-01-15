@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccjcys27joxuv"
-path="res://.godot/imported/kobe.svg-3d9efe12a2f5776f62a84b208f138e6f.ctex"
+uid="uid://bmw58ybkyyi8b"
+path="res://.godot/imported/icon.png-9110d7310f2f9eb5f0aad687fb584590.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/kobe.svg"
-dest_files=["res://.godot/imported/kobe.svg-3d9efe12a2f5776f62a84b208f138e6f.ctex"]
+source_file="res://assets/images/ui/icon.png"
+dest_files=["res://.godot/imported/icon.png-9110d7310f2f9eb5f0aad687fb584590.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

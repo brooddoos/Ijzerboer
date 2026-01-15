@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_ygkcj"]
 [ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/Menu.tscn" id="2_n8o7m"]
-[ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/nobgbrooddoos.png" id="3_73bwj"]
-[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/kobe.svg" id="4_3vyj7"]
-[ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/pfp.png" id="5_mgj8c"]
+[ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/ui/nobgbrooddoos.png" id="3_73bwj"]
+[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/ui/kobe.svg" id="4_3vyj7"]
+[ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/ui/pfp.png" id="5_mgj8c"]
 
 [node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
 layout_mode = 3
