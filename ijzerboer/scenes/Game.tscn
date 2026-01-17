@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=48 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="1_kiw3p"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="1_sv1m6"]
@@ -103,6 +103,9 @@ uv1_world_triplanar = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_78awf"]
 size = Vector3(500, 5, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jhsr3"]
+size = Vector3(10, 0.25, 5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7ua8r"]
 radius = 0.3
@@ -421,6 +424,18 @@ mesh = SubResource("BoxMesh_cpr0p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 shape = SubResource("BoxShape3D_78awf")
 
+[node name="ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5.46285, -8, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ramp"]
+transform = Transform3D(9.659258, -0.06470475, 0, 2.58819, 0.24148145, 0, 0, 0, 5, 13.663289, 3.5929866, -5.9317865)
+material_override = SubResource("StandardMaterial3D_kiw3p")
+mesh = SubResource("BoxMesh_cpr0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ramp"]
+transform = Transform3D(0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0, 1, 13.663, 3.593, -5.932)
+shape = SubResource("BoxShape3D_jhsr3")
+
 [node name="Assets" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056533813, 0)
 
@@ -470,25 +485,29 @@ transform = Transform3D(-0.9978026, 0, -0.0662565, 0, 1, 0, 0.0662565, 0, -0.997
 [node name="frietkot2" parent="." instance=ExtResource("25_jbgew")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.830044, -3, -6.6333084)
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "campos")]
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "back_view", "left_view", "right_view", "up_view", "down_view")]
 transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 6, -11)
 script = ExtResource("4_aug50")
 car = NodePath("../Car/Car")
-campos = NodePath("../Car/Car/CameraPoint")
+back_view = NodePath("../Car/Car/CameraPoint")
+left_view = NodePath("../Car/Car/CameraPoint2")
+right_view = NodePath("../Car/Car/CameraPoint3")
+up_view = NodePath("../Car/Car/CameraPoint4")
+down_view = NodePath("../Car/Car/CameraPoint5")
 
 [node name="Car" parent="." instance=ExtResource("19_45i86")]
 
 [node name="LicensePlate" parent="Car/Car/Mesh" index="9"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.46617928, 0.19263527, -2.6015983)
-no_depth_test = true
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.46617928, 0.19263527, -2.6220965)
 modulate = Color(0.8331618, 0.29373747, 0.31971705, 1)
 text = "1-ABC-123"
 font = ExtResource("23_a85ww")
 
 [node name="Skid" parent="Car/Car" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10649991, -0.637445, -1.7854915)
 stream = ExtResource("22_ocgqw")
-volume_db = 0.0
-max_db = 3.0
+volume_db = -5.0
+max_db = -5.0
 
 [node name="Engine" parent="Car/Car" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.93183, 2.2251968, -26.151123)

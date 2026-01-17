@@ -21,7 +21,7 @@ shader_parameter/albedo_texture = ExtResource("5_658ie")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7e1fp"]
 render_priority = 0
 shader = ExtResource("4_ckadj")
-shader_parameter/scale = 0.1
+shader_parameter/scale = 0.05
 shader_parameter/albedo_texture = ExtResource("5_658ie")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8osq2"]
@@ -135,6 +135,22 @@ bus = &"Car"
 
 [node name="CameraPoint" type="Node3D" parent="Car"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -11)
+metadata/DO_NOT_REMOVE_ME = ""
+
+[node name="CameraPoint2" type="Node3D" parent="Car"]
+transform = Transform3D(0.8660253, -0.12940952, -0.4829629, 0, 0.9659258, -0.25881904, 0.5, 0.22414386, 0.8365163, 4, 6, -6)
+metadata/DO_NOT_REMOVE_ME = ""
+
+[node name="CameraPoint3" type="Node3D" parent="Car"]
+transform = Transform3D(0.8660253, 0.1294095, 0.4829629, 0, 0.96592575, -0.25881904, -0.49999997, 0.22414385, 0.83651626, -4, 6, -6)
+metadata/DO_NOT_REMOVE_ME = ""
+
+[node name="CameraPoint4" type="Node3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 10, -3)
+metadata/DO_NOT_REMOVE_ME = ""
+
+[node name="CameraPoint5" type="Node3D" parent="Car"]
+transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.7071068, 1.6313155, 0.61384463, 3.7133055)
 metadata/DO_NOT_REMOVE_ME = ""
 
 [node name="RayCast3D" type="RayCast3D" parent="Car"]
