@@ -3,6 +3,7 @@ extends Control
 @onready var _3_dsplashtext: Label3D = $"../../Logo/3dsplashtext"
 @onready var buttons: PanelContainer = $Buttons
 @export var scene:PackedScene
+@onready var version_text: Label = $version
 
 # cam stuff
 @export var camera: Camera3D
@@ -22,9 +23,12 @@ const splashTexts = [ #voeg later mss meer toe, idk
 ]
 
 var rng = RandomNumberGenerator.new()
+var version = ProjectSettings.get_setting("application/config/version")
+
 func _ready() -> void:
 	origin = camera.global_position
 	_3_dsplashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
+	version_text.text = " v"+str(version)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("drift"):
