@@ -473,7 +473,8 @@ shape = SubResource("CylinderShape3D_jbgew")
 debug_color = Color(1, 1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="Garage/Area3D"]
-transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2, 0)
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
+texture_filter = 1
 texture = ExtResource("18_a85ww")
 
 [node name="garage" parent="Garage" instance=ExtResource("23_bneo8")]
@@ -508,6 +509,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10649991, -0.637445, -1.78
 stream = ExtResource("22_ocgqw")
 volume_db = -5.0
 max_db = -5.0
+playback_type = 1
 
 [node name="Engine" parent="Car/Car" index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.93183, 2.2251968, -26.151123)
