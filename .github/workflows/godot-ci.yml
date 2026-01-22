@@ -105,6 +105,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+  
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -112,22 +113,13 @@ jobs:
       - name: Download all artifacts
         uses: actions/download-artifact@v4
   
-      - name: Bump patch version
-        id: bump_version
+      - name: Read version
+        id: read_version
         run: |
           FILE="ijzerboer/project.godot"
           VERSION=$(grep 'config/version=' $FILE | cut -d'"' -f2)
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          PATCH=$((PATCH + 1))
-          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-          echo "New version: $NEW_VERSION"
-          sed -i "s/config\/version=\"[0-9]\+\.[0-9]\+\.[0-9]\+\"/config\/version=\"$NEW_VERSION\"/" $FILE
-          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add $FILE
-          git commit -m "Bump patch version to $NEW_VERSION"
-          git push
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "Using version: $VERSION"
   
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -138,3 +130,21 @@ jobs:
           files: |
             windows/**
             linux/**
+  
+      - name: Bump patch version (post-release)
+        run: |
+          FILE="ijzerboer/project.godot"
+          VERSION=${{ env.VERSION }}
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+  
+          echo "Bumping to $NEW_VERSION"
+  
+          sed -i "s/config\/version=\"[0-9]\+\.[0-9]\+\.[0-9]\+\"/config\/version=\"$NEW_VERSION\"/" $FILE
+  
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add $FILE
+          git commit -m "Bump patch version to $NEW_VERSION"
+          git push
