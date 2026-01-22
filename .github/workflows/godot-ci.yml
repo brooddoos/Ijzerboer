@@ -3,8 +3,7 @@ on:
   push:
     paths:
       - ijzerboer/**
-
-# NOTE: If your `project.godot` is at the repository root, set `PROJECT_PATH` below to ".".
+      - .github/workflows/**
 
 env:
   GODOT_VERSION: 4.5.1
@@ -14,7 +13,7 @@ env:
 jobs:
   export-windows:
     name: Windows Export
-    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:4.5.1
     steps:
@@ -24,13 +23,13 @@ jobs:
           lfs: true
       - name: Setup
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mkdir -v -p ~/.config/
+          mkdir -p ~/.local/share/godot/export_templates/
+          mkdir -p ~/.config/
           mv /root/.config/godot ~/.config/godot
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Windows Build
         run: |
-          mkdir -v -p build/windows
+          mkdir -p build/windows
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
@@ -42,7 +41,7 @@ jobs:
 
   export-linux:
     name: Linux Export
-    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:4.5.1
     steps:
@@ -52,11 +51,11 @@ jobs:
           lfs: true
       - name: Setup
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Linux Build
         run: |
-          mkdir -v -p build/linux
+          mkdir -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
@@ -68,7 +67,7 @@ jobs:
 
   export-web:
     name: Web Export
-    runs-on: ubuntu-24.04  # Use 24.04 with godot 4
+    runs-on: ubuntu-24.04
     container:
       image: barichello/godot-ci:4.5.1
     steps:
@@ -78,11 +77,11 @@ jobs:
           lfs: true
       - name: Setup
         run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -p ~/.local/share/godot/export_templates/
           mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
       - name: Web Build
         run: |
-          mkdir -v -p build/web
+          mkdir -p build/web
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
@@ -91,32 +90,51 @@ jobs:
         with:
           name: web
           path: build/web
-      - name: Install rsync 📚
+      - name: Install rsync
         run: |
           apt-get update && apt-get install -y rsync
-      - name: Deploy to GitHub Pages 🚀
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
+          branch: gh-pages
+          folder: build/web
+
   release:
     name: Release builds
     needs: [export-windows, export-linux, export-web]
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+  
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-
-      - name: Create / Update latest release
+  
+      - name: Bump patch version
+        id: bump_version
+        run: |
+          FILE="ijzerboer/project.godot"
+          VERSION=$(grep 'config/version=' $FILE | cut -d'"' -f2)
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "New version: $NEW_VERSION"
+          sed -i "s/config\/version=\"[0-9]\+\.[0-9]\+\.[0-9]\+\"/config\/version=\"$NEW_VERSION\"/" $FILE
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add $FILE
+          git commit -m "Bump patch version to $NEW_VERSION"
+          git push
+  
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: Latest Build
-          prerelease: true
+          tag_name: v${{ env.VERSION }}
+          name: Release v${{ env.VERSION }}
+          prerelease: false
           files: |
             windows/**
             linux/**
-            web/**
