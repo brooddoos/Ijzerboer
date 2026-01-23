@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=3 uid="uid://7s0n635txbqb"]
+
+[ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="1_75lht"]
+
+[node name="Garage" type="Node3D"]
+script = ExtResource("1_75lht")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -160.0
+offset_right = 250.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "garage"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/CustomLicensePlate"]
+layout_mode = 2
+text = "Custom Licenseplate"
+
+[node name="LicensePlateButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/CustomLicensePlate"]
+layout_mode = 2
+text = "40 000 BEF"
+metadata/price = 500
+
+[node name="UpgradeLoad" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/UpgradeLoad"]
+layout_mode = 2
+text = "Upgrade Load Capacity"
+
+[node name="CargoButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/UpgradeLoad"]
+layout_mode = 2
+text = "100 BEF"
+metadata/price = 500
+
+[node name="UpgradeEngine" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/UpgradeEngine"]
+layout_mode = 2
+text = "Upgrade Engine"
+
+[node name="EngineButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/UpgradeEngine"]
+layout_mode = 2
+text = "40 000 BEF"
+metadata/price = 500
+
+[node name="ExitButton" type="Button" parent="UI/PanelContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Exit"
+metadata/price = 500
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Vehicle" type="Node3D" parent="."]

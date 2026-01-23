@@ -1,22 +1,14 @@
 extends Control
 @onready var buttons = [
-	$PanelContainer/VBoxContainer2/CustomLicensePlate/LicensePlateButton, 
-	$PanelContainer/VBoxContainer2/UpgradeLoad/CargoButton, 
-	$PanelContainer/VBoxContainer2/UpgradeEngine/EngineButton]
+	$UI/PanelContainer/VBoxContainer2/CustomLicensePlate/LicensePlateButton, 
+	$UI/PanelContainer/VBoxContainer2/UpgradeLoad/CargoButton, 
+	$UI/PanelContainer/VBoxContainer2/UpgradeEngine/EngineButton]
 @onready var area_3d: Area3D = $"../../Garage/Area3D"
 
 func _ready() -> void:
-	area_3d.entered.connect(_on_body_entered)
-	area_3d.exited.connect(_on_body_exited)
 	for button in buttons:
 		button.pressed.connect(_on_button_pressed.bind(button))
 	update_buttons()
-
-func _on_body_entered():
-	self.show()
-
-func _on_body_exited():
-	self.hide()
 
 func text_input(prompt = ""):
 	var line = LineEdit.new()

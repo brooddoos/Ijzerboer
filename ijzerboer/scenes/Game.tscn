@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=47 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="1_kiw3p"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="1_sv1m6"]
@@ -15,7 +15,6 @@
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="16_attvq"]
 [ext_resource type="Script" uid="uid://s7q8cvdiv6w3" path="res://scripts/dirk.gd" id="16_vjgi4"]
 [ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="17_a8wo8"]
-[ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="18_45i86"]
 [ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/interactring.tres" id="18_a85ww"]
 [ext_resource type="Script" uid="uid://duye04gka0uvq" path="res://scripts/ironspawner.gd" id="18_kyk2p"]
 [ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="19_45i86"]
@@ -300,81 +299,6 @@ label_settings = SubResource("LabelSettings_jhsr3")
 stream = ExtResource("17_a8wo8")
 volume_db = -5.0
 bus = &"SFX"
-
-[node name="Garage" type="Control" parent="UI"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("18_45i86")
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/Garage"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -160.0
-offset_right = 250.0
-offset_bottom = 90.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/Garage/PanelContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(500, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 64
-text = "garage"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/CustomLicensePlate"]
-layout_mode = 2
-text = "Custom Licenseplate"
-
-[node name="LicensePlateButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/CustomLicensePlate"]
-layout_mode = 2
-text = "40 000 BEF"
-metadata/price = 500
-
-[node name="UpgradeLoad" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeLoad"]
-layout_mode = 2
-text = "Upgrade Load Capacity"
-
-[node name="CargoButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeLoad"]
-layout_mode = 2
-text = "100 BEF"
-metadata/price = 500
-
-[node name="UpgradeEngine" type="HBoxContainer" parent="UI/Garage/PanelContainer/VBoxContainer2"]
-layout_mode = 2
-alignment = 1
-
-[node name="Label" type="Label" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeEngine"]
-layout_mode = 2
-text = "Upgrade Engine"
-
-[node name="EngineButton" type="Button" parent="UI/Garage/PanelContainer/VBoxContainer2/UpgradeEngine"]
-layout_mode = 2
-text = "40 000 BEF"
-metadata/price = 500
 
 [node name="Cassette" parent="UI" instance=ExtResource("5_s0nni")]
 layout_mode = 1
