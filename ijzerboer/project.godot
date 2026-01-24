@@ -27,6 +27,7 @@ config/icon="uid://bmw58ybkyyi8b"
 
 Gamestate="*res://scripts/gamestate.gd"
 Manager="*res://scripts/manager.gd"
+Transition="*res://scenes/Transition.tscn"
 
 [display]
 

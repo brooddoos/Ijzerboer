@@ -43,12 +43,14 @@ func _process(_delta: float) -> void:
 	camera.global_position = origin + offset
 
 func _on_play_pressed() -> void:
-	##Transition.changescene()
+	await Transition.fade_out()
 	get_tree().change_scene_to_packed(scene)
+	await Transition.fade_in()
 
 func _on_options_pressed() -> void:
 	buttons.visible = !buttons.visible
 	settings.visible = !settings.visible
 
 func _on_exit_pressed() -> void:
+	await Transition.fade_out()
 	get_tree().quit()
