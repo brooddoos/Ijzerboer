@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=44 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="1_kiw3p"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="1_sv1m6"]
@@ -13,9 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://be5kc485fxbrn" path="res://assets/images/skyboxes/skybox3_lowquality.png" id="12_bneo8"]
 [ext_resource type="Shader" uid="uid://dw2x83lxhae1h" path="res://shaders/speed.gdshader" id="13_7ua8r"]
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="16_attvq"]
-[ext_resource type="Script" uid="uid://s7q8cvdiv6w3" path="res://scripts/dirk.gd" id="16_vjgi4"]
 [ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="17_a8wo8"]
-[ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/interactring.tres" id="18_a85ww"]
+[ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/yellowring.tres" id="18_a85ww"]
 [ext_resource type="Script" uid="uid://duye04gka0uvq" path="res://scripts/ironspawner.gd" id="18_kyk2p"]
 [ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="19_45i86"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="19_sv1m6"]
@@ -105,12 +104,6 @@ size = Vector3(500, 5, 500)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhsr3"]
 size = Vector3(10, 0.25, 5)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_7ua8r"]
-radius = 0.3
-height = 1.85
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r7sob"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
 
@@ -312,10 +305,10 @@ grow_vertical = 0
 script = ExtResource("18_kyk2p")
 
 [node name="SpawnLocation1" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -57.886, -0.889, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -57.886, -2.889, 0)
 
 [node name="SpawnLocation2" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322296, -0.9900398, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322296, -2.9900398, 0)
 
 [node name="SpawnLocation3" type="Marker3D" parent="SpawnLocations"]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0.3958664, -0.889, -104.43997)
@@ -360,28 +353,26 @@ mesh = SubResource("BoxMesh_cpr0p")
 transform = Transform3D(0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0, 1, 13.663, 3.593, -5.932)
 shape = SubResource("BoxShape3D_jhsr3")
 
-[node name="Assets" type="Node3D" parent="."]
+[node name="Props" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056533813, 0)
 
-[node name="tree_temp" parent="Assets" instance=ExtResource("4_s0nni")]
+[node name="tree_temp" parent="Props" instance=ExtResource("4_s0nni")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.4280624, -4.45, 7.631594)
 
-[node name="tree_temp2" parent="Assets" instance=ExtResource("4_s0nni")]
+[node name="tree_temp2" parent="Props" instance=ExtResource("4_s0nni")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14.042095, -4.4016037, -19.5496)
 
-[node name="tree_temp3" parent="Assets" instance=ExtResource("4_s0nni")]
+[node name="tree_temp3" parent="Props" instance=ExtResource("4_s0nni")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.8489985, -4.1745024, 43.555683)
 
-[node name="Dirk" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.532063, -3, 0)
-script = ExtResource("16_vjgi4")
+[node name="hubo" parent="Props" instance=ExtResource("24_ocgqw")]
+transform = Transform3D(-0.9978026, 0, -0.0662565, 0, 1, 0, 0.0662565, 0, -0.9978026, -4.5343704, -1.9434652, -39.656296)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Dirk"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.15942, 1, -6.5201945)
-mesh = SubResource("CapsuleMesh_7ua8r")
+[node name="frietkot2" parent="Props" instance=ExtResource("25_jbgew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.830044, -2.9434662, -6.6333084)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Dirk"]
-shape = SubResource("CapsuleShape3D_r7sob")
+[node name="distributiehuis" parent="Props" instance=ExtResource("22_bneo8")]
+transform = Transform3D(-0.8831442, 0, 0.46910167, 0, 1, 0, -0.46910167, 0, -0.8831442, 36.226757, -0.9434662, 3.2757282)
 
 [node name="Garage" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33)
@@ -403,12 +394,6 @@ texture = ExtResource("18_a85ww")
 
 [node name="garage" parent="Garage" instance=ExtResource("23_bneo8")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.9556332, 0.020529628, 18.349487)
-
-[node name="hubo" parent="." instance=ExtResource("24_ocgqw")]
-transform = Transform3D(-0.9978026, 0, -0.0662565, 0, 1, 0, 0.0662565, 0, -0.9978026, -4.5343704, -1.999999, -39.656296)
-
-[node name="frietkot2" parent="." instance=ExtResource("25_jbgew")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.830044, -3, -6.6333084)
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "back_view", "left_view", "right_view", "up_view", "down_view")]
 transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 6, -11)
@@ -442,8 +427,22 @@ stream = ExtResource("26_jhsr3")
 [node name="Honk" parent="Car/Car" index="3"]
 volume_db = 5.0
 
-[node name="distributiehuis" parent="." instance=ExtResource("22_bneo8")]
-transform = Transform3D(-0.8831442, 0, 0.46910167, 0, 1, 0, -0.46910167, 0, -0.8831442, 36.226757, -1, 3.2757282)
+[node name="IronDealer" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="IronDealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 4)
+collision_mask = 2
+script = ExtResource("19_sv1m6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IronDealer/Area3D"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jbgew")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="IronDealer/Area3D"]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
+texture_filter = 1
+texture = ExtResource("18_a85ww")
 
 [connection signal="files_selected" from="UI/Pause/FileDialog" to="UI/Pause" method="_on_file_dialog_files_selected"]
 [connection signal="pressed" from="UI/Pause/ColorRect/VBoxContainer/resume" to="UI/Pause" method="_on_resume_pressed"]

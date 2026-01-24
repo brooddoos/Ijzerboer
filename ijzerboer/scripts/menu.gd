@@ -3,7 +3,7 @@ extends Control
 @onready var _3_dsplashtext: Label3D = $"../../Logo/3dsplashtext"
 @onready var buttons: PanelContainer = $Buttons
 @export var scene:PackedScene
-@onready var version_text: Label = $version
+@onready var version_text: Label = $Version
 
 # cam stuff
 @export var camera: Camera3D

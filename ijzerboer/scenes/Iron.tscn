@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8ln7qlcbwnws"]
+[gd_scene load_steps=8 format=3 uid="uid://c8ln7qlcbwnws"]
 
 [ext_resource type="Script" uid="uid://dphciv4eiw1yr" path="res://scripts/iron.gd" id="1_lg60l"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="2_53umh"]
 [ext_resource type="PackedScene" uid="uid://ctanbea6r442i" path="res://assets/3d/wasmachien.glb" id="3_lauls"]
+[ext_resource type="Texture2D" uid="uid://bk8p17u8untjd" path="res://assets/godot/bluering.tres" id="3_y5ytf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lauls"]
 
@@ -24,16 +25,23 @@ script = ExtResource("2_53umh")
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 shape = SubResource("CylinderShape3D_lauls")
 
+[node name="Ring" type="Sprite3D" parent="Area3D"]
+transform = Transform3D(8.208, 0, 0, 0, -3.5799627e-07, 1.0000001, 0, -8.19, -4.3711392e-08, 0, 0, 0)
+texture = ExtResource("3_y5ytf")
+
 [node name="Models" type="Node3D" parent="."]
 
 [node name="Mesh" type="MeshInstance3D" parent="Models"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 visible = false
 mesh = SubResource("SphereMesh_oaecf")
 skeleton = NodePath("")
 
 [node name="Mesh2" type="MeshInstance3D" parent="Models"]
+transform = Transform3D(0.7, 0, 0, 0, 1, 0, 0, 0, 0.8, 0, 2, 0)
 visible = false
 mesh = SubResource("BoxMesh_lg60l")
 skeleton = NodePath("")
 
 [node name="wasmachien" parent="Models" instance=ExtResource("3_lauls")]
+visible = false

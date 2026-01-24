@@ -2,7 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://cvdu00w76ewsw" path="res://shaders/transition.gdshader" id="1_f0i4t"]
 [ext_resource type="Texture2D" uid="uid://do3e2amrm70x8" path="res://assets/images/transition.png" id="2_px735"]
-[ext_resource type="Script" uid="uid://cm7g1ujgyxa74" path="res://scripts/transition.gd" id="3_4da38"]
+[ext_resource type="Script" path="res://scripts/transition.gd" id="3_4da38"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xmi56"]
 shader = ExtResource("1_f0i4t")

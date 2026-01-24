@@ -1,6 +1,47 @@
-[gd_scene load_steps=2 format=3 uid="uid://7s0n635txbqb"]
+[gd_scene load_steps=7 format=3 uid="uid://7s0n635txbqb"]
 
 [ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="1_75lht"]
+[ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="2_vgbj5"]
+
+[sub_resource type="Animation" id="Animation_vgbj5"]
+resource_name = "rotate"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tpskm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uwphw"]
+_data = {
+&"RESET": SubResource("Animation_tpskm"),
+&"rotate": SubResource("Animation_vgbj5")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_q2e5a"]
 
 [node name="Garage" type="Node3D"]
 script = ExtResource("1_75lht")
@@ -83,7 +124,42 @@ layout_mode = 2
 text = "Exit"
 metadata/price = 500
 
+[node name="Values" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("2_vgbj5")
+
+[node name="Currency" type="Label" parent="UI/Values"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 2.0
+offset_bottom = 39.0
+text = "0 BEF"
+
+[node name="Cargo" type="Label" parent="UI/Values"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 48.0
+offset_right = 2.0
+offset_bottom = 71.0
+text = "0 KG"
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
 [node name="Vehicle" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Vehicle"]
+libraries = {
+&"": SubResource("AnimationLibrary_uwphw")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle"]
+mesh = SubResource("BoxMesh_q2e5a")
