@@ -1,0 +1,304 @@
+[gd_scene load_steps=40 format=3 uid="uid://1qbfol6dsaaq"]
+
+[ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaignteleports.gd" id="1_884pu"]
+[ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_omouk"]
+[ext_resource type="PackedScene" uid="uid://cpo6y824goy0o" path="res://scenes/Pause.tscn" id="3_884pu"]
+[ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/Spedometer.tscn" id="4_omouk"]
+[ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="7_8trgh"]
+[ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="8_hhjj0"]
+[ext_resource type="FontFile" uid="uid://b4hlmaj4yd0i6" path="res://assets/fonts/ClockFont.ttf" id="9_kyytd"]
+[ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="10_frj31"]
+[ext_resource type="PackedScene" uid="uid://bq3i3dy8sx7qc" path="res://scenes/Cassette.tscn" id="11_gylty"]
+[ext_resource type="Script" uid="uid://duye04gka0uvq" path="res://scripts/ironspawner.gd" id="12_8bylg"]
+[ext_resource type="Texture2D" uid="uid://be5kc485fxbrn" path="res://assets/images/skyboxes/skybox3_lowquality.png" id="13_rm7g2"]
+[ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="14_j435p"]
+[ext_resource type="PackedScene" uid="uid://cknkwf45wt35w" path="res://assets/3d/tree_temp.glb" id="15_kmly7"]
+[ext_resource type="PackedScene" uid="uid://3c2nxibwpjol" path="res://assets/3d/hubo.glb" id="16_ckcxc"]
+[ext_resource type="PackedScene" uid="uid://dl8c0psnwq170" path="res://assets/3d/frietkot.glb" id="17_4wrb7"]
+[ext_resource type="PackedScene" uid="uid://bds8qpwvnn87w" path="res://assets/3d/distributiehuis.glb" id="18_24gru"]
+[ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="19_ybmad"]
+[ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/yellowring.tres" id="20_yih4i"]
+[ext_resource type="PackedScene" uid="uid://bv57k2wldeeul" path="res://assets/3d/garage.glb" id="21_ydbld"]
+[ext_resource type="Script" uid="uid://dir1g2xgg4x7m" path="res://scripts/camera.gd" id="22_1fub5"]
+[ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="23_ka5kf"]
+[ext_resource type="FontFile" uid="uid://de76da3364gsa" path="res://assets/fonts/LicensePlate.otf" id="24_o2rnv"]
+[ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="25_aq82i"]
+[ext_resource type="AudioStream" uid="uid://4qt05n3dcopj" path="res://assets/audio/engine_1.wav" id="26_sny0x"]
+[ext_resource type="Script" uid="uid://dwer3mfjq8ggm" path="res://scripts/irondealer.gd" id="27_omouk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jhsr3"]
+font = ExtResource("9_kyytd")
+font_size = 20
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_attvq"]
+panorama = ExtResource("13_rm7g2")
+
+[sub_resource type="Sky" id="Sky_bneo8"]
+sky_material = SubResource("PanoramaSkyMaterial_attvq")
+
+[sub_resource type="Environment" id="Environment_aug50"]
+background_mode = 2
+sky = SubResource("Sky_bneo8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r7sob"]
+emission_shape_offset = Vector3(0, 15, 0)
+emission_shape = 3
+emission_box_extents = Vector3(100, 1, 100)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 3.0
+initial_velocity_max = 6.0
+radial_velocity_min = -4.0000224
+radial_velocity_max = 3.9999776
+
+[sub_resource type="Gradient" id="Gradient_r7sob"]
+colors = PackedColorArray(1, 1, 1, 1, 0.41215247, 0.41215247, 0.41215247, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y5y3l"]
+gradient = SubResource("Gradient_r7sob")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5y3l"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("GradientTexture2D_y5y3l")
+billboard_mode = 1
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_mcffj"]
+material = SubResource("StandardMaterial3D_y5y3l")
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiw3p"]
+albedo_texture = ExtResource("14_j435p")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar_sharpness = 9.915176e-05
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_cpr0p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78awf"]
+size = Vector3(500, 5, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jhsr3"]
+size = Vector3(10, 0.25, 5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
+
+[node name="Campaign" type="Node3D"]
+script = ExtResource("1_884pu")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_omouk")
+
+[node name="Pause" parent="UI" instance=ExtResource("3_884pu")]
+layout_mode = 1
+
+[node name="Spedometer" parent="UI" instance=ExtResource("4_omouk")]
+layout_mode = 1
+
+[node name="Values" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("7_8trgh")
+
+[node name="Currency" type="Label" parent="UI/Values"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 16.0
+offset_right = 2.0
+offset_bottom = 39.0
+text = "0 BEF"
+
+[node name="Cargo" type="Label" parent="UI/Values"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 48.0
+offset_right = 2.0
+offset_bottom = 71.0
+text = "0 KG"
+
+[node name="Clock" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_hhjj0")
+
+[node name="Time" type="Label" parent="UI/Clock"]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 48.0
+text = "99:99:99"
+label_settings = SubResource("LabelSettings_jhsr3")
+
+[node name="Bell" type="AudioStreamPlayer" parent="UI/Clock"]
+stream = ExtResource("10_frj31")
+volume_db = -5.0
+bus = &"SFX"
+
+[node name="Cassette" parent="UI" instance=ExtResource("11_gylty")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_right = 0.0
+grow_horizontal = 1
+grow_vertical = 0
+
+[node name="SpawnLocations" type="Node3D" parent="."]
+script = ExtResource("12_8bylg")
+
+[node name="SpawnLocation1" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -57.886, -2.889, 0)
+
+[node name="SpawnLocation2" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322296, -2.9900398, 0)
+
+[node name="SpawnLocation3" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0.3958664, -0.889, -104.43997)
+
+[node name="SpawnLocation4" type="Marker3D" parent="SpawnLocations"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -157.33385, -0.889, 84.90105)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_aug50")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 18.369925, 0)
+
+[node name="Snow" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 0)
+amount = 500
+lifetime = 2.0
+visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
+process_material = SubResource("ParticleProcessMaterial_r7sob")
+draw_pass_1 = SubResource("QuadMesh_mcffj")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -8, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(500, 0, 0, 0, 5, 0, 0, 0, 500, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_kiw3p")
+mesh = SubResource("BoxMesh_cpr0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_78awf")
+
+[node name="ramp" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 5.46285, -8, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ramp"]
+transform = Transform3D(9.659258, -0.06470475, 0, 2.58819, 0.24148145, 0, 0, 0, 5, 13.663289, 3.5929866, -5.9317865)
+material_override = SubResource("StandardMaterial3D_kiw3p")
+mesh = SubResource("BoxMesh_cpr0p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ramp"]
+transform = Transform3D(0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 0, 1, 13.663, 3.593, -5.932)
+shape = SubResource("BoxShape3D_jhsr3")
+
+[node name="Props" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.056533813, 0)
+
+[node name="tree_temp" parent="Props" instance=ExtResource("15_kmly7")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -0.4280624, -4.45, 7.631594)
+
+[node name="tree_temp2" parent="Props" instance=ExtResource("15_kmly7")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14.042095, -4.4016037, -19.5496)
+
+[node name="tree_temp3" parent="Props" instance=ExtResource("15_kmly7")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -6.8489985, -4.1745024, 43.555683)
+
+[node name="hubo" parent="Props" instance=ExtResource("16_ckcxc")]
+transform = Transform3D(-0.9978026, 0, -0.0662565, 0, 1, 0, 0.0662565, 0, -0.9978026, -4.5343704, -1.9434652, -39.656296)
+
+[node name="frietkot2" parent="Props" instance=ExtResource("17_4wrb7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.830044, -2.9434662, -6.6333084)
+
+[node name="distributiehuis" parent="Props" instance=ExtResource("18_24gru")]
+transform = Transform3D(-0.8831442, 0, 0.46910167, 0, 1, 0, -0.46910167, 0, -0.8831442, 36.226757, -0.9434662, 3.2757282)
+
+[node name="Garage" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 33)
+
+[node name="Area3D" type="Area3D" parent="Garage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+collision_mask = 2
+script = ExtResource("19_ybmad")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Garage/Area3D"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jbgew")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="Garage/Area3D"]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
+texture_filter = 1
+texture = ExtResource("20_yih4i")
+
+[node name="garage" parent="Garage" instance=ExtResource("21_ydbld")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.9556332, 0.020529628, 18.349487)
+
+[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "back_view", "left_view", "right_view", "up_view", "down_view")]
+transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 6, -11)
+script = ExtResource("22_1fub5")
+car = NodePath("../Car/Car")
+back_view = NodePath("../Car/Car/CameraPoint")
+left_view = NodePath("../Car/Car/CameraPoint2")
+right_view = NodePath("../Car/Car/CameraPoint3")
+up_view = NodePath("../Car/Car/CameraPoint4")
+down_view = NodePath("../Car/Car/CameraPoint5")
+
+[node name="Car" parent="." instance=ExtResource("23_ka5kf")]
+
+[node name="LicensePlate" parent="Car/Car/Mesh" index="9"]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.46617928, 0.19263527, -2.6220965)
+modulate = Color(0.8331618, 0.29373747, 0.31971705, 1)
+text = "1-ABC-123"
+font = ExtResource("24_o2rnv")
+
+[node name="Skid" parent="Car/Car" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10649991, -0.637445, -1.7854915)
+stream = ExtResource("25_aq82i")
+volume_db = -5.0
+max_db = -5.0
+playback_type = 1
+
+[node name="Engine" parent="Car/Car" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.93183, 2.2251968, -26.151123)
+stream = ExtResource("26_sny0x")
+
+[node name="Honk" parent="Car/Car" index="3"]
+volume_db = 5.0
+
+[node name="IronDealer" type="Node3D" parent="."]
+script = ExtResource("27_omouk")
+
+[node name="Area3D" type="Area3D" parent="IronDealer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61, 0, 4)
+collision_mask = 2
+script = ExtResource("19_ybmad")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="IronDealer/Area3D"]
+transform = Transform3D(30, 0, 0, 0, 30, 0, 0, 0, 30, 0, 0, 0)
+shape = SubResource("CylinderShape3D_jbgew")
+debug_color = Color(1, 1, 1, 1)
+
+[node name="Sprite3D" type="Sprite3D" parent="IronDealer/Area3D"]
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
+texture_filter = 1
+texture = ExtResource("20_yih4i")
+
+[editable path="Car"]
+[editable path="Car/Car/Mesh"]

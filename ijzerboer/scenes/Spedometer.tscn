@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnbqq766c3ej4"]
+
+[ext_resource type="Texture2D" uid="uid://bvdtxoxhkl374" path="res://assets/images/ui/spedometer_outline.png" id="1_xp54u"]
+[ext_resource type="Texture2D" uid="uid://cukwu6sx7ul8w" path="res://assets/images/ui/spedometer_needle.png" id="2_7rqml"]
+[ext_resource type="Shader" uid="uid://dw2x83lxhae1h" path="res://shaders/speed.gdshader" id="3_7rqml"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6y1wf"]
+frequency = 0.0815
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r7sob"]
+noise = SubResource("FastNoiseLite_6y1wf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmk3e"]
+shader = ExtResource("3_7rqml")
+shader_parameter/noise = SubResource("NoiseTexture2D_r7sob")
+shader_parameter/line_color = Color(1, 1, 1, 1)
+shader_parameter/line_count = 2.0
+shader_parameter/line_density = 0.0
+shader_parameter/line_faloff = 0.58000002755
+shader_parameter/mask_size = 0.3210000152475
+shader_parameter/mask_edge = 0.3600000171
+shader_parameter/animation_speed = 20.0
+
+[node name="Spedometer" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -123.0
+offset_top = -135.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Bg" type="Sprite2D" parent="."]
+position = Vector2(61, 58)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("1_xp54u")
+
+[node name="Needle" type="Sprite2D" parent="."]
+position = Vector2(61, 58)
+rotation = -2.7052603
+scale = Vector2(0.15000002, 0.15000002)
+texture = ExtResource("2_7rqml")
+
+[node name="Spedometer" type="Label" parent="."]
+texture_filter = 2
+layout_mode = 0
+offset_left = 2.0
+offset_top = 113.0
+offset_right = 121.0
+offset_bottom = 136.0
+text = "0 KM/H"
+horizontal_alignment = 1
+
+[node name="LineLayer" type="CanvasLayer" parent="."]
+
+[node name="SpeedLines" type="ColorRect" parent="LineLayer"]
+material = SubResource("ShaderMaterial_bmk3e")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

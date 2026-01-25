@@ -17,7 +17,7 @@ extends Node3D
 @onready var license_plate: Label3D = $Car/Mesh/LicensePlate
 
 @onready var needle: Sprite2D = $"../UI/Spedometer/Needle"
-@onready var speed_lines: ColorRect = $"../UI/LineLayer/SpeedLines"
+@onready var speed_lines: ColorRect = $"../UI/Spedometer/LineLayer/SpeedLines"
 
 # Movement settings
 var max_speed := 200.0

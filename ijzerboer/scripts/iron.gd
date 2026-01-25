@@ -1,9 +1,7 @@
 extends StaticBody3D
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"/root/Game/UI/Values".update_cargo()
+	$"/root/Campaign/UI/Values".update_cargo()
 	var models = $Models.get_children()
 	var model = models.pick_random()
 	model.show()
@@ -12,4 +10,4 @@ func _on_body_entered():
 	if Gamestate.cargo < Gamestate.car_stats["max_cargo"]:
 		Gamestate.cargo += 1
 		self.queue_free()
-		$"/root/Game/SpawnLocations".spawn_iron( )
+		$"/root/Campaign/SpawnLocations".spawn_iron( )

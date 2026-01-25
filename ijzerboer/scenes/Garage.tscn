@@ -2,6 +2,22 @@
 
 [ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="1_75lht"]
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="2_vgbj5"]
+[ext_resource type="AudioStream" uid="uid://blp63rxb3derj" path="res://assets/audio/Tool1.ogg" id="3_tpskm"]
+
+[sub_resource type="Animation" id="Animation_tpskm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 6.2831855, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_vgbj5"]
 resource_name = "rotate"
@@ -20,28 +36,11 @@ tracks/0/keys = {
 "values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_tpskm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 6.2831855, 0)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uwphw"]
 _data = {
 &"RESET": SubResource("Animation_tpskm"),
 &"rotate": SubResource("Animation_vgbj5")
 }
-
-[sub_resource type="BoxMesh" id="BoxMesh_q2e5a"]
 
 [node name="Garage" type="Node3D"]
 script = ExtResource("1_75lht")
@@ -151,7 +150,7 @@ offset_bottom = 71.0
 text = "0 KG"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 2, 13)
 
 [node name="Vehicle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0, 0)
@@ -161,5 +160,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_uwphw")
 }
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Vehicle"]
-mesh = SubResource("BoxMesh_q2e5a")
+[node name="UpgradeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tpskm")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)

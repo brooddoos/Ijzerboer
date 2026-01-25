@@ -4,10 +4,12 @@ extends Node3D
 	$UI/PanelContainer/VBoxContainer2/UpgradeLoad/CargoButton, 
 	$UI/PanelContainer/VBoxContainer2/UpgradeEngine/EngineButton]
 @onready var values = $UI/Values
+@onready var exitbutton = $UI/PanelContainer/VBoxContainer2/ExitButton
 var car = load(Gamestate.car_stats["model"])
 func _ready() -> void:
 	for button in buttons:
 		button.pressed.connect(_on_button_pressed.bind(button))
+	exitbutton.pressed.connect(_on_exit_pressed)
 	update_buttons()
 	$Vehicle.add_child(car.instantiate())
 	$Vehicle/AnimationPlayer.play("rotate")
@@ -32,21 +34,21 @@ func _on_button_pressed(button):
 	match button.name:
 		"LicensePlateButton":
 			Gamestate.BEF -= button.get_meta("price")
-			update_buttons()
-			values.update_currency()
 			var plaat = await text_input("Enter your new license plate. (Maximum of 9 characters)") #gui komt later, dit werkt voorlopig
 			Gamestate.car_stats["licenseplate"] = plaat
 		"CargoButton":
 			Gamestate.BEF -= button.get_meta("price")
 			Gamestate.car_stats["max_cargo"] += 50
-			values.update_currency()
-			values.update_cargo() 
 		"EngineButton":
 			Gamestate.BEF -= button.get_meta("price")
 			Gamestate.car_stats["engine_multiplier"] += 20
-			update_buttons()
-			values.update_currency()
-
+	update_buttons()
+	values.update_currency()
+	$UpgradeSound.play()
+func _on_exit_pressed():
+	await Transition.fade_out()
+	get_tree().change_scene_to_packed(load("res://scenes/Campaign.tscn"))
+	await Transition.fade_in()
 func update_buttons():
 	for button in buttons:
 		var price = button.get_meta("price")

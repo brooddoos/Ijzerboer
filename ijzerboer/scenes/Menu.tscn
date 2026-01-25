@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=4 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
-[ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/Game.tscn" id="2_el213"]
+[ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/Campaign.tscn" id="2_el213"]
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="2_yt8fu"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="6_7yvfd"]
