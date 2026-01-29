@@ -1,11 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl5msmw1a2run"]
+[gd_scene load_steps=14 format=3 uid="uid://cl5msmw1a2run"]
 
-[ext_resource type="PackedScene" uid="uid://bq3i3dy8sx7qc" path="res://scenes/Cassette.tscn" id="1_g66jw"]
+[ext_resource type="Script" uid="uid://bngd4ytt8fkk" path="res://scripts/rally.gd" id="1_gwcyc"]
 [ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/Spedometer.tscn" id="2_bdwll"]
-[ext_resource type="PackedScene" uid="uid://cpo6y824goy0o" path="res://scenes/Pause.tscn" id="3_v00se"]
-[ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="4_gwcyc"]
+[ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="5_bdwll"]
+[ext_resource type="Texture2D" uid="uid://biqhg002ihs8l" path="res://assets/images/ui/1.png" id="5_yp80n"]
+[ext_resource type="Texture2D" uid="uid://djrcvue4jo48g" path="res://assets/images/ui/2.png" id="6_yojo7"]
+[ext_resource type="Texture2D" uid="uid://qyerc2qogimr" path="res://assets/images/ui/3.png" id="7_vjfl4"]
+[ext_resource type="Texture2D" uid="uid://d03fkt8k1iw0o" path="res://assets/images/ui/go.png" id="8_dssaa"]
+[ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="8_wgk42"]
+[ext_resource type="Texture2D" uid="uid://bk8p17u8untjd" path="res://assets/godot/bluering.tres" id="9_j2d5f"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v00se"]
+albedo_texture = ExtResource("5_bdwll")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar_sharpness = 9.915176e-05
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_gwcyc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_em4j8"]
+size = Vector3(500, 5, 500)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yp80n"]
 
 [node name="Rally" type="Node3D"]
+script = ExtResource("1_gwcyc")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -15,23 +34,81 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Cassette" parent="UI" instance=ExtResource("1_g66jw")]
-layout_mode = 1
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 800.0
-offset_bottom = 600.0
-grow_horizontal = 1
-grow_vertical = 1
-
 [node name="Spedometer" parent="UI" instance=ExtResource("2_bdwll")]
 layout_mode = 1
 
-[node name="Pause" parent="UI" instance=ExtResource("3_v00se")]
+[node name="Countdown" type="Control" parent="UI"]
 layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Car" parent="." instance=ExtResource("4_gwcyc")]
+[node name="One" type="Sprite2D" parent="UI/Countdown"]
+visible = false
+position = Vector2(416, 224)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_yp80n")
+
+[node name="Two" type="Sprite2D" parent="UI/Countdown"]
+visible = false
+position = Vector2(416, 224)
+scale = Vector2(1.5, 1.4999999)
+texture = ExtResource("6_yojo7")
+
+[node name="Three" type="Sprite2D" parent="UI/Countdown"]
+visible = false
+position = Vector2(416, 224)
+scale = Vector2(1.5, 1.4999999)
+texture = ExtResource("7_vjfl4")
+
+[node name="Go" type="Sprite2D" parent="UI/Countdown"]
+visible = false
+position = Vector2(416, 224)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_dssaa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UI/Countdown"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 26.531248, 0)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -8, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(500, 0, 0, 0, 5, 0, 0, 0, 500, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_v00se")
+mesh = SubResource("BoxMesh_gwcyc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_em4j8")
+
+[node name="Finish" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Finish"]
+collision_mask = 2
+script = ExtResource("8_wgk42")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Finish/Area3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("CylinderShape3D_yp80n")
+
+[node name="Ring" type="Sprite3D" parent="Finish/Area3D"]
+transform = Transform3D(8.208, 0, 0, 0, -3.5799627e-07, 1.0000001, 0, -8.19, -4.3711392e-08, 0, 0, 0)
+texture = ExtResource("9_j2d5f")
+
+[node name="Checkpoint" type="Node3D" parent="."]
+
+[node name="Area3D" type="Area3D" parent="Checkpoint"]
+collision_mask = 2
+script = ExtResource("8_wgk42")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Checkpoint/Area3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("CylinderShape3D_yp80n")
+
+[node name="Ring" type="Sprite3D" parent="Checkpoint/Area3D"]
+transform = Transform3D(8.208, 0, 0, 0, -3.5799627e-07, 1.0000001, 0, -8.19, -4.3711392e-08, 0, 0, 0)
+texture = ExtResource("9_j2d5f")

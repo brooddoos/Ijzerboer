@@ -5,12 +5,8 @@ extends Control
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var cassette_start_pos = cassette.position.y
 @onready var cassette_up := false
-@export var tapes:Dictionary = {
-	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg"},
-	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3"},
-	3: { "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg"},
-}
 @export var current_tape = 1
+var tapes = Gamestate.tapes
 var tween
 
 func load_music(path:String):
@@ -30,7 +26,7 @@ func load_music(path:String):
 			var wav = AudioStreamWAV.load_from_file(path)
 			audio.stream = wav
 		else:
-			push_error("not supported(only ogg, mp3 and wav pls): " + path)
+			push_error("Audio is only supported in the MP3, OGG or WAV filetypes: " + path)
 			return
 
 func allTween(transistionType:Tween.TransitionType,object,property:String,vars,time:float): #zoda we nie 10x dezelfde functie opnieuw moete schrijven

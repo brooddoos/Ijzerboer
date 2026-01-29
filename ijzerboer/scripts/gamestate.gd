@@ -8,6 +8,14 @@ var car_stats := {
 	"licenseplate" = "123_ABC",
 	"model" = "res://scenes/cami.tscn"
 }
+var tapes:= {
+	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg"},
+	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3"},
+	3: { "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg"},
+}
 var campaign := {
 	"position" = Vector3(0,0,0)
+}
+var rally := {
+	"time" = {}
 }
