@@ -1,8 +1,10 @@
 extends CanvasLayer
 @onready var fade: AnimationPlayer = $Mask/Fade
+@onready var mask: ColorRect = $Mask
 
 var busy := false
 var current_scene := ""
+const DEFAULT_MASK := preload("res://assets/images/transition.png")
 
 signal fade_out_finished
 signal fade_in_finished
@@ -10,15 +12,26 @@ signal fade_in_finished
 func _ready() -> void:
 	current_scene = get_tree().get_current_scene().get_name()
 
-func fade_in():
+func fade_in(custom_mask = ""):
+	if custom_mask != "" and ResourceLoader.exists(custom_mask): #vr int geval als we weer alle files herorganiseren
+		mask.material.set_shader_parameter('mask',load(custom_mask))
+	else:
+		mask.material.set_shader_parameter('mask',DEFAULT_MASK)
+		
 	fade.play("FadeIn")
 	await fade_in_finished
 	busy = false
 
-func fade_out() -> void:
+func fade_out(custom_mask = "") -> void:
 	if busy:
 		return
 	busy = true
+	
+	if custom_mask != "" and ResourceLoader.exists(custom_mask): #vr int geval als we weer alle files herorganiseren
+		mask.material.set_shader_parameter('mask',load(custom_mask))
+	else:
+		mask.material.set_shader_parameter('mask',DEFAULT_MASK)
+	
 	fade.play("FadeOut")
 	await fade_out_finished
 

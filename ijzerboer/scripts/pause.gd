@@ -10,7 +10,11 @@ var customSongs:Dictionary = {}
  
 func _ready() -> void:
 	$".".position.y = 730.0
-	ogLen = len(cassette.tapes)
+	ogLen = 0
+	for tape in cassette.tapes.values():
+		if tape.has("default"):
+			ogLen += 1
+
 	hide()
 	
 	if OS.has_feature("web"): #eh wrm zoude we t op web late alst toch nie supported is

@@ -33,7 +33,11 @@ func allTween(transistionType:Tween.TransitionType,object,property:String,vars,t
 	tween.tween_property(object, property, vars, time)
 
 func _ready() -> void:
+	if current_tape > len(tapes):
+		current_tape = 1
+		Gamestate.currentTape = 1
 	title.text = tapes[current_tape]["title"]
+	
 	if !title.text.contains("\n"):
 		title.text = title.text + "\n "
 	cassette.position.y = cassette_start_pos - 0.05

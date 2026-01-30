@@ -63,6 +63,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.57, 0)
 [node name="Van" parent="Car/Mesh" index="0"]
 surface_material_override/0 = ExtResource("3_i5sjj")
 
+[node name="BackLicensePlate" type="Label3D" parent="Car/Mesh/Van" index="0"]
+transform = Transform3D(-2, 0, 1.7484555e-07, 0, 2, 0, -1.7484555e-07, 0, -2, 0.010147572, -1.1563202, -5.223979)
+modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
+text = "test"
+outline_size = 0
+
+[node name="FrontLicensePlate" type="Label3D" parent="Car/Mesh/Van" index="1"]
+transform = Transform3D(2, 0, -3.496911e-07, 0, 2, 0, 3.496911e-07, 0, 2, 0.010147572, -1.1563202, 5.161964)
+modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
+text = "test"
+outline_size = 0
+
 [node name="BackLeftWheel" parent="Car/Mesh" index="1"]
 surface_material_override/0 = SubResource("ShaderMaterial_ctlpt")
 
@@ -102,18 +114,6 @@ mesh = SubResource("PlaneMesh_ofkat")
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
-
-[node name="BackLicensePlate" type="Label3D" parent="Car/Mesh"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.5050738, 0.16246593, -2.6132786)
-modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
-text = "test"
-outline_size = 0
-
-[node name="FrontLicensePlate" type="Label3D" parent="Car/Mesh"]
-transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0.5050738, 0.16246593, 2.5796928)
-modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
-text = "test"
-outline_size = 0
 
 [node name="Skid" type="AudioStreamPlayer3D" parent="Car"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33076286, -1.0688324, 2.5575929)

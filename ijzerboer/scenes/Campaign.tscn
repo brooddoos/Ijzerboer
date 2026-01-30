@@ -21,8 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://bv57k2wldeeul" path="res://assets/3d/garage.glb" id="21_ydbld"]
 [ext_resource type="Script" uid="uid://dir1g2xgg4x7m" path="res://scripts/camera.gd" id="22_1fub5"]
 [ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/Car.tscn" id="23_ka5kf"]
-[ext_resource type="FontFile" uid="uid://de76da3364gsa" path="res://assets/fonts/LicensePlate.otf" id="24_o2rnv"]
 [ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="25_aq82i"]
+[ext_resource type="AudioStream" uid="uid://b6wyaoflkjc26" path="res://assets/audio/cash_sfx.mp3" id="25_vaxq8"]
 [ext_resource type="AudioStream" uid="uid://4qt05n3dcopj" path="res://assets/audio/engine_1.wav" id="26_sny0x"]
 [ext_resource type="Script" uid="uid://dwer3mfjq8ggm" path="res://scripts/irondealer.gd" id="27_omouk"]
 
@@ -254,12 +254,6 @@ down_view = NodePath("../Car/Car/CameraPoint5")
 
 [node name="Car" parent="." instance=ExtResource("23_ka5kf")]
 
-[node name="LicensePlate" parent="Car/Car/Mesh" index="9"]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.46617928, 0.19263527, -2.6220965)
-modulate = Color(0.8331618, 0.29373747, 0.31971705, 1)
-text = "1-ABC-123"
-font = ExtResource("24_o2rnv")
-
 [node name="Skid" parent="Car/Car" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10649991, -0.637445, -1.7854915)
 stream = ExtResource("25_aq82i")
@@ -299,6 +293,9 @@ debug_color = Color(1, 1, 1, 1)
 transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
 texture_filter = 0
 texture = ExtResource("20_yih4i")
+
+[node name="cash_sfx" type="AudioStreamPlayer3D" parent="IronDealer/Area3D"]
+stream = ExtResource("25_vaxq8")
 
 [editable path="Car"]
 [editable path="Car/Car/Mesh"]

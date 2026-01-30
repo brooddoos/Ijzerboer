@@ -14,7 +14,8 @@ extends Node3D
 @onready var drift: CPUParticles3D = $Car/Mesh/drift
 @onready var drift_2: CPUParticles3D = $Car/Mesh/drift2
 @onready var van_model: MeshInstance3D = $Car/Mesh/Van
-@onready var license_plate: Label3D = $Car/Mesh/LicensePlate
+@onready var back_license_plate: Label3D = $Car/Mesh/Van/BackLicensePlate
+@onready var front_license_plate: Label3D = $Car/Mesh/Van/FrontLicensePlate
 
 @onready var needle: Sprite2D = $"../UI/Spedometer/Needle"
 @onready var speed_lines: ColorRect = $"../UI/Spedometer/LineLayer/SpeedLines"
@@ -48,7 +49,8 @@ var was_already_drifting := false
 func _ready() -> void:
 	if brake_mult >= 1:
 		brake_mult = 0.98
-	license_plate.text = Gamestate.car_stats["licenseplate"]
+	back_license_plate.text = Gamestate.car_stats["licenseplate"]
+	front_license_plate.text = Gamestate.car_stats["licenseplate"]
 
 func reduce_sideways_slipping(gripf):
 	var velocity = ball.linear_velocity
@@ -151,10 +153,8 @@ func _physics_process(delta):
 	# Tilt effect
 	if turn_input != 0:
 		van_model.rotation.z = clamp(van_model.rotation.z + turn_input * -0.05,deg_to_rad(-5),deg_to_rad(5))
-		license_plate.rotation.z = clamp(license_plate.rotation.z + turn_input * 0.05,deg_to_rad(-5),deg_to_rad(5))
 	else:
 		van_model.rotation.z = lerp(van_model.rotation.z, 0.0, 0.1)
-		license_plate.rotation.z = lerp(license_plate.rotation.z, 0.0, 0.1)
 
 	# wheels spinning
 	var true_turn  = deg_to_rad(default_steering*(drift_steering/1.5)) * Input.get_axis("steer_right", "steer_left")
