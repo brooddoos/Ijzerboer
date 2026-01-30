@@ -5,7 +5,7 @@ extends Control
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var cassette_start_pos = cassette.position.y
 @onready var cassette_up := false
-@export var current_tape = 1
+@export var current_tape = Gamestate.currentTape
 var tapes = Gamestate.tapes
 var tween
 
@@ -52,6 +52,7 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("cassette"):
 		current_tape = (current_tape % len(tapes)) + 1
+		Gamestate.currentTape = current_tape
 
 		allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.1,0.25)
 		await tween.finished
@@ -68,6 +69,7 @@ func _input(event: InputEvent) -> void:
 
 func _on_audio_stream_player_finished() -> void:
 	current_tape = (current_tape % len(tapes)) + 1
+	Gamestate.currentTape = current_tape
 
 	allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.1,0.25)
 	await tween.finished

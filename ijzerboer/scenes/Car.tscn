@@ -103,8 +103,14 @@ direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
 
-[node name="LicensePlate" type="Label3D" parent="Car/Mesh"]
+[node name="BackLicensePlate" type="Label3D" parent="Car/Mesh"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.5050738, 0.16246593, -2.6132786)
+modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
+text = "test"
+outline_size = 0
+
+[node name="FrontLicensePlate" type="Label3D" parent="Car/Mesh"]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 0.5050738, 0.16246593, 2.5796928)
 modulate = Color(0.9323887, 0.35383728, 0.38981858, 1)
 text = "test"
 outline_size = 0

@@ -9,6 +9,8 @@ var car_stats := {
 	"model" = "res://scenes/cami.tscn"
 }
 
+var currentTape := 1
+
 var tapes:= {
 	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg"},
 	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3"},

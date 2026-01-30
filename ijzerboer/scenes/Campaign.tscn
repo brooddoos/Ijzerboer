@@ -40,6 +40,22 @@ sky_material = SubResource("PanoramaSkyMaterial_attvq")
 background_mode = 2
 sky = SubResource("Sky_bneo8")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiw3p"]
+albedo_texture = ExtResource("14_j435p")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar_sharpness = 9.915176e-05
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_cpr0p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_78awf"]
+size = Vector3(500, 5, 500)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jhsr3"]
+size = Vector3(10, 0.25, 5)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r7sob"]
 emission_shape_offset = Vector3(0, 15, 0)
 emission_shape = 3
@@ -69,22 +85,6 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_mcffj"]
 material = SubResource("StandardMaterial3D_y5y3l")
 size = Vector2(0.2, 0.2)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiw3p"]
-albedo_texture = ExtResource("14_j435p")
-uv1_scale = Vector3(100, 100, 100)
-uv1_triplanar_sharpness = 9.915176e-05
-uv1_world_triplanar = true
-
-[sub_resource type="BoxMesh" id="BoxMesh_cpr0p"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_78awf"]
-size = Vector3(500, 5, 500)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_jhsr3"]
-size = Vector3(10, 0.25, 5)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
 
 [node name="Campaign" type="Node3D"]
 script = ExtResource("1_884pu")
@@ -176,14 +176,6 @@ environment = SubResource("Environment_aug50")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 18.369925, 0)
-
-[node name="Snow" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 0)
-amount = 500
-lifetime = 2.0
-visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
-process_material = SubResource("ParticleProcessMaterial_r7sob")
-draw_pass_1 = SubResource("QuadMesh_mcffj")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -8, 0)
@@ -282,6 +274,14 @@ stream = ExtResource("26_sny0x")
 [node name="Honk" parent="Car/Car" index="3"]
 volume_db = 5.0
 
+[node name="Snow" type="GPUParticles3D" parent="Car/Car" index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 34.936226)
+amount = 1000
+lifetime = 2.0
+visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
+process_material = SubResource("ParticleProcessMaterial_r7sob")
+draw_pass_1 = SubResource("QuadMesh_mcffj")
+
 [node name="IronDealer" type="Node3D" parent="."]
 script = ExtResource("27_omouk")
 
@@ -297,7 +297,7 @@ debug_color = Color(1, 1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="IronDealer/Area3D"]
 transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, -2.8622088, 0)
-texture_filter = 1
+texture_filter = 0
 texture = ExtResource("20_yih4i")
 
 [editable path="Car"]
