@@ -1,8 +1,35 @@
-[gd_scene load_steps=7 format=3 uid="uid://7s0n635txbqb"]
+[gd_scene load_steps=31 format=4 uid="uid://7s0n635txbqb"]
 
 [ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="1_75lht"]
+[ext_resource type="Texture2D" uid="uid://cn57dflgjfokl" path="res://assets/images/nummerplaat_template.png" id="2_rd182"]
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="2_vgbj5"]
+[ext_resource type="FontFile" uid="uid://de76da3364gsa" path="res://assets/fonts/LicensePlate.otf" id="3_6t0ip"]
+[ext_resource type="Texture2D" uid="uid://dgandea2lyobj" path="res://assets/3d/cami_cami.png" id="3_q2e5a"]
 [ext_resource type="AudioStream" uid="uid://blp63rxb3derj" path="res://assets/audio/Tool1.ogg" id="3_tpskm"]
+[ext_resource type="Texture2D" uid="uid://bl3v4utw7o846" path="res://assets/3d/cami_wheel.png" id="4_3uxhb"]
+[ext_resource type="Material" uid="uid://c5jnsmgq8ymji" path="res://shaders/aesthetic.tres" id="6_3dhpt"]
+[ext_resource type="AudioStream" uid="uid://bihlj0o5rortf" path="res://assets/audio/music/original_music/garage/intro.wav" id="6_3uxhb"]
+[ext_resource type="Shader" uid="uid://s60rywsqspcx" path="res://shaders/aesthetic.gdshader" id="8_x6lty"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwphw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_q2e5a"]
+sky_material = SubResource("ProceduralSkyMaterial_uwphw")
+
+[sub_resource type="Environment" id="Environment_3uxhb"]
+background_mode = 2
+sky = SubResource("Sky_q2e5a")
+tonemap_mode = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_3dhpt"]
+font = ExtResource("3_6t0ip")
+font_size = 46
+font_color = Color(0.83137256, 0.29411766, 0.32156864, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwphw"]
+albedo_color = Color(0.48962224, 0.48962224, 0.48962218, 1)
 
 [sub_resource type="Animation" id="Animation_tpskm"]
 length = 0.001
@@ -42,8 +69,116 @@ _data = {
 &"rotate": SubResource("Animation_vgbj5")
 }
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_op26k"]
+resource_name = "Van"
+cull_mode = 2
+albedo_texture = ExtResource("3_q2e5a")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2dgdk"]
+_surfaces = [{
+"aabb": AABB(-2, -1.4812521, -5.1974216, 4, 4.4, 10.32),
+"format": 34359742465,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAgADAAQABQAEAAMAAQAFAAMABQAGAAQABgACAAQABwAGAAUAAQAHAAUACAACAAYABwAIAAYACQACAAgABwAKAAgACQAIAAoABwALAAoADAAHAAEADAALAAcAAgAJAA0ADQAAAAIAAAAOAAEADwAOAAAAEAABAA4AAQAQAAwADwARAA4AEAAOABEAAAASAA8AEgARAA8AEgAQABEAAAANABIADAAQABIADAASAA0ADAANABMADQAUABMADAATABUAFQATABQADQAWABQADQAJABYAFQAUABcAFwAMABUAFAAWABgAFwAUABgAGQAMABcAFwAYABkAGAAaABkAGgAMABkAGAAWABoAGwAMABoAGwAaABYAGwAWAAkADAAbAAsACQAcABsACwAbABwACQAdABwACwAcAB4ACQAfAB0AHAAdAB8AHAAfAB4AHwALAB4ACQAKAB8AHwAKAAsA"),
+"name": "Van",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 32,
+"vertex_data": PackedByteArray("mpnZP8TMOkCj4JjAAAAAwFVmgj9HUabAAAAAQFdmgj9HUabAAAAAwKuZvb9HUabAAAAAQKuZvb9HUabAAAAAwKuZvb/XE4zAAAAAQKuZvb/XE4zAAAAAwO/MFL+uJ3jAAAAAQO/MFL+uJ3jAAAAAQE9i9r4epTRAAAAAQO/MFL8Vjj7AAAAAwO/MFL8Vjj7AAAAAwHaZUT8+Km5AAAAAQHaZUT8+Km5AmpnZv8TMOkCj4JjAmpnZP8TMOkAeRZm/mpnZv8TMOkAepTRAmpnZv8TMOkAeRZm/mpnZP8TMOkAepTRAAAAAQB1m1j4p7KNAAAAAQKuZvb8p7KNAAAAAwCVm1j4p7KNAAAAAQE9i9r4fpXRAAAAAwKuZvb8p7KNAAAAAQKuZvb+PUopAAAAAwKuZvb+PUopAAAAAwKtm9r4fpXRAAAAAwKtm9r4epTRAAAAAwKuZvb8epRRAAAAAQKuZvb8epRRAAAAAwKuZvb8Vjh7AAAAAQKuZvb8Vjh7A")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a0kf5"]
+resource_name = "cami_Cube"
+_surfaces = [{
+"aabb": AABB(-2, -1.4812521, -5.1974216, 4, 4.4, 10.32),
+"attribute_data": PackedByteArray("fgQQP+fAAD8vc3g/CA44P8+MBz8FDjg/hftvP+nAAD8p+Lk+6luSPm+zGj9+j70+Kfi5Pn6PvT5vsxo/6luSPgZi/DxjUUg/elvyPkEufj8GYvw8QS5+P3pb8j5jUUg/BmL8PLgJPT8TXeE+514AP3pb8j64CT0/HBKDPedeAD/ScQ0/WFTGPrmt1z4ohG4+0nENPyiEbj65rdc+WFTGPtJxDT8UQsc+uK3XPmiDdT7RcQ0/bIN1Prmt1z4UQsc+EFGAPzQp8D6ri14/jiiAPhBRgD9wjZM+kCdtPzQp8D77+mA/1na/PsqhSD/Wdr8+RKVtPnZVxD40dTw/NCnwPtIrjz40KfA+yP0VPnZVxD7gCbs8iNZsPtCWyj00KfA+4Am7PDQp8D6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPquLXj+OKIA+EFGAPzQp8D4QUYA/cI2TPvv6YD9sdr8+kCdtPzQp8D7KoUg/bHa/PuAJuzyI1mw+0JbKPTQp8D7gCbs8NCnwPsj9FT52VcQ+RKVtPnZVxD7SK48+NCnwPjR1PD80KfA+z4wHPwUOOD8wc3g/GD9/P86MBz8YP38/L3N4PwgOOD+erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPp6vGD4yqPM+YlBnPs5XzD6erxg+zlfMPmJQZz4yqPM+nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPquLXj+OKIA+WFl5PUDOPj3gCbs8iNZsPsqhSD9Azj49GnrOPkDOPj3gCbs8iNZsPsqhSD9Azj49q4teP44ogD5YWXk9QM4+PRp6zj5Azj49nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z6erxg+MqjzPmJQZz7OV8w+nq8YPs5XzD5iUGc+MqjzPp6vGD4yqPM+YlBnPs5XzD6erxg+zlfMPmJQZz4yqPM+nq8YPjKo8z5iUGc+zlfMPp6vGD7OV8w+YlBnPjKo8z4="),
+"format": 34359742487,
+"index_count": 180,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAGAAZABoAGwAZABgAHAAZABsAHQAZABwAGQAdAB4AHgAdAB8AHgAfACAAGQAeACEAGQAhACIAIgAhACMAIgAjACQAJQAmACcAJQAoACYAKQAqACsAKQAsACoAKgAsAC0AKQAuACwALwAuACkAMAAvADEAMgAvADAALgAvADIALgAyADMALgAzADQALgA0ADUANgA3ADgANgA5ADcAOgA7ADwAOgA9ADsAPgA/AEAAPgBBAD8AQgBDAEQAQgBFAEMARgBHAEgARgBJAEcASgBLAEwASwBKAE0ASwBNAE4ATwBQAFEAUABPAFIAUABSAFMAVABVAFYAVABXAFUAWABZAFoAWABbAFkAXABdAF4AXABfAF0AYABhAGIAYABjAGEA"),
+"material": SubResource("StandardMaterial3D_op26k"),
+"name": "Van",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 100,
+"vertex_data": PackedByteArray("mpnZP8TMOkCj4JjAAAAAwFVmgj9HUabAAAAAQFdmgj9HUabAmpnZv8TMOkCj4JjAAAAAwHaZUT8+Km5AAAAAQB1m1j4p7KNAAAAAwCVm1j4p7KNAAAAAQHaZUT8+Km5AAAAAwCVm1j4p7KNAAAAAQKuZvb8p7KNAAAAAwKuZvb8p7KNAAAAAQB1m1j4p7KNAAAAAwHaZUT8+Km5AmpnZP8TMOkAepTRAAAAAQHaZUT8+Km5AmpnZv8TMOkAepTRAmpnZP8TMOkAepTRAmpnZv8TMOkAeRZm/mpnZP8TMOkAeRZm/mpnZv8TMOkAepTRAmpnZP8TMOkAeRZm/mpnZv8TMOkCj4JjAmpnZP8TMOkCj4JjAmpnZv8TMOkAeRZm/AAAAwKuZvb8p7KNAAAAAwHaZUT8+Km5AAAAAwCVm1j4p7KNAAAAAwKuZvb+PUopAAAAAwKtm9r4fpXRAAAAAwKtm9r4epTRAAAAAwO/MFL8Vjj7AAAAAwKuZvb8epRRAAAAAwKuZvb8Vjh7AAAAAwO/MFL+uJ3jAAAAAwFVmgj9HUabAAAAAwKuZvb/XE4zAAAAAwKuZvb9HUabAAAAAwKuZvb8p7KNAAAAAQKuZvb+PUopAAAAAwKuZvb+PUopAAAAAQKuZvb8p7KNAAAAAQHaZUT8+Km5AAAAAQKuZvb8p7KNAAAAAQB1m1j4p7KNAAAAAQE9i9r4fpXRAAAAAQKuZvb+PUopAAAAAQE9i9r4epTRAAAAAQFdmgj9HUabAAAAAQKuZvb/XE4zAAAAAQKuZvb9HUabAAAAAQO/MFL+uJ3jAAAAAQO/MFL8Vjj7AAAAAQKuZvb8Vjh7AAAAAQKuZvb8epRRAAAAAQFdmgj9HUabAAAAAwKuZvb9HUabAAAAAQKuZvb9HUabAAAAAwFVmgj9HUabAAAAAQKuZvb+PUopAAAAAwKtm9r4fpXRAAAAAwKuZvb+PUopAAAAAQE9i9r4fpXRAAAAAQE9i9r4epTRAAAAAwKuZvb8epRRAAAAAwKtm9r4epTRAAAAAQKuZvb8epRRAAAAAwO/MFL+uJ3jAAAAAQKuZvb/XE4zAAAAAwKuZvb/XE4zAAAAAQO/MFL+uJ3jAAAAAwKtm9r4epTRAAAAAQE9i9r4fpXRAAAAAQE9i9r4epTRAAAAAwKtm9r4fpXRAAAAAQHaZUT8+Km5AmpnZP8TMOkCj4JjAAAAAQFdmgj9HUabAmpnZP8TMOkAepTRAmpnZP8TMOkAeRZm/AAAAwFVmgj9HUabAmpnZv8TMOkAepTRAAAAAwHaZUT8+Km5AmpnZv8TMOkCj4JjAmpnZv8TMOkAeRZm/AAAAQKuZvb8Vjh7AAAAAwO/MFL8Vjj7AAAAAwKuZvb8Vjh7AAAAAQO/MFL8Vjj7AAAAAwKuZvb/XE4zAAAAAQKuZvb9HUabAAAAAwKuZvb9HUabAAAAAQKuZvb/XE4zAAAAAwKuZvb8epRRAAAAAQKuZvb8Vjh7AAAAAwKuZvb8Vjh7AAAAAQKuZvb8epRRAAAAAwO/MFL+uJ3jAAAAAQO/MFL8Vjj7AAAAAQO/MFL+uJ3jAAAAAwO/MFL8Vjj7A0+j//wAA/7/T6P//AAD/v9Po//8AAP+/0+j//wAA/7//f5Lj////v/9/kuP///+//3+S4////7//f5Lj////v/9//3////+//3//f////7//f/9/////v/9//3////+//39dpv///7//f12m////v/9/Xab///+//39dpv///7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+/AAD/f/9/9r8AAP9//3/4vwAA/3//f+a/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//7//fwAA////P/9/AAD///8//38AAP///z//fwAA////P////3//fwZA////f/9/CED///9//38YQP///3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8/////f/9//z////9//3//P////3//f/8//////wAA/7//////AAD/v/////8AAP+//////wAA/79U1QAAqaoAAFTVAACpqgAAVNUAAKmqAABU1QAAqqoAAP9/VFWpqv5//39UVamq/n//f1RVqar+f/9/VFWpqv5//39JUv///z//f0lS////P/9/SVL///8//39JUv///z//fwAA/3//P/9/AAD/f/8//38AAP9//z//fwAA/3//PxnvsZDFfwRAGe+xkMV/A0AZ77GQxX8DQBnvsZDFfwRAGe+xkP///z/lELGQOYD6v+UQsZA5gPu/5RCxkDmA+7/lELGQOYD6v+UQsZD///8/SdIAALWtAABJ0gAAta0AAEnSAAC1rQAASdIAALWtAAD/fwAA////P/9/AAD///8//38AAP///z//fwAA////P/9/AAD///8//38AAP///z//fwAA////P/9/AAD///8//38AAP9//z//fwAA/3//P/9/AAD/f/8//38AAP9//z8=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2dgdk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hql2w"]
+resource_name = "Tire.001"
+cull_mode = 2
+albedo_texture = ExtResource("4_3uxhb")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ueqmc"]
+_surfaces = [{
+"aabb": AABB(-0.20000005, -0.32360685, -0.38042247, 0.4000001, 0.7236068, 0.7608454),
+"format": 34896613377,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIABQADAAAABQACAAYAAwAHAAQAAwAFAAgAAwAIAAcACAAFAAYABwAJAAQABwAIAAkAAgAEAAkACAAGAAkAAgAJAAYA"),
+"name": "Tire.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("/v////9/AAAAADae//8AAAAA////fwAA//82nv7/AAAAAAAAGs8AAP7/Np4AAAAAAAA2ngAAAAD//wAAGs8AAP7/AADkMAAAAAAAAOQwAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hjrok"]
+resource_name = "cami_Cylinder"
+_surfaces = [{
+"aabb": AABB(-0.20000005, -0.32360685, -0.38042247, 0.4000001, 0.7236068, 0.7608454),
+"attribute_data": PackedByteArray("vX9o6kEAlpVBAGjqvX+Wlb1/aOpBAJaVQQBo6r1/lpW9/2jqQYCWlUGAaOq9/5aVvf9o6kGAlpVBgGjqvf+Wlb1/aOpBAJaVQQBo6r1/lpUQLY8CEC1wfW0A/z9KdQcaSnX4ZUGIaBrCz9J8QYiXZcLPLAPz+/8/"),
+"format": 34896613399,
+"index_count": 48,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFQAUABcAFQAXABgAGQAaABsAGgAZABwAGgAcAB0A"),
+"material": SubResource("StandardMaterial3D_hql2w"),
+"name": "Tire.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 30,
+"vertex_data": PackedByteArray("/v////9/mVkAADae//+ZWQAA////f5lZ//82nv7/mVn//zae/v8zcwAAAAAazzNzAAA2nv//M3P//wAAGs8zc///AAAaz/8/AAAAAOQw/z8AAAAAGs//P/7/AADkMP8//v8AAOQwzAwAADaeAADMDAAAAADkMMwM/v82ngAAzAz+/zaeAABmJgAA////f2YmAAA2ngAAZib+/////39mJgAAAAAaz/b2AAD///9/9vYAADae///29gAAAADkMPb2AAA2ngAA9vb+/zaeAABd5f//Np7+/13l/v////9/XeX+/wAA5DBd5f//AAAaz13l////f////3////9//v//fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f/7//3/+//9//v//f////3+yRGSJskRkibJEZImyRGSJskRkiQCzAmYAswJmALMCZgCzAmYAswJm")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ueqmc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5jui4"]
+render_priority = 0
+shader = ExtResource("8_x6lty")
+shader_parameter/scale = 0.05
+shader_parameter/albedo_texture = ExtResource("4_3uxhb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_52rp6"]
+render_priority = 0
+shader = ExtResource("8_x6lty")
+shader_parameter/scale = 0.05
+shader_parameter/albedo_texture = ExtResource("4_3uxhb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b03ny"]
+render_priority = 0
+shader = ExtResource("8_x6lty")
+shader_parameter/scale = 0.05
+shader_parameter/albedo_texture = ExtResource("4_3uxhb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oa7wk"]
+render_priority = 0
+shader = ExtResource("8_x6lty")
+shader_parameter/scale = 0.05
+shader_parameter/albedo_texture = ExtResource("4_3uxhb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imsuq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q2e5a"]
+albedo_color = Color(0.4351923, 0.43519226, 0.43519226, 1)
+
 [node name="Garage" type="Node3D"]
 script = ExtResource("1_75lht")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3uxhb")
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -53,73 +188,97 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="UI"]
+[node name="Menu" type="PanelContainer" parent="UI"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -160.0
-offset_right = 250.0
-offset_bottom = 90.0
-grow_horizontal = 2
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 256.0
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/PanelContainer"]
+[node name="Content" type="VBoxContainer" parent="UI/Menu"]
 layout_mode = 2
-alignment = 1
 
-[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(500, 0)
+[node name="title" type="Label" parent="UI/Menu/Content"]
+custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "garage"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+[node name="buttons" type="VBoxContainer" parent="UI/Menu/Content"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menu/Content/buttons"]
+layout_mode = 2
+
+[node name="CustomLicensePlate" type="HBoxContainer" parent="UI/Menu/Content/buttons/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/CustomLicensePlate"]
+[node name="Label" type="Label" parent="UI/Menu/Content/buttons/VBoxContainer/CustomLicensePlate"]
 layout_mode = 2
 text = "Custom Licenseplate"
 
-[node name="LicensePlateButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/CustomLicensePlate"]
+[node name="LicensePlateButton" type="Button" parent="UI/Menu/Content/buttons/VBoxContainer/CustomLicensePlate"]
 layout_mode = 2
-text = "40 000 BEF"
+text = "99 999 BEF"
 metadata/price = 500
 
-[node name="UpgradeLoad" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+[node name="Label2" type="Label" parent="UI/Menu/Content/buttons/VBoxContainer"]
+layout_mode = 2
+text = "Your current licenseplate:"
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UI/Menu/Content/buttons/VBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_rd182")
+expand_mode = 5
+
+[node name="license" type="Label" parent="UI/Menu/Content/buttons/VBoxContainer/TextureRect"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 16.0
+offset_right = 194.0
+offset_bottom = 90.0
+text = "ABC-123"
+label_settings = SubResource("LabelSettings_3dhpt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeLoad" type="HBoxContainer" parent="UI/Menu/Content/buttons"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/UpgradeLoad"]
+[node name="Label" type="Label" parent="UI/Menu/Content/buttons/UpgradeLoad"]
 layout_mode = 2
 text = "Upgrade Load Capacity"
 
-[node name="CargoButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/UpgradeLoad"]
+[node name="CargoButton" type="Button" parent="UI/Menu/Content/buttons/UpgradeLoad"]
 layout_mode = 2
-text = "100 BEF"
+text = "99 999 BEF"
 metadata/price = 500
 
-[node name="UpgradeEngine" type="HBoxContainer" parent="UI/PanelContainer/VBoxContainer2"]
+[node name="UpgradeEngine" type="HBoxContainer" parent="UI/Menu/Content/buttons"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="UI/PanelContainer/VBoxContainer2/UpgradeEngine"]
+[node name="Label" type="Label" parent="UI/Menu/Content/buttons/UpgradeEngine"]
 layout_mode = 2
 text = "Upgrade Engine"
 
-[node name="EngineButton" type="Button" parent="UI/PanelContainer/VBoxContainer2/UpgradeEngine"]
+[node name="EngineButton" type="Button" parent="UI/Menu/Content/buttons/UpgradeEngine"]
 layout_mode = 2
-text = "40 000 BEF"
+text = "99 999 BEF"
 metadata/price = 500
 
-[node name="ExitButton" type="Button" parent="UI/PanelContainer/VBoxContainer2"]
+[node name="ExitButton" type="Button" parent="UI/Menu/Content"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "Exit"
 metadata/price = 500
 
@@ -150,18 +309,74 @@ offset_bottom = 71.0
 text = "0 KG"
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 2, 13)
+transform = Transform3D(1, 0, 0, 0, 0.9659259, 0.25881907, 0, -0.25881907, 0.9659258, -3.127912, 3.04071, 9.367557)
 
 [node name="Vehicle" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 1.7484555e-07, 0, 1, 0, -1.7484555e-07, 0, 1, 0, 0, 0)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Vehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.4818158, 0)
+material_override = SubResource("StandardMaterial3D_uwphw")
+radius = 5.0
+sides = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Vehicle"]
 libraries = {
 &"": SubResource("AnimationLibrary_uwphw")
 }
 
+[node name="PropCar" type="Node3D" parent="Vehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+
+[node name="Van" type="MeshInstance3D" parent="Vehicle/PropCar"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.74062604, -0.0012890585)
+mesh = SubResource("ArrayMesh_a0kf5")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("6_3dhpt")
+
+[node name="BackLeftWheel" type="MeshInstance3D" parent="Vehicle/PropCar"]
+transform = Transform3D(-1, 0, 3.2584137e-07, 0, 1, 0, -3.2584137e-07, 0, -1, 1.3, -0.1, -1.7200001)
+mesh = SubResource("ArrayMesh_hjrok")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_5jui4")
+
+[node name="BackRightWheel" type="MeshInstance3D" parent="Vehicle/PropCar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.1, -1.7200001)
+mesh = SubResource("ArrayMesh_hjrok")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_52rp6")
+
+[node name="FrontLeftWheel" type="MeshInstance3D" parent="Vehicle/PropCar"]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 1.3, -0.1, 1.68)
+mesh = SubResource("ArrayMesh_hjrok")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_b03ny")
+
+[node name="FrontRightWheel" type="MeshInstance3D" parent="Vehicle/PropCar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.1, 1.68)
+mesh = SubResource("ArrayMesh_hjrok")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("ShaderMaterial_oa7wk")
+
 [node name="UpgradeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tpskm")
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_3uxhb")
+autoplay = true
+playback_type = 1
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.4818158, 0)
+size = Vector3(50, 1, 50)
+material = SubResource("StandardMaterial3D_imsuq")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.750423, -12.944569)
+size = Vector3(50, 19.464478, 4.871521)
+material = SubResource("StandardMaterial3D_q2e5a")
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

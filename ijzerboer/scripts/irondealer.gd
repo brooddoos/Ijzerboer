@@ -1,4 +1,5 @@
 extends Node3D
+
 func _ready() -> void:
 	$Area3D.entered.connect(_on_body_entered)
 func _on_body_entered():

@@ -16,8 +16,6 @@ func load_music(path:String):
 	else: #is a user music 
 		if path.ends_with("mp3"):
 			var mp3 = AudioStreamMP3.load_from_file(path)
-			#var file = FileAccess.open(path, FileAccess.READ)
-			#mp3.data = file.get_buffer(file.get_length())
 			audio.stream = mp3
 		elif path.ends_with(".ogg"):
 			var ogg = AudioStreamOggVorbis.load_from_file(path)

@@ -175,8 +175,6 @@ func _input(event: InputEvent) -> void:
 		right_headlight.visible = left_headlight.visible #this is here to ensure that they're both either on or off 
 
 func _process(_delta):
-	license_plate.text = Gamestate.car_stats["licenseplate"] #TODO: make this into a signal, this is extremely inefficient lmao
-
 	if Input.is_action_just_pressed("drift") and ball.linear_velocity.length() > 10.0:
 		drift_pressed = true
 		steering = default_steering * drift_steering

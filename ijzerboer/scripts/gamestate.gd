@@ -5,9 +5,10 @@ var BEF := 1000
 var car_stats := {
 	"engine_multiplier" = 1,
 	"max_cargo" = 10,
-	"licenseplate" = "123_ABC",
+	"licenseplate" = "123-ABC",
 	"model" = "res://scenes/cami.tscn"
 }
+
 var tapes:= {
 	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg"},
 	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3"},
