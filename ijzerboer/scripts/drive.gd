@@ -51,6 +51,7 @@ func _ready() -> void:
 		brake_mult = 0.98
 	back_license_plate.text = Gamestate.car_stats["licenseplate"]
 	front_license_plate.text = Gamestate.car_stats["licenseplate"]
+	$Car/MinimapMarker.visible = true #belangrijk
 
 func reduce_sideways_slipping(gripf):
 	var velocity = ball.linear_velocity
@@ -72,6 +73,10 @@ func get_sideways_speed() -> float:
 
 func handleGUI(speed:int): #intermediate function to make _physics_process() look nicer
 	$"../UI/Spedometer/Spedometer".text = str(speed) + " KM/H"
+	
+	$"../UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport/MinimapCam".position.x = car.global_position.x
+	$"../UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport/MinimapCam".position.z = car.global_position.z
+	
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))
 	if needle_orientation > 150.0:

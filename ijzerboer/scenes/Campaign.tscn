@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=41 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaignteleports.gd" id="1_884pu"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_omouk"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="7_8trgh"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="8_hhjj0"]
 [ext_resource type="FontFile" uid="uid://b4hlmaj4yd0i6" path="res://assets/fonts/ClockFont.ttf" id="9_kyytd"]
+[ext_resource type="Texture2D" uid="uid://bohvcqwk4xryx" path="res://assets/images/ui/tomtom.png" id="10_884pu"]
 [ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="10_frj31"]
 [ext_resource type="PackedScene" uid="uid://bq3i3dy8sx7qc" path="res://scenes/Cassette.tscn" id="11_gylty"]
 [ext_resource type="Script" uid="uid://duye04gka0uvq" path="res://scripts/ironspawner.gd" id="12_8bylg"]
@@ -103,6 +104,10 @@ layout_mode = 1
 
 [node name="Spedometer" parent="UI" instance=ExtResource("4_omouk")]
 layout_mode = 1
+offset_left = -119.0
+offset_top = -144.0
+offset_right = 4.0
+offset_bottom = -9.0
 
 [node name="Values" type="Control" parent="UI"]
 layout_mode = 1
@@ -131,17 +136,36 @@ offset_bottom = 71.0
 text = "0 KG"
 
 [node name="Clock" type="Control" parent="UI"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("8_hhjj0")
 
 [node name="Time" type="Label" parent="UI/Clock"]
-layout_mode = 0
-offset_right = 144.0
-offset_bottom = 48.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -72.0
+offset_top = -24.0
+offset_right = 72.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "99:99:99"
 label_settings = SubResource("LabelSettings_jhsr3")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Bell" type="AudioStreamPlayer" parent="UI/Clock"]
 stream = ExtResource("10_frj31")
@@ -155,6 +179,38 @@ anchor_top = 1.0
 anchor_right = 0.0
 grow_horizontal = 1
 grow_vertical = 0
+
+[node name="Minimap" type="Control" parent="UI"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="UI/Minimap"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("10_884pu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI/Minimap/TextureRect"]
+layer = -1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Minimap/TextureRect/CanvasLayer"]
+offset_left = 16.0
+offset_top = 17.0
+offset_right = 168.0
+offset_bottom = 105.0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(152, 88)
+render_target_update_mode = 4
+
+[node name="MinimapCam" type="Camera3D" parent="UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 90, 0)
+cull_mask = 1048573
 
 [node name="SpawnLocations" type="Node3D" parent="."]
 script = ExtResource("12_8bylg")
@@ -244,6 +300,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -3.9
 
 [node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "back_view", "left_view", "right_view", "up_view", "down_view")]
 transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 6, -11)
+cull_mask = 1048571
 script = ExtResource("22_1fub5")
 car = NodePath("../Car/Car")
 back_view = NodePath("../Car/Car/CameraPoint")
@@ -270,6 +327,7 @@ volume_db = 5.0
 
 [node name="Snow" type="GPUParticles3D" parent="Car/Car" index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 34.936226)
+layers = 2
 amount = 1000
 lifetime = 2.0
 visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
