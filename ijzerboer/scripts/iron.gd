@@ -6,7 +6,9 @@ func _ready() -> void:
 	var model = models.pick_random()
 	model.show()
 	$Area3D.entered.connect(_on_body_entered)
-	$Area3D/marker.visible = true
+	
+	if Gamestate.car_stats["gps_metal_detector"]:
+		$Area3D/marker.visible = true
 
 func _on_body_entered():
 	if Gamestate.cargo < Gamestate.car_stats["max_cargo"]:

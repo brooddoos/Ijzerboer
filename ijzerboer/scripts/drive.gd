@@ -51,7 +51,7 @@ func _ready() -> void:
 		brake_mult = 0.98
 	back_license_plate.text = Gamestate.car_stats["licenseplate"]
 	front_license_plate.text = Gamestate.car_stats["licenseplate"]
-	$Car/MinimapMarker.visible = true #belangrijk
+	$Car/pointer.visible = true #belangrijk
 
 func reduce_sideways_slipping(gripf):
 	var velocity = ball.linear_velocity
@@ -104,7 +104,7 @@ func _physics_process(delta):
 	var forward_speed = ball.linear_velocity.dot(car.global_transform.basis.z)
 	
 	# Input
-	speed_input = Input.get_axis("brake", "accelerate") * acceleration
+	speed_input = Input.get_axis("brake", "accelerate") * acceleration + (Input.get_axis("brake", "accelerate") * engine_multiplier / 50)
 	turn_input = deg_to_rad(steering) * Input.get_axis("steer_right", "steer_left")
 	
 	# Car mechanics / physics
