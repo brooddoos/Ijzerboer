@@ -251,7 +251,6 @@ scene = ExtResource("2_el213")
 camera = NodePath("../../Camera3D")
 
 [node name="Buttons" type="PanelContainer" parent="ui/Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -301,6 +300,7 @@ text = "Exit
 "
 
 [node name="Settings" type="PanelContainer" parent="ui/Control"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -370,7 +370,7 @@ max_value = 300.0
 [node name="FPSLabel" type="Label" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/FPS"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Unlimited"
+text = "Auto"
 horizontal_alignment = 1
 
 [node name="VSync" type="HBoxContainer" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content"]
@@ -399,7 +399,6 @@ text = "Fullscreen:"
 
 [node name="FullscreenToggle" type="CheckButton" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/Fullscreen"]
 layout_mode = 2
-button_pressed = true
 
 [node name="FullscreenLabel" type="Label" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/Fullscreen"]
 custom_minimum_size = Vector2(146, 0)
@@ -424,6 +423,7 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
+rounded = true
 
 [node name="SFXLabel" type="Label" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/SFX"]
 layout_mode = 2
@@ -443,6 +443,7 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
+rounded = true
 
 [node name="CarLabel" type="Label" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/Car"]
 layout_mode = 2
@@ -462,6 +463,7 @@ custom_minimum_size = Vector2(130, 0)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
+rounded = true
 
 [node name="MusicLabel" type="Label" parent="ui/Control/Settings/MarginContainer/VBoxContainer/content/settings/content/Music"]
 layout_mode = 2

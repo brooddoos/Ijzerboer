@@ -85,7 +85,6 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_d65km")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v7lie"]
-shading_mode = 0
 albedo_color = Color(0, 0, 1, 1)
 
 [node name="Car" type="Node3D"]
