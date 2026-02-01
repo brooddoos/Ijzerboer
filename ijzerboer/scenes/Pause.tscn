@@ -19,14 +19,6 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_0ep5p")
 
-[node name="FileDialog" type="FileDialog" parent="."]
-oversampling_override = 1.0
-title = "Open File(s)"
-file_mode = 1
-access = 2
-filters = PackedStringArray("*.mp3,*.wav,*.ogg;Music Files;audio/mpeg,audio/wav,audio/ogg")
-use_native_dialog = true
-
 [node name="ColorRect" type="ColorRect" parent="."]
 process_mode = 2
 layout_mode = 1
@@ -59,7 +51,7 @@ text = "paused"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="resume" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="Resume" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
@@ -68,32 +60,21 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
 text = "Resume
 "
 
-[node name="music" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="Settings" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
-text = " Upload Music "
+text = "Settings"
 
-[node name="clear" type="Button" parent="ColorRect/VBoxContainer"]
+[node name="Return" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
-text = " Clear custom songs "
+text = "Return"
 
-[node name="Button" type="Button" parent="ColorRect/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.53303653, 0.5330366, 0.53303766, 1)
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxFlat_r7sob")
-text = "Exit"
-
-[connection signal="files_selected" from="FileDialog" to="." method="_on_file_dialog_files_selected"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/music" to="." method="_on_music_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/clear" to="." method="_on_clear_pressed"]
-[connection signal="pressed" from="ColorRect/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Return" to="." method="_on_button_pressed"]

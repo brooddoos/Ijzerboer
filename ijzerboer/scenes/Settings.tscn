@@ -1,0 +1,219 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2blyruyj7gkd"]
+
+[ext_resource type="Script" path="res://scripts/settings/settings.gd" id="1_1dggd"]
+[ext_resource type="Script" uid="uid://b8lh4gtpb2bcn" path="res://scripts/settings/cassettesettings.gd" id="2_8e7v8"]
+[ext_resource type="Script" uid="uid://dvpgrr0jww8qg" path="res://scripts/settings/videosettings.gd" id="3_j1j16"]
+[ext_resource type="Script" uid="uid://bhctmvws8bbtt" path="res://scripts/settings/audiosettings.gd" id="4_slqrs"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1dggd")
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cassette" type="Control" parent="Main"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_8e7v8")
+
+[node name="FileDialog" type="FileDialog" parent="Main/Cassette"]
+oversampling_override = 1.0
+title = "Open File(s)"
+file_mode = 1
+access = 2
+filters = PackedStringArray("*.mp3,*.wav,*.ogg;Music Files;audio/mpeg,audio/wav,audio/ogg")
+use_native_dialog = true
+
+[node name="Video" type="Control" parent="Main"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_j1j16")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Video"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GraphicsTitle" type="Label" parent="Main/Video/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Graphics Settings"
+
+[node name="VSync" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSyncTitle" type="Label" parent="Main/Video/VBoxContainer/VSync"]
+layout_mode = 2
+text = "VSync:"
+
+[node name="CheckButton" type="CheckButton" parent="Main/Video/VBoxContainer/VSync"]
+layout_mode = 2
+button_pressed = true
+
+[node name="VSyncLabel" type="Label" parent="Main/Video/VBoxContainer/VSync"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Enabled"
+horizontal_alignment = 2
+
+[node name="Fullscreen" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="FUllscreenTitle" type="Label" parent="Main/Video/VBoxContainer/Fullscreen"]
+layout_mode = 2
+text = "Fullscreen:"
+
+[node name="FullscreenToggle" type="CheckButton" parent="Main/Video/VBoxContainer/Fullscreen"]
+layout_mode = 2
+
+[node name="FullscreenLabel" type="Label" parent="Main/Video/VBoxContainer/Fullscreen"]
+custom_minimum_size = Vector2(146, 0)
+layout_mode = 2
+text = "Enabled"
+horizontal_alignment = 2
+
+[node name="FPS" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="FPSTitle" type="Label" parent="Main/Video/VBoxContainer/FPS"]
+layout_mode = 2
+text = "Max FPS:"
+
+[node name="FPSSlider" type="HSlider" parent="Main/Video/VBoxContainer/FPS"]
+custom_minimum_size = Vector2(135, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 300.0
+
+[node name="FPSLabel" type="Label" parent="Main/Video/VBoxContainer/FPS"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Auto"
+horizontal_alignment = 1
+
+[node name="Audio" type="Control" parent="Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_slqrs")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/Audio"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AudioTitle" type="Label" parent="Main/Audio/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "Audio Settings"
+
+[node name="Music" type="HBoxContainer" parent="Main/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicTitle" type="Label" parent="Main/Audio/VBoxContainer/Music"]
+layout_mode = 2
+text = "Music Volume:"
+
+[node name="MusicSlider" type="HSlider" parent="Main/Audio/VBoxContainer/Music"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+rounded = true
+
+[node name="MusicLabel" type="Label" parent="Main/Audio/VBoxContainer/Music"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Car" type="HBoxContainer" parent="Main/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="CarTitle" type="Label" parent="Main/Audio/VBoxContainer/Car"]
+layout_mode = 2
+text = "Car Volume:    "
+
+[node name="CarSlider" type="HSlider" parent="Main/Audio/VBoxContainer/Car"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+rounded = true
+
+[node name="CarLabel" type="Label" parent="Main/Audio/VBoxContainer/Car"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+horizontal_alignment = 1
+
+[node name="SFX" type="HBoxContainer" parent="Main/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXTitle" type="Label" parent="Main/Audio/VBoxContainer/SFX"]
+layout_mode = 2
+text = "SFX Volume:    "
+
+[node name="SFXSlider" type="HSlider" parent="Main/Audio/VBoxContainer/SFX"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+rounded = true
+
+[node name="SFXLabel" type="Label" parent="Main/Audio/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Buttons" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 600.0
+
+[node name="Cassette" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 64.0
+text = "Cassette"
+
+[node name="Video" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 128.0
+text = "Graphics"
+
+[node name="Audio" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_top = 128.0
+offset_right = 128.0
+offset_bottom = 192.0
+text = "Audio"
+
+[node name="Return" type="Button" parent="Buttons"]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 128.0
+offset_bottom = 256.0
+text = "Return"

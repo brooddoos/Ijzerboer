@@ -1,5 +1,5 @@
 extends Control
-@onready var settings: PanelContainer = $Settings
+@onready var settings: Button = $Buttons/MarginContainer/HBoxContainer/Settings
 @onready var _3_dsplashtext: Label3D = $"../../Logo/3dsplashtext"
 @onready var buttons: PanelContainer = $Buttons
 @export var scene:PackedScene
@@ -29,6 +29,7 @@ func _ready() -> void:
 	origin = camera.global_position
 	_3_dsplashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
 	version_text.text = " v"+str(version)
+	$Buttons/MarginContainer/HBoxContainer/Settings.pressed.connect(_on_settings_pressed)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("drift"):
@@ -47,9 +48,10 @@ func _on_play_pressed() -> void:
 	get_tree().change_scene_to_packed(scene)
 	await Transition.fade_in()
 
-func _on_options_pressed() -> void:
-	buttons.visible = !buttons.visible
-	settings.visible = !settings.visible
+func _on_settings_pressed() -> void:
+	await Transition.fade_out()
+	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
+	await Transition.fade_in()
 
 func _on_exit_pressed() -> void:
 	await Transition.fade_out()

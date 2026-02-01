@@ -9,17 +9,7 @@ var ogLen:int
 var customSongs:Dictionary = {}
  
 func _ready() -> void:
-	$".".position.y = 730.0
-	ogLen = 0
-	for tape in cassette.tapes.values():
-		if tape.has("default"):
-			ogLen += 1
-
-	hide()
-	
-	if OS.has_feature("web"): #eh wrm zoude we t op web late alst toch nie supported is
-		$ColorRect/VBoxContainer/music.hide()
-		$ColorRect/VBoxContainer/clear.hide()
+	$ColorRect/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
 
 func show_info(msg: String, title: String = "Info"):
 	var dialog = AcceptDialog.new()
@@ -65,43 +55,8 @@ func _on_button_pressed() -> void:
 	get_tree().change_scene_to_packed(mainmenu)
 	await Transition.fade_in()
 
-func _on_music_pressed() -> void:
-	if OS.has_feature("web"):
-		OS.alert("This feature is not and probably will never be supported on Web. Please download a Windows or Linux build to use this feature. Also, you're not supposed to be here? How did you manage to get this message?", "Error")
-		return
-	$FileDialog.popup_centered()
-
-func _on_file_dialog_files_selected(paths: PackedStringArray) -> void:
-	var current_length = len(cassette.tapes)
-	var addQueue = {}
-	for i in range(len(paths)):
-		var title:String = paths[i-1].get_file().get_basename()
-		if title.contains(" - "):
-			title = title.replace(" - ","\nBy: ")
-		addQueue[current_length+i+1] = { "title": title, "file":paths[i-1]}
-	cassette.tapes.merge(addQueue)
-	customSongs.merge(addQueue)
-	
-	var msg = "Succesfully added "+str(len(addQueue))+" songs to playlist!\nAdded:"
-	
-	for i in addQueue:
-		msg += "\n- - -\n" + addQueue[i]["title"]
-	show_info(msg, "Success")
-	
-
-func _on_clear_pressed() -> void:
-	if not ogLen == len(cassette.tapes):
-		var keys_to_remove := []
-		for key in cassette.tapes.keys():
-			if key > ogLen:
-				keys_to_remove.append(key)
-		for key in keys_to_remove:
-			cassette.tapes.erase(key)
-		
-		show_info("Successfully cleared all custom songs.", "Cleared")
-	else:
-		show_info("You gotta add some songs before clearing 'em.", "No songs")
-
+func _on_settings_pressed():
+	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
 
 func _on_resume_pressed() -> void:
 	allTween(Tween.TRANS_EXPO,$".","position:y",730,0.25)
