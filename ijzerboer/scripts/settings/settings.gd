@@ -11,6 +11,7 @@ func _on_button_pressed(category):
 	category.show()
 	current = category
 func _on_return_pressed():
+	var old = Gamestate.last_scene
 	await Transition.fade_out()
-	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+	get_tree().change_scene_to_file(old)
 	await Transition.fade_in()

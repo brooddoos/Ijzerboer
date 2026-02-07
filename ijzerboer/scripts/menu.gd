@@ -44,6 +44,7 @@ func _process(_delta: float) -> void:
 	camera.global_position = origin + offset
 
 func _on_play_pressed() -> void:
+	Savesystem.load_save()
 	await Transition.fade_out()
 	get_tree().change_scene_to_packed(scene)
 	await Transition.fade_in()

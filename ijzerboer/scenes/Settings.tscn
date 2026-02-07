@@ -62,7 +62,7 @@ layout_mode = 2
 layout_mode = 2
 text = "VSync:"
 
-[node name="CheckButton" type="CheckButton" parent="Main/Video/VBoxContainer/VSync"]
+[node name="VSyncToggle" type="CheckButton" parent="Main/Video/VBoxContainer/VSync"]
 layout_mode = 2
 button_pressed = true
 
@@ -186,6 +186,10 @@ size_flags_horizontal = 3
 text = "100%"
 horizontal_alignment = 1
 
+[node name="Button" type="Button" parent="Main/Audio/VBoxContainer"]
+layout_mode = 2
+text = "Reset to default"
+
 [node name="Buttons" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 128.0
@@ -217,3 +221,12 @@ offset_top = 192.0
 offset_right = 128.0
 offset_bottom = 256.0
 text = "Return"
+
+[connection signal="toggled" from="Main/Video/VBoxContainer/VSync/VSyncToggle" to="Main/Video" method="_on_check_button_toggled"]
+[connection signal="toggled" from="Main/Video/VBoxContainer/Fullscreen/FullscreenToggle" to="Main/Video" method="_on_fullscreen_toggle_toggled"]
+[connection signal="drag_ended" from="Main/Video/VBoxContainer/FPS/FPSSlider" to="Main/Video" method="_on_fps_slider_drag_ended"]
+[connection signal="value_changed" from="Main/Video/VBoxContainer/FPS/FPSSlider" to="Main/Video" method="_on_fps_slider_value_changed"]
+[connection signal="value_changed" from="Main/Audio/VBoxContainer/Music/MusicSlider" to="Main/Audio" method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Main/Audio/VBoxContainer/Car/CarSlider" to="Main/Audio" method="_on_car_slider_value_changed"]
+[connection signal="value_changed" from="Main/Audio/VBoxContainer/SFX/SFXSlider" to="Main/Audio" method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="Main/Audio/VBoxContainer/Button" to="Main/Audio" method="_on_button_pressed"]

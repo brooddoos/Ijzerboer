@@ -199,7 +199,6 @@ offset_bottom = 105.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer"]
-transparent_bg = true
 handle_input_locally = false
 size = Vector2i(152, 88)
 render_target_update_mode = 4

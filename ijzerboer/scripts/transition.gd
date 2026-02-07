@@ -4,7 +4,7 @@ extends CanvasLayer
 
 var busy := false
 var current_scene := ""
-const DEFAULT_MASK := preload("res://assets/images/transition.png")
+const DEFAULT_MASK := preload("res://assets/images/ui/transition/transition.png")
 
 signal fade_out_finished
 signal fade_in_finished
@@ -17,7 +17,8 @@ func fade_in(custom_mask = ""):
 		mask.material.set_shader_parameter('mask',load(custom_mask))
 	else:
 		mask.material.set_shader_parameter('mask',DEFAULT_MASK)
-		
+	
+	get_tree().paused = false
 	fade.play("FadeIn")
 	await fade_in_finished
 	busy = false
@@ -26,6 +27,9 @@ func fade_out(custom_mask = "") -> void:
 	if busy:
 		return
 	busy = true
+	
+	var scene_path = get_tree().current_scene.scene_file_path
+	Gamestate.last_scene = scene_path
 	
 	if custom_mask != "" and ResourceLoader.exists(custom_mask): #vr int geval als we weer alle files herorganiseren
 		mask.material.set_shader_parameter('mask',load(custom_mask))
