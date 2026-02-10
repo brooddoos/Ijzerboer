@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://t1al5hykieb"]
 
-[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_ygkcj"]
-[ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/Menu.tscn" id="2_n8o7m"]
-[ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/ui/nobgbrooddoos.png" id="3_73bwj"]
-[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/ui/kobe.svg" id="4_3vyj7"]
-[ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/ui/pfp.png" id="5_mgj8c"]
+[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_v8cx8"]
+[ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/start/Start.tscn" id="2_5i4oy"]
+[ext_resource type="Texture2D" uid="uid://tsxu172cd61q" path="res://assets/images/ui/nobgbrooddoos.png" id="3_ld7vn"]
+[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/ui/kobe.svg" id="4_qb3q0"]
+[ext_resource type="Texture2D" uid="uid://c1i8xv5snklmw" path="res://assets/images/ui/pfp.png" id="5_qbu5m"]
 
 [node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
 layout_mode = 3
@@ -13,8 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ygkcj")
-load_scene = ExtResource("2_n8o7m")
+script = ExtResource("1_v8cx8")
+load_scene = ExtResource("2_5i4oy")
 splash_screen_container = NodePath("CenterContainer")
 fg = NodePath("fadeout")
 syncColors = true
@@ -39,7 +39,7 @@ grow_vertical = 2
 [node name="brooddoos" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("3_73bwj")
+texture = ExtResource("3_ld7vn")
 expand_mode = 3
 stretch_mode = 5
 
@@ -63,14 +63,14 @@ vertical_alignment = 1
 [node name="kobe" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("4_3vyj7")
+texture = ExtResource("4_qb3q0")
 expand_mode = 3
 stretch_mode = 5
 
 [node name="j4y" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("5_mgj8c")
+texture = ExtResource("5_qbu5m")
 expand_mode = 3
 stretch_mode = 5
 

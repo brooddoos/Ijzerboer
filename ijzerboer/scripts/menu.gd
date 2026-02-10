@@ -1,7 +1,5 @@
 extends Control
-@onready var settings: Button = $Buttons/MarginContainer/HBoxContainer/Settings
 @onready var _3_dsplashtext: Label3D = $"../../Logo/3dsplashtext"
-@onready var buttons: PanelContainer = $Buttons
 @export var scene:PackedScene
 @onready var version_text: Label = $Version
 
@@ -28,8 +26,7 @@ var version = ProjectSettings.get_setting("application/config/version")
 func _ready() -> void:
 	origin = camera.global_position
 	_3_dsplashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
-	version_text.text = " v"+str(version)
-	$Buttons/MarginContainer/HBoxContainer/Settings.pressed.connect(_on_settings_pressed)
+	version_text.text = " v"+str(version) 
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("drift"):
@@ -42,17 +39,15 @@ func _process(_delta: float) -> void:
 
 	var offset = Vector3(mx * stength, -my * stength, 0)
 	camera.global_position = origin + offset
+	
+var transitioning := false
 
-func _on_play_pressed() -> void:
-	await Transition.fade_out()
-	get_tree().change_scene_to_packed(scene)
-	await Transition.fade_in()
+func _input(event: InputEvent) -> void:
+	if transitioning:
+		return
 
-func _on_settings_pressed() -> void:
-	await Transition.fade_out()
-	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
-	await Transition.fade_in()
-
-func _on_exit_pressed() -> void:
-	await Transition.fade_out()
-	get_tree().quit()
+	if event.is_action_pressed("ui_accept"):
+		transitioning = true
+		$"../../Camera3D/AnimationPlayer".play("camera_anim")
+		await $"../../Camera3D/AnimationPlayer".animation_finished
+		get_tree().change_scene_to_file("res://scenes/start/House.tscn")

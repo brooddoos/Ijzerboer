@@ -1,5 +1,5 @@
 extends Node3D
-var iron_scene = load("res://scenes/Iron.tscn")
+var iron_scene = load("res://scenes/game/Iron.tscn")
 func spawn_iron():
 	#Get random spawn location
 	var spawnlocations = get_children()

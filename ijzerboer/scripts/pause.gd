@@ -1,6 +1,4 @@
 extends Control
-@onready var cassette: Control = $"../Cassette"
-
 var paused := false
 var inTransition := false
 var tween
@@ -56,7 +54,10 @@ func _on_button_pressed() -> void:
 	await Transition.fade_in()
 
 func _on_settings_pressed():
+	await Transition.fade_out()
+	get_tree().paused = false
 	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
+	await Transition.fade_in()
 
 func _on_resume_pressed() -> void:
 	allTween(Tween.TRANS_EXPO,$".","position:y",730,0.25)

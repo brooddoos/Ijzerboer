@@ -18,6 +18,9 @@ var tapes:= {
 	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3", "default": true},
 	3: { "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg", "default": true},
 }
+var flippos:= {
+	
+}
 
 var campaign := {
 	"position" = Vector3(0,0,0)

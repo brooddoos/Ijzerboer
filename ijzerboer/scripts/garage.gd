@@ -96,7 +96,7 @@ func _on_button_pressed(button):
 func _on_exit_pressed():
 	Gamestate.permanently_disabled_buttons = permanently_disabled_buttons
 	await Transition.fade_out()
-	get_tree().change_scene_to_packed(load("res://scenes/Campaign.tscn"))
+	get_tree().change_scene_to_packed(load("res://scenes/game/Campaign.tscn"))
 	await Transition.fade_in()
 	
 func update_buttons():
