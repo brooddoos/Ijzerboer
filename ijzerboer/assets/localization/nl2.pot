@@ -1,0 +1,169 @@
+# LANGUAGE translation for Ijzerboer for the following files:
+# res://scenes/Menu.tscn
+# res://scenes/Campaign.tscn
+# res://scenes/Settings.tscn
+# res://scenes/Garage.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ijzerboer\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8-bit\n"
+
+#: scenes/Menu.tscn
+msgid "Play"
+msgstr ""
+
+#: scenes/Menu.tscn
+msgid "Options"
+msgstr ""
+
+#: scenes/Menu.tscn
+msgid "Exit\n"
+msgstr ""
+
+#: scenes/Menu.tscn
+msgid "  v1.0.0"
+msgstr ""
+
+#: scenes/Menu.tscn
+msgid "Er passen hier achtenveertig karakters per lijn."
+msgstr ""
+
+#: scenes/Campaign.tscn
+#: scenes/Garage.tscn
+msgid "0 BEF"
+msgstr ""
+
+#: scenes/Campaign.tscn
+#: scenes/Garage.tscn
+msgid "0 KG"
+msgstr ""
+
+#: scenes/Campaign.tscn
+msgid "99:99:99"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Open File(s)"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Music Files"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Graphics Settings"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "VSync:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Enabled"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Fullscreen:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Max FPS:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Auto"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Audio Settings"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Music Volume:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "100%"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Car Volume:    "
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "SFX Volume:    "
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Cassette"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Graphics"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Audio"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Return"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "garage"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "[u]Car Upgrades[/u]"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Custom Licenseplate"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "99 999 BEF"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Your current licenseplate:"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "ABC-123"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Upgrade Load Capacity (Lvl 0/100) "
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Upgrade Engine (Lvl 0/30) "
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "[u]One-time Upgrades[/u]"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "GPS Markers for scrap metal "
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Exit"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "999999 BEF"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "0 / 9999 KG"
+msgstr ""

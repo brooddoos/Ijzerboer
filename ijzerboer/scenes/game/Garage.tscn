@@ -389,7 +389,7 @@ libraries = {
 }
 
 [node name="PropCar" type="Node3D" parent="Vehicle"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.43115997, -0.10529971, 0)
 
 [node name="Van" type="MeshInstance3D" parent="Vehicle/PropCar"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.5, 0.74062604, -0.0012890585)
@@ -423,10 +423,12 @@ surface_material_override/0 = SubResource("ShaderMaterial_oa7wk")
 
 [node name="UpgradeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tpskm")
+volume_db = -11.0
 bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_3uxhb")
+volume_db = 2.0
 autoplay = true
 bus = &"BGM"
 playback_type = 1

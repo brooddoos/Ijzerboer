@@ -1,0 +1,173 @@
+# LANGUAGE translation for Ijzerboer for the following files:
+# res://scenes/Menu.tscn
+# res://scenes/Campaign.tscn
+# res://scenes/Settings.tscn
+# res://scenes/Garage.tscn
+#
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ijzerboer\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+
+#: scenes/Menu.tscn
+msgid "Play"
+msgstr "Spelen"
+
+#: scenes/Menu.tscn
+msgid "Options"
+msgstr "Instellingen"
+
+#: scenes/Menu.tscn
+msgid "Exit\n"
+msgstr "Verlaten\n"
+
+#: scenes/Menu.tscn
+msgid "  v1.0.0"
+msgstr ""
+
+#: scenes/Menu.tscn
+msgid "Er passen hier achtenveertig karakters per lijn."
+msgstr ""
+
+#: scenes/Campaign.tscn scenes/Garage.tscn
+msgid "0 BEF"
+msgstr ""
+
+#: scenes/Campaign.tscn scenes/Garage.tscn
+msgid "0 KG"
+msgstr ""
+
+#: scenes/Campaign.tscn
+msgid "99:99:99"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Open File(s)"
+msgstr "Bestanden openen"
+
+#: scenes/Settings.tscn
+msgid "Music Files"
+msgstr "Muziekbestanden\\"
+
+#: scenes/Settings.tscn
+msgid "Graphics Settings"
+msgstr "Grafische Instellingen"
+
+#: scenes/Settings.tscn
+msgid "VSync:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Enabled"
+msgstr "Aan"
+
+#: scenes/Settings.tscn
+msgid "Fullscreen:"
+msgstr "Volledig scherm:"
+
+#: scenes/Settings.tscn
+msgid "Max FPS:"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Auto"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Audio Settings"
+msgstr "Geluidsinstellingen"
+
+#: scenes/Settings.tscn
+msgid "Music Volume:"
+msgstr "Muziek Volume:"
+
+#: scenes/Settings.tscn
+msgid "100%"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Car Volume:    "
+msgstr "Auto Volume: "
+
+#: scenes/Settings.tscn
+msgid "SFX Volume:    "
+msgstr "Geluidseffecten: "
+
+#: scenes/Settings.tscn
+msgid "Cassette"
+msgstr ""
+
+#: scenes/Settings.tscn
+msgid "Graphics"
+msgstr "Grafisch"
+
+#: scenes/Settings.tscn
+msgid "Audio"
+msgstr "Geluid"
+
+#: scenes/Settings.tscn
+msgid "Return"
+msgstr "Terugkeren"
+
+#: scenes/Garage.tscn
+msgid "garage"
+msgstr "garage"
+
+#: scenes/Garage.tscn
+msgid "[u]Car Upgrades[/u]"
+msgstr "[u]Autoverbeteringen[/u]"
+
+#: scenes/Garage.tscn
+msgid "Custom Licenseplate"
+msgstr "Aangepaste Nummerplaat"
+
+#: scenes/Garage.tscn
+msgid "99 999 BEF"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Your current licenseplate:"
+msgstr "Jouw huidige nummerplaat:"
+
+#: scenes/Garage.tscn
+msgid "ABC-123"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "Upgrade Load Capacity (Lvl 0/100) "
+msgstr "Verhoog Laad Capaciteit (Lvl 0/100) "
+
+#: scenes/Garage.tscn
+msgid "Upgrade Engine (Lvl 0/30) "
+msgstr "Verbeter Motor (Lvl 0/30) "
+
+#: scenes/Garage.tscn
+msgid "[u]One-time Upgrades[/u]"
+msgstr "[u]Eenmalige Verbeteringen[/u]"
+
+#: scenes/Garage.tscn
+msgid "GPS Markers for scrap metal "
+msgstr "GPS-markeringen voor metaal "
+
+#: scenes/Garage.tscn
+msgid "Exit"
+msgstr "Verlaten"
+
+#: scenes/Garage.tscn
+msgid "999999 BEF"
+msgstr ""
+
+#: scenes/Garage.tscn
+msgid "0 / 9999 KG"
+msgstr ""

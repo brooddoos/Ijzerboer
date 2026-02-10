@@ -1,7 +1,11 @@
 extends Node
+
+var last_scene := "res://scenes/Menu.tscn" #Which scene to return to from settings
+
 var map := ""
 var cargo := 0
 var BEF := 1000 
+var time := 21600.0
 var car_stats := {
 	"engine_multiplier" = 1,
 	"max_cargo" = 10,
@@ -12,7 +16,8 @@ var car_stats := {
 
 var permanently_disabled_buttons = []
 
-var currentTape := 1
+
+var current_tape := 1
 var tapes:= {
 	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg", "default": true},
 	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3", "default": true},

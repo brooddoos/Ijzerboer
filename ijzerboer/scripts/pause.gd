@@ -8,6 +8,9 @@ var customSongs:Dictionary = {}
  
 func _ready() -> void:
 	$ColorRect/VBoxContainer/Settings.pressed.connect(_on_settings_pressed)
+	await Engine.get_main_loop().process_frame
+	if Gamestate.last_scene == "res://scenes/Settings.tscn":
+		toggle_menu()
 
 func show_info(msg: String, title: String = "Info"):
 	var dialog = AcceptDialog.new()
@@ -23,30 +26,34 @@ func allTween(transistionType:Tween.TransitionType,object,property:String,vars,t
 	tween.set_trans(transistionType)
 	tween.tween_property(object, property, vars, time)
 
+func toggle_menu():
+	if not inTransition:
+		inTransition = true
+		if not paused:
+			paused = true
+			get_tree().paused = true
+			show()
+			
+			allTween(Tween.TRANS_EXPO,$".","position:y",0,0.25)
+			await tween.finished
+			tween.kill()
+			inTransition = false
+		else:
+			allTween(Tween.TRANS_EXPO,$".","position:y",730,0.25)
+			await tween.finished
+			inTransition = false
+			tween.kill()
+			
+			paused = false
+			get_tree().paused = false
+			hide()
+
 func _unhandled_input(event):
 	if event.is_action_pressed("escape"):
-		if not inTransition:
-			inTransition = true
-			if not paused:
-				paused = true
-				get_tree().paused = true
-				show()
-				
-				allTween(Tween.TRANS_EXPO,$".","position:y",0,0.25)
-				await tween.finished
-				tween.kill()
-				inTransition = false
-			else:
-				allTween(Tween.TRANS_EXPO,$".","position:y",730,0.25)
-				await tween.finished
-				inTransition = false
-				tween.kill()
-				
-				paused = false
-				get_tree().paused = false
-				hide()
+		toggle_menu()
 
-func _on_button_pressed() -> void:
+func _on_button_pressed() -> void: #exit
+	Savesystem.save()
 	await Transition.fade_out()
 	var mainmenu = load("res://scenes/Menu.tscn") as PackedScene
 	get_tree().paused = false
