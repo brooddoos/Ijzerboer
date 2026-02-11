@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=44 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaignteleports.gd" id="1_d48t8"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_d2me3"]
@@ -26,6 +26,8 @@
 [ext_resource type="AudioStream" uid="uid://4qt05n3dcopj" path="res://assets/audio/engine_1.wav" id="24_udslw"]
 [ext_resource type="Script" uid="uid://dwer3mfjq8ggm" path="res://scripts/irondealer.gd" id="25_48hix"]
 [ext_resource type="AudioStream" uid="uid://b6wyaoflkjc26" path="res://assets/audio/cash_sfx.mp3" id="26_lq8yn"]
+[ext_resource type="Script" uid="uid://dpg7mwnivhx8s" path="res://scripts/train.gd" id="27_minu2"]
+[ext_resource type="PackedScene" uid="uid://bi3u7o8h4htyp" path="res://assets/3d/HLE16.glb" id="28_o7e2w"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jhsr3"]
 font = ExtResource("7_okiu4")
@@ -86,6 +88,13 @@ billboard_keep_scale = true
 [sub_resource type="QuadMesh" id="QuadMesh_mcffj"]
 material = SubResource("StandardMaterial3D_y5y3l")
 size = Vector2(0.2, 0.2)
+
+[sub_resource type="Curve3D" id="Curve3D_x1w3f"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 121.52654, 0, 38.835472, 0, 0, 0, 0, 0, 0, -27.628887, 0, 49.68759),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
 
 [node name="Campaign" type="Node3D"]
 script = ExtResource("1_d48t8")
@@ -353,6 +362,21 @@ texture = ExtResource("19_8421g")
 
 [node name="cash_sfx" type="AudioStreamPlayer3D" parent="IronDealer/Area3D"]
 stream = ExtResource("26_lq8yn")
+
+[node name="Train" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.8833, -3, 0)
+script = ExtResource("27_minu2")
+
+[node name="Path3D" type="Path3D" parent="Train"]
+transform = Transform3D(-0.21829659, 0, 0.9758825, 0, 1, 0, -0.9758825, 0, -0.21829659, 71.247604, 0, 0)
+curve = SubResource("Curve3D_x1w3f")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Train/Path3D"]
+transform = Transform3D(-0.07256493, 0, 0.99735856, 0, 1, 0, -0.99735856, 0, -0.07256493, 21.711025, 0, 46.097763)
+progress = 100.07936
+
+[node name="HLE16" parent="Train/Path3D/PathFollow3D" instance=ExtResource("28_o7e2w")]
+transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0, 0, 0)
 
 [editable path="Car"]
 [editable path="Car/Car/Mesh"]

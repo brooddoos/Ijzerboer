@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://boylucjwuhkw"
-path="res://.godot/imported/interieurtest.glb-32515b31e8a842b971bf0ae4b705e63b.scn"
+uid="uid://bi3u7o8h4htyp"
+path="res://.godot/imported/HLE16.glb-5d5335bc9c2189e5095e0df27334369d.scn"
 
 [deps]
 
-source_file="res://assets/images/interieurtest.glb"
-dest_files=["res://.godot/imported/interieurtest.glb-32515b31e8a842b971bf0ae4b705e63b.scn"]
+source_file="res://assets/3d/HLE16.glb"
+dest_files=["res://.godot/imported/HLE16.glb-5d5335bc9c2189e5095e0df27334369d.scn"]
 
 [params]
 

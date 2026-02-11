@@ -1,93 +1,53 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfxkdwk4o32la"]
+[gd_scene load_steps=5 format=3 uid="uid://cfxkdwk4o32la"]
 
 [ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scenes/start/house.gd" id="1_ee5pl"]
 [ext_resource type="SpriteFrames" uid="uid://dch8veojoj0k8" path="res://assets/images/fire/fire.tres" id="2_tj35a"]
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="3_cekqg"]
-[ext_resource type="PackedScene" uid="uid://boylucjwuhkw" path="res://assets/images/interieurtest.glb" id="4_glcan"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ve0ua"]
-bg_color = Color(0, 0, 0, 0.4)
-border_width_left = 10
-border_width_top = 10
-border_width_right = 10
-border_width_bottom = 10
-border_color = Color(0, 0, 0, 0)
-border_blend = true
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
+[ext_resource type="PackedScene" uid="uid://ch8grexs8o8e6" path="res://assets/3d/interior/interieur.glb" id="4_glcan"]
 
 [node name="House" type="Node3D"]
 script = ExtResource("1_ee5pl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Buttons" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -166.0
-offset_top = 6.0
-offset_right = 167.0
-offset_bottom = 79.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 6
-size_flags_vertical = 6
-theme_override_styles/panel = SubResource("StyleBoxFlat_ve0ua")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Buttons"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Buttons/MarginContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Play" type="Button" parent="CanvasLayer/Buttons/MarginContainer/HBoxContainer"]
-layout_mode = 2
+[node name="Play" type="Button" parent="CanvasLayer"]
+offset_left = 64.0
+offset_top = 288.0
+offset_right = 136.0
+offset_bottom = 341.0
 theme = ExtResource("3_cekqg")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 
-[node name="spacer" type="Control" parent="CanvasLayer/Buttons/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
-[node name="Settings" type="Button" parent="CanvasLayer/Buttons/MarginContainer/HBoxContainer"]
-layout_mode = 2
+[node name="Options" type="Button" parent="CanvasLayer"]
+offset_left = 648.0
+offset_top = 288.0
+offset_right = 778.0
+offset_bottom = 341.0
 theme_override_font_sizes/font_size = 32
 text = "Options"
 
-[node name="spacer2" type="Control" parent="CanvasLayer/Buttons/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(15, 0)
-layout_mode = 2
-
-[node name="Exit" type="Button" parent="CanvasLayer/Buttons/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Exit
-"
-
 [node name="Fireplace" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7918849, -1)
-pixel_size = 0.02
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.75)
+pixel_size = 0.008
 texture_filter = 0
 sprite_frames = ExtResource("2_tj35a")
 frame = 23
 frame_progress = 1.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.78111553)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.28160667)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="interieurtest" parent="." instance=ExtResource("4_glcan")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.2732978, 0, -0.32582945)
+[node name="Interior" parent="." instance=ExtResource("4_glcan")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -1)
+
+[node name="door" parent="Interior" index="8"]
+transform = Transform3D(-1.3113416e-07, 3, -1.3113416e-07, 0, -1.3113416e-07, -3, -3, -1.3113416e-07, 5.7320566e-15, -0.97999984, 0.96100026, 1.922)
+
+[node name="door_001" parent="Interior" index="13"]
+transform = Transform3D(-1.3113416e-07, 3, 1.3113416e-07, 0, -1.3113416e-07, 3, 3, 1.3113416e-07, 5.7320566e-15, -0.9800001, 0.96100026, -1.922)
+
+[editable path="Interior"]

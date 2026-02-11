@@ -12,7 +12,6 @@ extends Control
 @export var syncColors = false
 
 var splash_screens : Array
-var skipping = true
 
 func get_screens():
 	splash_screens = splash_screen_container.get_children()
@@ -36,6 +35,8 @@ func fade():
 	get_tree().change_scene_to_packed(load_scene)
 	
 func _unhandled_input(event: InputEvent):
+	var skipping = true
+	
 	if event.is_action_pressed("ui_accept") and skipping:
 		skipping = false
 		var tween = self.create_tween()

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgkoqkuat33hv"
-path.s3tc="res://.godot/imported/interieurtest_barometer.png-0825f6744f633fda2d3369aa5aaa2fe0.s3tc.ctex"
+uid="uid://dodxnlqw4roev"
+path.s3tc="res://.godot/imported/interieur_cross.png-2523ca82bdf7b734495f0c45913d528c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1ea50d64a811f323691ce873ee8ceb13"
+"md5": "72df83fb950fb8afec79338ea91f1cfa"
 }
 
 [deps]
 
-source_file="res://assets/images/interieurtest_barometer.png"
-dest_files=["res://.godot/imported/interieurtest_barometer.png-0825f6744f633fda2d3369aa5aaa2fe0.s3tc.ctex"]
+source_file="res://assets/3d/interior/interieur_cross.png"
+dest_files=["res://.godot/imported/interieur_cross.png-2523ca82bdf7b734495f0c45913d528c.s3tc.ctex"]
 
 [params]
 

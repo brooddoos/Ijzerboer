@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl77exiusaxfi"
-path.s3tc="res://.godot/imported/interieurtest_interieur.png-344aa0d5be842f99026a65f1ac14a8e2.s3tc.ctex"
+uid="uid://cc0g5r1eh8twh"
+path.s3tc="res://.godot/imported/interieur_interieur.png-29fdb925a90771f0042b3bdce5fb7572.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -14,8 +14,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://assets/images/interieurtest_interieur.png"
-dest_files=["res://.godot/imported/interieurtest_interieur.png-344aa0d5be842f99026a65f1ac14a8e2.s3tc.ctex"]
+source_file="res://assets/3d/interior/interieur_interieur.png"
+dest_files=["res://.godot/imported/interieur_interieur.png-29fdb925a90771f0042b3bdce5fb7572.s3tc.ctex"]
 
 [params]
 
