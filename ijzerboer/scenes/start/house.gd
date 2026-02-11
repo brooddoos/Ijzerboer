@@ -4,8 +4,15 @@ extends Node3D
 @onready var options = $CanvasLayer/Options
 func _ready():
 	$Fireplace.play("default")
+	$Fireplace/AudioStreamPlayer.play()
 	play.pressed.connect(_on_play_pressed)
 	options.pressed.connect(_on_options_pressed)
+var oldflicker := 1.0
+var newflicker := 1.0
+func _physics_process(delta: float) -> void:
+	newflicker = randf_range(0.6,1.4)
+	$Fireplace/OmniLight3D.light_energy = lerp(oldflicker, newflicker , 0.5)
+	oldflicker = newflicker
 func _on_play_pressed():
 	dooranim.play("doorAction")
 	await Transition.fade_out()

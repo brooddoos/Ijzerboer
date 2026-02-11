@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfxkdwk4o32la"]
+[gd_scene load_steps=6 format=3 uid="uid://cfxkdwk4o32la"]
 
 [ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scenes/start/house.gd" id="1_ee5pl"]
 [ext_resource type="SpriteFrames" uid="uid://dch8veojoj0k8" path="res://assets/images/fire/fire.tres" id="2_tj35a"]
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="3_cekqg"]
+[ext_resource type="AudioStream" uid="uid://niuaubegt2ig" path="res://assets/audio/fireplace.ogg" id="4_8ndtc"]
 [ext_resource type="PackedScene" uid="uid://ch8grexs8o8e6" path="res://assets/3d/interior/interieur.glb" id="4_glcan"]
 
 [node name="House" type="Node3D"]
@@ -35,11 +36,15 @@ sprite_frames = ExtResource("2_tj35a")
 frame = 23
 frame_progress = 1.0
 
+[node name="OmniLight3D" type="OmniLight3D" parent="Fireplace"]
+light_color = Color(1, 0.5019608, 0, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Fireplace"]
+stream = ExtResource("4_8ndtc")
+volume_db = -20.0
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.28160667)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Interior" parent="." instance=ExtResource("4_glcan")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -1)
@@ -49,5 +54,8 @@ transform = Transform3D(-1.3113416e-07, 3, -1.3113416e-07, 0, -1.3113416e-07, -3
 
 [node name="door_001" parent="Interior" index="13"]
 transform = Transform3D(-1.3113416e-07, 3, 1.3113416e-07, 0, -1.3113416e-07, 3, 3, 1.3113416e-07, 5.7320566e-15, -0.9800001, 0.96100026, -1.922)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 
 [editable path="Interior"]
