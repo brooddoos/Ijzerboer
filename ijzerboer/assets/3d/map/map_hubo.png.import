@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diy1vbhrsybx1"
-path.s3tc="res://.godot/imported/frietkot_frituurke.png-8e039bcbb425dc26ecd8a9a9b83174b5.s3tc.ctex"
+uid="uid://cvtcfyssuoasv"
+path.s3tc="res://.godot/imported/map_hubo.png-9fcbaa08246bcc200128db32ee64568a.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "c088d84b351256af223af47a9ed57759"
+"md5": "c8076fc912c41ba39d2dccc06d63c6d3"
 }
 
 [deps]
 
-source_file="res://assets/3d/frietkot_frituurke.png"
-dest_files=["res://.godot/imported/frietkot_frituurke.png-8e039bcbb425dc26ecd8a9a9b83174b5.s3tc.ctex"]
+source_file="res://assets/3d/map/map_hubo.png"
+dest_files=["res://.godot/imported/map_hubo.png-9fcbaa08246bcc200128db32ee64568a.s3tc.ctex"]
 
 [params]
 

@@ -39,7 +39,6 @@ filters = PackedStringArray("*.mp3,*.wav,*.ogg;Music Files;audio/mpeg,audio/wav,
 use_native_dialog = true
 
 [node name="Video" type="Control" parent="Main"]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -50,10 +49,10 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="GraphicsTitle" type="Label" parent="Main/Video/VBoxContainer"]
+[node name="VideoTitle" type="Label" parent="Main/Video/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
-text = "Graphics Settings"
+text = "Video Settings"
 
 [node name="VSync" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
 layout_mode = 2
@@ -71,6 +70,30 @@ custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 text = "Enabled"
 horizontal_alignment = 2
+
+[node name="Resolution" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionTitle" type="Label" parent="Main/Video/VBoxContainer/Resolution"]
+layout_mode = 2
+text = "Resolution:"
+
+[node name="ResolutionLabel" type="Label" parent="Main/Video/VBoxContainer/Resolution"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Enabled"
+horizontal_alignment = 2
+
+[node name="MenuButton" type="MenuButton" parent="Main/Video/VBoxContainer/Resolution"]
+layout_mode = 2
+text = "Resolution"
+item_count = 2
+popup/item_0/text = "Retro"
+popup/item_0/checkable = 1
+popup/item_0/id = 0
+popup/item_1/text = "Normal"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
 
 [node name="Fullscreen" type="HBoxContainer" parent="Main/Video/VBoxContainer"]
 layout_mode = 2
@@ -108,6 +131,7 @@ text = "Auto"
 horizontal_alignment = 1
 
 [node name="Audio" type="Control" parent="Main"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -206,7 +230,7 @@ layout_mode = 0
 offset_top = 64.0
 offset_right = 128.0
 offset_bottom = 128.0
-text = "Graphics"
+text = "Video"
 
 [node name="Audio" type="Button" parent="Buttons"]
 layout_mode = 0

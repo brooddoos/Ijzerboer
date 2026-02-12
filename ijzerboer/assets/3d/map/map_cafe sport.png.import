@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://doxm64l4130ai"
-path.s3tc="res://.godot/imported/garage_garage.png-e1bbd2637850923a1d3569073bbd8ff9.s3tc.ctex"
+uid="uid://c1qwir0r7bsxs"
+path.s3tc="res://.godot/imported/map_cafe sport.png-4da40ebd37cf2a021b8b2c85615d0ced.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "f2ce1994cadb0f15060fb88768810569"
+"md5": "61d3ac343c236474c62b2942d68ea881"
 }
 
 [deps]
 
-source_file="res://assets/3d/garage_garage.png"
-dest_files=["res://.godot/imported/garage_garage.png-e1bbd2637850923a1d3569073bbd8ff9.s3tc.ctex"]
+source_file="res://assets/3d/map/map_cafe sport.png"
+dest_files=["res://.godot/imported/map_cafe sport.png-4da40ebd37cf2a021b8b2c85615d0ced.s3tc.ctex"]
 
 [params]
 

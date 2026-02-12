@@ -9,7 +9,7 @@ func _ready():
 	options.pressed.connect(_on_options_pressed)
 var oldflicker := 1.0
 var newflicker := 1.0
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	newflicker = randf_range(0.6,1.4)
 	$Fireplace/OmniLight3D.light_energy = lerp(oldflicker, newflicker , 0.5)
 	oldflicker = newflicker

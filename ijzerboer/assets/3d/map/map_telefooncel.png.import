@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cek6opeyjw4o"
-path.s3tc="res://.godot/imported/hubo_hubo.png-5333cbd7f8a6d4868435547dd4591486.s3tc.ctex"
+uid="uid://c8efi8e11aax6"
+path.s3tc="res://.godot/imported/map_telefooncel.png-329ac9b8a518e1c9a2d1cf41a98f2347.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "71d540e4b81dbba5b24d495a95ebf419"
+"md5": "752f484ffd21b9cb082e470e9412081f"
 }
 
 [deps]
 
-source_file="res://assets/3d/hubo_hubo.png"
-dest_files=["res://.godot/imported/hubo_hubo.png-5333cbd7f8a6d4868435547dd4591486.s3tc.ctex"]
+source_file="res://assets/3d/map/map_telefooncel.png"
+dest_files=["res://.godot/imported/map_telefooncel.png-329ac9b8a518e1c9a2d1cf41a98f2347.s3tc.ctex"]
 
 [params]
 

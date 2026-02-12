@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://bv57k2wldeeul"
-path="res://.godot/imported/garage.glb-a9633bf923b1f456b131ee9aa87610b1.scn"
+uid="uid://durhjptyuaef"
+path="res://.godot/imported/map.glb-fe443b9ad725319ccb547a3cd50d0236.scn"
 
 [deps]
 
-source_file="res://assets/3d/garage.glb"
-dest_files=["res://.godot/imported/garage.glb-a9633bf923b1f456b131ee9aa87610b1.scn"]
+source_file="res://assets/3d/map/map.glb"
+dest_files=["res://.godot/imported/map.glb-fe443b9ad725319ccb547a3cd50d0236.scn"]
 
 [params]
 
@@ -39,7 +39,31 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
+"PATH:Church": {
+"generate/physics": true
+},
 "PATH:Cube": {
+"generate/physics": true
+},
+"PATH:Cube_001": {
+"generate/physics": true
+},
+"PATH:Cube_002": {
+"generate/physics": true
+},
+"PATH:Floor": {
+"generate/physics": true
+},
+"PATH:frietkot": {
+"generate/physics": true
+},
+"PATH:garage": {
+"generate/physics": true
+},
+"PATH:hobo": {
+"generate/physics": true
+},
+"PATH:trein": {
 "generate/physics": true
 }
 }

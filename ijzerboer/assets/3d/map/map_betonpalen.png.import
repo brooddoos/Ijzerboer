@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxfaboramwyba"
-path.s3tc="res://.godot/imported/distributiehuis_distributiecabine.png-b01764160f0e19815d4ec606be921371.s3tc.ctex"
+uid="uid://bcobwcmbcctxf"
+path.s3tc="res://.godot/imported/map_betonpalen.png-510b88547fd09b3655e61325b771eff9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "b06b613c9c72f126fdd6fa3b601e6a2c"
+"md5": "a8d2334f4f5d621d83790dfa7a10b730"
 }
 
 [deps]
 
-source_file="res://assets/3d/distributiehuis_distributiecabine.png"
-dest_files=["res://.godot/imported/distributiehuis_distributiecabine.png-b01764160f0e19815d4ec606be921371.s3tc.ctex"]
+source_file="res://assets/3d/map/map_betonpalen.png"
+dest_files=["res://.godot/imported/map_betonpalen.png-510b88547fd09b3655e61325b771eff9.s3tc.ctex"]
 
 [params]
 
