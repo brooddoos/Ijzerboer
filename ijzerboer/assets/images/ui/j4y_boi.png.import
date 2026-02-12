@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1i8xv5snklmw"
-path="res://.godot/imported/pfp.png-d655f32591775758d422ec8b939843cf.ctex"
+uid="uid://cprxj64tgl2vy"
+path="res://.godot/imported/j4y_boi.png-e0be5cb567b67939207e1130c8594a33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ui/pfp.png"
-dest_files=["res://.godot/imported/pfp.png-d655f32591775758d422ec8b939843cf.ctex"]
+source_file="res://assets/images/ui/j4y_boi.png"
+dest_files=["res://.godot/imported/j4y_boi.png-e0be5cb567b67939207e1130c8594a33.ctex"]
 
 [params]
 

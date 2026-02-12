@@ -20,7 +20,7 @@ run/main_scene="uid://t1al5hykieb"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.08627451, 0.08627451, 0.10980392, 1)
 boot_splash/fullsize=false
-boot_splash/image="uid://c66qp8utrtyjo"
+boot_splash/image="uid://coisvu8pfym47"
 config/icon="uid://bmw58ybkyyi8b"
 
 [autoload]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c66qp8utrtyjo"
-path="res://.godot/imported/logo_small.png-854fd013ad44b6772cc9973f49cb2035.ctex"
+uid="uid://b2p6hu6v4tlnd"
+path="res://.godot/imported/brooddoos.png-56b5b6e367c2e75d1d89438e56d3931a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/images/ui/logo_small.png"
-dest_files=["res://.godot/imported/logo_small.png-854fd013ad44b6772cc9973f49cb2035.ctex"]
+source_file="res://assets/images/ui/brooddoos.png"
+dest_files=["res://.godot/imported/brooddoos.png-56b5b6e367c2e75d1d89438e56d3931a.ctex"]
 
 [params]
 

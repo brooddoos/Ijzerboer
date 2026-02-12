@@ -1,7 +1,7 @@
 extends Control
 @onready var cassette: Node3D = $SubViewportContainer/SubViewport/Node3D/Cassette
 @onready var animation_player = $SubViewportContainer/SubViewport/Node3D/Cassette/AnimationPlayer
-@onready var title: Label3D  = $SubViewportContainer/SubViewport/Node3D/Cassette/label/text
+@onready var title: Label3D  = $SubViewportContainer/SubViewport/Node3D/Cassette/Label/Text
 @onready var audio: AudioStreamPlayer = $AudioStreamPlayer
 @onready var cassette_start_pos = cassette.position.y
 @onready var cassette_up := false

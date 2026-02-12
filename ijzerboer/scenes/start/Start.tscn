@@ -2,15 +2,30 @@
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
 [ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/game/Campaign.tscn" id="2_el213"]
+[ext_resource type="Texture2D" uid="uid://coisvu8pfym47" path="res://assets/images/ui/logosmall.png" id="4_pym4i"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="6_7yvfd"]
-[ext_resource type="Texture2D" uid="uid://dcfej0covuq8y" path="res://assets/images/ui/logo.png" id="6_thu7x"]
 [ext_resource type="Texture2D" uid="uid://dgandea2lyobj" path="res://assets/3d/cami_cami.png" id="9_el213"]
 [ext_resource type="AudioStream" uid="uid://dum3r7il36506" path="res://assets/audio/oudijzer.ogg" id="10_pp5m5"]
 [ext_resource type="Texture2D" uid="uid://bl3v4utw7o846" path="res://assets/3d/cami_wheel.png" id="10_thu7x"]
 [ext_resource type="Material" uid="uid://d4akr53ewtdty" path="res://shaders/lightmaterial.tres" id="11_2af52"]
 [ext_resource type="Texture2D" uid="uid://d1aytgwfxfyk0" path="res://scenes/start/Screenshot from 2026-02-09 15-35-17.png" id="11_pym4i"]
 [ext_resource type="QuadMesh" uid="uid://d0a3wmmibg0ii" path="res://assets/godot/SnowDrawPass.tres" id="13_thu7x"]
+
+[sub_resource type="Animation" id="Animation_ru5xp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 5, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_pym4i"]
 resource_name = "camera_anim"
@@ -25,22 +40,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 2.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(-8.4336605, 4.6083984, 0.97271824), Vector3(-8.434, 4.608, -20.152)]
-}
-
-[sub_resource type="Animation" id="Animation_ru5xp"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-8.4336605, 4.6083984, 0.97271824)]
+"values": [Vector3(0, 5, 1), Vector3(0, 4.608, -20.152)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f0qy"]
@@ -277,7 +277,7 @@ text = "Press START"
 horizontal_alignment = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.4336605, 4.6083984, 0.97271824)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
@@ -307,71 +307,48 @@ skeleton = NodePath("")
 [node name="Trees" type="Node" parent="."]
 
 [node name="tree_simple" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -36.421, -0.264709, -18.262314)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -28.421001, -0.264709, -18.262314)
 surface_material_override/0 = null
 
 [node name="tree_simple2" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -28.659405, -0.894609, -18.262314)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -20.659405, -0.894609, -18.262314)
 surface_material_override/0 = null
 
 [node name="tree_simple3" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -20.867926, -1.1303253, -18.262312)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -12.867926, -1.1303253, -18.262312)
 surface_material_override/0 = null
 
 [node name="tree_simple5" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -32.32728, -5.240683, -18.26231)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -24.327278, -5.240683, -18.26231)
 surface_material_override/0 = null
 
 [node name="tree_simple6" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -24.843372, -3.0345082, -18.26231)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.843372, -3.0345082, -18.26231)
 surface_material_override/0 = null
 
 [node name="tree_simple11" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 5.5909424, -3.990203, -18.262312)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 13.590942, -3.990203, -18.262312)
 surface_material_override/0 = null
 
 [node name="tree_simple12" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 10.145622, -2.4092255, -18.262312)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 18.145622, -2.4092255, -18.262312)
 surface_material_override/0 = null
 
 [node name="tree_simple13" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 14.24937, 0.13743877, -18.262312)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 22.24937, 0.13743877, -18.262312)
 surface_material_override/0 = null
 
 [node name="tree_simple14" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -3.611, -4.6550827, -2.642)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 4.389, -4.6550827, -2.642)
 surface_material_override/0 = null
 
 [node name="tree_simple15" parent="Trees" instance=ExtResource("5_7ycwl")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -13.163, -4.3460827, -2.642)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -5.163, -4.3460827, -2.642)
 surface_material_override/0 = null
 
 [node name="Wall" type="CSGBox3D" parent="."]
 transform = Transform3D(149.71939, 0, 0, 0, 1.7977414, 0, 0, 0, 1, 0, 6.955824, -41.283447)
 size = Vector3(1, 7.692993, 1)
-
-[node name="Logo" type="Sprite3D" parent="."]
-transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -8.090498, 8.353242, -15.785511)
-pixel_size = 0.0032
-texture = ExtResource("6_thu7x")
-
-[node name="3dsplashtext" type="Label3D" parent="Logo"]
-transform = Transform3D(1.0000002, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0, -1.9807835, 0)
-text = "Er passen hier achtenveertig karakters per lijn."
-font_size = 100
-outline_size = 0
-
-[node name="StartPoint1" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -47.305, 0.97105885, -8.994)
-
-[node name="EndPoint1" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 0.97105885, -8.994)
-
-[node name="EndPoint2" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -47.305, 0.97105885, -13)
-
-[node name="StartPoint2" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 34, 0.97105885, -13)
 
 [node name="Van" type="Node3D" parent="." node_paths=PackedStringArray("front_right_wheel", "front_left_wheel", "back_left_wheel", "back_right_wheel")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -25.236752, 0.977201, -8.258)
@@ -437,5 +414,31 @@ process_material = SubResource("ParticleProcessMaterial_el213")
 draw_pass_1 = ExtResource("13_thu7x")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1.2046655, 0.027368834, 0, -0.022289446, 1.4791886, 0, 0, 0, 1, -9.192117, 5.646375, -22)
+transform = Transform3D(1.2046655, 0.027368834, 0, -0.022289446, 1.4791886, 0, 0, 0, 1, 0, 5.646, -22)
 texture = ExtResource("11_pym4i")
+
+[node name="Logo" type="Node3D" parent="."]
+
+[node name="Logosprite" type="Sprite3D" parent="Logo"]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 8.353, -15.786)
+pixel_size = 0.0032
+texture_filter = 0
+texture = ExtResource("4_pym4i")
+
+[node name="3dsplashtext" type="Label3D" parent="Logo"]
+transform = Transform3D(1.7000004, 0, 0, 0, 1.7000004, 0, 0, 0, 1.7000004, 0, 4.986, -15.786)
+text = "Er passen hier achtenveertig karakters per lijn."
+font_size = 100
+outline_size = 0
+
+[node name="EndPoint2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, -13)
+
+[node name="StartPoint2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 1, -13)
+
+[node name="StartPoint1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, -9)
+
+[node name="EndPoint1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 1, -9)

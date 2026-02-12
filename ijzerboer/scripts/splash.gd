@@ -8,7 +8,7 @@ extends Control
 @export var out_time : float = 0.5
 @export var splash_screen_container : Node
 @export var fg : ColorRect
-@onready var bg: ColorRect = $mainbg
+@onready var bg: ColorRect = $Mainbg
 @export var syncColors = false
 
 var splash_screens : Array
