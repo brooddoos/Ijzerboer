@@ -15,7 +15,7 @@ config/name_localized={
 "en": "Junkman"
 }
 config/description="A game where you pick up scrap metal for a living."
-config/version="0.3.7"
+config/version="0.3.8"
 run/main_scene="uid://t1al5hykieb"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.08627451, 0.08627451, 0.10980392, 1)
