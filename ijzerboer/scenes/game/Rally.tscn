@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cl5msmw1a2run"]
+[gd_scene load_steps=18 format=3 uid="uid://cl5msmw1a2run"]
 
 [ext_resource type="Script" uid="uid://bngd4ytt8fkk" path="res://scripts/rally.gd" id="1_7dafm"]
 [ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/game/Spedometer.tscn" id="2_fjnja"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="7_i03er"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="8_0fr28"]
 [ext_resource type="Texture2D" uid="uid://bk8p17u8untjd" path="res://assets/godot/bluering.tres" id="9_w3mj6"]
+[ext_resource type="Texture2D" uid="uid://gj6k8xxka8me" path="res://assets/images/skyboxes/skybox.png" id="10_fjnja"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v00se"]
 albedo_texture = ExtResource("7_i03er")
@@ -23,10 +24,22 @@ size = Vector3(500, 5, 500)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_yp80n"]
 
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_r1gsd"]
+panorama = ExtResource("10_fjnja")
+
+[sub_resource type="Sky" id="Sky_5iave"]
+sky_material = SubResource("PanoramaSkyMaterial_r1gsd")
+
+[sub_resource type="Environment" id="Environment_27xhm"]
+background_mode = 2
+sky = SubResource("Sky_5iave")
+
 [node name="Rally" type="Node3D"]
 script = ExtResource("1_7dafm")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,10 +47,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Spedometer" parent="UI" instance=ExtResource("2_fjnja")]
+[node name="Spedometer" parent="UI/Control" instance=ExtResource("2_fjnja")]
 layout_mode = 1
 
-[node name="Countdown" type="Control" parent="UI"]
+[node name="Countdown" type="Control" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,31 +58,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="One" type="Sprite2D" parent="UI/Countdown"]
+[node name="One" type="Sprite2D" parent="UI/Control/Countdown"]
 visible = false
 position = Vector2(416, 224)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("3_r1gsd")
 
-[node name="Two" type="Sprite2D" parent="UI/Countdown"]
+[node name="Two" type="Sprite2D" parent="UI/Control/Countdown"]
 visible = false
 position = Vector2(416, 224)
 scale = Vector2(1.5, 1.4999999)
 texture = ExtResource("4_5iave")
 
-[node name="Three" type="Sprite2D" parent="UI/Countdown"]
+[node name="Three" type="Sprite2D" parent="UI/Control/Countdown"]
 visible = false
 position = Vector2(416, 224)
 scale = Vector2(1.5, 1.4999999)
 texture = ExtResource("5_27xhm")
 
-[node name="Go" type="Sprite2D" parent="UI/Countdown"]
+[node name="Go" type="Sprite2D" parent="UI/Control/Countdown"]
 visible = false
 position = Vector2(416, 224)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("6_nlcpc")
 
-[node name="Horn" type="AudioStreamPlayer" parent="UI/Countdown"]
+[node name="Horn" type="AudioStreamPlayer" parent="UI/Control/Countdown"]
 bus = &"SFX"
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -113,3 +126,12 @@ shape = SubResource("CylinderShape3D_yp80n")
 [node name="Ring" type="Sprite3D" parent="Checkpoint/Area3D"]
 transform = Transform3D(8.208, 0, 0, 0, -3.5799627e-07, 1.0000001, 0, -8.19, -4.3711392e-08, 0, 0, 0)
 texture = ExtResource("9_w3mj6")
+
+[node name="Startpositions" type="Node3D" parent="."]
+
+[node name="Position1" type="Marker3D" parent="Startpositions"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_27xhm")

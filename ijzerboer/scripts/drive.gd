@@ -19,6 +19,7 @@ extends Node3D
 
 @onready var needle: Sprite2D = $"../UI/Control/Spedometer/Needle"
 @onready var speed_lines: ColorRect = $"../UI/Control/Spedometer/LineLayer/SpeedLines"
+@onready var minimap := get_node_or_null("../UI/Control/Minimap/")
 
 @onready var camera := $"../Camera3D"
 @onready var back_view := $Car/BackCamera
@@ -59,7 +60,7 @@ func _ready() -> void:
 		brake_mult = 0.98
 	back_license_plate.text = Gamestate.car_stats["licenseplate"]
 	front_license_plate.text = Gamestate.car_stats["licenseplate"]
-	#$Car/pointer.visible = true #belangrijk
+	#$Car/Pointer.visible = true #for minimap
 
 func reduce_sideways_slipping(gripf):
 	var velocity = ball.linear_velocity
@@ -81,9 +82,9 @@ func get_sideways_speed() -> float:
 
 func handleGUI(speed:int): #intermediate function to make _physics_process() look nicer
 	$"../UI/Control/Spedometer/Spedometer".text = str(speed) + " KM/H"
-	
-	$"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam".position.x = car.global_position.x
-	$"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam".position.z = car.global_position.z
+	if minimap:
+		minimap.get_node("/TextureRect/SubViewportContainer/SubViewport/MinimapCam.position.x").position.x = car.global_position.x
+		minimap.get_node("/TextureRect/SubViewportContainer/SubViewport/MinimapCam.position.x").position.z = car.global_position.z
 	
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))

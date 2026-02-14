@@ -26,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0862745, 0.0862745, 0.109804, 1)
+color = Color(0.13725491, 0.13725491, 0.13725491, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -46,20 +46,17 @@ stretch_mode = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/Brooddoos"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -8.0
-offset_top = -64.0
-offset_right = 8.0
-offset_bottom = 8.0
+anchors_preset = -1
+anchor_top = 0.8125
+anchor_right = 1.0625
+anchor_bottom = 1.09375
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/normal_font_size = 50
 text = "Brooddoos"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="KobeGeens" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
@@ -77,7 +74,6 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="Fadeout" type="ColorRect" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

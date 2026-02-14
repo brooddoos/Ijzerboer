@@ -3,7 +3,6 @@ func _ready() -> void:
 	var car = load("res://scenes/game/Car.tscn")
 	var car_instance = car.instantiate()
 	self.add_child(car_instance)
-	print(Gamestate.campaign["position"])
 	car_instance.position = Gamestate.campaign["position"]
 @onready var garage = $Garage/Area3D.entered.connect(_on_garage_entered)
 func _on_garage_entered():
