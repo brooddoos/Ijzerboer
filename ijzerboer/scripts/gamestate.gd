@@ -28,7 +28,7 @@ var flippos:= {
 }
 
 var campaign := {
-	"position" = Vector3(0,0,0)
+	"position" = Vector3(100,0,0)
 }
 
 var rally := {
