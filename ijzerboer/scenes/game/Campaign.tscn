@@ -1,6 +1,6 @@
-[gd_scene load_steps=40 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=31 format=3 uid="uid://1qbfol6dsaaq"]
 
-[ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaignteleports.gd" id="1_d48t8"]
+[ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaign.gd" id="1_d48t8"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_d2me3"]
 [ext_resource type="PackedScene" uid="uid://cpo6y824goy0o" path="res://scenes/game/Pause.tscn" id="3_o4j3j"]
 [ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/game/Spedometer.tscn" id="4_jsf20"]
@@ -15,11 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://by5cxbxpl1gtw" path="res://assets/images/grid.png" id="13_v3pj6"]
 [ext_resource type="Script" uid="uid://6abxpudceh44" path="res://scripts/area_3d.gd" id="18_vpoxd"]
 [ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/yellowring.tres" id="19_8421g"]
-[ext_resource type="Script" uid="uid://dir1g2xgg4x7m" path="res://scripts/camera.gd" id="21_ir0bq"]
-[ext_resource type="PackedScene" uid="uid://c0s3v0fi7ln4u" path="res://scenes/game/Car.tscn" id="22_mffci"]
-[ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="23_8qovh"]
 [ext_resource type="PackedScene" uid="uid://durhjptyuaef" path="res://assets/3d/map/map.glb" id="24_a21rl"]
-[ext_resource type="AudioStream" uid="uid://4qt05n3dcopj" path="res://assets/audio/engine_1.wav" id="24_udslw"]
 [ext_resource type="Script" uid="uid://dwer3mfjq8ggm" path="res://scripts/irondealer.gd" id="25_48hix"]
 [ext_resource type="AudioStream" uid="uid://b6wyaoflkjc26" path="res://assets/audio/cash_sfx.mp3" id="26_lq8yn"]
 [ext_resource type="Script" uid="uid://dpg7mwnivhx8s" path="res://scripts/train.gd" id="27_minu2"]
@@ -52,36 +48,6 @@ size = Vector3(10, 0.25, 5)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_jbgew"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r7sob"]
-emission_shape_offset = Vector3(0, 15, 0)
-emission_shape = 3
-emission_box_extents = Vector3(100, 1, 100)
-direction = Vector3(0, -1, 0)
-initial_velocity_min = 3.0
-initial_velocity_max = 6.0
-radial_velocity_min = -4.0000224
-radial_velocity_max = 3.9999776
-
-[sub_resource type="Gradient" id="Gradient_r7sob"]
-colors = PackedColorArray(1, 1, 1, 1, 0.41215247, 0.41215247, 0.41215247, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y5y3l"]
-gradient = SubResource("Gradient_r7sob")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y5y3l"]
-transparency = 1
-shading_mode = 0
-vertex_color_use_as_albedo = true
-albedo_texture = SubResource("GradientTexture2D_y5y3l")
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="QuadMesh" id="QuadMesh_mcffj"]
-material = SubResource("StandardMaterial3D_y5y3l")
-size = Vector2(0.2, 0.2)
-
 [sub_resource type="Curve3D" id="Curve3D_x1w3f"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, 121.52654, 0, 38.835472, 0, 0, 0, 0, 0, 0, -27.628887, 0, 49.68759),
@@ -94,7 +60,9 @@ point_count = 2
 [node name="Campaign" type="Node3D"]
 script = ExtResource("1_d48t8")
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,14 +70,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_d2me3")
+metadata/_edit_use_anchors_ = true
 
-[node name="Pause" parent="UI" instance=ExtResource("3_o4j3j")]
+[node name="Pause" parent="UI/Control" instance=ExtResource("3_o4j3j")]
 layout_mode = 1
 
-[node name="Spedometer" parent="UI" instance=ExtResource("4_jsf20")]
+[node name="Spedometer" parent="UI/Control" instance=ExtResource("4_jsf20")]
 layout_mode = 1
 
-[node name="Values" type="Control" parent="UI"]
+[node name="Values" type="Control" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -119,7 +88,7 @@ offset_bottom = 40.0
 grow_horizontal = 0
 script = ExtResource("5_fow0s")
 
-[node name="Currency" type="Label" parent="UI/Values"]
+[node name="Currency" type="Label" parent="UI/Control/Values"]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 16.0
@@ -127,7 +96,7 @@ offset_right = 2.0
 offset_bottom = 39.0
 text = "0 BEF"
 
-[node name="Cargo" type="Label" parent="UI/Values"]
+[node name="Cargo" type="Label" parent="UI/Control/Values"]
 layout_mode = 0
 offset_left = -40.0
 offset_top = 48.0
@@ -135,7 +104,7 @@ offset_right = 2.0
 offset_bottom = 71.0
 text = "0 KG"
 
-[node name="Clock" type="Control" parent="UI"]
+[node name="Clock" type="Control" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -149,7 +118,7 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("6_64q1x")
 
-[node name="Time" type="Label" parent="UI/Clock"]
+[node name="Time" type="Label" parent="UI/Control/Clock"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -167,12 +136,12 @@ label_settings = SubResource("LabelSettings_jhsr3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bell" type="AudioStreamPlayer" parent="UI/Clock"]
+[node name="Bell" type="AudioStreamPlayer" parent="UI/Control/Clock"]
 stream = ExtResource("8_hedx0")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="Cassette" parent="UI" instance=ExtResource("9_17cv4")]
+[node name="Cassette" parent="UI/Control" instance=ExtResource("9_17cv4")]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -180,35 +149,46 @@ anchor_right = 0.0
 grow_horizontal = 1
 grow_vertical = 0
 
-[node name="Minimap" type="Control" parent="UI"]
+[node name="Minimap" type="Control" parent="UI/Control"]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 160.0
+offset_bottom = 112.0
 
-[node name="TextureRect" type="TextureRect" parent="UI/Minimap"]
+[node name="TextureRect" type="TextureRect" parent="UI/Control/Minimap"]
 texture_filter = 1
-layout_mode = 0
-offset_right = 836.36365
-offset_bottom = 545.4545
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 583.2727
+offset_bottom = 413.0909
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("10_rce2t")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UI/Minimap/TextureRect"]
-layer = -1
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Minimap/TextureRect/CanvasLayer"]
-offset_left = 16.0
-offset_top = 8.0
-offset_right = 168.0
-offset_bottom = 104.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI/Control/Minimap/TextureRect"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 36.36364
+offset_top = 36.36364
+offset_right = -36.36371
+offset_bottom = -36.363647
+grow_horizontal = 2
+grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="UI/Control/Minimap/TextureRect/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(152, 96)
+size = Vector2i(654, 436)
 render_target_update_mode = 4
 
-[node name="MinimapCam" type="Camera3D" parent="UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport"]
+[node name="MinimapCam" type="Camera3D" parent="UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 90, 0)
 cull_mask = 1048573
 current = true
@@ -269,46 +249,6 @@ transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06,
 texture_filter = 0
 texture = ExtResource("19_8421g")
 
-[node name="Camera3D" type="Camera3D" parent="." node_paths=PackedStringArray("car", "back_view", "left_view", "right_view", "up_view", "down_view")]
-transform = Transform3D(-1, 4.371139e-08, -7.5710346e-08, 0, 0.8660254, 0.5, 8.742278e-08, 0.5, -0.8660254, 0, 6, -11)
-cull_mask = 1048571
-script = ExtResource("21_ir0bq")
-car = NodePath("../Car/Car")
-back_view = NodePath("../Car/Car/CameraPoint")
-left_view = NodePath("../Car/Car/CameraPoint2")
-right_view = NodePath("../Car/Car/CameraPoint3")
-up_view = NodePath("../Car/Car/CameraPoint4")
-down_view = NodePath("../Car/Car/CameraPoint5")
-
-[node name="Car" parent="." instance=ExtResource("22_mffci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-
-[node name="Skid" parent="Car/Car" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.10649991, -0.637445, -1.7854915)
-stream = ExtResource("23_8qovh")
-volume_db = -5.0
-max_db = -5.0
-playback_type = 1
-
-[node name="Engine" parent="Car/Car" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.93183, 2.2251968, -26.151123)
-stream = ExtResource("24_udslw")
-
-[node name="Honk" parent="Car/Car" index="3"]
-volume_db = 5.0
-
-[node name="Snow" type="GPUParticles3D" parent="Car/Car" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 34.936226)
-layers = 2
-amount = 1000
-lifetime = 2.0
-visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
-process_material = SubResource("ParticleProcessMaterial_r7sob")
-draw_pass_1 = SubResource("QuadMesh_mcffj")
-
-[node name="MinimapMarker" parent="Car/Car/pointer" index="0"]
-surface_material_override/0 = null
-
 [node name="IronDealer" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 59, 0, 54)
 script = ExtResource("25_48hix")
@@ -352,6 +292,6 @@ transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0,
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WorldBoundary"]
 shape = SubResource("WorldBoundaryShape3D_a21rl")
 
-[editable path="Car"]
-[editable path="Car/Car/Mesh"]
+[node name="Camera3D" type="Camera3D" parent="."]
+
 [editable path="Map"]

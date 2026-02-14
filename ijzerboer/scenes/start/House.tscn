@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cfxkdwk4o32la"]
+[gd_scene load_steps=7 format=3 uid="uid://cfxkdwk4o32la"]
 
 [ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scenes/start/house.gd" id="1_ee5pl"]
+[ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_cekqg"]
 [ext_resource type="SpriteFrames" uid="uid://dch8veojoj0k8" path="res://assets/images/fire/fire.tres" id="2_tj35a"]
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="3_cekqg"]
 [ext_resource type="AudioStream" uid="uid://dynn2ddvhicoo" path="res://assets/audio/fireplace.ogg" id="4_8ndtc"]
@@ -11,7 +12,17 @@ script = ExtResource("1_ee5pl")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Play" type="Button" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_cekqg")
+
+[node name="Play" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
 offset_left = 64.0
 offset_top = 288.0
 offset_right = 136.0
@@ -20,13 +31,15 @@ theme = ExtResource("3_cekqg")
 theme_override_font_sizes/font_size = 32
 text = "Play"
 
-[node name="Options" type="Button" parent="CanvasLayer"]
-offset_left = 648.0
-offset_top = 288.0
-offset_right = 778.0
-offset_bottom = 341.0
+[node name="Options" type="Button" parent="CanvasLayer/Control"]
+layout_mode = 0
+anchor_left = 0.75
+anchor_top = 0.6
+anchor_right = 0.953125
+anchor_bottom = 0.7104167
 theme_override_font_sizes/font_size = 32
 text = "Options"
+metadata/_edit_use_anchors_ = true
 
 [node name="Fireplace" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, -1.75)

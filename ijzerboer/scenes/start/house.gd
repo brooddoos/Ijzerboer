@@ -1,7 +1,7 @@
 extends Node3D
 @onready var dooranim = $Interior/AnimationPlayer
-@onready var play = $CanvasLayer/Play
-@onready var options = $CanvasLayer/Options
+@onready var play = $CanvasLayer/Control/Play
+@onready var options = $CanvasLayer/Control/Options
 func _ready():
 	$Fireplace.play("default")
 	$Fireplace/AudioStreamPlayer.play()

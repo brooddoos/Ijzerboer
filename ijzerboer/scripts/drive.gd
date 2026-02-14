@@ -17,8 +17,15 @@ extends Node3D
 @onready var back_license_plate: Label3D = $Car/Mesh/Van/BackLicensePlate
 @onready var front_license_plate: Label3D = $Car/Mesh/Van/FrontLicensePlate
 
-@onready var needle: Sprite2D = $"../UI/Spedometer/Needle"
-@onready var speed_lines: ColorRect = $"../UI/Spedometer/LineLayer/SpeedLines"
+@onready var needle: Sprite2D = $"../UI/Control/Spedometer/Needle"
+@onready var speed_lines: ColorRect = $"../UI/Control/Spedometer/LineLayer/SpeedLines"
+
+@onready var camera := $"../Camera3D"
+@onready var back_view := $Car/BackCamera
+@onready var left_view := $Car/LeftCamera
+@onready var right_view := $Car/RightCamera
+@onready var up_view := $Car/TopCamera
+@onready var down_view := $Car/FrontCamera
 
 # Movement settings
 var max_speed := 200.0
@@ -45,13 +52,14 @@ var smoothing:float = 1.0
 var drift_pressed := false
 var is_drifting := false
 var was_already_drifting := false
+var used_cam_pos = back_view
 
 func _ready() -> void:
 	if brake_mult >= 1:
 		brake_mult = 0.98
 	back_license_plate.text = Gamestate.car_stats["licenseplate"]
 	front_license_plate.text = Gamestate.car_stats["licenseplate"]
-	$Car/pointer.visible = true #belangrijk
+	#$Car/pointer.visible = true #belangrijk
 
 func reduce_sideways_slipping(gripf):
 	var velocity = ball.linear_velocity
@@ -72,10 +80,10 @@ func get_sideways_speed() -> float:
 	return sideways_velocity.length()
 
 func handleGUI(speed:int): #intermediate function to make _physics_process() look nicer
-	$"../UI/Spedometer/Spedometer".text = str(speed) + " KM/H"
+	$"../UI/Control/Spedometer/Spedometer".text = str(speed) + " KM/H"
 	
-	$"../UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport/MinimapCam".position.x = car.global_position.x
-	$"../UI/Minimap/TextureRect/CanvasLayer/SubViewportContainer/SubViewport/MinimapCam".position.z = car.global_position.z
+	$"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam".position.x = car.global_position.x
+	$"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam".position.z = car.global_position.z
 	
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))
@@ -97,6 +105,7 @@ func calculateTurn(speed, direction) -> float:
 	return turn_speed_temp
 
 func _physics_process(delta):
+	## physics
 	#some variables that can be used anywhere here
 	var sideways_speed = get_sideways_speed()
 	var speed:float = ball.linear_velocity.length()
@@ -134,14 +143,31 @@ func _physics_process(delta):
 	#braking (this is here so it gets calculated when the rest also gets calculated)
 	if Input.is_action_pressed("brake") and forward_speed > 5.0:
 		ball.linear_velocity *= brake_mult
+		
+	# Camera
+	if Input.is_action_pressed("left_view"):
+		used_cam_pos = left_view
+	elif Input.is_action_pressed("right_view"):
+		used_cam_pos = right_view
+	elif Input.is_action_pressed("up_view"):
+		used_cam_pos = up_view
+	elif Input.is_action_pressed("down_view"):
+		used_cam_pos = down_view
+	else:
+		used_cam_pos = back_view
+	
+	var target_pos = lerp(camera.global_position, used_cam_pos.global_position, 0.1)
 
-	#----------------------------#
-	#Anything under here is for cosmetic purposes and what not, above is the actual physics
-	#----------------------------#
+	if target_pos.distance_to(car.global_position) > 10.0:
+		target_pos = car.global_position + (target_pos - car.global_position).normalized() * 10.0
 
+	camera.global_position = target_pos
+	camera.look_at(car.global_position)
+	
+	## Visuals
 	# GUI Handling
 	handleGUI(int(speed))
-
+	
 	# All FX related with drifting
 	is_drifting = (drift_pressed and ground_ray.is_colliding() and speed > 10.0 and sideways_speed > 2.0)
 	drift_2.emitting = is_drifting

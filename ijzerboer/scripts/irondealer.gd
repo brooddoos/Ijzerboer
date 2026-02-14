@@ -9,6 +9,6 @@ func _on_body_entered():
 		cash.play()
 
 	Gamestate.BEF += Gamestate.cargo * randi_range(40,80)
-	$"../UI/Values".update_currency()
+	$"../UI/Control/Values".update_currency()
 	Gamestate.cargo = 0
-	$"../UI/Values".update_cargo()
+	$"../UI/Control/Values".update_cargo()

@@ -1,7 +1,7 @@
 extends StaticBody3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$"/root/Campaign/UI/Values".update_cargo()
+	$"/root/Campaign/UI/Control/Values".update_cargo()
 	var models = $Models.get_children()
 	var model = models.pick_random()
 	model.show()

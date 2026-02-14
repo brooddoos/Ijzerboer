@@ -33,9 +33,6 @@ func allTween(transistionType:Tween.TransitionType,object,property:String,vars,t
 	tween.tween_property(object, property, vars, time)
 
 func _ready() -> void:
-	if current_tape > len(tapes):
-		current_tape = 1
-		Gamestate.currentTape = 1
 	title.text = tapes[current_tape]["title"]
 	
 	if !title.text.contains("\n"):
@@ -45,7 +42,7 @@ func _ready() -> void:
 	load_music(tapes[current_tape]["file"])
 	audio.play(0)
 	animation_player.play("cassette_animation")
-
+	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("info"):
 		cassette_up = not cassette_up
@@ -55,7 +52,7 @@ func _input(event: InputEvent) -> void:
 			allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.05,0.25)
 
 	if event.is_action_pressed("cassette"):
-		current_tape = (current_tape % len(tapes)) + 1
+		current_tape = (current_tape % len(tapes)) - 1
 		Gamestate.current_tape = current_tape
 
 		allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.1,0.25)

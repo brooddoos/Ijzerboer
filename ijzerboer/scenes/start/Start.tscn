@@ -1,6 +1,7 @@
-[gd_scene load_steps=34 format=4 uid="uid://duqanjqofiqy2"]
+[gd_scene load_steps=35 format=4 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
+[ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="1_ru5xp"]
 [ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/game/Campaign.tscn" id="2_el213"]
 [ext_resource type="Texture2D" uid="uid://coisvu8pfym47" path="res://assets/images/ui/logosmall.png" id="4_pym4i"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
@@ -237,9 +238,9 @@ radial_velocity_max = 3.9999776
 
 [node name="Node3D" type="Node3D"]
 
-[node name="ui" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="ui" node_paths=PackedStringArray("camera")]
+[node name="Control" type="Control" parent="UI" node_paths=PackedStringArray("camera")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -248,11 +249,13 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_ru5xp")
 script = ExtResource("1_5mbse")
 scene = ExtResource("2_el213")
 camera = NodePath("../../Camera3D")
+metadata/_edit_use_anchors_ = true
 
-[node name="Version" type="Label" parent="ui/Control"]
+[node name="Version" type="Label" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -260,10 +263,9 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 54.0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0, 0, 0, 0.14509805)
 text = "  v1.0.0"
 
-[node name="Label" type="Label" parent="ui/Control"]
+[node name="Label" type="Label" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

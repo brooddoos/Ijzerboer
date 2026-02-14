@@ -18,11 +18,11 @@ var permanently_disabled_buttons = []
 
 
 var current_tape := 1
-var tapes:= {
-	1: { "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg", "default": true},
-	2: { "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3", "default": true},
-	3: { "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg", "default": true},
-}
+var tapes:= [
+	{ "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg", "default": true},
+	{ "title": "Asleep and Dreaming\nBy: Arcologies ", "file":"res://assets/audio/music/asleepanddreaming.mp3", "default": true},
+	{ "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg", "default": true},
+]
 var flippos:= {
 	
 }

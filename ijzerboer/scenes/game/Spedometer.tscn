@@ -35,14 +35,14 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Bg" type="Sprite2D" parent="."]
-position = Vector2(61, 58)
-scale = Vector2(0.15, 0.15)
+position = Vector2(58.999985, 71.00001)
+scale = Vector2(0.10754066, 0.11129033)
 texture = ExtResource("1_xp54u")
 
 [node name="Needle" type="Sprite2D" parent="."]
-position = Vector2(61, 58)
+position = Vector2(59, 71)
 rotation = -2.7052603
-scale = Vector2(0.15000002, 0.15000002)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_7rqml")
 
 [node name="Spedometer" type="Label" parent="."]

@@ -29,9 +29,6 @@ func _ready() -> void:
 	version_text.text = " v"+str(version) 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("drift"):
-		_3_dsplashtext.text = splashTexts[rng.randi_range(0,len(splashTexts)-1)]
-	
 	var mouse = get_viewport().get_mouse_position()
 	var viewport_size = get_viewport().get_visible_rect().size
 	var mx = (mouse.x / viewport_size.x - 0.5) * 2.0
@@ -45,9 +42,9 @@ var transitioning := false
 func _input(event: InputEvent) -> void:
 	if transitioning:
 		return
-
 	if event.is_action_pressed("ui_accept"):
 		transitioning = true
+		$".".hide()
 		$"../../Camera3D/AnimationPlayer".play("camera_anim")
 		await $"../../Camera3D/AnimationPlayer".animation_finished
 		get_tree().change_scene_to_file("res://scenes/start/House.tscn")
