@@ -55,7 +55,7 @@ func _unhandled_input(event):
 func _on_button_pressed() -> void: #exit
 	Savesystem.save()
 	await Transition.fade_out()
-	var mainmenu = load("res://scenes/Menu.tscn") as PackedScene
+	var mainmenu = load("res://scenes/start/Start.tscn") as PackedScene
 	get_tree().paused = false
 	get_tree().change_scene_to_packed(mainmenu)
 	await Transition.fade_in()
@@ -63,7 +63,7 @@ func _on_button_pressed() -> void: #exit
 func _on_settings_pressed():
 	await Transition.fade_out()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/Settings.tscn")
+	get_tree().change_scene_to_file("res://scenes/start/Options.tscn")
 	await Transition.fade_in()
 
 func _on_resume_pressed() -> void:

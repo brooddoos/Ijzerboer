@@ -19,7 +19,9 @@ extends Node3D
 
 @onready var needle: Sprite2D = $"../UI/Control/Spedometer/Needle"
 @onready var speed_lines: ColorRect = $"../UI/Control/Spedometer/LineLayer/SpeedLines"
-@onready var minimap := get_node_or_null("../UI/Control/Minimap/")
+@onready var minimap: Control = $"../UI/Control/Minimap"
+@onready var minimap_cam: Camera3D = $"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam"
+@onready var pointer: TextureRect = $"../UI/Control/Minimap/TextureRect/pointer"
 
 @onready var camera := $"../Camera3D"
 @onready var back_view := $Car/BackCamera
@@ -27,6 +29,8 @@ extends Node3D
 @onready var right_view := $Car/RightCamera
 @onready var up_view := $Car/TopCamera
 @onready var down_view := $Car/FrontCamera
+
+@onready var skid: AudioStreamPlayer3D = $Car/Skid
 
 # Movement settings
 var max_speed := 200.0
@@ -83,8 +87,9 @@ func get_sideways_speed() -> float:
 func handleGUI(speed:int): #intermediate function to make _physics_process() look nicer
 	$"../UI/Control/Spedometer/Spedometer".text = str(speed) + " KM/H"
 	if minimap:
-		minimap.get_node("/TextureRect/SubViewportContainer/SubViewport/MinimapCam.position.x").position.x = car.global_position.x
-		minimap.get_node("/TextureRect/SubViewportContainer/SubViewport/MinimapCam.position.x").position.z = car.global_position.z
+		minimap_cam.position.x = car.global_position.x
+		minimap_cam.position.z = car.global_position.z
+		pointer.rotation = car.rotation.y*-1 + 135
 	
 	var needle_orientation = -150+abs(int(speed))
 	needle.rotation = deg_to_rad(clamp(needle_orientation, -155, 150))
@@ -173,14 +178,11 @@ func _physics_process(delta):
 	is_drifting = (drift_pressed and ground_ray.is_colliding() and speed > 10.0 and sideways_speed > 2.0)
 	drift_2.emitting = is_drifting
 	drift.emitting = is_drifting
-	if not $Car/Skid.playing:
-		was_already_drifting = true #dit werkt nog nie helemaal :P
-		if was_already_drifting:
-			$Car/Skid.play(0.8)
-		else:
-			$Car/Skid.playing = is_drifting
-	elif is_drifting == false:
-		$Car/Skid.playing = false
+	if is_drifting and not skid.playing:
+		skid.play()
+
+	elif not is_drifting and skid.playing:
+		skid.stop()
 
 	# Tilt effect
 	if turn_input != 0:
@@ -217,4 +219,4 @@ func _process(_delta):
 		acceleration = default_acceleration
 		drift_pressed = false
 		was_already_drifting = false
-		$Car/Skid.stop()
+		skid.stop()

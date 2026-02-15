@@ -49,3 +49,7 @@ func _unhandled_input(event: InputEvent):
 func _ready():
 	get_screens()
 	fade()
+
+func _process(delta: float) -> void:
+	if get_node("Control/Control/icon"): # if is the autosave notice
+		$Control/Control/icon.rotation += delta*5

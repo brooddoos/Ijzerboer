@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwnu0ihmts1tj"]
+
+[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_5jr3v"]
+[ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/start/Start.tscn" id="2_cfmo5"]
+[ext_resource type="Texture2D" uid="uid://bmw58ybkyyi8b" path="res://assets/images/ui/icon.png" id="4_6vifb"]
+
+[node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5jr3v")
+load_scene = ExtResource("2_cfmo5")
+splash_screen_container = NodePath("Control")
+fg = NodePath("fadeout")
+syncColors = true
+
+[node name="Mainbg" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0862745, 0.0862745, 0.109804, 1)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="icon" type="TextureRect" parent="Control/Control"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 332.0
+offset_top = 170.0
+offset_right = 428.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(48, 48)
+texture = ExtResource("4_6vifb")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Control"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 130.0
+offset_top = 192.0
+offset_right = 630.0
+offset_bottom = 492.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(250, 150)
+theme_override_font_sizes/normal_font_size = 30
+text = "This game has an autosave feature. Please do not close the game when this icon is visible."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fadeout" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.9144961, 0.9149079, 0.9343023, 1)

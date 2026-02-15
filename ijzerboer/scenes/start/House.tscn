@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfxkdwk4o32la"]
+[gd_scene load_steps=9 format=3 uid="uid://cfxkdwk4o32la"]
 
 [ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scenes/start/house.gd" id="1_ee5pl"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_cekqg"]
@@ -6,6 +6,8 @@
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="3_cekqg"]
 [ext_resource type="AudioStream" uid="uid://dynn2ddvhicoo" path="res://assets/audio/fireplace.ogg" id="4_8ndtc"]
 [ext_resource type="PackedScene" uid="uid://ch8grexs8o8e6" path="res://assets/3d/interior/interieur.glb" id="4_glcan"]
+[ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="7_riprt"]
+[ext_resource type="AudioStream" uid="uid://dum3r7il36506" path="res://assets/audio/oudijzer.ogg" id="8_qyksv"]
 
 [node name="House" type="Node3D"]
 script = ExtResource("1_ee5pl")
@@ -71,5 +73,44 @@ transform = Transform3D(-1.3113416e-07, 3, 1.3113416e-07, 0, -1.3113416e-07, 3, 
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+
+[node name="car audio" type="Node3D" parent="."]
+transform = Transform3D(-0.49999994, 0, 1.607492e-08, 0, 0.5, 0, -7.5497894e-08, 0, -0.10645938, 4.431734, 0, 6.406702)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="car audio" node_paths=PackedStringArray("front_right_wheel", "front_left_wheel", "back_left_wheel", "back_right_wheel")]
+transform = Transform3D(-8.742278e-08, 0, 2, 0, 2, 0, -2, 0, -8.742278e-08, -15.592852, 0.977201, 12.507263)
+stream = ExtResource("8_qyksv")
+volume_db = -5.0
+max_db = -15.0
+autoplay = true
+max_distance = 20.0
+bus = &"SFX"
+doppler_tracking = 1
+parameters/looping = true
+script = ExtResource("7_riprt")
+front_right_wheel = NodePath("../DONOTDELETE")
+front_left_wheel = NodePath("../DONOTDELETE")
+back_left_wheel = NodePath("../DONOTDELETE")
+back_right_wheel = NodePath("../DONOTDELETE")
+
+[node name="DONOTDELETE" type="MeshInstance3D" parent="car audio"]
+
+[node name="EndPoint2" type="Marker3D" parent="car audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.356096, 1, 27.157387)
+
+[node name="StartPoint2" type="Marker3D" parent="car audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.64389, 1, 27.157372)
+
+[node name="StartPoint1" type="Marker3D" parent="car audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.356098, 1, 31.157387)
+
+[node name="EndPoint1" type="Marker3D" parent="car audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.64389, 1, 31.157372)
+
+[node name="window" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1032505, 1, -1)
+light_energy = 42.54
+light_indirect_energy = 12.876
+spot_range = 3.4833446
 
 [editable path="Interior"]

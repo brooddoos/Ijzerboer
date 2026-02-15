@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://s60rywsqspcx" path="res://shaders/aesthetic.gdshader" id="4_ckadj"]
 [ext_resource type="Texture2D" uid="uid://bl3v4utw7o846" path="res://assets/3d/cami_wheel.png" id="5_658ie"]
 [ext_resource type="Material" uid="uid://d4akr53ewtdty" path="res://shaders/lightmaterial.tres" id="6_i1fuk"]
-[ext_resource type="AudioStream" uid="uid://uj4g8in8uv54" path="res://assets/audio/skid.wav" id="7_ipn2e"]
+[ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="7_ipn2e"]
 [ext_resource type="AudioStream" uid="uid://d3kvgkcqdp7x4" path="res://assets/audio/honk.wav" id="7_v7lie"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ra71u"]

@@ -15,7 +15,7 @@ config/name_localized={
 "en": "Junkman"
 }
 config/description="A game where you pick up scrap metal for a living."
-config/version="0.3.10"
+config/version="0.4.0"
 run/main_scene="uid://t1al5hykieb"
 config/features=PackedStringArray("4.5", "Mobile")
 boot_splash/bg_color=Color(0.08627451, 0.08627451, 0.10980392, 1)
@@ -28,12 +28,12 @@ config/icon="uid://bmw58ybkyyi8b"
 Gamestate="*res://scripts/gamestate.gd"
 Manager="*res://scripts/manager.gd"
 Transition="*res://scenes/Transition.tscn"
-Savesystem="*res://scripts/savesystem.gd"
+Savesystem="*res://scenes/savesystem.tscn"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=480
+window/size/viewport_width=800
+window/size/viewport_height=600
 window/stretch/mode="viewport"
 
 [editor_plugins]

@@ -1,9 +1,18 @@
 extends Node
+@onready var appear_timer: Timer = $appearTimer
+@onready var autosave_timer: Timer = $autosaveTimer
+@onready var icon: TextureRect = $icon
 
 const SAVE_LOCATION = "user://savefile.json"
 var version = ProjectSettings.get_setting("application/config/version")
 var contents_to_save = {}
 var success = false
+
+var autosave_enabled_scenes = [
+	"res://scenes/game/Campaign.tscn",
+	"res://scenes/game/Rally.tscn"]
+
+var autosave_interval = 60 # in seconds
 
 func set_list(): #modify to add or remove entries for saving
 	contents_to_save = {
@@ -33,12 +42,15 @@ func set_gamestate(): #if not added, it wont actually load it
 	Gamestate.rally = contents_to_save["rally"]
 
 func save():
+	appear_timer.start()
 	print("Saving...")
+	icon.show()
 	set_list()
 		
 	var file = FileAccess.open_encrypted_with_pass(SAVE_LOCATION, FileAccess.WRITE, "ijzerboersavefile")
 	file.store_var(contents_to_save.duplicate())
 	file.close()
+	await appear_timer.timeout
 	print("Saved")
 
 func load_save():
@@ -68,9 +80,31 @@ func load_save():
 
 func _ready() -> void:
 	set_list()
-	
+	autosave_timer.wait_time = autosave_interval
+	get_tree().scene_changed.connect(_on_scene_changed)
+	icon.hide()
+	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
+		autosave_timer.start()
+
+func _process(delta: float) -> void:
+	if icon.visible:
+		icon.rotation += delta*5
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("save"):
 		save()
 	if event.is_action_pressed("load"):
 		load_save()
+
+func _on_appear_timer_timeout() -> void:
+	icon.hide()
+	
+func _on_autosave_timer_timeout() -> void:
+	save()
+	
+func _on_scene_changed():
+	var scene = get_tree().current_scene
+	if scene and scene.scene_file_path in autosave_enabled_scenes:
+		autosave_timer.start()
+	else:
+		autosave_timer.stop()

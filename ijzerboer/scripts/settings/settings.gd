@@ -1,10 +1,10 @@
 extends Control
-@onready var current = $Main/Audio
+@onready var current = $Main/Video
+
 func _ready():
 	$Buttons/Cassette.pressed.connect(_on_button_pressed.bind($Main/Cassette))
 	$Buttons/Video.pressed.connect(_on_button_pressed.bind($Main/Video))
 	$Buttons/Audio.pressed.connect(_on_button_pressed.bind($Main/Audio))
-	
 	$Buttons/Return.pressed.connect(_on_return_pressed)
 func _on_button_pressed(category):
 	current.hide()

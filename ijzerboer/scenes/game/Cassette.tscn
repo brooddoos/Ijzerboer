@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cj2tmqcbv7qk2" path="res://scripts/cassette.gd" id="1_68kt0"]
 [ext_resource type="Texture2D" uid="uid://ctav3jkfeasug" path="res://assets/3d/cassettelowpoly_Behuizing.png" id="2_68kt0"]
+[ext_resource type="Texture2D" uid="uid://binradpwcfo00" path="res://assets/images/ui/label_hq.png" id="3_asr8g"]
 [ext_resource type="FontFile" uid="uid://d0vhpjp132hd8" path="res://assets/fonts/TrashHand.TTF" id="4_0j804"]
-[ext_resource type="Texture2D" uid="uid://cj6usxakrsfli" path="res://assets/images/ui/label.png" id="4_oirex"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_dyp6u"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -523,9 +523,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -192.0
-offset_right = 496.0
-offset_bottom = 234.0
+offset_top = -235.0
+offset_right = 552.0
+offset_bottom = 277.0
 grow_vertical = 0
 scale = Vector2(0.5, 0.5)
 stretch = true
@@ -534,7 +534,7 @@ stretch = true
 world_3d = SubResource("World3D_0j804")
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(496, 426)
+size = Vector2i(552, 512)
 size_2d_override_stretch = true
 render_target_update_mode = 4
 
@@ -581,50 +581,54 @@ libraries = {
 &"": SubResource("AnimationLibrary_0ryrr")
 }
 
-[node name="Label" type="Node3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette"]
+[node name="label" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette"]
+transform = Transform3D(0.017, 0, 0, 0, 0.017, 0, 0, 0, 0.017, 0, 0.006, -0.005)
+pixel_size = 0.0026
+texture = ExtResource("3_asr8g")
 
-[node name="Text" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Label"]
-transform = Transform3D(-0.017000005, 0, 1.4861877e-09, 0, 0.017000005, 0, -1.4861877e-09, 0, -0.017000005, 0, 0.021528006, -0.0048545673)
+[node name="text" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/label"]
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0, 0.95, 0.01)
 sorting_offset = 1.0
+outline_render_priority = 0
 modulate = Color(0, 0, 0, 1)
 text = "mixtape 1902809
  "
 font = ExtResource("4_0j804")
 font_size = 75
+outline_size = 0
 line_spacing = -18.0
 
-[node name="Lines" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Label"]
-transform = Transform3D(-0.017000005, 0, 1.4861877e-09, 0, 0.017000005, 0, -1.4861877e-09, 0, -0.017000005, 0, 0.020848006, -0.0048545673)
+[node name="lines" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/label"]
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 0, 0.91, 0.01)
 sorting_offset = 1.0
+outline_render_priority = 0
 modulate = Color(0, 0, 0, 1)
 text = "_________________________________________________
 _________________________________________________"
-outline_size = 127
+outline_size = 4
 line_spacing = 16.0
 
-[node name="Copyright" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Label"]
-transform = Transform3D(-0.017000005, 0, 1.4861877e-09, 0, 0.017000005, 0, -1.4861877e-09, 0, -0.017000005, 0.021439169, -0.013311999, -0.0047534704)
+[node name="copyright" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/label"]
+transform = Transform3D(-1.0000002, 0, 8.7422805e-08, 0, 1.0000002, 0, -8.7422805e-08, 0, -1.0000002, 1.2611275, -1.0994118, 0.015946865)
 sorting_offset = 1.0
+outline_render_priority = 0
 modulate = Color(0, 0, 0, 1)
 text = "brooddoos tapes ©2025"
 font_size = 50
+outline_size = 0
 line_spacing = -25.0
 
-[node name="Copyright2" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Label/Copyright"]
+[node name="copyright2" type="Label3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/label/copyright"]
 transform = Transform3D(1, 0, 1.2789769e-13, 0, 1, 0, -1.2789769e-13, 0, 1, 3.2924976, 0, 0)
 sorting_offset = 1.0
+outline_render_priority = 0
 modulate = Color(0, 0, 0, 1)
 text = "one sided
 type MMXXV tape
 uhhhhh infoinfoinfo"
 font_size = 25
+outline_size = 0
 line_spacing = -12.0
-
-[node name="Labelimg" type="Sprite3D" parent="SubViewportContainer/SubViewport/Node3D/Cassette/Label"]
-transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 0, 0.005378004, -0.0050245672)
-pixel_size = 0.0026
-texture_filter = 0
-texture = ExtResource("4_oirex")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Node3D"]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, -0.07)

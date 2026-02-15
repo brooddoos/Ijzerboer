@@ -1,9 +1,10 @@
-[gd_scene load_steps=35 format=4 uid="uid://duqanjqofiqy2"]
+[gd_scene load_steps=39 format=4 uid="uid://duqanjqofiqy2"]
 
 [ext_resource type="Script" uid="uid://mqf81qrmeos" path="res://scripts/menu.gd" id="1_5mbse"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="1_ru5xp"]
 [ext_resource type="PackedScene" uid="uid://1qbfol6dsaaq" path="res://scenes/game/Campaign.tscn" id="2_el213"]
 [ext_resource type="Texture2D" uid="uid://coisvu8pfym47" path="res://assets/images/ui/logosmall.png" id="4_pym4i"]
+[ext_resource type="Material" uid="uid://bd00nsi2ne3jd" path="res://shaders/snowy_trees.tres" id="5_5f0qy"]
 [ext_resource type="PackedScene" uid="uid://c4ec6r74ng1hj" path="res://scenes/tree_simple.tscn" id="5_7ycwl"]
 [ext_resource type="Script" uid="uid://cpny8b1ylg8y5" path="res://scripts/menucar.gd" id="6_7yvfd"]
 [ext_resource type="Texture2D" uid="uid://dgandea2lyobj" path="res://assets/3d/cami_cami.png" id="9_el213"]
@@ -12,6 +13,17 @@
 [ext_resource type="Material" uid="uid://d4akr53ewtdty" path="res://shaders/lightmaterial.tres" id="11_2af52"]
 [ext_resource type="Texture2D" uid="uid://d1aytgwfxfyk0" path="res://scenes/start/Screenshot from 2026-02-09 15-35-17.png" id="11_pym4i"]
 [ext_resource type="QuadMesh" uid="uid://d0a3wmmibg0ii" path="res://assets/godot/SnowDrawPass.tres" id="13_thu7x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjlqv"]
+bg_color = Color(0, 0, 0, 0.42352942)
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ru5xp"]
+color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ru5xp"]
+bg_color = Color(0, 0, 0, 0.42352942)
+corner_radius_top_left = 20
 
 [sub_resource type="Animation" id="Animation_ru5xp"]
 length = 0.001
@@ -25,12 +37,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 5, 1)]
+"values": [Vector3(-0.5, 5, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_pym4i"]
 resource_name = "camera_anim"
-length = 2.5
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -38,10 +50,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector3(0, 5, 1), Vector3(0, 4.608, -20.152)]
+"values": [Vector3(0, 5, 1), Vector3(0, 4.608, -20.152), Vector3(0, 4.608, -20.152)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f0qy"]
@@ -247,6 +259,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(400, 300)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_ru5xp")
@@ -255,31 +268,80 @@ scene = ExtResource("2_el213")
 camera = NodePath("../../Camera3D")
 metadata/_edit_use_anchors_ = true
 
-[node name="Version" type="Label" parent="UI/Control"]
+[node name="Version" type="Panel" parent="UI/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -23.0
-offset_right = 54.0
+offset_top = -29.0
+offset_right = 68.0
 grow_vertical = 0
-text = "  v1.0.0"
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjlqv")
 
-[node name="Label" type="Label" parent="UI/Control"]
+[node name="Version" type="Button" parent="UI/Control/Version"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 1
-anchors_preset = 12
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+offset_right = 60.0
+offset_bottom = 4.0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxLine_ru5xp")
+text = "v1.0.0"
+flat = true
+
+[node name="Company" type="Panel" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -88.0
-offset_bottom = -65.0
-grow_horizontal = 2
+offset_left = -222.0
+offset_top = -29.0
+grow_horizontal = 0
 grow_vertical = 0
-text = "Press START"
+theme_override_styles/panel = SubResource("StyleBoxFlat_ru5xp")
+
+[node name="CompanyText" type="Button" parent="UI/Control/Company"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -217.0
+offset_top = -27.0
+offset_bottom = 4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxLine_ru5xp")
+text = "Made by ©2026 Brooddoos"
+flat = true
+
+[node name="Start" type="Label" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -172.0
+offset_top = 120.0
+offset_right = 172.0
+offset_bottom = 189.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 25
+text = "  Press START  "
 horizontal_alignment = 1
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 5, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
 libraries = {
@@ -310,43 +372,43 @@ skeleton = NodePath("")
 
 [node name="tree_simple" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -28.421001, -0.264709, -18.262314)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple2" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -20.659405, -0.894609, -18.262314)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple3" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -12.867926, -1.1303253, -18.262312)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple5" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -24.327278, -5.240683, -18.26231)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple6" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.843372, -3.0345082, -18.26231)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple11" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 13.590942, -3.990203, -18.262312)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple12" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 18.145622, -2.4092255, -18.262312)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple13" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 22.24937, 0.13743877, -18.262312)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple14" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 4.389, -4.6550827, -2.642)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="tree_simple15" parent="Trees" instance=ExtResource("5_7ycwl")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -5.163, -4.3460827, -2.642)
-surface_material_override/0 = null
+surface_material_override/0 = ExtResource("5_5f0qy")
 
 [node name="Wall" type="CSGBox3D" parent="."]
 transform = Transform3D(149.71939, 0, 0, 0, 1.7977414, 0, 0, 0, 1, 0, 6.955824, -41.283447)
@@ -411,6 +473,7 @@ surface_material_override/0 = ExtResource("11_2af52")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0929794, 0)
 amount = 250
 lifetime = 2.0
+preprocess = 2.0
 visibility_aabb = AABB(-50, -5, -50, 100, 10, 100)
 process_material = SubResource("ParticleProcessMaterial_el213")
 draw_pass_1 = ExtResource("13_thu7x")
@@ -423,15 +486,16 @@ texture = ExtResource("11_pym4i")
 
 [node name="Logosprite" type="Sprite3D" parent="Logo"]
 transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 8.353, -15.786)
-pixel_size = 0.0032
+pixel_size = 0.0037
 texture_filter = 0
 texture = ExtResource("4_pym4i")
 
 [node name="3dsplashtext" type="Label3D" parent="Logo"]
 transform = Transform3D(1.7000004, 0, 0, 0, 1.7000004, 0, 0, 0, 1.7000004, 0, 4.986, -15.786)
+alpha_cut = 1
 text = "Er passen hier achtenveertig karakters per lijn."
 font_size = 100
-outline_size = 0
+outline_size = 40
 
 [node name="EndPoint2" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, -13)
@@ -444,3 +508,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 1, -9)
 
 [node name="EndPoint1" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 1, -9)
+
+[connection signal="pressed" from="UI/Control/Version/Version" to="UI/Control" method="_on_version_pressed"]
+[connection signal="pressed" from="UI/Control/Company/CompanyText" to="UI/Control" method="_on_company_text_pressed"]

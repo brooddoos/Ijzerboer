@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://t1al5hykieb"]
 
-[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_v8cx8"]
-[ext_resource type="PackedScene" uid="uid://duqanjqofiqy2" path="res://scenes/start/Start.tscn" id="2_5i4oy"]
-[ext_resource type="Texture2D" uid="uid://b2p6hu6v4tlnd" path="res://assets/images/ui/brooddoos.png" id="3_v8cx8"]
-[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/ui/kobe.svg" id="4_qb3q0"]
-[ext_resource type="Texture2D" uid="uid://cprxj64tgl2vy" path="res://assets/images/ui/j4y_boi.png" id="5_5i4oy"]
+[ext_resource type="Script" uid="uid://d14a2jaywfd01" path="res://scripts/splash.gd" id="1_ygkcj"]
+[ext_resource type="PackedScene" uid="uid://bwnu0ihmts1tj" path="res://scenes/start/SaveIconNotice.tscn" id="2_v8cx8"]
+[ext_resource type="Texture2D" uid="uid://b2p6hu6v4tlnd" path="res://assets/images/ui/brooddoos.png" id="3_73bwj"]
+[ext_resource type="Texture2D" uid="uid://ccjcys27joxuv" path="res://assets/images/ui/kobe.svg" id="4_3vyj7"]
+[ext_resource type="Texture2D" uid="uid://cprxj64tgl2vy" path="res://assets/images/ui/j4y_boi.png" id="5_mgj8c"]
 
 [node name="control" type="Control" node_paths=PackedStringArray("splash_screen_container", "fg")]
 layout_mode = 3
@@ -13,10 +13,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_v8cx8")
-load_scene = ExtResource("2_5i4oy")
+script = ExtResource("1_ygkcj")
+load_scene = ExtResource("2_v8cx8")
 splash_screen_container = NodePath("CenterContainer")
-fg = NodePath("Fadeout")
+fg = NodePath("fadeout")
 syncColors = true
 
 [node name="Mainbg" type="ColorRect" parent="."]
@@ -26,7 +26,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.13725491, 0.13725491, 0.13725491, 1)
+color = Color(0.0862745, 0.0862745, 0.109804, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -36,44 +36,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Brooddoos" type="TextureRect" parent="CenterContainer"]
-texture_filter = 1
+[node name="brooddoos" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("3_v8cx8")
+texture = ExtResource("3_73bwj")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/Brooddoos"]
+[node name="RichTextLabel" type="RichTextLabel" parent="CenterContainer/brooddoos"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.8125
-anchor_right = 1.0625
-anchor_bottom = 1.09375
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -41.0
+offset_right = 8.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/normal_font_size = 50
 text = "Brooddoos"
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
-[node name="KobeGeens" type="TextureRect" parent="CenterContainer"]
+[node name="kobe" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("4_qb3q0")
+texture = ExtResource("4_3vyj7")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="J4y_boi" type="TextureRect" parent="CenterContainer"]
-texture_filter = 1
+[node name="j4y" type="TextureRect" parent="CenterContainer"]
 custom_minimum_size = Vector2(256, 256)
 layout_mode = 2
-texture = ExtResource("5_5i4oy")
+texture = ExtResource("5_mgj8c")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Fadeout" type="ColorRect" parent="."]
+[node name="fadeout" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

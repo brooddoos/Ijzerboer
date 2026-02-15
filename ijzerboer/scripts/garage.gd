@@ -121,6 +121,9 @@ func update_labels():
 	
 func _on_exit_pressed():
 	Gamestate.permanently_disabled_buttons = permanently_disabled_buttons
+	Gamestate.campaign["position"].x = -40.0
+	Gamestate.campaign["position"].y = -6.0
+	await Savesystem.save()
 	await Transition.fade_out()
 	get_tree().change_scene_to_packed(load("res://scenes/game/Campaign.tscn"))
 	await Transition.fade_in()
