@@ -19,9 +19,8 @@ func _physics_process(_delta: float) -> void:
 	
 func _on_play_pressed():
 	dooranim.play("doorAction")
-	Savesystem.load_save()
 	await Transition.fade_out()
-	get_tree().change_scene_to_file("res://scenes/game/Campaign.tscn")
+	get_tree().change_scene_to_file("res://scenes/start/saveselection.tscn")
 	await Transition.fade_in()
 	
 func _on_options_pressed():

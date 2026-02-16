@@ -8,10 +8,12 @@ extends Control
 @export var out_time : float = 0.5
 @export var splash_screen_container : Node
 @export var fg : ColorRect
+@export var skippable = true
 @onready var bg: ColorRect = $Mainbg
 @export var syncColors = false
 
 var splash_screens : Array
+var skipping = true
 
 func get_screens():
 	splash_screens = splash_screen_container.get_children()
@@ -33,11 +35,9 @@ func fade():
 		await tween.finished
 	await get_tree().process_frame
 	get_tree().change_scene_to_packed(load_scene)
-	
+
 func _unhandled_input(event: InputEvent):
-	var skipping = true
-	
-	if event.is_action_pressed("ui_accept") and skipping:
+	if event.is_action_pressed("ui_accept") and skipping and skippable:
 		skipping = false
 		var tween = self.create_tween()
 		tween.tween_property(fg, "modulate:a", 1.0, 0.25)
@@ -45,11 +45,11 @@ func _unhandled_input(event: InputEvent):
 		await tween.finished
 		await get_tree().process_frame
 		get_tree().change_scene_to_packed(load_scene)
-	
+
 func _ready():
 	get_screens()
 	fade()
 
 func _process(delta: float) -> void:
-	if get_node("Control/Control/icon"): # if is the autosave notice
+	if get_node_or_null("Control/Control/icon"): # if is the autosave notice
 		$Control/Control/icon.rotation += delta*5

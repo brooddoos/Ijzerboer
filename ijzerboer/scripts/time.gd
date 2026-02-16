@@ -1,5 +1,5 @@
 extends Node
-var last_hour := 0
+var last_hour := (int(Gamestate.time) / 3600) % 24
 func _physics_process(delta: float) -> void:
 	Gamestate.time += delta * 60
 	@warning_ignore("integer_division") var seconds = int(Gamestate.time) % 60 

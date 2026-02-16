@@ -15,6 +15,7 @@ script = ExtResource("1_5jr3v")
 load_scene = ExtResource("2_cfmo5")
 splash_screen_container = NodePath("Control")
 fg = NodePath("fadeout")
+skippable = false
 syncColors = true
 
 [node name="Mainbg" type="ColorRect" parent="."]

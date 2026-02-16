@@ -54,6 +54,7 @@ func _unhandled_input(event):
 
 func _on_button_pressed() -> void: #exit
 	Savesystem.save()
+	await Savesystem.appear_timer.timeout
 	await Transition.fade_out()
 	var mainmenu = load("res://scenes/start/Start.tscn") as PackedScene
 	get_tree().paused = false

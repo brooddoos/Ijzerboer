@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cfxkdwk4o32la"]
 
-[ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scenes/start/house.gd" id="1_ee5pl"]
+[ext_resource type="Script" uid="uid://cdp2363sgh0n5" path="res://scripts/house.gd" id="1_ee5pl"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_cekqg"]
 [ext_resource type="SpriteFrames" uid="uid://dch8veojoj0k8" path="res://assets/images/fire/fire.tres" id="2_tj35a"]
 [ext_resource type="Theme" uid="uid://5nsxtmf0cw8u" path="res://assets/godot/Menu.tres" id="3_cekqg"]
@@ -108,7 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.356098, 1, 31.157387)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.64389, 1, 31.157372)
 
 [node name="window" type="SpotLight3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.1032505, 1, -1)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -4.3069715, 1, -1)
 light_energy = 42.54
 light_indirect_energy = 12.876
 spot_range = 3.4833446

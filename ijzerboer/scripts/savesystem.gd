@@ -3,10 +3,14 @@ extends Node
 @onready var autosave_timer: Timer = $autosaveTimer
 @onready var icon: TextureRect = $icon
 
-const SAVE_LOCATION = "user://savefile.json"
+const SAVE_LOCATION = "user://savefiles/"
 var version = ProjectSettings.get_setting("application/config/version")
 var contents_to_save = {}
 var success = false
+
+var force_old = false
+
+var current_used_slot = 1
 
 var autosave_enabled_scenes = [
 	"res://scenes/game/Campaign.tscn",
@@ -15,8 +19,12 @@ var autosave_enabled_scenes = [
 var autosave_interval = 60 # in seconds
 
 func set_list(): #modify to add or remove entries for saving
+	var current_date = Time.get_date_string_from_system() # Output: "2024-05-20"
+	var current_time = Time.get_time_string_from_system() # Output: "14:30:05"
+
 	contents_to_save = {
 		"version" : version,
+		"last_saved" : current_date + " at " + current_time,
 		"map" : Gamestate.map,
 		"cargo" : Gamestate.cargo,
 		"BEF" : Gamestate.BEF,
@@ -42,22 +50,33 @@ func set_gamestate(): #if not added, it wont actually load it
 	Gamestate.rally = contents_to_save["rally"]
 
 func save():
+	var used_save_location
+	if not force_old:
+		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
+	else:
+		used_save_location = "user://savefile.json"
 	appear_timer.start()
 	print("Saving...")
 	icon.show()
 	set_list()
 		
-	var file = FileAccess.open_encrypted_with_pass(SAVE_LOCATION, FileAccess.WRITE, "ijzerboersavefile")
+	var file = FileAccess.open_encrypted_with_pass(used_save_location, FileAccess.WRITE, "ijzerboersavefile")
 	file.store_var(contents_to_save.duplicate())
 	file.close()
 	await appear_timer.timeout
 	print("Saved")
 
-func load_save():
+func load_save(setgamestate:bool = true):
 	success = false
-	if FileAccess.file_exists(SAVE_LOCATION):
+	var used_save_location
+	if not force_old:
+		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
+	else:
+		used_save_location = "user://savefile.json"
+		
+	if FileAccess.file_exists(used_save_location):
 		print("Savefile found!")
-		var file = FileAccess.open_encrypted_with_pass(SAVE_LOCATION, FileAccess.READ, "ijzerboersavefile")
+		var file = FileAccess.open_encrypted_with_pass(used_save_location, FileAccess.READ, "ijzerboersavefile")
 		var data = file.get_var()
 		file.close()
 		
@@ -72,8 +91,23 @@ func load_save():
 		
 		success = true
 		
-		set_gamestate()
+		if setgamestate:
+			set_gamestate()
 		print("Succesfully loaded")
+	else:
+		print("No savefile found.")
+		return
+
+func delete_save():
+	success = false
+	var used_save_location
+	if not force_old:
+		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
+	else:
+		used_save_location = "user://savefile.json"
+	if FileAccess.file_exists(used_save_location):
+		DirAccess.remove_absolute(used_save_location)
+		print("Deleted")
 	else:
 		print("No savefile found.")
 		return
@@ -85,6 +119,9 @@ func _ready() -> void:
 	icon.hide()
 	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
 		autosave_timer.start()
+	
+	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
+
 
 func _process(delta: float) -> void:
 	if icon.visible:
@@ -98,10 +135,10 @@ func _input(event: InputEvent) -> void:
 
 func _on_appear_timer_timeout() -> void:
 	icon.hide()
-	
+
 func _on_autosave_timer_timeout() -> void:
 	save()
-	
+
 func _on_scene_changed():
 	var scene = get_tree().current_scene
 	if scene and scene.scene_file_path in autosave_enabled_scenes:
