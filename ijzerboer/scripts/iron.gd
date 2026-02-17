@@ -9,6 +9,8 @@ func _ready() -> void:
 	
 	if Gamestate.car_stats["gps_metal_detector"]:
 		$Area3D/marker.visible = true
+	else:
+		$Area3D/marker.visible = false
 
 func _on_body_entered():
 	if Gamestate.cargo < Gamestate.car_stats["max_cargo"]:

@@ -16,7 +16,6 @@ var car_stats := {
 
 var permanently_disabled_buttons = []
 
-
 var current_tape := 0
 var tapes:= [
 	{ "title": "Jungle Mixtape\nVOLUME 1", "file":"res://assets/audio/music/jungle.ogg", "default": true},

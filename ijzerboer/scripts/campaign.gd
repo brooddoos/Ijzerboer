@@ -12,3 +12,7 @@ func _on_garage_entered():
 	await Transition.fade_out("res://assets/images/transition2.png")
 	get_tree().change_scene_to_packed(load("res://scenes/game/Garage.tscn"))
 	await Transition.fade_in("res://assets/images/transition2.png")
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("cashdebug"):
+		_on_garage_entered()

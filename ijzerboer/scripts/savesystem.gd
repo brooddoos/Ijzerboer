@@ -3,20 +3,18 @@ extends Node
 @onready var autosave_timer: Timer = $autosaveTimer
 @onready var icon: TextureRect = $icon
 
-const SAVE_LOCATION = "user://savefiles/"
 var version = ProjectSettings.get_setting("application/config/version")
 var contents_to_save = {}
 var success = false
+var DEFAULT_CONTENTS_TO_SAVE = {}
 
+const SAVE_LOCATION = "user://savefiles/"
 var force_old = false
-
 var current_used_slot = 1
-
+var autosave_interval = 60 # in seconds
 var autosave_enabled_scenes = [
 	"res://scenes/game/Campaign.tscn",
 	"res://scenes/game/Rally.tscn"]
-
-var autosave_interval = 60 # in seconds
 
 func set_list(): #modify to add or remove entries for saving
 	var current_date = Time.get_date_string_from_system() # Output: "2024-05-20"
@@ -49,16 +47,15 @@ func set_gamestate(): #if not added, it wont actually load it
 	Gamestate.campaign = contents_to_save["campaign"]
 	Gamestate.rally = contents_to_save["rally"]
 
-func save():
-	var used_save_location
-	if not force_old:
-		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
-	else:
-		used_save_location = "user://savefile.json"
+func save(refresh_data:bool = true):
+	var used_save_location = get_save_path()
+	
 	appear_timer.start()
 	print("Saving...")
 	icon.show()
-	set_list()
+	
+	if refresh_data:
+		set_list()
 		
 	var file = FileAccess.open_encrypted_with_pass(used_save_location, FileAccess.WRITE, "ijzerboersavefile")
 	file.store_var(contents_to_save.duplicate())
@@ -68,12 +65,7 @@ func save():
 
 func load_save(setgamestate:bool = true):
 	success = false
-	var used_save_location
-	if not force_old:
-		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
-	else:
-		used_save_location = "user://savefile.json"
-		
+	var used_save_location = get_save_path()
 	if FileAccess.file_exists(used_save_location):
 		print("Savefile found!")
 		var file = FileAccess.open_encrypted_with_pass(used_save_location, FileAccess.READ, "ijzerboersavefile")
@@ -100,11 +92,7 @@ func load_save(setgamestate:bool = true):
 
 func delete_save():
 	success = false
-	var used_save_location
-	if not force_old:
-		used_save_location = SAVE_LOCATION + "slot" + str(current_used_slot) + ".json"
-	else:
-		used_save_location = "user://savefile.json"
+	var used_save_location = get_save_path()
 	if FileAccess.file_exists(used_save_location):
 		DirAccess.remove_absolute(used_save_location)
 		print("Deleted")
@@ -112,26 +100,24 @@ func delete_save():
 		print("No savefile found.")
 		return
 
-func _ready() -> void:
-	set_list()
-	autosave_timer.wait_time = autosave_interval
-	get_tree().scene_changed.connect(_on_scene_changed)
-	icon.hide()
-	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
-		autosave_timer.start()
-	
-	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
+func get_save_info(slot:int): # because its probably a good idea to not reload entire saves
+	var path = SAVE_LOCATION + "slot" + str(slot) + ".json"
+	if not FileAccess.file_exists(path):
+		return {}
 
+	var file = FileAccess.open_encrypted_with_pass(path, FileAccess.READ, "ijzerboersavefile")
+	var data = file.get_var()
+	file.close()
 
-func _process(delta: float) -> void:
-	if icon.visible:
-		icon.rotation += delta*5
+	if typeof(data) != TYPE_DICTIONARY:
+		return {}
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("save"):
-		save()
-	if event.is_action_pressed("load"):
-		load_save()
+	return {"version": data.get("version", "unknown"),"last_saved": data.get("last_saved", "unknown")}
+
+func get_save_path(slot = current_used_slot) -> String:
+	if force_old:
+		return "user://savefile.json"
+	return SAVE_LOCATION + "slot" + str(slot) + ".json"
 
 func _on_appear_timer_timeout() -> void:
 	icon.hide()
@@ -145,3 +131,22 @@ func _on_scene_changed():
 		autosave_timer.start()
 	else:
 		autosave_timer.stop()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("save"):
+		save()
+
+func _ready() -> void:
+	set_list()
+	DEFAULT_CONTENTS_TO_SAVE = contents_to_save.duplicate(true) #I HATE YOU GODOT DICTS WHY WOULD NORMAL ASSIGNMENT NOT JUST DUPLICATE
+	autosave_timer.wait_time = autosave_interval
+	get_tree().scene_changed.connect(_on_scene_changed)
+	icon.hide()
+	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
+		autosave_timer.start()
+	
+	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
+
+func _process(delta: float) -> void:
+	if icon.visible:
+		icon.rotation += delta*5

@@ -25,22 +25,29 @@ theme = ExtResource("2_cekqg")
 
 [node name="Play" type="Button" parent="CanvasLayer/Control"]
 layout_mode = 0
-offset_left = 64.0
-offset_top = 288.0
-offset_right = 136.0
-offset_bottom = 341.0
+offset_left = 44.0
+offset_top = 124.0
+offset_right = 213.0
+offset_bottom = 482.0
+focus_neighbor_right = NodePath("../Options")
 theme = ExtResource("3_cekqg")
 theme_override_font_sizes/font_size = 32
-text = "Play"
+flat = true
 
 [node name="Options" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-anchor_left = 0.75
-anchor_top = 0.6
-anchor_right = 0.953125
-anchor_bottom = 0.7104167
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.71875
+anchor_top = 0.19833334
+anchor_right = 0.921875
+anchor_bottom = 0.32208332
+offset_left = 8.0
+offset_top = 5.0
+offset_right = 14.5
+offset_bottom = 280.75
+focus_neighbor_left = NodePath("../Play")
 theme_override_font_sizes/font_size = 32
-text = "Options"
+flat = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Fireplace" type="AnimatedSprite3D" parent="."]
@@ -65,11 +72,35 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.28160667)
 [node name="Interior" parent="." instance=ExtResource("4_glcan")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, -1)
 
+[node name="Jupiler_001" parent="Interior" index="3"]
+transform = Transform3D(0.97156566, 0, -0.23677032, 0, 1, 0, 0.23677032, 0, 0.97156566, -0.8116312, 0, -0.7244489)
+
+[node name="Jupiler_003" parent="Interior" index="5"]
+transform = Transform3D(0.97156566, 0, -0.23677032, 0, 1, 0, 0.23677032, 0, 0.97156566, -0.8116312, 0.2, -0.7244489)
+
 [node name="door" parent="Interior" index="8"]
 transform = Transform3D(-1.3113416e-07, 3, -1.3113416e-07, 0, -1.3113416e-07, -3, -3, -1.3113416e-07, 5.7320566e-15, -0.97999984, 0.96100026, 1.922)
 
+[node name="Play" type="Label3D" parent="Interior/door" index="0"]
+transform = Transform3D(1, -1.4117216e-22, -1.4117215e-22, 1.4117216e-22, -4.371139e-08, 1, -1.4117215e-22, -1, -4.371139e-08, 0.12119758, 0.003006637, -0.17211357)
+pixel_size = 0.003
+render_priority = 2
+outline_render_priority = 1
+text = "Play"
+font_size = 20
+outline_size = 8
+
 [node name="door_001" parent="Interior" index="13"]
 transform = Transform3D(-1.3113416e-07, 3, 1.3113416e-07, 0, -1.3113416e-07, 3, 3, 1.3113416e-07, 5.7320566e-15, -0.9800001, 0.96100026, -1.922)
+
+[node name="Options" type="Label3D" parent="Interior/door_001" index="0"]
+transform = Transform3D(-1, -3.764591e-22, -8.742278e-08, -8.742278e-08, -4.371139e-08, 1, -3.8213714e-15, 1, 4.371139e-08, 0.12535304, 0.003006637, 0.17211357)
+pixel_size = 0.003
+render_priority = 2
+outline_render_priority = 1
+text = "Options"
+font_size = 20
+outline_size = 8
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)

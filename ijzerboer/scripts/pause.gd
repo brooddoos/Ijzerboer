@@ -51,8 +51,9 @@ func toggle_menu():
 func _unhandled_input(event):
 	if event.is_action_pressed("escape"):
 		toggle_menu()
-
+		
 func _on_button_pressed() -> void: #exit
+	#Gamestate.campaign["position"] = $"../../../Car".position
 	Savesystem.save()
 	await Savesystem.appear_timer.timeout
 	await Transition.fade_out()

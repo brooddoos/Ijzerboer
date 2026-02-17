@@ -79,6 +79,7 @@ texture = ExtResource("3_y5ytf")
 
 [node name="marker" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, 0)
+visible = false
 layers = 4
 mesh = SubResource("SphereMesh_y5ytf")
 skeleton = NodePath("../..")
