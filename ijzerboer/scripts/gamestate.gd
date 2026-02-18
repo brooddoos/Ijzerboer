@@ -14,10 +14,7 @@ var car_stats := {
 	"gps_metal_detector" = false,
 }
 
-<<<<<<< Updated upstream
 var permanently_disabled_buttons = []
-=======
->>>>>>> Stashed changes
 
 var current_tape := 0
 var tapes:= [
