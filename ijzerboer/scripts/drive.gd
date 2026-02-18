@@ -46,7 +46,7 @@ var grip := 20.0 				# amount of grip the tires have
 var brake_mult := 0.98			# how hard the car brakes (The code basically does current_speed*brake_mult, so don't make it too low)
 var full_turn_speed := 15.0		# the turn speed is normally determined by the cars speed, this is the speed needed to get full steering
 
-var engine_multiplier = Gamestate.car_stats["engine_multiplier"]
+var engine_multiplier = Gamestate.car_stats["engine"] * 20
 # Misc. variables i.e. they're just here so they can be initialized
 var speed_input := 0.0
 var turn_input := 0.0

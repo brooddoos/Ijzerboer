@@ -8,7 +8,7 @@ func _ready() -> void:
 	car_instance.position = Gamestate.campaign["position"]
 
 func _on_garage_entered():
-	Gamestate.campaign["position"] = $Car/Ball.global_position - Vector3(10,0,0)
+	Gamestate.campaign["position"] = $Garage/Spawn.global_position
 	await Transition.fade_out("res://assets/images/transition2.png")
 	get_tree().change_scene_to_packed(load("res://scenes/game/Garage.tscn"))
 	await Transition.fade_in("res://assets/images/transition2.png")

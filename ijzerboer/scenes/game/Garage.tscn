@@ -234,7 +234,7 @@ text = "Custom Licenseplate"
 [node name="LicensePlateButton" type="Button" parent="UI/Menu/Content/buttons/CustomLicense/CustomLicensePlate"]
 layout_mode = 2
 text = "99 999 BEF"
-metadata/price = 500
+metadata/Price = 5000
 
 [node name="Label2" type="Label" parent="UI/Menu/Content/buttons/CustomLicense"]
 layout_mode = 2
@@ -265,12 +265,17 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UI/Menu/Content/buttons/UpgradeLoad"]
 layout_mode = 2
-text = "Upgrade Load Capacity (Lvl 0/100) "
+text = "Upgrade Load Capacity"
+
+[node name="Level" type="Label" parent="UI/Menu/Content/buttons/UpgradeLoad"]
+layout_mode = 2
 
 [node name="CargoButton" type="Button" parent="UI/Menu/Content/buttons/UpgradeLoad"]
 layout_mode = 2
 text = "99 999 BEF"
-metadata/price = 500
+metadata/Max = 10
+metadata/Price = 500
+metadata/Gamestate = "cargo"
 
 [node name="UpgradeEngine" type="HBoxContainer" parent="UI/Menu/Content/buttons"]
 layout_mode = 2
@@ -278,12 +283,17 @@ alignment = 1
 
 [node name="Label" type="Label" parent="UI/Menu/Content/buttons/UpgradeEngine"]
 layout_mode = 2
-text = "Upgrade Engine (Lvl 0/30) "
+text = "Upgrade Engine"
+
+[node name="Level" type="Label" parent="UI/Menu/Content/buttons/UpgradeEngine"]
+layout_mode = 2
 
 [node name="EngineButton" type="Button" parent="UI/Menu/Content/buttons/UpgradeEngine"]
 layout_mode = 2
 text = "99 999 BEF"
-metadata/price = 500
+metadata/Max = 10
+metadata/Price = 500
+metadata/Gamestate = "engine"
 
 [node name="buttons2" type="VBoxContainer" parent="UI/Menu/Content"]
 layout_mode = 2
@@ -310,7 +320,9 @@ text = "GPS Markers for scrap metal "
 [node name="GPSButton" type="Button" parent="UI/Menu/Content/buttons2/GPSMetal"]
 layout_mode = 2
 text = "99 999 BEF"
-metadata/price = 150
+metadata/Price = 160
+metadata/Max = true
+metadata/Gamestate = "gps_metal_detector"
 
 [node name="ExitButton" type="Button" parent="UI/Menu/Content"]
 layout_mode = 2

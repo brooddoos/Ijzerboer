@@ -28,7 +28,6 @@ func set_list(): #modify to add or remove entries for saving
 		"BEF" : Gamestate.BEF,
 		"time" : Gamestate.time,
 		"car_stats" : Gamestate.car_stats,
-		"permanently_disabled_buttons" : Gamestate.permanently_disabled_buttons,
 		"current_tape" : Gamestate.current_tape,
 		"tapes" : Gamestate.tapes,
 		"campaign" : Gamestate.campaign,

@@ -1,14 +1,11 @@
 extends Node3D
 
 @onready var buttons = [
-	$UI/Menu/Content/buttons/CustomLicense/CustomLicensePlate/LicensePlateButton, 
+	$UI/Menu/Content/buttons/CustomLicense/CustomLicensePlate/LicensePlateButton,
 	$UI/Menu/Content/buttons/UpgradeLoad/CargoButton, 
 	$UI/Menu/Content/buttons/UpgradeEngine/EngineButton,
 	$UI/Menu/Content/buttons2/GPSMetal/GPSButton,
 ]
-
-@onready var engine_label: Label = $UI/Menu/Content/buttons/UpgradeEngine/Label
-@onready var cargo_label: Label = $UI/Menu/Content/buttons/UpgradeLoad/Label
 
 @onready var exitbutton = $UI/Menu/Content/ExitButton
 @onready var license: Label = $UI/Menu/Content/buttons/CustomLicense/TextureRect/license
@@ -16,17 +13,10 @@ extends Node3D
 @onready var music: AudioStreamPlayer = $Music
 @onready var values = $UI/Values
 
-# - CONFIG -
-var max_engine_upgrade = 30
-var engine_upgrade_multiplier = 20
-
-var max_cargo_upgrade = 100
-var cargo_upgrade_amount = 50
 # -
 
 var mouse_right_down := false
 var car = load(Gamestate.car_stats["model"])
-var permanently_disabled_buttons = Gamestate.permanently_disabled_buttons
 var old_rotation := 0.0
 var in_drag := false
 var mx_base
@@ -36,7 +26,6 @@ func _ready() -> void:
 		button.pressed.connect(_on_button_pressed.bind(button))
 	exitbutton.pressed.connect(_on_exit_pressed)
 	update_buttons()
-	update_labels()
 	
 	#$Vehicle.remove_child($Vehicle/PropCar)
 	#$Vehicle.add_child(car.instantiate())
@@ -82,47 +71,29 @@ func text_input(prompt = ""):
 func _on_button_pressed(button):
 	match button.name:
 		"LicensePlateButton":
-			Gamestate.BEF -= button.get_meta("price")
-			values.update_currency()
+			Gamestate.BEF -= button.get_meta("Price")
 			var plaat = await text_input("Enter your new license plate. (9 characters max.)") #gui komt later, dit werkt voorlopig
 			Gamestate.car_stats["licenseplate"] = plaat
 			license.text = plaat
+			values.update_currency()
 		"CargoButton":
-			Gamestate.BEF -= button.get_meta("price")
-			
-			Gamestate.car_stats["max_cargo"] += cargo_upgrade_amount
-			if Gamestate.car_stats["max_cargo"] >= max_cargo_upgrade * cargo_upgrade_amount:
-				permanently_disabled_buttons.append("CargoButton")
-				
+			Gamestate.BEF -= button.get_meta("Price")
+			Gamestate.car_stats["cargo"] += 1
 			values.update_cargo()
 		"EngineButton":
-			Gamestate.BEF -= button.get_meta("price")
-			
-			Gamestate.car_stats["engine_multiplier"] += engine_upgrade_multiplier
-			if Gamestate.car_stats["engine_multiplier"] >= max_engine_upgrade * engine_upgrade_multiplier:
-				permanently_disabled_buttons.append("EngineButton")
+			Gamestate.BEF -= button.get_meta("Price")
+			Gamestate.car_stats["engine"] += 1
 		"GPSButton":
-			Gamestate.BEF -= button.get_meta("price")
+			Gamestate.BEF -= button.get_meta("Price")
 			Gamestate.car_stats["gps_metal_detector"] = true
-			permanently_disabled_buttons.append("GPSButton")
 			
 	update_buttons()
-	update_labels()
 	values.update_currency()
 	$UpgradeSound.pitch_scale = randf_range(0.9,1.1)
 	$UpgradeSound.play()
 	
-func update_labels():
-	var cargo_level := int(Gamestate.car_stats["max_cargo"] / cargo_upgrade_amount)
-	cargo_label.text = "Upgrade Load Capacity (Lvl %d/%d) " % [cargo_level, max_cargo_upgrade]
-	
-	var engine_level := int(Gamestate.car_stats["engine_multiplier"] / engine_upgrade_multiplier)
-	engine_label.text = "Upgrade Engine (Lvl %d/%d)" % [engine_level, max_engine_upgrade]
 	
 func _on_exit_pressed():
-	Gamestate.permanently_disabled_buttons = permanently_disabled_buttons
-	Gamestate.campaign["position"].x = -40.0
-	Gamestate.campaign["position"].y = -6.0
 	await Savesystem.save()
 	await Transition.fade_out()
 	get_tree().change_scene_to_packed(load("res://scenes/game/Campaign.tscn"))
@@ -130,22 +101,32 @@ func _on_exit_pressed():
 	
 func update_buttons():
 	for button in buttons:
-		if button.name in permanently_disabled_buttons:
-			button.disabled = true
-			button.text = "MAX"
-			continue
-		
-		var price = button.get_meta("price")
+		var price = button.get_meta("Price")
+		var max 
+		var current
+		var cash = Gamestate.BEF
+		var level = button.get_parent().get_node_or_null("Level")
 		button.text = str(price)  + " BEF"
-		if price <= Gamestate.BEF:
+		if button.has_meta("Max") and button.has_meta("Gamestate"):
+			max = button.get_meta("Max")
+			current = Gamestate.car_stats[button.get_meta("Gamestate")]
+		if max and current:
+			if max != current and price <= cash:
+				button.disabled = false
+			else:
+				button.disabled = true
+			if max == current:
+				button.text = "MAX"
+		elif price <= cash:
 			button.disabled = false
 		else:
 			button.disabled = true
+			
+		if level:
+			level.text = "("+str(current)+"/"+str(max)+")"
+			
+	
 
-func _on_music_finished() -> void:
-	music.stop()
-	music.stream = (load("res://assets/audio/music/original_music/garage/mainloop.wav"))
-	music.play()
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cashdebug"):

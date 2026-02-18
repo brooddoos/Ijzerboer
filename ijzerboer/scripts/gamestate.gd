@@ -7,14 +7,17 @@ var cargo := 0
 var BEF := 1000 
 var time := 21600.0
 var car_stats := {
-	"engine_multiplier" = 1,
-	"max_cargo" = 10,
+	"engine" = 1,
+	"cargo" = 1,
 	"licenseplate" = "123-ABC",
 	"model" = "res://scenes/cami.tscn",
 	"gps_metal_detector" = false,
 }
 
+<<<<<<< Updated upstream
 var permanently_disabled_buttons = []
+=======
+>>>>>>> Stashed changes
 
 var current_tape := 0
 var tapes:= [
@@ -23,7 +26,7 @@ var tapes:= [
 	{ "title": "Mega Dance Mix", "file":"res://assets/audio/music/megadance.ogg", "default": true},
 ]
 var flippos:= {
-	
+
 }
 
 var campaign := {

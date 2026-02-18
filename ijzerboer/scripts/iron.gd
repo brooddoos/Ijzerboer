@@ -13,7 +13,7 @@ func _ready() -> void:
 		$Area3D/marker.visible = false
 
 func _on_body_entered():
-	if Gamestate.cargo < Gamestate.car_stats["max_cargo"]:
+	if Gamestate.cargo < Gamestate.car_stats["cargo"]:
 		Gamestate.cargo += 1
 		self.queue_free()
 		$"/root/Campaign/SpawnLocations".spawn_iron( )
