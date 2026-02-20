@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dc8touxc0f6fn"
-path="res://.godot/imported/map.glb-fe443b9ad725319ccb547a3cd50d0236.scn"
+uid="uid://b70pundrf8ckh"
+path="res://.godot/imported/oversteek.glb-a8200d9a3e1cc62f79b88a516603a4b0.scn"
 
 [deps]
 
-source_file="res://assets/3d/map/map.glb"
-dest_files=["res://.godot/imported/map.glb-fe443b9ad725319ccb547a3cd50d0236.scn"]
+source_file="res://assets/3d/map/oversteek.glb"
+dest_files=["res://.godot/imported/oversteek.glb-a8200d9a3e1cc62f79b88a516603a4b0.scn"]
 
 [params]
 
@@ -39,37 +39,10 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
-"PATH:Church": {
-"generate/physics": true
-},
-"PATH:Cube": {
-"generate/physics": true
-},
 "PATH:Cube_001": {
 "generate/physics": true
 },
-"PATH:Cube_002": {
-"generate/physics": true
-},
-"PATH:Forestedge": {
-"generate/physics": true
-},
-"PATH:Forestedge_001": {
-"generate/physics": true
-},
-"PATH:Forestedge_002": {
-"generate/physics": true
-},
-"PATH:Forestedge_003": {
-"generate/physics": true
-},
-"PATH:frietkot": {
-"generate/physics": true
-},
-"PATH:garage": {
-"generate/physics": true
-},
-"PATH:hobo": {
+"PATH:Plane": {
 "generate/physics": true
 }
 }

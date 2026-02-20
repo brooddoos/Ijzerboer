@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://12cpfnd6r3px"
-path.s3tc="res://.godot/imported/map_betonpalen.png-510b88547fd09b3655e61325b771eff9.s3tc.ctex"
+uid="uid://b42ki0phnpx0l"
+path.s3tc="res://.godot/imported/oversteek_overweg.png-bc6fd4342c72deaa8a87ab1619b47ca9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a8d2334f4f5d621d83790dfa7a10b730"
+"md5": "1264f9a3b2ca8def72af9dc3ae3e91f3"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_betonpalen.png"
-dest_files=["res://.godot/imported/map_betonpalen.png-510b88547fd09b3655e61325b771eff9.s3tc.ctex"]
+source_file="res://assets/3d/map/oversteek_overweg.png"
+dest_files=["res://.godot/imported/oversteek_overweg.png-bc6fd4342c72deaa8a87ab1619b47ca9.s3tc.ctex"]
 
 [params]
 
