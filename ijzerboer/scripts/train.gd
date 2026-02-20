@@ -4,13 +4,19 @@ extends Node3D
 @onready var pathlength = path.curve.get_baked_length() 
 @onready var train := $Path3D/PathFollow3D/HLE16
 @onready var audiostreamplayer := $Path3D/PathFollow3D/AudioStreamPlayer3D
-@onready var crossinglocation = $Crossing.global_position
-var waiting := false
+@onready var crossings = $Crossings.get_children()
+
 var wait_time := 30 #in s
 var speed = 40 #in m/s
+var close_dinstance = 200 #in m
+var waiting := false
 var trainlocation
 var distance
-var closed = false
+var crossinglocation
+var crossingstates := {}
+func _ready():
+	for crossing in crossings:
+		crossingstates[crossing]="open"
 func _process(delta: float) -> void:
 	trainlocation = $Path3D/PathFollow3D.global_position
 	if waiting:
@@ -19,16 +25,19 @@ func _process(delta: float) -> void:
 	if pathfollow.progress_ratio >= 1.0:
 		pathfollow.progress_ratio = 1.0
 		wait()
-	distance = trainlocation.distance_to(crossinglocation)
-	## barrier
-	if distance < 100 and closed == false:
-		$Crossing/AnimationPlayer.play_backwards("PlaneAction")
-		closed = true
-	elif distance > 100 and closed == true:
-		$Crossing/AnimationPlayer.play("PlaneAction")
-		closed = false
-	else:
-		pass
+		
+	## crossing
+	for crossing in crossings:
+		crossinglocation = crossing.global_position
+		distance = trainlocation.distance_to(crossinglocation)
+		if distance < close_dinstance and crossingstates[crossing] == "open":
+			crossing.get_node("AnimationPlayer").play_backwards("PlaneAction")
+			crossingstates[crossing] = "closed"
+		elif distance > close_dinstance and crossingstates[crossing] == "closed":
+			crossing.get_node("AnimationPlayer").play("PlaneAction")
+			crossingstates[crossing] = "open"
+		else:
+			pass
 func wait():
 	waiting = true
 	train.hide()
