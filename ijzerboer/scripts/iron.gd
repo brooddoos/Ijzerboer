@@ -1,5 +1,6 @@
 extends StaticBody3D
 # Called when the node enters the scene tree for the first time.
+var max_cargo = Gamestate.car_upgrades["cargo"] * 5
 func _ready() -> void:
 	$"/root/Campaign/UI/Control/Values".update_cargo()
 	var models = $Models.get_children()
@@ -7,13 +8,13 @@ func _ready() -> void:
 	model.show()
 	$Area3D.entered.connect(_on_body_entered)
 	
-	if Gamestate.car_stats["gps_metal_detector"]:
+	if Gamestate.car_upgrades["gps_metal_detector"]:
 		$Area3D/marker.visible = true
 	else:
 		$Area3D/marker.visible = false
 
 func _on_body_entered():
-	if Gamestate.cargo < Gamestate.car_stats["cargo"]:
+	if Gamestate.cargo < max_cargo:
 		Gamestate.cargo += 1
 		self.queue_free()
 		$"/root/Campaign/SpawnLocations".spawn_iron( )

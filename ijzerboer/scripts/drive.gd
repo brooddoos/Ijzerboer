@@ -33,10 +33,10 @@ extends Node3D
 @onready var skid: AudioStreamPlayer3D = $Car/Skid
 
 # Movement settings
-var max_speed := 200.0
+var max_speed :int= 25.0 + Gamestate.car_upgrades["engine"] * 5
 var max_reverse_speed := 25.0
 
-var default_acceleration = 20	
+var default_acceleration = 10	
 var default_steering := 40.0 	
 
 var drift_acceleration := 0.75 	# this is a multiplier, meaning if its set to 0.75, itll reduce the default acceleration by 25%
@@ -46,7 +46,6 @@ var grip := 20.0 				# amount of grip the tires have
 var brake_mult := 0.98			# how hard the car brakes (The code basically does current_speed*brake_mult, so don't make it too low)
 var full_turn_speed := 15.0		# the turn speed is normally determined by the cars speed, this is the speed needed to get full steering
 
-var engine_multiplier = Gamestate.car_stats["engine"] * 20
 # Misc. variables i.e. they're just here so they can be initialized
 var speed_input := 0.0
 var turn_input := 0.0
@@ -62,8 +61,8 @@ var used_cam_pos = back_view
 func _ready() -> void:
 	if brake_mult >= 1:
 		brake_mult = 0.98
-	back_license_plate.text = Gamestate.car_stats["licenseplate"]
-	front_license_plate.text = Gamestate.car_stats["licenseplate"]
+	back_license_plate.text = Gamestate.car_upgrades["licenseplate"]
+	front_license_plate.text = Gamestate.car_upgrades["licenseplate"]
 	#$Car/Pointer.visible = true #for minimap
 
 func reduce_sideways_slipping(gripf):
@@ -119,7 +118,7 @@ func _physics_process(delta):
 	var forward_speed = ball.linear_velocity.dot(car.global_transform.basis.z)
 	
 	# Input
-	speed_input = Input.get_axis("brake", "accelerate") * acceleration + (Input.get_axis("brake", "accelerate") * engine_multiplier / 50)
+	speed_input = Input.get_axis("brake", "accelerate") * acceleration + (Input.get_axis("brake", "accelerate"))
 	turn_input = deg_to_rad(steering) * Input.get_axis("steer_right", "steer_left")
 	
 	# Car mechanics / physics

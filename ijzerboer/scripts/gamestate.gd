@@ -4,9 +4,9 @@ var last_scene := "res://scenes/Menu.tscn" #Which scene to return to from settin
 
 var map := ""
 var cargo := 0
-var BEF := 1000 
+var BEF := 0
 var time := 21600.0
-var car_stats := {
+var car_upgrades := {
 	"engine" = 1,
 	"cargo" = 1,
 	"licenseplate" = "123-ABC",

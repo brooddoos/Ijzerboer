@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cddnvc08o4afr"
-path.s3tc="res://.godot/imported/map_overweg.png-d02ff1f1eb17e8cab012b3e01e85d2bb.s3tc.ctex"
+uid="uid://u3y2yr75dqgx"
+path.s3tc="res://.godot/imported/map_hooibal.png-fc91bb3a1e772d89c518e7e629e34cb6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "1264f9a3b2ca8def72af9dc3ae3e91f3"
+"md5": "e51e7329f78ba8b5d01fd1c8323912e1"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_overweg.png"
-dest_files=["res://.godot/imported/map_overweg.png-d02ff1f1eb17e8cab012b3e01e85d2bb.s3tc.ctex"]
+source_file="res://assets/3d/map/map_hooibal.png"
+dest_files=["res://.godot/imported/map_hooibal.png-fc91bb3a1e772d89c518e7e629e34cb6.s3tc.ctex"]
 
 [params]
 

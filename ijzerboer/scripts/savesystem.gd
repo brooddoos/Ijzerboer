@@ -19,7 +19,7 @@ var autosave_enabled_scenes = [
 func set_list(): #modify to add or remove entries for saving
 	var current_date = Time.get_date_string_from_system() # Output: "2024-05-20"
 	var current_time = Time.get_time_string_from_system() # Output: "14:30:05"
-
+	
 	contents_to_save = {
 		"version" : version,
 		"last_saved" : current_date + " at " + current_time,
@@ -27,7 +27,7 @@ func set_list(): #modify to add or remove entries for saving
 		"cargo" : Gamestate.cargo,
 		"BEF" : Gamestate.BEF,
 		"time" : Gamestate.time,
-		"car_stats" : Gamestate.car_stats,
+		"car_upgrades" : Gamestate.car_upgrades,
 		"current_tape" : Gamestate.current_tape,
 		"tapes" : Gamestate.tapes,
 		"campaign" : Gamestate.campaign,
@@ -35,16 +35,8 @@ func set_list(): #modify to add or remove entries for saving
 	}
 
 func set_gamestate(): #if not added, it wont actually load it
-	Gamestate.map = contents_to_save["map"]
-	Gamestate.cargo = contents_to_save["cargo"]
-	Gamestate.BEF = contents_to_save["BEF"]
-	Gamestate.time = contents_to_save["time"]
-	Gamestate.car_stats = contents_to_save["car_stats"]
-	Gamestate.permanently_disabled_buttons = contents_to_save["permanently_disabled_buttons"]
-	Gamestate.current_tape = contents_to_save["current_tape"]
-	Gamestate.tapes = contents_to_save["tapes"]
-	Gamestate.campaign = contents_to_save["campaign"]
-	Gamestate.rally = contents_to_save["rally"]
+	for content in contents_to_save:
+		Gamestate.set(content, contents_to_save[content])
 
 func save(refresh_data:bool = true):
 	var used_save_location = get_save_path()

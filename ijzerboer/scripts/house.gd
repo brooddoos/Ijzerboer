@@ -30,14 +30,3 @@ func _on_options_pressed():
 	await Transition.fade_out()
 	get_tree().change_scene_to_file("res://scenes/start/Options.tscn")
 	await Transition.fade_in()
-
-func _process(delta: float) -> void:
-	if options.is_hovered() or options.has_focus():
-		door_2.rotation.y = deg_to_rad(-77.0)
-	else:
-		door_2.rotation.y = deg_to_rad(-90.0)
-	
-	if play.is_hovered() or play.has_focus():
-		door_1.rotation.y = deg_to_rad(77.0)
-	else:
-		door_1.rotation.y = deg_to_rad(90.0)

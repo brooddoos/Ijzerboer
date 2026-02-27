@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dc8touxc0f6fn"
+uid="uid://bsofso7vjdhvt"
 path="res://.godot/imported/map.glb-fe443b9ad725319ccb547a3cd50d0236.scn"
 
 [deps]
@@ -39,16 +39,13 @@ materials/extract_format=0
 materials/extract_path=""
 _subresources={
 "nodes": {
+"PATH:Cafe": {
+"generate/physics": true
+},
 "PATH:Church": {
 "generate/physics": true
 },
 "PATH:Cube": {
-"generate/physics": true
-},
-"PATH:Cube_001": {
-"generate/physics": true
-},
-"PATH:Cube_002": {
 "generate/physics": true
 },
 "PATH:Forestedge": {
@@ -63,13 +60,55 @@ _subresources={
 "PATH:Forestedge_003": {
 "generate/physics": true
 },
+"PATH:Haybale": {
+"generate/physics": true
+},
+"PATH:Haybale_001": {
+"generate/physics": true
+},
+"PATH:Haybale_002": {
+"generate/physics": true
+},
+"PATH:Haybale_003": {
+"generate/physics": true
+},
+"PATH:Haybale_004": {
+"generate/physics": true
+},
+"PATH:Haybale_005": {
+"generate/physics": true
+},
+"PATH:Haybale_007": {
+"generate/physics": true
+},
+"PATH:Haybale_008": {
+"generate/physics": true
+},
+"PATH:Hubo": {
+"generate/physics": true
+},
+"PATH:Telephonecell": {
+"generate/physics": true
+},
+"PATH:Transformerhouse": {
+"generate/physics": true
+},
+"PATH:concretefence": {
+"generate/physics": true
+},
+"PATH:concretefence_001": {
+"generate/physics": true
+},
+"PATH:concretefence_002": {
+"generate/physics": true
+},
+"PATH:concretefence_003": {
+"generate/physics": true
+},
 "PATH:frietkot": {
 "generate/physics": true
 },
 "PATH:garage": {
-"generate/physics": true
-},
-"PATH:hobo": {
 "generate/physics": true
 }
 }

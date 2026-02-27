@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by27067l86m4u"
-path.s3tc="res://.godot/imported/map_HLE16.png-8ff3c1627471cf3179d682f57f4906f1.s3tc.ctex"
+uid="uid://c0oelsnngal3e"
+path.s3tc="res://.godot/imported/map_concretefence.png-0d0f00ef15b347cfca3b2999ac84f798.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "a273adb78da1abc3dd671d3ff49eebe3"
+"md5": "272f9d799b905ab122a145200bd2622f"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_HLE16.png"
-dest_files=["res://.godot/imported/map_HLE16.png-8ff3c1627471cf3179d682f57f4906f1.s3tc.ctex"]
+source_file="res://assets/3d/map/map_concretefence.png"
+dest_files=["res://.godot/imported/map_concretefence.png-0d0f00ef15b347cfca3b2999ac84f798.s3tc.ctex"]
 
 [params]
 

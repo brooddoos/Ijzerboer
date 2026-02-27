@@ -16,7 +16,7 @@ extends Node3D
 # -
 
 var mouse_right_down := false
-var car = load(Gamestate.car_stats["model"])
+var car = load(Gamestate.car_upgrades["model"])
 var old_rotation := 0.0
 var in_drag := false
 var mx_base
@@ -30,7 +30,7 @@ func _ready() -> void:
 	#$Vehicle.remove_child($Vehicle/PropCar)
 	#$Vehicle.add_child(car.instantiate())
 	#$Vehicle/AnimationPlayer.play("rotate")
-	license.text = Gamestate.car_stats["licenseplate"]
+	license.text = Gamestate.car_upgrades["licenseplate"]
 	
 func _process(delta: float) -> void:
 	if mouse_right_down:
@@ -73,19 +73,19 @@ func _on_button_pressed(button):
 		"LicensePlateButton":
 			Gamestate.BEF -= button.get_meta("Price")
 			var plaat = await text_input("Enter your new license plate. (9 characters max.)") #gui komt later, dit werkt voorlopig
-			Gamestate.car_stats["licenseplate"] = plaat
+			Gamestate.car_upgrades["licenseplate"] = plaat
 			license.text = plaat
 			values.update_currency()
 		"CargoButton":
 			Gamestate.BEF -= button.get_meta("Price")
-			Gamestate.car_stats["cargo"] += 1
+			Gamestate.car_upgrades["cargo"] += 1
 			values.update_cargo()
 		"EngineButton":
 			Gamestate.BEF -= button.get_meta("Price")
-			Gamestate.car_stats["engine"] += 1
+			Gamestate.car_upgrades["engine"] += 1
 		"GPSButton":
 			Gamestate.BEF -= button.get_meta("Price")
-			Gamestate.car_stats["gps_metal_detector"] = true
+			Gamestate.car_upgrades["gps_metal_detector"] = true
 			
 	update_buttons()
 	values.update_currency()
@@ -109,7 +109,7 @@ func update_buttons():
 		button.text = str(price)  + " BEF"
 		if button.has_meta("Max") and button.has_meta("Gamestate"):
 			max = button.get_meta("Max")
-			current = Gamestate.car_stats[button.get_meta("Gamestate")]
+			current = Gamestate.car_upgrades[button.get_meta("Gamestate")]
 		if max and current:
 			if max != current and price <= cash:
 				button.disabled = false
