@@ -14,8 +14,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_oncwi")
 
-[node name="icon" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="icon" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -34,6 +36,3 @@ texture = ExtResource("2_7qyvv")
 
 [node name="autosaveTimer" type="Timer" parent="."]
 wait_time = 60.0
-
-[connection signal="timeout" from="appearTimer" to="." method="_on_appear_timer_timeout"]
-[connection signal="timeout" from="autosaveTimer" to="." method="_on_autosave_timer_timeout"]

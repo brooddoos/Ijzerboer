@@ -30,3 +30,7 @@ func _on_options_pressed():
 	await Transition.fade_out()
 	get_tree().change_scene_to_file("res://scenes/start/Options.tscn")
 	await Transition.fade_in()
+
+func _process(_delta: float) -> void: #its just three lines idgaf
+	$Interior/door_001/Options.modulate = Color("#f5e942") if options.is_hovered() or options.has_focus() else Color.WHITE
+	$Interior/door/Play.modulate = Color("#f5e942") if play.is_hovered() or play.has_focus() else Color.WHITE

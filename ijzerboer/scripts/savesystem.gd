@@ -1,7 +1,7 @@
 extends Node
 @onready var appear_timer: Timer = $appearTimer
 @onready var autosave_timer: Timer = $autosaveTimer
-@onready var icon: TextureRect = $icon
+@onready var icon: TextureRect = $CanvasLayer/icon
 
 var version = ProjectSettings.get_setting("application/config/version")
 var contents_to_save = {}
@@ -12,11 +12,31 @@ const SAVE_LOCATION = "user://savefiles/"
 var force_old = false
 var current_used_slot = 1
 var autosave_interval = 60 # in seconds
+
+var ingame = false
+
 var autosave_enabled_scenes = [
 	"res://scenes/game/Campaign.tscn",
 	"res://scenes/game/Rally.tscn"]
 
-func set_list(): #modify to add or remove entries for saving
+func _ready() -> void:
+	set_list()
+	DEFAULT_CONTENTS_TO_SAVE = contents_to_save.duplicate(true) #I HATE YOU GODOT DICTS WHY WOULD NORMAL ASSIGNMENT NOT JUST DUPLICATE
+	autosave_timer.wait_time = autosave_interval
+	get_tree().scene_changed.connect(_on_scene_changed)
+	icon.hide()
+	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
+		autosave_timer.start()
+	
+	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
+	appear_timer.timeout.connect(icon.hide)
+	autosave_timer.timeout.connect(save)
+
+func _process(delta: float) -> void:
+	if icon.visible:
+		icon.rotation += delta*5
+
+func set_list():
 	var current_date = Time.get_date_string_from_system() # Output: "2024-05-20"
 	var current_time = Time.get_time_string_from_system() # Output: "14:30:05"
 	
@@ -29,12 +49,13 @@ func set_list(): #modify to add or remove entries for saving
 		"time" : Gamestate.time,
 		"car_upgrades" : Gamestate.car_upgrades,
 		"current_tape" : Gamestate.current_tape,
+		"timestamp" : Gamestate.timestamp,
 		"tapes" : Gamestate.tapes,
 		"campaign" : Gamestate.campaign,
 		"rally" : Gamestate.rally,
 	}
 
-func set_gamestate(): #if not added, it wont actually load it
+func set_gamestate():
 	for content in contents_to_save:
 		Gamestate.set(content, contents_to_save[content])
 
@@ -110,15 +131,8 @@ func get_save_path(slot = current_used_slot) -> String:
 		return "user://savefile.json"
 	return SAVE_LOCATION + "slot" + str(slot) + ".json"
 
-func _on_appear_timer_timeout() -> void:
-	icon.hide()
-
-func _on_autosave_timer_timeout() -> void:
-	save()
-
 func _on_scene_changed():
-	var scene = get_tree().current_scene
-	if scene and scene.scene_file_path in autosave_enabled_scenes:
+	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
 		autosave_timer.start()
 	else:
 		autosave_timer.stop()
@@ -126,18 +140,3 @@ func _on_scene_changed():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("save"):
 		save()
-
-func _ready() -> void:
-	set_list()
-	DEFAULT_CONTENTS_TO_SAVE = contents_to_save.duplicate(true) #I HATE YOU GODOT DICTS WHY WOULD NORMAL ASSIGNMENT NOT JUST DUPLICATE
-	autosave_timer.wait_time = autosave_interval
-	get_tree().scene_changed.connect(_on_scene_changed)
-	icon.hide()
-	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
-		autosave_timer.start()
-	
-	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
-
-func _process(delta: float) -> void:
-	if icon.visible:
-		icon.rotation += delta*5

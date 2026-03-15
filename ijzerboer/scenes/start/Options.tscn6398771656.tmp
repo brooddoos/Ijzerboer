@@ -86,48 +86,38 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Ingame" type="Label" parent="content/Main/Cassette"]
-visible = false
+[node name="VBoxContainer" type="VBoxContainer" parent="content/Main/Cassette"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -331.0
+offset_top = -73.0
+offset_right = 331.0
+offset_bottom = 73.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "This feature can only be used in-game, please load or create a                                          save file in order to use it."
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
 
-[node name="contents" type="VBoxContainer" parent="content/Main/Cassette"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -73.0
-offset_right = 662.0
-offset_bottom = 73.0
-grow_vertical = 2
-
-[node name="load" type="Button" parent="content/Main/Cassette/contents"]
+[node name="load" type="Button" parent="content/Main/Cassette/VBoxContainer"]
 layout_mode = 2
 text = "load custom songs"
 
-[node name="clear" type="Button" parent="content/Main/Cassette/contents"]
+[node name="clear" type="Button" parent="content/Main/Cassette/VBoxContainer"]
 layout_mode = 2
 text = "clear custom songs"
 
-[node name="Label" type="Label" parent="content/Main/Cassette/contents"]
+[node name="Label" type="Label" parent="content/Main/Cassette/VBoxContainer"]
 layout_mode = 2
 text = "Supports mp3, wav and ogg files.
 You can name the files in format [TITLE] - [ARTIST] to make the game use those names"
 
-[node name="Label2" type="Label" parent="content/Main/Cassette/contents"]
+[node name="Label2" type="Label" parent="content/Main/Cassette/VBoxContainer"]
 layout_mode = 2
 text = "This is a temporary solution until Kobe actually makes the final version"
 
 [node name="Video" type="Control" parent="content/Main"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -139,8 +129,13 @@ script = ExtResource("3_j1j16")
 [node name="VBoxContainer" type="VBoxContainer" parent="content/Main/Video"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -75.0
 offset_right = 384.0
-offset_bottom = 150.0
+offset_bottom = 75.0
+grow_vertical = 2
 
 [node name="VideoTitle" type="Label" parent="content/Main/Video/VBoxContainer"]
 layout_mode = 2
@@ -234,8 +229,13 @@ script = ExtResource("4_slqrs")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="content/Main/Audio"]
 layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -74.0
 offset_right = 293.0
-offset_bottom = 148.0
+offset_bottom = 74.0
+grow_vertical = 2
 
 [node name="AudioTitle" type="Label" parent="content/Main/Audio/VBoxContainer"]
 layout_mode = 2
@@ -332,14 +332,13 @@ grow_vertical = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="content/Main/Credits/PanelContainer"]
 layout_mode = 2
-focus_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "[b][u]Ijzerboer[/u][/b]
 A game made by ©2025 Brooddoos
-Ijzerboer is licensed under CC BY-NC-ND 4.0, a copy of which can be found at:
-[url=https://creativecommons.org/licenses/by-nc-nd/4.0/]https://creativecommons.org/licenses/by-nc-nd/4.0/[/url]
+Ijzerboer is licensed under CC BY-NC-ND 4.0, a copy which can be found at [url=https://creativecommons.org/licenses/by-nc-nd/4.0/]https://creativecommons.org/licenses/by-nc-nd/4.0/[/url]
 
-[b][u]3D Modeling:[/u][/b]
+[b][u]3D Moddeling:[/u][/b]
 Kobe Geens
 [url=https://github.com/kobegeens]https://github.com/kobegeens[/url]
 
@@ -362,7 +361,7 @@ j4y_boi
 Kobe Geens
 Other friends
 
-[u][b]Other resources used:[/b][/u]
+[u][b]Other used resources:[/b][/u]
 PromptFont by Yukari “Shinmera” Hafner
 https://shinmera.com/promptfont
 
@@ -370,10 +369,7 @@ Trash Hand by Luce Avérous
 https://www.dafont.com/trashhand.font
 
 atmospheric jungle drum and bass mix by Dopo Goto:
-https://www.youtube.com/watch?v=uXsZz4bwEYQ
-
-[u][b]Genereuze Donor:[/b][/u]
-Balthasar Boma"
+https://www.youtube.com/watch?v=uXsZz4bwEYQ"
 selection_enabled = true
 
 [node name="Label" type="Label" parent="."]
@@ -384,9 +380,6 @@ offset_right = 638.0
 offset_bottom = 489.0
 text = "ui not finished todo: make look good instead of gray squares"
 
-[connection signal="files_selected" from="content/Main/Cassette/FileDialog" to="content/Main/Cassette" method="_on_file_dialog_files_selected"]
-[connection signal="pressed" from="content/Main/Cassette/contents/load" to="content/Main/Cassette" method="_on_load_pressed"]
-[connection signal="pressed" from="content/Main/Cassette/contents/clear" to="content/Main/Cassette" method="_on_clear_pressed"]
 [connection signal="toggled" from="content/Main/Video/VBoxContainer/VSync/VSyncToggle" to="content/Main/Video" method="_on_check_button_toggled"]
 [connection signal="item_selected" from="content/Main/Video/VBoxContainer/Resolution/ResolutionOptions" to="content/Main/Video" method="_on_resolution_options_item_selected"]
 [connection signal="toggled" from="content/Main/Video/VBoxContainer/Fullscreen/FullscreenToggle" to="content/Main/Video" method="_on_fullscreen_toggle_toggled"]

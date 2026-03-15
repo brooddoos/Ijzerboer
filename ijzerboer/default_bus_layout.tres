@@ -1,4 +1,11 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://75ovok50qqdp"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://75ovok50qqdp"]
+
+[sub_resource type="AudioEffectEQ" id="AudioEffectEQ_j3pel"]
+resource_name = "EQ"
+band_db/320_hz = -60.0
+band_db/1000_hz = -60.0
+band_db/3200_hz = -60.0
+band_db/10000_hz = -60.0
 
 [resource]
 bus/0/volume_db = -0.13049698
@@ -20,3 +27,11 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = -3.7683105
 bus/3/send = &"Master"
+bus/4/name = &"EQ (For House)"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = -6.2510104
+bus/4/send = &"Master"
+bus/4/effect/0/effect = SubResource("AudioEffectEQ_j3pel")
+bus/4/effect/0/enabled = true

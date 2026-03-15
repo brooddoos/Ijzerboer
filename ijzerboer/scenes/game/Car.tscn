@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c0s3v0fi7ln4u"]
+[gd_scene load_steps=27 format=3 uid="uid://c0s3v0fi7ln4u"]
 
 [ext_resource type="Script" uid="uid://clfas6djira7w" path="res://scripts/drive.gd" id="1_v7lie"]
 [ext_resource type="PackedScene" uid="uid://e8f5a586tn0u" path="res://assets/3d/cami.glb" id="2_bfku0"]
@@ -8,6 +8,7 @@
 [ext_resource type="Material" uid="uid://d4akr53ewtdty" path="res://shaders/lightmaterial.tres" id="6_i1fuk"]
 [ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="7_ipn2e"]
 [ext_resource type="AudioStream" uid="uid://d3kvgkcqdp7x4" path="res://assets/audio/honk.wav" id="7_v7lie"]
+[ext_resource type="Texture2D" uid="uid://qcv6i1f27enj" path="res://assets/images/smoke.png" id="7_vvc6e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ra71u"]
 
@@ -44,6 +45,52 @@ albedo_color = Color(0, 0, 0, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_ofkat"]
 material = SubResource("StandardMaterial3D_2rd6h")
 size = Vector2(0.5, 1)
+
+[sub_resource type="Curve" id="Curve_fqiae"]
+_data = [Vector2(0.28030303, 0.47191018), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_crkys"]
+curve = SubResource("Curve_fqiae")
+
+[sub_resource type="Gradient" id="Gradient_wou3i"]
+offsets = PackedFloat32Array(0, 0.6132075)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6dmu7"]
+gradient = SubResource("Gradient_wou3i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3gsw"]
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0.5, 0, 0)
+spread = 0.0
+angular_velocity_min = -180.00002
+angular_velocity_max = 179.99998
+gravity = Vector3(0, 5, 0)
+color_ramp = SubResource("GradientTexture1D_6dmu7")
+alpha_curve = SubResource("CurveTexture_crkys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0quw"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.7708395, 0.77083945, 0.7708394, 0.18431373)
+albedo_texture = ExtResource("7_vvc6e")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_5vanh"]
+material = SubResource("StandardMaterial3D_w0quw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipn2e"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_vvc6e"]
+material = SubResource("StandardMaterial3D_ipn2e")
 
 [node name="Car" type="Node3D"]
 script = ExtResource("1_v7lie")
@@ -97,10 +144,10 @@ layers = 2
 surface_material_override/0 = ExtResource("6_i1fuk")
 
 [node name="drift2" type="CPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3, -0.40000004, -1.7200001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.40000004, -1.72)
 layers = 2
 emitting = false
-amount = 150
+amount = 800
 lifetime = 1.5
 fixed_fps = 60
 mesh = SubResource("PlaneMesh_ofkat")
@@ -109,16 +156,30 @@ spread = 0.0
 gravity = Vector3(0, 0, 0)
 
 [node name="drift" type="CPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.40000004, -1.7200001)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3413494, -0.40000004, -1.72)
 layers = 2
 emitting = false
-amount = 150
+amount = 800
 lifetime = 1.5
 fixed_fps = 60
 mesh = SubResource("PlaneMesh_ofkat")
 direction = Vector3(0, 0, 0)
 spread = 0.0
 gravity = Vector3(0, 0, 0)
+
+[node name="smoke" type="GPUParticles3D" parent="Car/Mesh"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3215678, 0.021069944, -2.1371508)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_k3gsw")
+draw_pass_1 = SubResource("QuadMesh_5vanh")
+
+[node name="smoke2" type="GPUParticles3D" parent="Car/Mesh"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15436637, 0.021000028, -2.137)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_k3gsw")
+draw_pass_1 = SubResource("QuadMesh_5vanh")
 
 [node name="Skid" type="AudioStreamPlayer3D" parent="Car"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33076286, -1.0688324, 2.5575929)
@@ -162,5 +223,21 @@ transform = Transform3D(-0.7071068, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, -0.707
 [node name="RayCast3D" type="RayCast3D" parent="Car"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -1, 0)
 hit_from_inside = true
+
+[node name="pivot (do not remove)" type="Node3D" parent="Car"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Car/pivot (do not remove)"]
+mesh = SubResource("SphereMesh_vvc6e")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Car/pivot (do not remove)"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Car/pivot (do not remove)/SpringArm3D"]
+mesh = SubResource("SphereMesh_vvc6e")
+skeleton = NodePath("../..")
+
+[node name="Camera3D" type="Camera3D" parent="Car/pivot (do not remove)/SpringArm3D"]
+cull_mask = 1048571
 
 [editable path="Car/Mesh"]

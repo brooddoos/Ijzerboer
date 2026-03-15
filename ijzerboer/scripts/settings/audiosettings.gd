@@ -18,11 +18,6 @@ func update_label():
 	music_label.text = str(int(music_slider.value)) + "%"
 	sfx_slider.value = AudioServer.get_bus_volume_linear(3)*100
 	sfx_label.text = str(int(sfx_slider.value)) + "%"
-	
-	print(str(int(car_slider.value)) + "%")
-	print(str(int(music_slider.value)) + "%")
-	print(str(int(sfx_slider.value)) + "%")
-
 
 func _ready() -> void:
 	await Engine.get_main_loop().process_frame

@@ -40,9 +40,12 @@ func _ready() -> void:
 	cassette.position.y = cassette_start_pos - 0.05
 	cassette_up = false
 	load_music(tapes[current_tape]["file"])
-	audio.play(0)
+	audio.play(Gamestate.timestamp)
 	animation_player.play("cassette_animation")
-	
+
+func _process(_delta: float) -> void:
+	Gamestate.timestamp = audio.get_playback_position()
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("info"):
 		cassette_up = not cassette_up
@@ -51,10 +54,14 @@ func _input(event: InputEvent) -> void:
 		else:
 			allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.05,0.25)
 
-	if event.is_action_pressed("cassette"):
-		current_tape = (current_tape % len(tapes)) - 1
+	if event.is_action_pressed("cassette") or event.is_action_pressed("previous_song"):
+		if event.is_action_pressed("previous_song"):
+			current_tape = (current_tape - 1 + len(tapes)) % len(tapes)
+		else:
+			current_tape = (current_tape + 1) % len(tapes)
+		
 		Gamestate.current_tape = current_tape
-
+		
 		allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.1,0.25)
 		await tween.finished
 		title.text = tapes[current_tape]["title"]
@@ -69,7 +76,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_audio_stream_player_finished() -> void:
-	current_tape = (current_tape % len(tapes)) + 1
+	current_tape = (current_tape + 1) % len(tapes)
 	Gamestate.current_tape = current_tape
 
 	allTween(Tween.TRANS_EXPO,cassette,"position:y",cassette_start_pos - 0.1,0.25)

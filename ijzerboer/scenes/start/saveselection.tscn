@@ -1,6 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkbtjy7jk0y7u"]
+[gd_scene load_steps=11 format=3 uid="uid://dkbtjy7jk0y7u"]
 
 [ext_resource type="Script" uid="uid://nmaoy71igx7h" path="res://scripts/saveselection.gd" id="1_mt8rh"]
+[ext_resource type="PackedScene" uid="uid://bsofso7vjdhvt" path="res://assets/3d/map/map.glb" id="2_qfclh"]
+[ext_resource type="Shader" uid="uid://dwao0orvioy4h" path="res://shaders/blur.gdshader" id="3_pw2qy"]
+[ext_resource type="FontFile" uid="uid://8yccq4nagqoy" path="res://assets/fonts/promptfont.otf" id="4_eb7q4"]
+[ext_resource type="PackedScene" uid="uid://ymbmajn3a8ya" path="res://scenes/cami.tscn" id="4_kky1n"]
+[ext_resource type="Texture2D" uid="uid://bohvcqwk4xryx" path="res://assets/images/ui/tomtom.png" id="5_3wqvf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pw2qy"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_kky1n"]
+sky_material = SubResource("ProceduralSkyMaterial_pw2qy")
+
+[sub_resource type="Environment" id="Environment_eb7q4"]
+background_mode = 2
+sky = SubResource("Sky_kky1n")
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kky1n"]
+shader = ExtResource("3_pw2qy")
+shader_parameter/blur_lod = 1.5
 
 [node name="SaveSelection" type="Control"]
 layout_mode = 3
@@ -10,6 +31,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mt8rh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_eb7q4")
+
+[node name="bg" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="bg"]
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="map" parent="bg/SubViewport" instance=ExtResource("2_qfclh")]
+
+[node name="Camera3D" type="Camera3D" parent="bg/SubViewport"]
+transform = Transform3D(-0.43837097, 0, -0.8987941, 0, 1, 0, 0.8987941, 0, -0.43837097, 116.871, 2.525, -1.87)
+
+[node name="blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_kky1n")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -135,22 +186,190 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Return to menu"
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -230.5
-offset_top = -61.0
-offset_right = 230.5
-offset_bottom = -12.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
 text = "*THIS GUI IS UNFINISHED AND ONLY SERVES AS PROTOTYPE
 -j4y_boi"
 horizontal_alignment = 1
+
+[node name="tutorial" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Title" type="Label" parent="tutorial"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Tutorial:"
+horizontal_alignment = 1
+
+[node name="begin" type="Label" parent="tutorial"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "The ingame tutorials arent't finished, enjoy this written tutorial 
+(press next to continue)"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="controls" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "These are the basic controls used in-game:
+[b]␣[/b] to drive
+[b]Ｌ[/b] to toggle headlights and [b]Ｈ[/b] to honk
+[b]␤[/b] to switch between camera positions
+[b]␫[/b] to switch between tapes and [b]～[/b] (or whatever is left of the one key on your keyboard) to view the tape
+[b]␩[/b] or [b]␺[/b] to drift
+[b]␯[/b] to open pause menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="goal" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "Well, what's the goal of this game?
+The quest system hasn't been implemented yet, but the basic premise is that you collect scrap metal and sell it for cash. You can upgrade your car with this money!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="upgrades" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "Wait, car upgrades?
+Yes! You can upgrade your car at the local garage, this can  include stuff like making your car faster, or having a higher load capacity, to upgrading your GPS to show scrap metal!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="location" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "Well, I don't know where everything is!
+Well, drive around! You have a small GPS showing where you are on the map, but if you wanna see where the different locations are you should explore."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="tutorial/location"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 29.999985
+offset_right = 174.0
+offset_bottom = 109.999985
+rotation = -0.27576202
+pivot_offset = Vector2(64, 40)
+texture = ExtResource("5_3wqvf")
+
+[node name="ColorRect" type="ColorRect" parent="tutorial/location/TextureRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 9.0
+offset_right = 116.0
+offset_bottom = 68.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="tutorial/location/TextureRect/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "this is a GPS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="plans" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 25
+bbcode_enabled = true
+text = "[This tutorial item will only be included with the beta releases]
+What are your future plans for this game?
+We are currently working on:
+- A dialogue system
+- A custscene system
+- A quest system
+- An achievement system
+- Improving general UI & UX + the map
+- Two new gamemodes (Rally + free roam)
+And finally controller support."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="plans2" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "
+We have lives outside of making this game, so we don't have a definitive ETA on when these features will be finished."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="final" type="RichTextLabel" parent="tutorial"]
+visible = false
+custom_minimum_size = Vector2(0, 400)
+layout_mode = 2
+theme_override_fonts/bold_font = ExtResource("4_eb7q4")
+theme_override_font_sizes/normal_font_size = 25
+theme_override_font_sizes/bold_font_size = 40
+theme_override_font_sizes/italics_font_size = 40
+bbcode_enabled = true
+text = "Well, that's it basically, you can press \"Start Game\" now to well, start the game."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="HBoxContainer" parent="tutorial"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Return" type="Button" parent="tutorial/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Return to menu"
+
+[node name="Continue" type="Button" parent="tutorial/Options"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Next"
 
 [node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
 title = "Confirmation"
@@ -158,4 +377,9 @@ force_native = true
 ok_button_text = "Delete"
 cancel_button_text = "Return"
 
+[node name="cami" parent="." instance=ExtResource("4_kky1n")]
+transform = Transform3D(0.5327138, 0, -0.8462955, 0, 1, 0, 0.8462955, 0, 0.5327138, 119.573204, 0.37572277, -6.590723)
+
+[connection signal="pressed" from="tutorial/Options/Return" to="." method="_on_tutorial_return_pressed"]
+[connection signal="pressed" from="tutorial/Options/Continue" to="." method="_on_tutorial_continue_pressed"]
 [connection signal="confirmed" from="DeleteConfirm" to="." method="_on_delete_confirm_confirmed"]

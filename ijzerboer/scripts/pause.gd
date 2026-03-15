@@ -56,6 +56,7 @@ func _on_button_pressed() -> void: #exit
 	#Gamestate.campaign["position"] = $"../../../Car".position
 	Savesystem.save()
 	await Savesystem.appear_timer.timeout
+	Savesystem.ingame = false
 	await Transition.fade_out()
 	var mainmenu = load("res://scenes/start/Start.tscn") as PackedScene
 	get_tree().paused = false

@@ -13,6 +13,8 @@ extends Node3D
 
 @onready var drift: CPUParticles3D = $Car/Mesh/drift
 @onready var drift_2: CPUParticles3D = $Car/Mesh/drift2
+@onready var smoke: GPUParticles3D = $Car/Mesh/smoke
+@onready var smoke_2: GPUParticles3D = $Car/Mesh/smoke2
 @onready var van_model: MeshInstance3D = $Car/Mesh/Van
 @onready var back_license_plate: Label3D = $Car/Mesh/Van/BackLicensePlate
 @onready var front_license_plate: Label3D = $Car/Mesh/Van/FrontLicensePlate
@@ -23,7 +25,8 @@ extends Node3D
 @onready var minimap_cam: Camera3D = $"../UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport/MinimapCam"
 @onready var pointer: TextureRect = $"../UI/Control/Minimap/TextureRect/pointer"
 
-@onready var camera := $"../Camera3D"
+#@onready var pivot := $Car/pivot
+@onready var camera_3d: Camera3D = $"../Camera3D"
 @onready var back_view := $Car/BackCamera
 @onready var left_view := $Car/LeftCamera
 @onready var right_view := $Car/RightCamera
@@ -160,14 +163,18 @@ func _physics_process(delta):
 		used_cam_pos = down_view
 	else:
 		used_cam_pos = back_view
-	
-	var target_pos = lerp(camera.global_position, used_cam_pos.global_position, 0.1)
+	var target_pos = lerp(camera_3d.global_position, used_cam_pos.global_position, 0.1)
 
 	if target_pos.distance_to(car.global_position) > 10.0:
 		target_pos = car.global_position + (target_pos - car.global_position).normalized() * 10.0
 
-	camera.global_position = target_pos
-	camera.look_at(car.global_position)
+	camera_3d.global_position = target_pos
+	camera_3d.look_at(car.global_position)
+
+	#pivot.global_position = target_pos
+	#pivot.look_at(car.global_position)
+	#pivot.rotate_object_local(Vector3.UP, deg_to_rad(180))
+	#camera_3d.look_at(car.global_position)
 	
 	## Visuals
 	# GUI Handling
@@ -175,8 +182,12 @@ func _physics_process(delta):
 	
 	# All FX related with drifting
 	is_drifting = (drift_pressed and ground_ray.is_colliding() and speed > 10.0 and sideways_speed > 2.0)
+	
 	drift_2.emitting = is_drifting
 	drift.emitting = is_drifting
+	smoke.emitting = is_drifting
+	smoke_2.emitting = is_drifting
+	
 	if is_drifting and not skid.playing:
 		skid.play()
 

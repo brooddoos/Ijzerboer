@@ -111,6 +111,7 @@ text = "0 / 9999 KG"
 horizontal_alignment = 2
 
 [node name="Clock" type="Control" parent="UI/Control"]
+process_mode = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -278,7 +279,7 @@ texture = ExtResource("19_8421g")
 transform = Transform3D(-0.7660446, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660446, 15, 1, 20)
 
 [node name="IronDealer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, 0)
 script = ExtResource("25_48hix")
 
 [node name="Area3D" type="Area3D" parent="IronDealer"]
@@ -291,7 +292,7 @@ shape = SubResource("CylinderShape3D_jbgew")
 debug_color = Color(1, 1, 1, 1)
 
 [node name="Sprite3D" type="Sprite3D" parent="IronDealer/Area3D"]
-transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, 0, 10)
+transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06, 0, 0, 0)
 texture_filter = 0
 texture = ExtResource("19_8421g")
 
@@ -314,6 +315,7 @@ transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0,
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Path3D/PathFollow3D"]
 stream = ExtResource("21_vepuy")
 volume_db = 20.0
+max_distance = 30.0
 
 [node name="Crossings" type="Node3D" parent="Train"]
 
@@ -347,7 +349,9 @@ transform = Transform3D(-1.3113416e-07, -3, 1.3113416e-07, 0, -1.3113416e-07, -3
 shape = SubResource("WorldBoundaryShape3D_a21rl")
 
 [node name="Camera3D" type="Camera3D" parent="."]
+visible = false
 cull_mask = 1048571
+current = true
 
 [node name="map" parent="." instance=ExtResource("23_7lpwj")]
 

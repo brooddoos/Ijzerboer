@@ -26,10 +26,7 @@ func _ready() -> void:
 		button.pressed.connect(_on_button_pressed.bind(button))
 	exitbutton.pressed.connect(_on_exit_pressed)
 	update_buttons()
-	
-	#$Vehicle.remove_child($Vehicle/PropCar)
-	#$Vehicle.add_child(car.instantiate())
-	#$Vehicle/AnimationPlayer.play("rotate")
+
 	license.text = Gamestate.car_upgrades["licenseplate"]
 	
 func _process(delta: float) -> void:
@@ -125,9 +122,7 @@ func update_buttons():
 		if level:
 			level.text = "("+str(current)+"/"+str(max)+")"
 			
-	
 
-	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cashdebug"):
 		if OS.is_debug_build(): #vr debug purposes
@@ -145,3 +140,8 @@ func _input(event: InputEvent) -> void:
 			mouse_right_down = true
 		elif event.button_index == 2 and not event.is_pressed():
 			mouse_right_down = false
+
+func _on_music_finished() -> void: # NOTE: DO NOT REMOVE THIS IS TO LOOP THE F🚌🚌🚌ING MUSIC
+	music.stop()
+	music.stream = (load("res://assets/audio/music/original_music/garage/mainloop.wav"))
+	music.play()

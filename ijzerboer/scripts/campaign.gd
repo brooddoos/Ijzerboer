@@ -6,6 +6,7 @@ func _ready() -> void:
 	var car_instance = car.instantiate()
 	self.add_child(car_instance)
 	car_instance.position = Gamestate.campaign["position"]
+	Savesystem.ingame = true
 
 func _on_garage_entered():
 	Gamestate.campaign["position"] = $Garage/Spawn.global_position
