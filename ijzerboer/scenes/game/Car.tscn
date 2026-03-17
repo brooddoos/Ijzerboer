@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c0s3v0fi7ln4u"]
+[gd_scene load_steps=22 format=3 uid="uid://c0s3v0fi7ln4u"]
 
 [ext_resource type="Script" uid="uid://clfas6djira7w" path="res://scripts/drive.gd" id="1_v7lie"]
 [ext_resource type="PackedScene" uid="uid://e8f5a586tn0u" path="res://assets/3d/cami.glb" id="2_bfku0"]
@@ -8,7 +8,6 @@
 [ext_resource type="Material" uid="uid://d4akr53ewtdty" path="res://shaders/lightmaterial.tres" id="6_i1fuk"]
 [ext_resource type="AudioStream" uid="uid://bak3v42pa8mtm" path="res://assets/audio/drift.wav" id="7_ipn2e"]
 [ext_resource type="AudioStream" uid="uid://d3kvgkcqdp7x4" path="res://assets/audio/honk.wav" id="7_v7lie"]
-[ext_resource type="Texture2D" uid="uid://qcv6i1f27enj" path="res://assets/images/smoke.png" id="7_vvc6e"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ra71u"]
 
@@ -38,28 +37,6 @@ shader = ExtResource("4_ckadj")
 shader_parameter/scale = 0.1
 shader_parameter/albedo_texture = ExtResource("5_658ie")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rd6h"]
-shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ofkat"]
-material = SubResource("StandardMaterial3D_2rd6h")
-size = Vector2(0.5, 1)
-
-[sub_resource type="Curve" id="Curve_fqiae"]
-_data = [Vector2(0.28030303, 0.47191018), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_crkys"]
-curve = SubResource("Curve_fqiae")
-
-[sub_resource type="Gradient" id="Gradient_wou3i"]
-offsets = PackedFloat32Array(0, 0.6132075)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_6dmu7"]
-gradient = SubResource("Gradient_wou3i")
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3gsw"]
 angle_min = -179.99998
 angle_max = 180.00002
@@ -68,14 +45,21 @@ spread = 0.0
 angular_velocity_min = -180.00002
 angular_velocity_max = 179.99998
 gravity = Vector3(0, 5, 0)
-color_ramp = SubResource("GradientTexture1D_6dmu7")
-alpha_curve = SubResource("CurveTexture_crkys")
+
+[sub_resource type="Gradient" id="Gradient_ipn2e"]
+colors = PackedColorArray(0.15127608, 0.15127608, 0.15127608, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vvc6e"]
+gradient = SubResource("Gradient_ipn2e")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w0quw"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.7708395, 0.77083945, 0.7708394, 0.18431373)
-albedo_texture = ExtResource("7_vvc6e")
+albedo_texture = SubResource("GradientTexture2D_vvc6e")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -143,38 +127,14 @@ surface_material_override/0 = ExtResource("6_i1fuk")
 layers = 2
 surface_material_override/0 = ExtResource("6_i1fuk")
 
-[node name="drift2" type="CPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.40000004, -1.72)
-layers = 2
-emitting = false
-amount = 800
-lifetime = 1.5
-fixed_fps = 60
-mesh = SubResource("PlaneMesh_ofkat")
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-
-[node name="drift" type="CPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3413494, -0.40000004, -1.72)
-layers = 2
-emitting = false
-amount = 800
-lifetime = 1.5
-fixed_fps = 60
-mesh = SubResource("PlaneMesh_ofkat")
-direction = Vector3(0, 0, 0)
-spread = 0.0
-gravity = Vector3(0, 0, 0)
-
-[node name="smoke" type="GPUParticles3D" parent="Car/Mesh"]
+[node name="Smoke" type="GPUParticles3D" parent="Car/Mesh"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3215678, 0.021069944, -2.1371508)
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_k3gsw")
 draw_pass_1 = SubResource("QuadMesh_5vanh")
 
-[node name="smoke2" type="GPUParticles3D" parent="Car/Mesh"]
+[node name="Smoke2" type="GPUParticles3D" parent="Car/Mesh"]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15436637, 0.021000028, -2.137)
 emitting = false
 amount = 20

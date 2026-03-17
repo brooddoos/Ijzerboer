@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfuyp1k5cmmxm"
-path.s3tc="res://.godot/imported/map_straten.png-94d872dae505d4a12b59e17b853968e8.s3tc.ctex"
+uid="uid://iwk4vruqwptw"
+path.s3tc="res://.godot/imported/map_vake.png-96bcefcf00ffb319b01887001d7d2f94.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ece366069bbc352795fc4ab9c22b9b1f"
+"md5": "65cfeda77e08c57a65d1e1ca7d3c29f5"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_straten.png"
-dest_files=["res://.godot/imported/map_straten.png-94d872dae505d4a12b59e17b853968e8.s3tc.ctex"]
+source_file="res://assets/3d/map/map_vake.png"
+dest_files=["res://.godot/imported/map_vake.png-96bcefcf00ffb319b01887001d7d2f94.s3tc.ctex"]
 
 [params]
 

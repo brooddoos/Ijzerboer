@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfuyp1k5cmmxm"
-path.s3tc="res://.godot/imported/map_straten.png-94d872dae505d4a12b59e17b853968e8.s3tc.ctex"
+uid="uid://bfambibpx2dm0"
+path.s3tc="res://.godot/imported/map_golfplaat.png-07701d48e1540507cf2dc933ae9bd6c9.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "ece366069bbc352795fc4ab9c22b9b1f"
+"md5": "f9996c5b86c9ed2247e4d7ca380bd723"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_straten.png"
-dest_files=["res://.godot/imported/map_straten.png-94d872dae505d4a12b59e17b853968e8.s3tc.ctex"]
+source_file="res://assets/3d/map/map_golfplaat.png"
+dest_files=["res://.godot/imported/map_golfplaat.png-07701d48e1540507cf2dc933ae9bd6c9.s3tc.ctex"]
 
 [params]
 

@@ -11,10 +11,8 @@ extends Node3D
 @onready var right_headlight: MeshInstance3D = $Car/Mesh/FrontRightLight
 @onready var left_headlight: MeshInstance3D = $Car/Mesh/FrontLeftLight
 
-@onready var drift: CPUParticles3D = $Car/Mesh/drift
-@onready var drift_2: CPUParticles3D = $Car/Mesh/drift2
-@onready var smoke: GPUParticles3D = $Car/Mesh/smoke
-@onready var smoke_2: GPUParticles3D = $Car/Mesh/smoke2
+@onready var smoke: GPUParticles3D = $Car/Mesh/Smoke
+@onready var smoke_2: GPUParticles3D = $Car/Mesh/Smoke2
 @onready var van_model: MeshInstance3D = $Car/Mesh/Van
 @onready var back_license_plate: Label3D = $Car/Mesh/Van/BackLicensePlate
 @onready var front_license_plate: Label3D = $Car/Mesh/Van/FrontLicensePlate
@@ -183,8 +181,7 @@ func _physics_process(delta):
 	# All FX related with drifting
 	is_drifting = (drift_pressed and ground_ray.is_colliding() and speed > 10.0 and sideways_speed > 2.0)
 	
-	drift_2.emitting = is_drifting
-	drift.emitting = is_drifting
+
 	smoke.emitting = is_drifting
 	smoke_2.emitting = is_drifting
 	

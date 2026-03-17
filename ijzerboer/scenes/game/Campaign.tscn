@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://bjsiptfh4ytxq" path="res://assets/godot/yellowring.tres" id="19_8421g"]
 [ext_resource type="AudioStream" uid="uid://cxh563fsy20jx" path="res://assets/audio/train.ogg" id="21_vepuy"]
 [ext_resource type="PackedScene" uid="uid://b70pundrf8ckh" path="res://assets/3d/map/oversteek.glb" id="22_7l0pg"]
-[ext_resource type="PackedScene" uid="uid://bsofso7vjdhvt" path="res://assets/3d/map/map.glb" id="23_7lpwj"]
+[ext_resource type="PackedScene" uid="uid://c0v0y0dqebexr" path="res://assets/3d/map/map.glb" id="23_7lpwj"]
 [ext_resource type="Script" uid="uid://dwer3mfjq8ggm" path="res://scripts/irondealer.gd" id="25_48hix"]
 [ext_resource type="AudioStream" uid="uid://b6wyaoflkjc26" path="res://assets/audio/cash_sfx.mp3" id="26_lq8yn"]
 [ext_resource type="Script" uid="uid://dpg7mwnivhx8s" path="res://scripts/train.gd" id="27_minu2"]
@@ -223,22 +223,22 @@ current = true
 script = ExtResource("11_aef2a")
 
 [node name="SpawnLocation1" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -24.529, 0, -24.127)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 123.471, 0, 12.872999)
 
 [node name="SpawnLocation2" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.322, 0, 192)
 
 [node name="SpawnLocation3" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 0.396, 0, -104.44)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -200.604, 0, -138.44)
 
 [node name="SpawnLocation4" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, -157.334, 0, 84.901)
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 1, 230.666, 0, 179.901)
 
 [node name="SpawnLocation5" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 1, 133.33203, 0, 169.802)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 1, 208.33203, 0, -177.198)
 
 [node name="SpawnLocation6" type="Marker3D" parent="SpawnLocations"]
-transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 1, 143.66406, 0, -125.395996)
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 1, -187.33594, 0, 166.604)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_aug50")
@@ -259,7 +259,7 @@ transform = Transform3D(0.9659258, -0.25881904, 0, 0.25881904, 0.9659258, 0, 0, 
 shape = SubResource("BoxShape3D_jhsr3")
 
 [node name="Garage" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45, 0, -58)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0, 184)
 
 [node name="Area3D" type="Area3D" parent="Garage"]
 collision_mask = 2
@@ -278,8 +278,11 @@ texture = ExtResource("19_8421g")
 [node name="Spawn" type="Marker3D" parent="Garage"]
 transform = Transform3D(-0.7660446, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660446, 15, 1, 20)
 
+[node name="RespawnPoint" type="Marker3D" parent="Garage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, -23)
+
 [node name="IronDealer" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -128, 0, -5)
 script = ExtResource("25_48hix")
 
 [node name="Area3D" type="Area3D" parent="IronDealer"]
@@ -302,46 +305,66 @@ stream = ExtResource("26_lq8yn")
 [node name="Train" type="Node3D" parent="."]
 script = ExtResource("27_minu2")
 
-[node name="Path3D" type="Path3D" parent="Train"]
-curve = SubResource("Curve3D_x1w3f")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Train/Path3D"]
-transform = Transform3D(0.9999768, 0, 0, 0, 0.9999968, 0, 0, 0, 0.99997485, 0, 0, 400)
-loop = false
-
-[node name="HLE16" parent="Train/Path3D/PathFollow3D" instance=ExtResource("28_o7e2w")]
-transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0, 0, 0)
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Path3D/PathFollow3D"]
-stream = ExtResource("21_vepuy")
-volume_db = 20.0
-max_distance = 30.0
-
 [node name="Crossings" type="Node3D" parent="Train"]
 
 [node name="Crossing" parent="Train/Crossings" instance=ExtResource("22_7l0pg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -143)
 
 [node name="Plane" parent="Train/Crossings/Crossing" index="3"]
 transform = Transform3D(-1.3113416e-07, -3, 1.3113416e-07, 0, -1.3113416e-07, -3, 3, -1.3113416e-07, 5.7320566e-15, 0.34, 0.66999996, 0.19999999)
 
 [node name="Crossing2" parent="Train/Crossings" instance=ExtResource("22_7l0pg")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7, 0, -86)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7, 0, -154)
 
 [node name="Plane" parent="Train/Crossings/Crossing2" index="3"]
 transform = Transform3D(-1.3113416e-07, -3, 1.3113416e-07, 0, -1.3113416e-07, -3, 3, -1.3113416e-07, 5.7320566e-15, 0.34, 0.66999996, 0.19999999)
 
 [node name="Crossing3" parent="Train/Crossings" instance=ExtResource("22_7l0pg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 103)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 178)
 
 [node name="Plane" parent="Train/Crossings/Crossing3" index="3"]
 transform = Transform3D(-1.3113416e-07, -3, 1.3113416e-07, 0, -1.3113416e-07, -3, 3, -1.3113416e-07, 5.7320566e-15, 0.34, 0.66999996, 0.19999999)
 
+[node name="CollisionShape3D" parent="Train/Crossings/Crossing3/Plane/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 2.1175824e-22, 0, 1, -8.351871e-23, 2.1175824e-22, -8.3518705e-23, 1, 0, 0, 0)
+
 [node name="Crossing4" parent="Train/Crossings" instance=ExtResource("22_7l0pg")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7, 0, 92)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 7, 0, 177)
 
 [node name="Plane" parent="Train/Crossings/Crossing4" index="3"]
 transform = Transform3D(-1.3113416e-07, -3, 1.3113416e-07, 0, -1.3113416e-07, -3, 3, -1.3113416e-07, 5.7320566e-15, 0.34, 0.66999996, 0.19999999)
+
+[node name="Trains" type="Node3D" parent="Train"]
+
+[node name="Path3D" type="Path3D" parent="Train/Trains"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2, 0, 0)
+curve = SubResource("Curve3D_x1w3f")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Train/Trains/Path3D"]
+transform = Transform3D(0.9999768, 0, 0, 0, 0.9999968, 0, 0, 0, 0.99997485, 0, 0, 400)
+loop = false
+
+[node name="HLE16" parent="Train/Trains/Path3D/PathFollow3D" instance=ExtResource("28_o7e2w")]
+transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Trains/Path3D/PathFollow3D"]
+stream = ExtResource("21_vepuy")
+volume_db = 20.0
+
+[node name="Path3D2" type="Path3D" parent="Train/Trains"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7, 0, 0)
+curve = SubResource("Curve3D_x1w3f")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="Train/Trains/Path3D2"]
+transform = Transform3D(0.9999768, 0, 0, 0, 0.9999968, 0, 0, 0, 0.99997485, 0, 0, 400)
+loop = false
+
+[node name="HLE16" parent="Train/Trains/Path3D2/PathFollow3D" instance=ExtResource("28_o7e2w")]
+transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0, 0, 0)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Trains/Path3D2/PathFollow3D"]
+stream = ExtResource("21_vepuy")
+volume_db = 20.0
 
 [node name="WorldBoundary" type="StaticBody3D" parent="."]
 

@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvn8wp7kur2la"
-path.s3tc="res://.godot/imported/map_tree.png-90e82455cd171c285e043b379be74bf4.s3tc.ctex"
+uid="uid://d2kph8bcjkgnl"
+path.s3tc="res://.godot/imported/map_Greenfence.png-1160153d5cf6b9e7230a7fc3f92e201d.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
 generator_parameters={
-"md5": "193f46d9557f007509bbfc2c5574645d"
+"md5": "aef8cdc4600a258f3b09f73b71257c22"
 }
 
 [deps]
 
-source_file="res://assets/3d/map/map_tree.png"
-dest_files=["res://.godot/imported/map_tree.png-90e82455cd171c285e043b379be74bf4.s3tc.ctex"]
+source_file="res://assets/3d/map/map_Greenfence.png"
+dest_files=["res://.godot/imported/map_Greenfence.png-1160153d5cf6b9e7230a7fc3f92e201d.s3tc.ctex"]
 
 [params]
 

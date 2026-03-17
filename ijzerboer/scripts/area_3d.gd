@@ -6,9 +6,7 @@ func _ready():
 	body_exited.connect(_on_body_exited)
 func _on_body_entered(_body: Node):
 	entered.emit()
-	print("binnen")
 func _on_body_exited(_body: Node):
 	exited.emit()
-	print("buiten")
 	
  

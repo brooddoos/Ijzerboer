@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qcv6i1f27enj"
-path.s3tc="res://.godot/imported/smoke.png-aa8d106b9387d107db06cb387112f6b3.s3tc.ctex"
+uid="uid://dkq03koved7hj"
+path.s3tc="res://.godot/imported/map_tree2.png-20384d8cbc4090093244846ae6b2f527.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "3655ae720de92cd27500560859f22418"
+}
 
 [deps]
 
-source_file="res://assets/images/smoke.png"
-dest_files=["res://.godot/imported/smoke.png-aa8d106b9387d107db06cb387112f6b3.s3tc.ctex"]
+source_file="res://assets/3d/map/map_tree2.png"
+dest_files=["res://.godot/imported/map_tree2.png-20384d8cbc4090093244846ae6b2f527.s3tc.ctex"]
 
 [params]
 

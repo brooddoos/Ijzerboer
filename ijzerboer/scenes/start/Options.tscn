@@ -334,55 +334,42 @@ grow_vertical = 2
 layout_mode = 2
 focus_mode = 2
 bbcode_enabled = true
-text = "[b][u]Ijzerboer[/u][/b]
+text = "[center]
+[b][u]Ijzerboer[/u][/b]
 A game made by ©2025 Brooddoos
-Ijzerboer is licensed under CC BY-NC-ND 4.0, a copy of which can be found at:
-[url=https://creativecommons.org/licenses/by-nc-nd/4.0/]https://creativecommons.org/licenses/by-nc-nd/4.0/[/url]
+Ijzerboer is licensed under [url=https://creativecommons.org/licenses/by-nc-nd/4.0/]CC BY-NC-ND 4.0[/url].
 
-[b][u]3D Modeling:[/u][/b]
-Kobe Geens
-[url=https://github.com/kobegeens]https://github.com/kobegeens[/url]
+[u][b]Sponsors[/b][/u]
+Boma Vleesindustrie N.V.
 
-[b][u]Code:[/u][/b]
-j4y_boi
-[url=https://linktr.ee/j4y_boi]https://linktr.ee/j4y_boi[/url]
+[b][u]Code[/u][/b]
+[url=https://github.com/kobegeens]Kobe Geens[/url]
+[url=https://linktr.ee/j4y_boi]j4y_boi[/url]
 
-Kobe Geens
-[url=https://github.com/kobegeens]https://github.com/kobegeens[/url]
+[center][b][u]3D Assets[/u][/b][/center]
+[url=https://github.com/kobegeens]Kobe Geens[/url]
 
-[b][u]Original Music:[/u][/b]
+[center][b][u]Music[/u][/b][/center]
 Garage Theme:
-j4y_boi
-[url=https://linktr.ee/j4y_boi]https://linktr.ee/j4y_boi[/url]
+[url=https://linktr.ee/j4y_boi]j4y_boi[/url]
 
-[b][u]Playtesting:[/u][/b]
+[u][b]Third Party Resources[/b][/u]
+Fonts:
+[url=https://shinmera.com/promptfont]PromptFont - Yukari “Shinmera” Hafner[/url]
+[url=https://www.dafont.com/trashhand.font]Trash Hand - Luce Avérous[/url]
+
+Audio:
+[url=https://www.youtube.com/watch?v=uXsZz4bwEYQ]atmospheric jungle drum and bass mix - Dopo Goto[/url]
+
+[b][u]Playtesting[/u][/b]
+[url=https://github.com/kobegeens]Kobe Geens[/url]
+[url=https://linktr.ee/j4y_boi]j4y_boi[/url]
 Kenny
 Lowpoly
-j4y_boi
-Kobe Geens
 Other friends
 
-[u][b]Other resources used:[/b][/u]
-PromptFont by Yukari “Shinmera” Hafner
-https://shinmera.com/promptfont
-
-Trash Hand by Luce Avérous
-https://www.dafont.com/trashhand.font
-
-atmospheric jungle drum and bass mix by Dopo Goto:
-https://www.youtube.com/watch?v=uXsZz4bwEYQ
-
-[u][b]Genereuze Donor:[/b][/u]
-Balthasar Boma"
+[/center]"
 selection_enabled = true
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 171.0
-offset_top = 466.0
-offset_right = 638.0
-offset_bottom = 489.0
-text = "ui not finished todo: make look good instead of gray squares"
 
 [connection signal="files_selected" from="content/Main/Cassette/FileDialog" to="content/Main/Cassette" method="_on_file_dialog_files_selected"]
 [connection signal="pressed" from="content/Main/Cassette/contents/load" to="content/Main/Cassette" method="_on_load_pressed"]
