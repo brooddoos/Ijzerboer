@@ -1,9 +1,116 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2blyruyj7gkd"]
+[gd_scene load_steps=16 format=3 uid="uid://c2blyruyj7gkd"]
 
 [ext_resource type="Script" path="res://scripts/settings/settings.gd" id="1_1dggd"]
 [ext_resource type="Script" uid="uid://b8lh4gtpb2bcn" path="res://scripts/settings/cassettesettings.gd" id="2_8e7v8"]
+[ext_resource type="PackedScene" uid="uid://c0v0y0dqebexr" path="res://assets/3d/map/map.glb" id="2_m08v4"]
 [ext_resource type="Script" uid="uid://dvpgrr0jww8qg" path="res://scripts/settings/videosettings.gd" id="3_j1j16"]
+[ext_resource type="PackedScene" uid="uid://ymbmajn3a8ya" path="res://scenes/cami.tscn" id="3_m37ne"]
+[ext_resource type="Shader" uid="uid://dwao0orvioy4h" path="res://shaders/blur.gdshader" id="3_pqn78"]
 [ext_resource type="Script" uid="uid://bhctmvws8bbtt" path="res://scripts/settings/audiosettings.gd" id="4_slqrs"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m08v4"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_pqn78"]
+sky_material = SubResource("ProceduralSkyMaterial_m08v4")
+
+[sub_resource type="Environment" id="Environment_m37ne"]
+background_mode = 2
+sky = SubResource("Sky_pqn78")
+tonemap_mode = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m37ne"]
+shader = ExtResource("3_pqn78")
+shader_parameter/blur_lod = 1.5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_357fk"]
+bg_color = Color(0, 0, 0, 0.54901963)
+
+[sub_resource type="Animation" id="Animation_m37ne"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bittom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 470)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("content:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-150, 138)]
+}
+
+[sub_resource type="Animation" id="Animation_pqn78"]
+resource_name = "fadein"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("top:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(-800, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("bittom:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector2(800, 470), Vector2(0, 470)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("content:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.5),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-150, 138), Vector2(-2, 138)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ibqfw"]
+_data = {
+&"RESET": SubResource("Animation_m37ne"),
+&"fadein": SubResource("Animation_pqn78")
+}
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -14,10 +121,52 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1dggd")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_m37ne")
+
+[node name="bg" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="bg"]
+handle_input_locally = false
+size = Vector2i(800, 600)
+render_target_update_mode = 4
+
+[node name="map" parent="bg/SubViewport" instance=ExtResource("2_m08v4")]
+
+[node name="Camera3D" type="Camera3D" parent="bg/SubViewport"]
+transform = Transform3D(-0.7815204, 0, -0.6238796, 0, 1, 0, 0.6238796, 0, -0.7815204, 111.61858, 2.525, -7.5035057)
+
+[node name="cami" parent="bg/SubViewport" instance=ExtResource("3_m37ne")]
+transform = Transform3D(0.48785958, 0, -0.87292194, 0, 1, 0, 0.87292194, 0, 0.48785958, 121.281296, 0.37572277, -6.7161217)
+
+[node name="blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_m37ne")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="content" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_right = 804.0
-offset_bottom = 324.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -162.0
+offset_right = 250.0
+offset_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Buttons" type="VBoxContainer" parent="content"]
 layout_mode = 2
@@ -50,7 +199,7 @@ layout_mode = 2
 text = "Return"
 
 [node name="Main" type="Control" parent="content"]
-custom_minimum_size = Vector2(672, 0)
+custom_minimum_size = Vector2(650, 0)
 layout_mode = 2
 
 [node name="Cassette" type="Control" parent="content/Main"]
@@ -94,7 +243,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "This feature can only be used in-game, please load or create a                                          save file in order to use it."
+text = "This feature can only be used in-game, please load or create a 
+save file in order to use it."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
@@ -147,6 +297,30 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "Video Settings"
 
+[node name="Resolution" type="HBoxContainer" parent="content/Main/Video/VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionTitle" type="Label" parent="content/Main/Video/VBoxContainer/Resolution"]
+layout_mode = 2
+text = "Resolution (Doesn't work) : "
+
+[node name="ResolutionOptions" type="OptionButton" parent="content/Main/Video/VBoxContainer/Resolution"]
+layout_mode = 2
+disabled = true
+selected = 0
+item_count = 2
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Retro"
+popup/item_1/id = 1
+
+[node name="ResolutionLabel" type="Label" parent="content/Main/Video/VBoxContainer/Resolution"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enabled"
+horizontal_alignment = 2
+
 [node name="VSync" type="HBoxContainer" parent="content/Main/Video/VBoxContainer"]
 layout_mode = 2
 
@@ -159,28 +333,6 @@ layout_mode = 2
 button_pressed = true
 
 [node name="VSyncLabel" type="Label" parent="content/Main/Video/VBoxContainer/VSync"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Enabled"
-horizontal_alignment = 2
-
-[node name="Resolution" type="HBoxContainer" parent="content/Main/Video/VBoxContainer"]
-layout_mode = 2
-
-[node name="ResolutionTitle" type="Label" parent="content/Main/Video/VBoxContainer/Resolution"]
-layout_mode = 2
-text = "Resolution (EXPERIMENTAL): "
-
-[node name="ResolutionOptions" type="OptionButton" parent="content/Main/Video/VBoxContainer/Resolution"]
-layout_mode = 2
-selected = 0
-item_count = 2
-popup/item_0/text = "Normal"
-popup/item_0/id = 0
-popup/item_1/text = "Retro"
-popup/item_1/id = 1
-
-[node name="ResolutionLabel" type="Label" parent="content/Main/Video/VBoxContainer/Resolution"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Enabled"
@@ -234,8 +386,8 @@ script = ExtResource("4_slqrs")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="content/Main/Audio"]
 layout_mode = 1
-offset_right = 293.0
-offset_bottom = 148.0
+offset_right = 300.0
+offset_bottom = 175.0
 
 [node name="AudioTitle" type="Label" parent="content/Main/Audio/VBoxContainer"]
 layout_mode = 2
@@ -246,6 +398,7 @@ text = "Audio Settings"
 layout_mode = 2
 
 [node name="MusicTitle" type="Label" parent="content/Main/Audio/VBoxContainer/Music"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 text = "Music Volume:"
 
@@ -266,8 +419,9 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="CarTitle" type="Label" parent="content/Main/Audio/VBoxContainer/Car"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "Car Volume:    "
+text = "Car Volume:"
 
 [node name="CarSlider" type="HSlider" parent="content/Main/Audio/VBoxContainer/Car"]
 custom_minimum_size = Vector2(130, 0)
@@ -286,8 +440,9 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="SFXTitle" type="Label" parent="content/Main/Audio/VBoxContainer/SFX"]
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-text = "SFX Volume:    "
+text = "SFX Volume:"
 
 [node name="SFXSlider" type="HSlider" parent="content/Main/Audio/VBoxContainer/SFX"]
 custom_minimum_size = Vector2(130, 0)
@@ -297,6 +452,27 @@ value = 100.0
 rounded = true
 
 [node name="SFXLabel" type="Label" parent="content/Main/Audio/VBoxContainer/SFX"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Map" type="HBoxContainer" parent="content/Main/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="MapTitle" type="Label" parent="content/Main/Audio/VBoxContainer/Map"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Map Volume:"
+
+[node name="MapSlider" type="HSlider" parent="content/Main/Audio/VBoxContainer/Map"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+rounded = true
+
+[node name="MapLabel" type="Label" parent="content/Main/Audio/VBoxContainer/Map"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "100%"
@@ -339,19 +515,18 @@ text = "[center]
 A game made by ©2025 Brooddoos
 Ijzerboer is licensed under [url=https://creativecommons.org/licenses/by-nc-nd/4.0/]CC BY-NC-ND 4.0[/url].
 
-[u][b]Sponsors[/b][/u]
-Boma Vleesindustrie N.V.
+[b][u]Code:[/u][/b]
+ [url=https://linktr.ee/j4y_boi]j4y_boi[/url] and [url=https://github.com/kobegeens]Kobe Geens[/url]
 
-[b][u]Code[/u][/b]
-[url=https://github.com/kobegeens]Kobe Geens[/url]
-[url=https://linktr.ee/j4y_boi]j4y_boi[/url]
-
-[center][b][u]3D Assets[/u][/b][/center]
+[center][b][u]3D Assets:[/u][/b][/center]
 [url=https://github.com/kobegeens]Kobe Geens[/url]
 
-[center][b][u]Music[/u][/b][/center]
+[center][b][u]Original Music:[/u][/b][/center]
 Garage Theme:
 [url=https://linktr.ee/j4y_boi]j4y_boi[/url]
+
+[u][b]Sponsors[/b][/u]
+Boma Vleesindustrie N.V.
 
 [u][b]Third Party Resources[/b][/u]
 Fonts:
@@ -371,15 +546,84 @@ Other friends
 [/center]"
 selection_enabled = true
 
+[node name="Buffer" type="Control" parent="content/Main"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="top" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -400.0
+offset_right = 400.00037
+offset_bottom = 130.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_357fk")
+
+[node name="Label" type="Label" parent="top"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.5
+offset_top = -69.0
+offset_right = 195.5
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 81
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="bittom" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -400.0
+offset_top = -130.0
+offset_right = 400.00098
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_357fk")
+
+[node name="facts" type="Label" parent="bittom"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 800.0
+offset_right = 1557.999
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 25
+text = "Fun fact: The building where you sell your iron is based off of a real Belgian hardware store! paozkdpoakzpdkazpdkazopdkazpodk"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ibqfw")
+}
+
 [connection signal="files_selected" from="content/Main/Cassette/FileDialog" to="content/Main/Cassette" method="_on_file_dialog_files_selected"]
 [connection signal="pressed" from="content/Main/Cassette/contents/load" to="content/Main/Cassette" method="_on_load_pressed"]
 [connection signal="pressed" from="content/Main/Cassette/contents/clear" to="content/Main/Cassette" method="_on_clear_pressed"]
-[connection signal="toggled" from="content/Main/Video/VBoxContainer/VSync/VSyncToggle" to="content/Main/Video" method="_on_check_button_toggled"]
 [connection signal="item_selected" from="content/Main/Video/VBoxContainer/Resolution/ResolutionOptions" to="content/Main/Video" method="_on_resolution_options_item_selected"]
+[connection signal="toggled" from="content/Main/Video/VBoxContainer/VSync/VSyncToggle" to="content/Main/Video" method="_on_check_button_toggled"]
 [connection signal="toggled" from="content/Main/Video/VBoxContainer/Fullscreen/FullscreenToggle" to="content/Main/Video" method="_on_fullscreen_toggle_toggled"]
 [connection signal="drag_ended" from="content/Main/Video/VBoxContainer/FPS/FPSSlider" to="content/Main/Video" method="_on_fps_slider_drag_ended"]
 [connection signal="value_changed" from="content/Main/Video/VBoxContainer/FPS/FPSSlider" to="content/Main/Video" method="_on_fps_slider_value_changed"]
 [connection signal="value_changed" from="content/Main/Audio/VBoxContainer/Music/MusicSlider" to="content/Main/Audio" method="_on_music_slider_value_changed"]
 [connection signal="value_changed" from="content/Main/Audio/VBoxContainer/Car/CarSlider" to="content/Main/Audio" method="_on_car_slider_value_changed"]
 [connection signal="value_changed" from="content/Main/Audio/VBoxContainer/SFX/SFXSlider" to="content/Main/Audio" method="_on_sfx_slider_value_changed"]
+[connection signal="value_changed" from="content/Main/Audio/VBoxContainer/Map/MapSlider" to="content/Main/Audio" method="_on_map_slider_value_changed"]
 [connection signal="pressed" from="content/Main/Audio/VBoxContainer/Button" to="content/Main/Audio" method="_on_button_pressed"]
+[connection signal="meta_clicked" from="content/Main/Credits/PanelContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

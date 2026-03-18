@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=36 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaign.gd" id="1_d48t8"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_d2me3"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/game/Spedometer.tscn" id="4_jsf20"]
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="5_fow0s"]
 [ext_resource type="Script" uid="uid://ftyg7g7k825l" path="res://scripts/time.gd" id="6_64q1x"]
+[ext_resource type="Shader" uid="uid://cue6i7xwybfau" path="res://shaders/inverted.gdshader" id="7_a21rl"]
 [ext_resource type="FontFile" uid="uid://b4hlmaj4yd0i6" path="res://assets/fonts/ClockFont.ttf" id="7_okiu4"]
 [ext_resource type="AudioStream" uid="uid://djyuueslthfhi" path="res://assets/audio/bell.ogg" id="8_hedx0"]
 [ext_resource type="PackedScene" uid="uid://bq3i3dy8sx7qc" path="res://scenes/game/Cassette.tscn" id="9_17cv4"]
@@ -23,6 +24,9 @@
 [ext_resource type="AudioStream" uid="uid://b6wyaoflkjc26" path="res://assets/audio/cash_sfx.mp3" id="26_lq8yn"]
 [ext_resource type="Script" uid="uid://dpg7mwnivhx8s" path="res://scripts/train.gd" id="27_minu2"]
 [ext_resource type="PackedScene" uid="uid://bi3u7o8h4htyp" path="res://assets/3d/HLE16.glb" id="28_o7e2w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0g7ce"]
+shader = ExtResource("7_a21rl")
 
 [sub_resource type="LabelSettings" id="LabelSettings_jhsr3"]
 font = ExtResource("7_okiu4")
@@ -126,6 +130,7 @@ grow_vertical = 0
 script = ExtResource("6_64q1x")
 
 [node name="Time" type="Label" parent="UI/Control/Clock"]
+material = SubResource("ShaderMaterial_0g7ce")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -143,10 +148,17 @@ label_settings = SubResource("LabelSettings_jhsr3")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Bell" type="AudioStreamPlayer" parent="UI/Control/Clock"]
+[node name="Bell_old" type="AudioStreamPlayer" parent="UI/Control/Clock"]
 stream = ExtResource("8_hedx0")
 volume_db = -5.0
 bus = &"SFX"
+
+[node name="Bell" type="AudioStreamPlayer3D" parent="UI/Control/Clock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108.19998, 8.00446, 0)
+stream = ExtResource("8_hedx0")
+volume_db = 20.0
+max_distance = 1000.0
+bus = &"Map"
 
 [node name="Cassette" parent="UI/Control" instance=ExtResource("9_17cv4")]
 layout_mode = 1
@@ -275,9 +287,6 @@ transform = Transform3D(50, 0, 0, 0, -2.1855694e-06, -50, 0, 50, -2.1855694e-06,
 texture_filter = 0
 texture = ExtResource("19_8421g")
 
-[node name="Spawn" type="Marker3D" parent="Garage"]
-transform = Transform3D(-0.7660446, 0, -0.6427876, 0, 1, 0, 0.6427876, 0, -0.7660446, 15, 1, 20)
-
 [node name="RespawnPoint" type="Marker3D" parent="Garage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, -23)
 
@@ -349,7 +358,10 @@ transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0,
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Trains/Path3D/PathFollow3D"]
 stream = ExtResource("21_vepuy")
-volume_db = 20.0
+volume_db = 10.0
+max_db = 1.0
+max_distance = 750.0
+bus = &"Map"
 
 [node name="Path3D2" type="Path3D" parent="Train/Trains"]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.7, 0, 0)
@@ -364,7 +376,10 @@ transform = Transform3D(-2.9802322e-08, 0, 1, 0, 1, 0, -1, 0, -2.9802322e-08, 0,
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Train/Trains/Path3D2/PathFollow3D"]
 stream = ExtResource("21_vepuy")
-volume_db = 20.0
+volume_db = 10.0
+max_db = 1.0
+max_distance = 750.0
+bus = &"Map"
 
 [node name="WorldBoundary" type="StaticBody3D" parent="."]
 

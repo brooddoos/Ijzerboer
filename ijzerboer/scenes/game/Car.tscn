@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0s3v0fi7ln4u"]
+[gd_scene load_steps=21 format=3 uid="uid://c0s3v0fi7ln4u"]
 
 [ext_resource type="Script" uid="uid://clfas6djira7w" path="res://scripts/drive.gd" id="1_v7lie"]
 [ext_resource type="PackedScene" uid="uid://e8f5a586tn0u" path="res://assets/3d/cami.glb" id="2_bfku0"]
@@ -37,16 +37,8 @@ shader = ExtResource("4_ckadj")
 shader_parameter/scale = 0.1
 shader_parameter/albedo_texture = ExtResource("5_658ie")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k3gsw"]
-angle_min = -179.99998
-angle_max = 180.00002
-direction = Vector3(0.5, 0, 0)
-spread = 0.0
-angular_velocity_min = -180.00002
-angular_velocity_max = 179.99998
-gravity = Vector3(0, 5, 0)
-
 [sub_resource type="Gradient" id="Gradient_ipn2e"]
+offsets = PackedFloat32Array(0, 0.6727273)
 colors = PackedColorArray(0.15127608, 0.15127608, 0.15127608, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vvc6e"]
@@ -66,7 +58,7 @@ particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_5vanh"]
+[sub_resource type="QuadMesh" id="QuadMesh_ipn2e"]
 material = SubResource("StandardMaterial3D_w0quw")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipn2e"]
@@ -127,24 +119,28 @@ surface_material_override/0 = ExtResource("6_i1fuk")
 layers = 2
 surface_material_override/0 = ExtResource("6_i1fuk")
 
-[node name="Smoke" type="GPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 1.3215678, 0.021069944, -2.1371508)
+[node name="Smoke" type="CPUParticles3D" parent="Car/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15436637, 0.021000028, -1.9395304)
 emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_k3gsw")
-draw_pass_1 = SubResource("QuadMesh_5vanh")
+amount = 32
+lifetime = 1.25
+mesh = SubResource("QuadMesh_ipn2e")
+spread = 0.0
+gravity = Vector3(0, 3, 0)
 
-[node name="Smoke2" type="GPUParticles3D" parent="Car/Mesh"]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -0.15436637, 0.021000028, -2.137)
+[node name="Smoke2" type="CPUParticles3D" parent="Car/Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3215678, 0.021069944, -1.939681)
 emitting = false
-amount = 20
-process_material = SubResource("ParticleProcessMaterial_k3gsw")
-draw_pass_1 = SubResource("QuadMesh_5vanh")
+amount = 32
+lifetime = 1.25
+mesh = SubResource("QuadMesh_ipn2e")
+spread = 0.0
+gravity = Vector3(0, 3, 0)
 
 [node name="Skid" type="AudioStreamPlayer3D" parent="Car"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.33076286, -1.0688324, 2.5575929)
 stream = ExtResource("7_ipn2e")
-volume_db = 10.0
+volume_db = 5.0
 max_db = 6.0
 max_distance = 100.0
 bus = &"Car"

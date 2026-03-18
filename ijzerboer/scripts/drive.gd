@@ -11,8 +11,8 @@ extends Node3D
 @onready var right_headlight: MeshInstance3D = $Car/Mesh/FrontRightLight
 @onready var left_headlight: MeshInstance3D = $Car/Mesh/FrontLeftLight
 
-@onready var smoke: GPUParticles3D = $Car/Mesh/Smoke
-@onready var smoke_2: GPUParticles3D = $Car/Mesh/Smoke2
+@onready var smoke: CPUParticles3D = $Car/Mesh/Smoke
+@onready var smoke_2: CPUParticles3D = $Car/Mesh/Smoke2
 @onready var van_model: MeshInstance3D = $Car/Mesh/Van
 @onready var back_license_plate: Label3D = $Car/Mesh/Van/BackLicensePlate
 @onready var front_license_plate: Label3D = $Car/Mesh/Van/FrontLicensePlate
@@ -37,7 +37,7 @@ extends Node3D
 var max_speed :int= 25.0 + Gamestate.car_upgrades["engine"] * 5
 var max_reverse_speed := 25.0
 
-var default_acceleration = 10	
+var default_acceleration = 10 + Gamestate.car_upgrades["engine"]	
 var default_steering := 40.0 	
 
 var drift_acceleration := 0.75 	# this is a multiplier, meaning if its set to 0.75, itll reduce the default acceleration by 25%

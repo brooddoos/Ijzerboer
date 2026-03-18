@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dkbtjy7jk0y7u"]
 
 [ext_resource type="Script" uid="uid://nmaoy71igx7h" path="res://scripts/saveselection.gd" id="1_mt8rh"]
-[ext_resource type="PackedScene" uid="uid://bsofso7vjdhvt" path="res://assets/3d/map/map.glb" id="2_qfclh"]
+[ext_resource type="PackedScene" uid="uid://c0v0y0dqebexr" path="res://assets/3d/map/map.glb" id="2_qfclh"]
 [ext_resource type="Shader" uid="uid://dwao0orvioy4h" path="res://shaders/blur.gdshader" id="3_pw2qy"]
 [ext_resource type="FontFile" uid="uid://8yccq4nagqoy" path="res://assets/fonts/promptfont.otf" id="4_eb7q4"]
 [ext_resource type="PackedScene" uid="uid://ymbmajn3a8ya" path="res://scenes/cami.tscn" id="4_kky1n"]
@@ -47,6 +47,9 @@ grow_vertical = 2
 handle_input_locally = false
 size = Vector2i(800, 600)
 render_target_update_mode = 4
+
+[node name="cami" parent="bg/SubViewport" instance=ExtResource("4_kky1n")]
+transform = Transform3D(0.5327138, 0, -0.8462955, 0, 1, 0, 0.8462955, 0, 0.5327138, 119.573204, 0.37572277, -6.590723)
 
 [node name="map" parent="bg/SubViewport" instance=ExtResource("2_qfclh")]
 
@@ -376,9 +379,6 @@ title = "Confirmation"
 force_native = true
 ok_button_text = "Delete"
 cancel_button_text = "Return"
-
-[node name="cami" parent="." instance=ExtResource("4_kky1n")]
-transform = Transform3D(0.5327138, 0, -0.8462955, 0, 1, 0, 0.8462955, 0, 0.5327138, 119.573204, 0.37572277, -6.590723)
 
 [connection signal="pressed" from="tutorial/Options/Return" to="." method="_on_tutorial_return_pressed"]
 [connection signal="pressed" from="tutorial/Options/Continue" to="." method="_on_tutorial_continue_pressed"]

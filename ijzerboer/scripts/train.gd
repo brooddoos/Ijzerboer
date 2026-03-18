@@ -16,6 +16,8 @@ var pathfollow := {}
 var audio := {}
 var model := {}
 var waiting := {}
+var stop := {}
+
 func _ready():
 	for crossing in crossings:
 		crossingstates[crossing]="open"
@@ -25,22 +27,37 @@ func _ready():
 		audio[trainpath]=trainpath.get_node("PathFollow3D/AudioStreamPlayer3D")
 		model[trainpath]=trainpath.get_node("PathFollow3D/HLE16")
 		waiting[trainpath]=false
+		stop[trainpath] = false
+
+func train_wait(trainpath):
+	model[trainpath].hide()
+	audio[trainpath].playing = false
+	
+	await get_tree().create_timer(wait_time).timeout
+	
+	pathfollow[trainpath].progress_ratio = 0.0
+	model[trainpath].show()
+	audio[trainpath].playing = true
+	waiting[trainpath] = false
+	stop[trainpath] = false
+
 func _process(delta: float) -> void:
 	for trainpath in trainpaths:
 		trainlocation = pathfollow[trainpath].global_position
-		if waiting[trainpath]:
-			model[trainpath].hide()
-			audio[trainpath].playing = false
-			await get_tree().create_timer(wait_time).timeout
-			pathfollow.progress_ratio = 0.0
-			pathfollow.progress_ratio = 0.0
-			model[trainpath].show()
-			audio[trainpath].playing = true
+		if waiting[trainpath] and not stop[trainpath]:
+			stop[trainpath] = true
 			waiting[trainpath] = false
-		if audio[trainpath].playing == true:
-			pass
+			train_wait(trainpath) # want euhh await and _process gn nie samen
+			continue
+		elif stop[trainpath]:
+			continue
+			
+		if waiting[trainpath] or stop[trainpath]: #WHY DOESNT THE TRAIN SHUT THE HELL UP
+			audio[trainpath].playing = false
 		else:
-			audio[trainpath].playing = true
+			if not audio[trainpath].playing:
+				audio[trainpath].playing = true
+		
 		pathfollow[trainpath].progress += speed * delta
 		if pathfollow[trainpath].progress_ratio >= 1.0:
 			pathfollow[trainpath].progress_ratio = 1.0

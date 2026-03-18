@@ -72,4 +72,4 @@ func _on_resolution_options_item_selected(index: int):
 	if index == 0:
 		get_viewport().scaling_3d_scale = 1.0
 	else:
-		get_viewport().scaling_3d_scale = 0.25
+		get_viewport().scaling_3d_scale = 0.5
