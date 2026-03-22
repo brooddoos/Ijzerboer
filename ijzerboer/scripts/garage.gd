@@ -10,7 +10,6 @@ extends Node3D
 @onready var exitbutton = $UI/Menu/Content/ExitButton
 @onready var license: Label = $UI/Menu/Content/buttons/CustomLicense/TextureRect/license
 
-@onready var music: AudioStreamPlayer = $Music
 @onready var values = $UI/Values
 
 # -
@@ -65,6 +64,19 @@ func text_input(prompt = ""):
 	else:
 		return ""
 
+func check_if_fits():
+	var max_width = license.size.x
+	var font = license.label_settings.font
+	
+	var start_size = 48
+	var min_size = 14
+	
+	for size in range(start_size, min_size, -1): #will keep making smaller until fits
+		license.label_settings.font_size = size
+		var text_size = font.get_string_size(license.text,HORIZONTAL_ALIGNMENT_LEFT,-1,size)
+		if text_size.x <= max_width:	
+			break
+
 func _on_button_pressed(button):
 	match button.name:
 		"LicensePlateButton":
@@ -73,6 +85,7 @@ func _on_button_pressed(button):
 			Gamestate.car_upgrades["licenseplate"] = plaat
 			license.text = plaat
 			values.update_currency()
+			check_if_fits()
 		"CargoButton":
 			Gamestate.BEF -= button.get_meta("Price")
 			Gamestate.car_upgrades["cargo"] += 1
@@ -99,6 +112,7 @@ func _on_exit_pressed():
 func update_buttons():
 	for button in buttons:
 		var price = button.get_meta("Price")
+		@warning_ignore("shadowed_global_identifier")
 		var max 
 		var current
 		var cash = Gamestate.BEF
@@ -121,7 +135,6 @@ func update_buttons():
 			
 		if level:
 			level.text = "("+str(current)+"/"+str(max)+")"
-			
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cashdebug"):
@@ -140,8 +153,3 @@ func _input(event: InputEvent) -> void:
 			mouse_right_down = true
 		elif event.button_index == 2 and not event.is_pressed():
 			mouse_right_down = false
-
-func _on_music_finished() -> void: # NOTE: DO NOT REMOVE THIS IS TO LOOP THE F🚌🚌🚌ING MUSIC
-	music.stop()
-	music.stream = (load("res://assets/audio/music/original_music/garage/mainloop.wav"))
-	music.play()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://7s0n635txbqb"]
+[gd_scene load_steps=34 format=4 uid="uid://7s0n635txbqb"]
 
 [ext_resource type="Script" uid="uid://clau88y2temwp" path="res://scripts/garage.gd" id="1_75lht"]
 [ext_resource type="Texture2D" uid="uid://cn57dflgjfokl" path="res://assets/images/nummerplaat_template.png" id="2_rd182"]
@@ -10,6 +10,8 @@
 [ext_resource type="Material" uid="uid://c5jnsmgq8ymji" path="res://shaders/aesthetic.tres" id="6_3dhpt"]
 [ext_resource type="AudioStream" uid="uid://bihlj0o5rortf" path="res://assets/audio/music/original_music/garage/intro.wav" id="6_3uxhb"]
 [ext_resource type="Shader" uid="uid://s60rywsqspcx" path="res://shaders/aesthetic.gdshader" id="8_x6lty"]
+[ext_resource type="PackedScene" uid="uid://tcxrp6uxaq0x" path="res://scenes/music_looper.tscn" id="10_g4ivs"]
+[ext_resource type="AudioStream" uid="uid://c71utgapxyr3x" path="res://assets/audio/music/original_music/garage/mainloop.wav" id="12_ipnyo"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uwphw"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -23,7 +25,19 @@ background_mode = 2
 sky = SubResource("Sky_q2e5a")
 tonemap_mode = 2
 
-[sub_resource type="LabelSettings" id="LabelSettings_3dhpt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4ivs"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_g4ivs"]
 font = ExtResource("3_6t0ip")
 font_size = 46
 font_color = Color(0.83137256, 0.29411766, 0.32156864, 1)
@@ -188,12 +202,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Menu" type="PanelContainer" parent="UI"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 256.0
-grow_vertical = 2
+[node name="Menu" type="ScrollContainer" parent="UI"]
+layout_mode = 0
+offset_right = 375.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4ivs")
 
 [node name="Content" type="VBoxContainer" parent="UI/Menu"]
 layout_mode = 2
@@ -207,9 +220,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="buttons" type="VBoxContainer" parent="UI/Menu/Content"]
+custom_minimum_size = Vector2(0, 310)
 layout_mode = 2
 size_flags_vertical = 3
-alignment = 1
 
 [node name="title" type="RichTextLabel" parent="UI/Menu/Content/buttons"]
 layout_mode = 2
@@ -254,8 +267,8 @@ offset_left = 9.0
 offset_top = 16.0
 offset_right = 194.0
 offset_bottom = 90.0
-text = "ABC-123"
-label_settings = SubResource("LabelSettings_3dhpt")
+text = "WWWWWWWWW"
+label_settings = SubResource("LabelSettings_g4ivs")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -296,9 +309,9 @@ metadata/Price = 500
 metadata/Gamestate = "engine"
 
 [node name="buttons2" type="VBoxContainer" parent="UI/Menu/Content"]
+custom_minimum_size = Vector2(0, 139)
 layout_mode = 2
 size_flags_vertical = 6
-alignment = 1
 
 [node name="title" type="RichTextLabel" parent="UI/Menu/Content/buttons2"]
 layout_mode = 2
@@ -411,12 +424,10 @@ stream = ExtResource("3_tpskm")
 volume_db = -11.0
 bus = &"SFX"
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_3uxhb")
-volume_db = 5.0
-autoplay = true
+[node name="MusicLooper" parent="." instance=ExtResource("10_g4ivs")]
 bus = &"BGM"
-playback_type = 1
+Intro = ExtResource("6_3uxhb")
+Loop = ExtResource("12_ipnyo")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
@@ -430,5 +441,3 @@ material = SubResource("StandardMaterial3D_imsuq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.750423, -12.944569)
 size = Vector3(50, 19.464478, 4.871521)
 material = SubResource("StandardMaterial3D_q2e5a")
-
-[connection signal="finished" from="Music" to="." method="_on_music_finished"]

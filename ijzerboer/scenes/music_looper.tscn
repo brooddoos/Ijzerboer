@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://tcxrp6uxaq0x"]
+
+[ext_resource type="Script" uid="uid://1ga86ks8pdhb" path="res://scripts/music_intro_looper.gd" id="1_edsli"]
+
+[node name="MusicLooper" type="AudioStreamPlayer"]
+script = ExtResource("1_edsli")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

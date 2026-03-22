@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c2blyruyj7gkd"]
+[gd_scene load_steps=19 format=3 uid="uid://c2blyruyj7gkd"]
 
 [ext_resource type="Script" path="res://scripts/settings/settings.gd" id="1_1dggd"]
 [ext_resource type="Script" uid="uid://b8lh4gtpb2bcn" path="res://scripts/settings/cassettesettings.gd" id="2_8e7v8"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://ymbmajn3a8ya" path="res://scenes/cami.tscn" id="3_m37ne"]
 [ext_resource type="Shader" uid="uid://dwao0orvioy4h" path="res://shaders/blur.gdshader" id="3_pqn78"]
 [ext_resource type="Script" uid="uid://bhctmvws8bbtt" path="res://scripts/settings/audiosettings.gd" id="4_slqrs"]
+[ext_resource type="PackedScene" uid="uid://tcxrp6uxaq0x" path="res://scenes/music_looper.tscn" id="8_38cfe"]
+[ext_resource type="AudioStream" uid="uid://dupeh5onj5kc5" path="res://assets/audio/music/original_music/settings/intro.wav" id="9_38cfe"]
+[ext_resource type="AudioStream" uid="uid://d3swq127wdc2e" path="res://assets/audio/music/original_music/settings/loop.wav" id="10_sey0c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m08v4"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -68,7 +71,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_pqn78"]
 resource_name = "fadein"
-length = 2.0
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -522,7 +525,9 @@ Ijzerboer is licensed under [url=https://creativecommons.org/licenses/by-nc-nd/4
 [url=https://github.com/kobegeens]Kobe Geens[/url]
 
 [center][b][u]Original Music:[/u][/b][/center]
-Garage Theme:
+[u]Garage Theme:[/u]
+[url=https://linktr.ee/j4y_boi]j4y_boi[/url]
+[u]Settings Theme (arguably worse):[/u]
 [url=https://linktr.ee/j4y_boi]j4y_boi[/url]
 
 [u][b]Sponsors[/b][/u]
@@ -557,7 +562,7 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -400.0
-offset_right = 400.00037
+offset_right = 400.0005
 offset_bottom = 130.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_357fk")
@@ -576,7 +581,7 @@ offset_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 81
-text = "Settings"
+text = "Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -589,22 +594,23 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -400.0
 offset_top = -130.0
-offset_right = 400.00098
+offset_right = 400.0005
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_357fk")
 
 [node name="facts" type="Label" parent="bittom"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 800.0
-offset_right = 1557.999
+offset_left = -0.5
+offset_right = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 25
-text = "Fun fact: The building where you sell your iron is based off of a real Belgian hardware store! paozkdpoakzpdkazpdkazopdkazpodk"
+text = "oijoiazjfiozajfoaizjfoia placeholder gibberish tips will go here ig"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -612,6 +618,12 @@ vertical_alignment = 1
 libraries = {
 &"": SubResource("AnimationLibrary_ibqfw")
 }
+
+[node name="MusicLooper" parent="." instance=ExtResource("8_38cfe")]
+volume_db = 3.0
+bus = &"BGM"
+Intro = ExtResource("9_38cfe")
+Loop = ExtResource("10_sey0c")
 
 [connection signal="files_selected" from="content/Main/Cassette/FileDialog" to="content/Main/Cassette" method="_on_file_dialog_files_selected"]
 [connection signal="pressed" from="content/Main/Cassette/contents/load" to="content/Main/Cassette" method="_on_load_pressed"]

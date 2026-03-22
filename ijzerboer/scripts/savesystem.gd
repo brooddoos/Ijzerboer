@@ -13,11 +13,26 @@ var force_old = false
 var current_used_slot = 1
 var autosave_interval = 60 # in seconds
 
+const SETTINGS_LOCATION = "user://settings.json"
+
 var ingame = false
 
 var autosave_enabled_scenes = [
 	"res://scenes/game/Campaign.tscn",
 	"res://scenes/game/Rally.tscn"]
+
+var settings = {
+	"volume_sfx": AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("SFX")), #audio settings
+	"volume_music": AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("BGM")),
+	"volume_car": AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Car")),
+	"volume_map": AudioServer.get_bus_volume_linear(AudioServer.get_bus_index("Map")),
+	
+	"vsync": true, # video settings
+	"fullscreen": false,
+	"max_fps": 0,
+}
+
+var DEFAULT_SETTINGS = {}
 
 func _ready() -> void:
 	set_list()
@@ -31,12 +46,61 @@ func _ready() -> void:
 	DirAccess.make_dir_recursive_absolute(SAVE_LOCATION)
 	appear_timer.timeout.connect(icon.hide)
 	autosave_timer.timeout.connect(save)
+	
+	DEFAULT_SETTINGS = settings.duplicate(true) # before loading
+	load_settings()
+	apply_settings()
 
 func _process(delta: float) -> void:
 	if icon.visible:
 		icon.rotation += delta*5
 
-func set_list():
+func _on_scene_changed():
+	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
+		autosave_timer.start()
+	else:
+		autosave_timer.stop()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("save"):
+		save()
+
+# settings n stuff
+func apply_settings():
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("SFX"), linear_to_db(settings.volume_sfx))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("BGM"), linear_to_db(settings.volume_music))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Car"), linear_to_db(settings.volume_car))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Map"), linear_to_db(settings.volume_map))
+
+	DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_ENABLED if settings.vsync else DisplayServer.VSYNC_DISABLED)
+
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN if settings.fullscreen else DisplayServer.WINDOW_MODE_WINDOWED) # this is extremely unreadable, but fuck it we ball
+
+	Engine.max_fps = settings.max_fps
+
+func save_settings():
+	var file = FileAccess.open_encrypted_with_pass(SETTINGS_LOCATION, FileAccess.WRITE, "ijzerboersettings")
+	file.store_var(settings)
+	file.close()
+	print("Settings saved")
+
+func load_settings():
+	if FileAccess.file_exists(SETTINGS_LOCATION):
+		var file = FileAccess.open_encrypted_with_pass(SETTINGS_LOCATION, FileAccess.READ, "ijzerboersettings")
+		var data = file.get_var()
+		file.close()
+
+		if typeof(data) == TYPE_DICTIONARY:
+			for key in settings.keys():
+				if data.has(key) and typeof(data[key]) == typeof(settings[key]):
+					settings[key] = data[key]
+		print("Settings loaded")
+	else:
+		settings = DEFAULT_SETTINGS.duplicate(true)
+		save_settings()
+
+# gameplay saving
+func set_list(): #updates contents_to_save
 	var current_date = Time.get_date_string_from_system() # Output: "2024-05-20"
 	var current_time = Time.get_time_string_from_system() # Output: "14:30:05"
 	
@@ -130,13 +194,3 @@ func get_save_path(slot = current_used_slot) -> String:
 	if force_old:
 		return "user://savefile.json"
 	return SAVE_LOCATION + "slot" + str(slot) + ".json"
-
-func _on_scene_changed():
-	if get_tree().current_scene.scene_file_path in autosave_enabled_scenes:
-		autosave_timer.start()
-	else:
-		autosave_timer.stop()
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("save"):
-		save()

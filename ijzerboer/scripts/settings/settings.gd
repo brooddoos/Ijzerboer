@@ -4,15 +4,18 @@ extends Control
 @onready var fact_label: Label = $bittom/facts
 
 const facts = [
-	"Fun fact: The building where you sell your iron is based off of a real Belgian hardware store!",
+	"Fun fact: The building where you sell your scrap metal is based off of a real Belgian hardware store!",
 	"Fun fact: Ijzerboer means Ironfarmer when you translate it literally!",
 	"Tip: This is a tip (im so helpful)",
 	"Fun fact: Trains are in fact loud.",
-	"Handy: Double-clicking buttons can sometimes skip transitions! (we dont know why this happens)",
+	"Handy: Double-clicking buttons can sometimes skip transitions! (we don't know why this happens)",
 	"Fun fact: The in-game car is based off of the Mercedes-Benz T1!",
+	"Fun fact: This game has already taken 100+ hours to make!",
+	"Fun fact: this is a fun fact! (you can guess who won the most helpful award)",
 ]
 var busy = false
 var showfact = false
+var current_fact = randi_range(0,len(facts)-1)
 
 func _ready():
 	$content/Buttons/Cassette.pressed.connect(_on_button_pressed.bind($content/Main/Cassette))
@@ -30,16 +33,23 @@ func _ready():
 	fact_loop()
 
 func fact_loop():
-	fact_label.text = facts[randi_range(0,len(facts) - 1)]
-	fact_label.position.x = 1000
-	showfact = true
-	while showfact:
-		await get_tree().process_frame
-	fact_loop()
+	while true:
+		fact_label.text = facts[current_fact]
+		current_fact = (current_fact + 1) % len(facts)
+		fact_label.reset_size()
+		fact_label.global_position.x = 800
+		fact_label.global_position.y = 515
+		showfact = true
+		while showfact:
+			await get_tree().process_frame
 
 func _process(delta: float) -> void:
-	if fact_label.position.x >= -2000:
-		fact_label.position.x -= delta*100
+	if fact_label.global_position.x >= -1*fact_label.size.x:
+		if anim.is_playing() == false:
+			if Input.is_action_pressed("drift"):
+				fact_label.global_position.x -= delta*500
+			else:
+				fact_label.global_position.x -= delta*100
 	else:
 		showfact = false
 	$bg/SubViewport/Camera3D.rotate_y(deg_to_rad(2*delta))
@@ -53,6 +63,7 @@ func _on_button_pressed(category):
 func _on_return_pressed():
 	if not busy and not anim.is_playing():
 		busy = true
+		Savesystem.save_settings()
 		var old = Gamestate.last_scene
 		await Transition.fade_out()
 		get_tree().change_scene_to_file(old)

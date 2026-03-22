@@ -8,9 +8,9 @@ extends Node
 @onready var fps_slider: HSlider = $VBoxContainer/FPS/FPSSlider
 
 func _ready() -> void:
-	v_sync_toggle.button_pressed = DisplayServer.window_get_vsync_mode() == DisplayServer.VSYNC_ENABLED
-	fullscreen_toggle.button_pressed = DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN
-	fps_slider.value = Engine.max_fps
+	v_sync_toggle.button_pressed = Savesystem.settings.vsync
+	fullscreen_toggle.button_pressed = Savesystem.settings.fullscreen
+	fps_slider.value = Savesystem.settings.max_fps
 	
 	_on_fps_slider_value_changed(fps_slider.value)
 	_on_check_button_toggled(v_sync_toggle.button_pressed)
@@ -19,6 +19,7 @@ func _ready() -> void:
 func _on_fps_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		Engine.max_fps = int(fps_slider.value)
+		Savesystem.settings.max_fps = int(fps_slider.value)
 
 func _on_fps_slider_value_changed(value: float) -> void:
 	if value == 300:
@@ -35,6 +36,7 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 	else:
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
 		v_sync_label.text = "Disabled"
+	Savesystem.settings.vsync = toggled_on
 
 func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
 	if toggled_on:
@@ -44,6 +46,7 @@ func _on_fullscreen_toggle_toggled(toggled_on: bool) -> void:
 		if DisplayServer.window_get_mode() in [DisplayServer.WINDOW_MODE_FULLSCREEN, DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN]:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		fullscreen_label.text = "Disabled"
+	Savesystem.settings.fullscreen = toggled_on
 
 func text_input(prompt = ""):
 	var line = LineEdit.new()
@@ -68,7 +71,7 @@ func _input(event: InputEvent) -> void:
 			
 			get_tree().root.content_scale_size = Vector2(w,h)
 
-func _on_resolution_options_item_selected(index: int):
+func _on_resolution_options_item_selected(index: int): #doesnt save to savesystem, will once we fix it
 	if index == 0:
 		get_viewport().scaling_3d_scale = 1.0
 	else:
