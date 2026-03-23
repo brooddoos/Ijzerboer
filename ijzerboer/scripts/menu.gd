@@ -45,6 +45,9 @@ func _process(delta: float) -> void:
 	
 	start.modulate.a = abs(sin(time))
 	
+	if time >= 15 and start.modulate.a < 0.05:
+		start.text = "  Press START (the spacebar lol)  "
+	
 var transitioning := false
 
 func _input(event: InputEvent) -> void:
@@ -53,7 +56,7 @@ func _input(event: InputEvent) -> void:
 		$"../../Camera3D/AnimationPlayer".play("camera_anim") # play camera movement
 		
 		var tween = self.create_tween().set_parallel(true)
-		tween.tween_property(self, "scale", self.scale * 1.75, 1)
+		tween.tween_property(self, "scale", self.scale * 2, 1)
 		tween.tween_property(self, "modulate:a", 0, 1)
 		await tween.finished
 		self.hide() 

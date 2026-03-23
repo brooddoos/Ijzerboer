@@ -248,8 +248,10 @@ theme_override_font_sizes/normal_font_size = 25
 theme_override_font_sizes/bold_font_size = 40
 theme_override_font_sizes/italics_font_size = 40
 bbcode_enabled = true
-text = "Well, what's the goal of this game?
-The quest system hasn't been implemented yet, but the basic premise is that you collect scrap metal and sell it for cash. You can upgrade your car with this money!"
+text = "Well, what's the goal of this game? 
+The quest system hasn't been implemented yet, but the basic premise is that you collect scrap metal and sell it for cash. 
+You can use this money to upgrade your car! 
+Also, since not all models are finished at the moment, some are temporarily replaced with balls or cubes."
 horizontal_alignment = 1
 vertical_alignment = 1
 

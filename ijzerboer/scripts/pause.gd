@@ -51,17 +51,19 @@ func toggle_menu():
 func _unhandled_input(event):
 	if event.is_action_pressed("escape"):
 		toggle_menu()
-		
+var busy
 func _on_button_pressed() -> void: #exit
-	#Gamestate.campaign["position"] = $"../../../Car".position
-	Savesystem.save()
-	await Savesystem.appear_timer.timeout
-	Savesystem.ingame = false
-	await Transition.fade_out()
-	var mainmenu = load("res://scenes/start/Start.tscn") as PackedScene
-	get_tree().paused = false
-	get_tree().change_scene_to_packed(mainmenu)
-	await Transition.fade_in()
+	if not busy:
+		busy = true
+		#Gamestate.campaign["position"] = $"../../../Car".position
+		Savesystem.save()
+		await Savesystem.appear_timer.timeout
+		Savesystem.ingame = false
+		await Transition.fade_out()
+		var mainmenu = load("res://scenes/start/Start.tscn") as PackedScene
+		get_tree().paused = false
+		get_tree().change_scene_to_packed(mainmenu)
+		await Transition.fade_in()
 
 func _on_settings_pressed():
 	await Transition.fade_out()

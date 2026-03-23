@@ -4,8 +4,8 @@ var last_scene := "res://scenes/start/Start.tscn"  #Which scene to return to fro
 
 var map := ""
 var cargo := 0
-var BEF := 0
-var time := 24600.0 #default 21600.0
+var BEF := 200
+var time := 21600.0 #default 21600.0
 var car_upgrades := {
 	"engine" = 1,
 	"cargo" = 1,
@@ -26,7 +26,7 @@ var flippos:= {
 }
 
 var campaign := {
-	"position" = Vector3(0,0,0)
+	"position" = Vector3(115,0,0)
 }
 
 var rally := {

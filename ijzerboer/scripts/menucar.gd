@@ -53,7 +53,8 @@ func _process(delta: float) -> void:
 		
 	if arrivedCount + offset <= counter or arrivedCount == 0: 
 		direction = direction.normalized()
-		car.look_at(destination, Vector3.UP)
+		if not car.global_position.distance_to(destination) < 0.001:
+			car.look_at(destination, Vector3.UP)
 		if drunk:
 			car.rotation.y -= deg_to_rad(180+randi_range(-90,90))
 			car.position += direction * speed*2 * delta
