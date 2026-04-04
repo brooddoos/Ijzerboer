@@ -1,7 +1,9 @@
-[gd_scene load_steps=36 format=3 uid="uid://1qbfol6dsaaq"]
+[gd_scene load_steps=47 format=3 uid="uid://1qbfol6dsaaq"]
 
 [ext_resource type="Script" uid="uid://bkaipowrw2xi5" path="res://scripts/campaign.gd" id="1_d48t8"]
+[ext_resource type="Shader" uid="uid://dmpkmbxuakm83" path="res://shaders/slow_motion.gdshader" id="2_0g7ce"]
 [ext_resource type="Theme" uid="uid://wkqe0oh44ruk" path="res://assets/godot/UI.tres" id="2_d2me3"]
+[ext_resource type="Shader" uid="uid://b7u80td4vjyoc" path="res://shaders/fisheye.gdshader" id="2_x1w3f"]
 [ext_resource type="PackedScene" uid="uid://cpo6y824goy0o" path="res://scenes/game/Pause.tscn" id="3_o4j3j"]
 [ext_resource type="PackedScene" uid="uid://bnbqq766c3ej4" path="res://scenes/game/Spedometer.tscn" id="4_jsf20"]
 [ext_resource type="Script" uid="uid://cw1h2u0fpghhu" path="res://scripts/ui_values.gd" id="5_fow0s"]
@@ -25,12 +27,119 @@
 [ext_resource type="Script" uid="uid://dpg7mwnivhx8s" path="res://scripts/train.gd" id="27_minu2"]
 [ext_resource type="PackedScene" uid="uid://bi3u7o8h4htyp" path="res://assets/3d/HLE16.glb" id="28_o7e2w"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c884b"]
+shader = ExtResource("2_x1w3f")
+shader_parameter/fish_intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x1w3f"]
+shader = ExtResource("2_0g7ce")
+shader_parameter/alpha = 0.56
+shader_parameter/inner_radius = 1.0
+shader_parameter/outer_radius = 1.45
+
+[sub_resource type="Animation" id="Animation_x1w3f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/inner_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Fisheye/FX:material:shader_parameter/fish_intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0g7ce"]
+resource_name = "in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/inner_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-6.498014, 1),
+"update": 0,
+"values": [1.0, 0.09]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Fisheye/FX:material:shader_parameter/fish_intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-6.498014, 1),
+"update": 0,
+"values": [0.0, 0.50000002375]
+}
+
+[sub_resource type="Animation" id="Animation_c884b"]
+resource_name = "out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/inner_radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-6.498014, 1),
+"update": 0,
+"values": [0.09, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Fisheye/FX:material:shader_parameter/fish_intensity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-6.498014, 1),
+"update": 0,
+"values": [0.50000002375, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c884b"]
+_data = {
+&"RESET": SubResource("Animation_x1w3f"),
+&"in": SubResource("Animation_0g7ce"),
+&"out": SubResource("Animation_c884b")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0g7ce"]
 shader = ExtResource("7_a21rl")
 
 [sub_resource type="LabelSettings" id="LabelSettings_jhsr3"]
 font = ExtResource("7_okiu4")
 font_size = 20
+
+[sub_resource type="Gradient" id="Gradient_x1w3f"]
+offsets = PackedFloat32Array(0, 0.006666667, 0.65, 0.7)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c884b"]
+gradient = SubResource("Gradient_x1w3f")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_attvq"]
 panorama = ExtResource("12_7nvpa")
@@ -41,6 +150,9 @@ sky_material = SubResource("PanoramaSkyMaterial_attvq")
 [sub_resource type="Environment" id="Environment_aug50"]
 background_mode = 2
 sky = SubResource("Sky_bneo8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a21rl"]
+size = Vector3(22, 15.813477, 10)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kiw3p"]
 albedo_texture = ExtResource("13_v3pj6")
@@ -68,7 +180,35 @@ point_count = 2
 [node name="Campaign" type="Node3D"]
 script = ExtResource("1_d48t8")
 
+[node name="Fisheye" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
+
+[node name="FX" type="ColorRect" parent="Fisheye"]
+material = SubResource("ShaderMaterial_c884b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SlowMotion" type="ColorRect" parent="UI"]
+z_index = 20
+material = SubResource("ShaderMaterial_x1w3f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/SlowMotion"]
+libraries = {
+&"": SubResource("AnimationLibrary_c884b")
+}
 
 [node name="Control" type="Control" parent="UI"]
 layout_mode = 3
@@ -178,6 +318,7 @@ offset_bottom = 106.0
 
 [node name="TextureRect" type="TextureRect" parent="UI/Control/Minimap"]
 texture_filter = 1
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -213,23 +354,74 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 36.36364
-offset_top = 36.36364
-offset_right = -36.36371
-offset_bottom = -36.363647
+offset_left = 68.0
+offset_top = 63.0
+offset_right = -69.272705
+offset_bottom = -76.09091
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/Control/Minimap/TextureRect/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(654, 436)
+size = Vector2i(590, 370)
 render_target_update_mode = 4
 
 [node name="MinimapCam" type="Camera3D" parent="UI/Control/Minimap/TextureRect/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 90, 0)
 cull_mask = 1048573
 current = true
+
+[node name="Markers" type="Control" parent="UI/Control/Minimap/TextureRect"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -295.45435
+offset_top = -191.54546
+offset_right = 294.54565
+offset_bottom = 178.45454
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="template_marker" type="TextureRect" parent="UI/Control/Minimap/TextureRect/Markers"]
+visible = false
+layout_mode = 0
+offset_left = -90.90909
+offset_top = -63.63637
+offset_right = -26.909088
+offset_bottom = 0.3636284
+pivot_offset = Vector2(32, 32)
+texture = SubResource("GradientTexture2D_c884b")
+
+[node name="title" type="Label" parent="UI/Control/Minimap/TextureRect/Markers/template_marker"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -68.181816
+offset_right = 118.0
+offset_bottom = -55.181816
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 30
+theme_override_font_sizes/font_size = 56
+text = "Scrap Shop"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapMarkers" type="Node3D" parent="."]
+
+[node name="Downtown" type="Marker3D" parent="MapMarkers"]
+transform = Transform3D(0.9659262, -0.25881913, 0, 0.25881913, 0.9659262, 0, 0, 0, 1, 116.000046, -1.5438652, -5)
+
+[node name="Field" type="Marker3D" parent="MapMarkers"]
+transform = Transform3D(0.9659262, -0.25881913, 0, 0.25881913, 0.9659262, 0, 0, 0, 1, 58.000046, -1.5438652, -205.3144)
 
 [node name="SpawnLocations" type="Node3D" parent="."]
 script = ExtResource("11_aef2a")
@@ -260,6 +452,26 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1
 
 [node name="Ramp" type="StaticBody3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -46.53715, -5, 0)
+
+[node name="StuntArea" type="Area3D" parent="Ramp"]
+transform = Transform3D(0.4829629, -0.12940952, 0, 0.12940952, 0.4829629, 0, 0, 0, 0.5, 23.268576, 1.7280655, 0)
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp/StuntArea"]
+transform = Transform3D(1.0000012, 0, 0, 0, 1.0000012, 0, 0, 0, 1, -13.444916, 16.761978, -11.861323)
+shape = SubResource("BoxShape3D_a21rl")
+debug_color = Color(0.28651455, 0.29343706, 1, 1)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ramp/StuntArea"]
+transform = Transform3D(0.96592706, 0.2588193, 0, -0.2588193, 0.96592706, 0, 0, 0, 1, 7.307087, 13.6561, -11.861323)
+shape = SubResource("BoxShape3D_a21rl")
+debug_color = Color(0.28651455, 0.29343706, 1, 1)
+
+[node name="StuntCam" type="Marker3D" parent="Ramp/StuntArea"]
+transform = Transform3D(-0.9655871, 0.2588191, -0.02558827, 0.25872827, 0.96592605, 0.006856357, 0.02649092, 1.5778738e-09, -0.99964905, 4.131047, 11.050388, -23.300713)
+
+[node name="Camera3D" type="Camera3D" parent="Ramp/StuntArea"]
+transform = Transform3D(-0.96558696, 0.25881907, -0.025588267, 0.25872824, 0.96592593, 0.0068563563, 0.02649092, 1.5778738e-09, -0.99964905, 4.1310463, 11.050386, -23.300713)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ramp"]
 transform = Transform3D(9.659258, -0.06470475, 0, 2.58819, 0.24148145, 0, 0, 0, 5, 13.663289, 3.5929866, -5.9317865)

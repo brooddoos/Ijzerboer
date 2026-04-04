@@ -103,7 +103,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(250, 150)
 theme_override_font_sizes/normal_font_size = 30
-text = "kobe hasnt finished the map yet lol, so the map collisions are off"
+text = "kobe hasnt finished the map yet, so the map collisions are off lol"
 horizontal_alignment = 1
 vertical_alignment = 1
 

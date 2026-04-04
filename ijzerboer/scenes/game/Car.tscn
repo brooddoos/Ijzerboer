@@ -196,4 +196,12 @@ skeleton = NodePath("../..")
 [node name="Camera3D" type="Camera3D" parent="Car/pivot (do not remove)/SpringArm3D"]
 cull_mask = 1048571
 
+[node name="SlowMotion" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Stunt" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [editable path="Car/Mesh"]

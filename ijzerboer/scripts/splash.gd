@@ -34,7 +34,12 @@ func fade():
 		tween.tween_interval(out_time)
 		await tween.finished
 	await get_tree().process_frame
-	get_tree().change_scene_to_packed(load_scene)
+	if not skippable:
+		await Transition.fade_out()
+		get_tree().change_scene_to_packed(load_scene)
+		await Transition.fade_in()
+	else:
+		get_tree().change_scene_to_packed(load_scene)
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("ui_accept") and skipping and skippable:

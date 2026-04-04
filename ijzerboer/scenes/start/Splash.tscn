@@ -83,3 +83,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.9144961, 0.9149079, 0.9343023, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.1254902)
+theme_override_font_sizes/font_size = 16
+text = "Press Space to skip"

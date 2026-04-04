@@ -324,7 +324,6 @@ bbcode_enabled = true
 text = "[This tutorial item will only be included with the beta releases]
 What are your future plans for this game?
 We are currently working on:
-- A dialogue system
 - A custscene system
 - A quest system
 - An achievement system

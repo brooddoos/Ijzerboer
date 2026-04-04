@@ -7,6 +7,7 @@ func _ready() -> void:
 	self.add_child(car_instance)
 	car_instance.position = Gamestate.campaign["position"]
 	Savesystem.ingame = true
+	$Fisheye.show()
 
 func _on_garage_entered():
 	Gamestate.campaign["position"] = $Garage/RespawnPoint.global_position
@@ -16,4 +17,5 @@ func _on_garage_entered():
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("cashdebug"):
-		_on_garage_entered()
+		Gamestate.cargo = Gamestate.car_upgrades["cargo"] * 5
+		$UI/Control/Values.update_cargo()

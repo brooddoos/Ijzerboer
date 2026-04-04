@@ -101,13 +101,15 @@ func _on_button_pressed(button):
 	values.update_currency()
 	$UpgradeSound.pitch_scale = randf_range(0.9,1.1)
 	$UpgradeSound.play()
-	
-	
+
+var busy = false
 func _on_exit_pressed():
-	await Savesystem.save()
-	await Transition.fade_out("res://assets/images/ui/transition/transition_garage.png")
-	get_tree().change_scene_to_packed(load("res://scenes/game/Campaign.tscn"))
-	await Transition.fade_in("res://assets/images/ui/transition/transition_garage.png")
+	if not busy:
+		busy = true
+		await Savesystem.save()
+		await Transition.fade_out("res://assets/images/ui/transition/transition_garage.png")
+		get_tree().change_scene_to_packed(load("res://scenes/game/Campaign.tscn"))
+		await Transition.fade_in("res://assets/images/ui/transition/transition_garage.png")
 	
 func update_buttons():
 	for button in buttons:

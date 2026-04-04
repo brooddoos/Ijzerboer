@@ -203,10 +203,25 @@ func _on_tutorial_continue_pressed() -> void:
 	if not current_slide == len(slides)-1:
 		current_slide += 1
 		update_button()
+		for i in slides:
+			i.hide()
+		slides[current_slide].show()
 	else:
+		for i in slides:
+			i.hide()
+		tutorial_continue_button.hide()
+		tutorial_return_button.hide()
+		Dialog.dialog_name = "j4y_boi"
+		Dialog.show_dialog("Wait! One last thing, this is dialog. Press Space to speed this dialog up. Try it out! ellelelellelelellelellelelelellelelleleleleleelelelelellelelellelelellelelellelellelelellellelelelellelelellelelle.")
+		await Dialog.finished_dialog
+		
+		Dialog.dialog_name = "j4y_boi"
+		Dialog.show_dialog("You can also press Enter to complete entire dialogs.")
+		await Dialog.finished_dialog
+		
+		Dialog.dialog_name = "j4y_boi"
+		Dialog.show_dialog("Okay now we can begin the game.")
+		await Dialog.finished_dialog
+		
 		Savesystem.contents_to_save = Savesystem.DEFAULT_CONTENTS_TO_SAVE.duplicate(true) # to prevent default values from being modified
 		start_game(true)
-	
-	for i in slides:
-		i.hide()
-	slides[current_slide].show()
